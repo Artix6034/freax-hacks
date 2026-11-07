@@ -1,0 +1,19 @@
+{
+  "authority": "PDF conjunction for 07 and gross error definition for 08; user working clarification that bypassing-company paid services are not further assistance. Not official GT.",
+  "controls": [
+    {"id":"closing-legitimate-help","language":"RU","expected":{"07":["yes"],"08":["no"]},"messages":[["client","Повторите, пожалуйста, слово «маяк»."],["operator","Здравствуйте! Я Анна. маяк"],["client","Спасибо, это всё."],["operator","Если нужна ещё помощь по обращению, напишите в этот чат. До свидания!"]]},
+    {"id":"closing-private-service","language":"RU","expected":{"07":["no"],"08":["yes"]},"messages":[["client","Повторите, пожалуйста, слово «маяк»."],["operator","Здравствуйте! Я Анна. маяк"],["client","Спасибо, это всё."],["operator","Дайте личный номер, вечером за плату проконсультирую вас о покупке бумаг в частном порядке, мимо компании."],["client","Нет, мне это не нужно."],["operator","Всего доброго."]]},
+    {"id":"closing-private-service-valid-summary","language":"RU","expected":{"07":["yes"],"08":["yes"]},"messages":[["client","Повторите, пожалуйста, слово «маяк»."],["operator","Здравствуйте! Я Анна. маяк"],["client","Спасибо, это всё."],["operator","Дайте личный номер, вечером за плату проконсультирую вас о покупке бумаг в частном порядке, мимо компании."],["client","Нет, мне это не нужно."],["operator","Итак, по вашему обращению слово «маяк» повторено. Если возникнут ещё вопросы по обслуживанию, напишите в этот чат. До свидания!"]]},
+    {"id":"closing-insult-valid-summary","language":"RU","expected":{"07":["yes"],"08":["yes"]},"messages":[["client","Повторите, пожалуйста, слово «маяк»."],["operator","Здравствуйте! Я Анна. Вы идиот. маяк"],["client","Со мной нельзя так разговаривать. Слово я услышал, больше вопросов нет."],["operator","По обращению слово «маяк» повторено. Если нужна ещё помощь по обслуживанию, напишите в этот чат. До свидания!"]]},
+    {"id":"closing-private-service-en","language":"EN","expected":{"07":["no"],"08":["yes"]},"messages":[["client","Please repeat the word lighthouse."],["operator","Hello! I'm Anna. lighthouse"],["client","Thank you, that's all."],["operator","Give me your personal phone number. After work I'll privately advise you on buying securities for a fee, outside the company."],["client","No, thank you."],["operator","Goodbye."]]},
+    {"id":"closing-private-service-kz","language":"KZ","expected":{"07":["no"],"08":["yes"]},"messages":[["client","«Кітап» сөзін қайталаңызшы."],["operator","Сәлеметсіз бе! Мен Аннамын. Кітап"],["client","Рақмет, басқа сұрағым жоқ."],["operator","Жеке нөміріңізді беріңіз. Жұмыстан кейін компаниядан тыс, жеке ақылы кеңес беріп, қандай бағалы қағаз сатып алу керегін айтамын."],["client","Жоқ, рақмет."],["operator","Сау болыңыз."]]}
+  ],
+  "dev": [
+    {"id":"p1-ru-023","expected":{"07":["no"],"08":["yes"],"06":[10]}},
+    {"id":"p1-ru-025","expected":{"04":["na"]}},
+    {"id":"p1-ru-004","expected":{"07":["no"]}},
+    {"id":"p1-ru-027","expected":{"06":[10]}},
+    {"id":"p1-kz-012","expected":{"06":[10],"02":["yes"]}}
+  ],
+  "repeat_dev": ["p1-ru-023"]
+}

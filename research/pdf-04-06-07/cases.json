@@ -1,0 +1,70 @@
+{
+  "version": "pdf-04-06-07-v1",
+  "authority": "CQA_Chat_Quality_Checklist 1.pdf, pages 1-3; working development interpretations, not official GT.",
+  "notice": "Synthetic development fixtures. Expected answers are never sent to the model. KZ wording needs native review. No external team labels are used as authoritative answers.",
+  "pairs": [
+    {"id":"04-ru-request","language":"RU","target":"04","variants":[
+      {"id":"absent","expected":"na","messages":[["client","Здравствуйте, соедините с человеком."],["system","Оператор подключён."],["operator","Здравствуйте! Я Анна. С чем помочь?"]]},
+      {"id":"formulated","expected":20,"messages":[["client","Здравствуйте, соедините с человеком."],["system","Оператор подключён."],["operator","Здравствуйте! Я Анна. С чем помочь?"],["client","Повторите, пожалуйста, слово «маяк»."],["operator","маяк"]]}
+    ]},
+    {"id":"04-kz-request","language":"KZ","target":"04","variants":[
+      {"id":"absent","expected":"na","messages":[["client","Сәлеметсіз бе, оператормен сөйлескім келеді."],["system","Оператор қосылды."],["operator","Сәлеметсіз бе! Мен Аннамын. Қандай сұрағыңыз бар?"]]},
+      {"id":"formulated","expected":20,"messages":[["client","Сәлеметсіз бе, оператормен сөйлескім келеді."],["system","Оператор қосылды."],["operator","Сәлеметсіз бе! Мен Аннамын. Қандай сұрағыңыз бар?"],["client","«Кітап» сөзін қайталаңызшы."],["operator","Кітап"]]}
+    ]},
+    {"id":"04-en-request","language":"EN","target":"04","variants":[
+      {"id":"absent","expected":"na","messages":[["client","Hello, please connect me to a person."],["system","Agent connected."],["operator","Hello! I'm Anna. How can I help?"]]},
+      {"id":"formulated","expected":20,"messages":[["client","Hello, please connect me to a person."],["system","Agent connected."],["operator","Hello! I'm Anna. How can I help?"],["client","Please repeat the word lighthouse."],["operator","lighthouse"]]}
+    ]},
+    {"id":"07-ru-closing","language":"RU","target":"07","prefix":[["client","Повторите, пожалуйста, слово «маяк»."],["operator","Здравствуйте! Я Анна. маяк"],["client","Спасибо, это всё."]],"variants":[
+      {"id":"farewell-only","expected":"no","ending":[["operator","Пожалуйста. Хорошего дня!"]]},
+      {"id":"offer-and-farewell","expected":"yes","ending":[["operator","Если нужна ещё помощь, напишите нам. Хорошего дня!"]]}
+    ]},
+    {"id":"07-kz-closing","language":"KZ","target":"07","prefix":[["client","«Кітап» сөзін қайталаңызшы."],["operator","Сәлеметсіз бе! Мен Аннамын. Кітап"],["client","Рақмет, басқа сұрағым жоқ."]],"variants":[
+      {"id":"farewell-only","expected":"no","ending":[["operator","Оқасы жоқ. Сау болыңыз!"]]},
+      {"id":"offer-and-farewell","expected":"yes","ending":[["operator","Тағы көмек қажет болса, бізге жазыңыз. Сау болыңыз!"]]}
+    ]},
+    {"id":"07-en-closing","language":"EN","target":"07","prefix":[["client","Please repeat the word lighthouse."],["operator","Hello! I'm Anna. lighthouse"],["client","Thanks, that's all."]],"variants":[
+      {"id":"farewell-only","expected":"no","ending":[["operator","You're welcome. Have a good day!"]]},
+      {"id":"offer-and-farewell","expected":"yes","ending":[["operator","If you need more help, contact us again. Have a good day!"]]}
+    ]},
+    {"id":"06-ru-confirmation","language":"RU","target":"06","prefix":[["client","Как скачать отчёт в приложении?"],["system","Оператор подключён."]],"variants":[
+      {"id":"confirmation","expected":10,"ending":[["operator","Здравствуйте! Я Анна. Откройте «Документы», выберите «Отчёт», укажите период и нажмите «Скачать»."],["client","То есть для отчёта за год выбрать весь год?"],["operator","Да, выберите даты начала и конца нужного года, затем скачайте отчёт."],["client","Скачалось, спасибо."],["operator","Отчёт скачан. До свидания!"]]},
+      {"id":"forced-clarification","expected":4,"ending":[["operator","Здравствуйте! Я Анна. Это там же сверху вниз, только не там, выберите нужное."],["client","Не понимаю вашу инструкцию: какой раздел открыть и что нажать?"],["operator","Откройте «Документы», выберите «Отчёт», укажите даты и нажмите «Скачать»."],["client","Скачалось, спасибо."],["operator","Отчёт скачан. До свидания!"]]}
+    ]},
+    {"id":"06-en-navigation","language":"EN","target":"06","prefix":[["client","Please walk me through downloading the report in the app."],["system","Agent connected."]],"variants":[
+      {"id":"stepwise","expected":10,"ending":[["operator","Hello! I'm Anna. Open Documents, then select Report."],["client","I see the date fields. What's next?"],["operator","Select the dates you need, then press Download."],["client","The file downloaded. Thank you."],["operator","Your report is downloaded. Goodbye!"]]},
+      {"id":"forced-clarification","expected":4,"ending":[["operator","Hello! I'm Anna. Do it over there with the usual thing, but not that thing."],["client","I don't understand your instruction. Which section and button do you mean?"],["operator","Open Documents, select Report, choose your dates, then press Download."],["client","The file downloaded. Thank you."],["operator","Your report is downloaded. Goodbye!"]]}
+    ]},
+    {"id":"06-kz-glitch","language":"KZ","target":"06","prefix":[["client","Мен мобильді қосымшадамын. Есепті қалай жүктеймін?"],["system","Оператор қосылды."]],"variants":[
+      {"id":"repeated-known-fact","expected":7,"ending":[["operator","Сәлеметсіз бе! Мен Аннамын. Қосымшаны ма, веб-нұсқаны ма қолданып отырсыз?"],["client","Қосымшаны. Мұны жоғарыда жаздым."],["operator","«Құжаттар» бөлімін ашып, «Есеп» тармағын таңдаңыз, күндерді көрсетіп, «Жүктеу» батырмасын басыңыз."],["client","Файл жүктелді, рақмет."],["operator","Есеп жүктелді. Сау болыңыз!"]]},
+      {"id":"forced-clarification","expected":4,"ending":[["operator","Сәлеметсіз бе! Мен Аннамын. Сол жақтағы керегін таңдап, әдеттегідей жасаңыз."],["client","Нұсқауды түсінбедім: қай бөлімді ашып, қай батырманы басамын?"],["operator","«Құжаттар» бөлімін ашып, «Есеп» тармағын таңдаңыз, күндерді көрсетіп, «Жүктеу» батырмасын басыңыз."],["client","Файл жүктелді, рақмет."],["operator","Есеп жүктелді. Сау болыңыз!"]]}
+    ]}
+  ],
+  "controls": [
+    {"id":"07-earlier-summary","language":"RU","target":"07","expected":"yes","messages":[["client","Повторите два слова: маяк и море."],["operator","Здравствуйте! Я Анна. маяк и море"],["operator","Итак, оба запрошенных слова повторены: маяк и море."],["client","Спасибо, это всё."],["operator","Всего доброго!"]]},
+    {"id":"07-no-farewell","language":"RU","target":"07","expected":"no","messages":[["client","Повторите два слова: маяк и море."],["operator","Здравствуйте! Я Анна. маяк и море"],["client","Спасибо, это всё."],["operator","Итак, оба запрошенных слова повторены: маяк и море."]]}
+  ],
+  "dev": [
+    {"id":"p1-ru-025","expected":{"04":["na"]}},
+    {"id":"p1-ru-001","expected":{"07":["no"]}},
+    {"id":"p1-ru-003","expected":{"07":["no"]}},
+    {"id":"p1-ru-004","expected":{"07":["no"]}},
+    {"id":"p1-ru-023","expected":{"07":["no"],"06":[10]},"disputed":{"04":[10,20]}},
+    {"id":"p1-ru-008","expected":{"06":[10]},"disputed":{"07":["yes","no"]}},
+    {"id":"p1-ru-009","expected":{"06":[4],"08":["yes"]},"authority":"User working interpretation for 06, not organizer GT.","disputed":{"04":[5,10,20]}},
+    {"id":"p1-ru-010","expected":{"06":[10]},"disputed":{"04":[10,20]}},
+    {"id":"p1-ru-011","expected":{"06":[10]}},
+    {"id":"p1-ru-014","expected":{"06":[7],"02":["na"]}},
+    {"id":"p1-ru-017","expected":{"06":[10]},"disputed":{"04":[10,20]}},
+    {"id":"p1-ru-018","expected":{},"disputed":{"06":[4,7]}},
+    {"id":"p1-ru-026","expected":{"06":[7],"02":["na"]},"disputed":{"04":[0,5]}},
+    {"id":"p1-ru-027","expected":{"06":[10]}},
+    {"id":"p1-kz-008","expected":{"06":[7],"02":["na"]}},
+    {"id":"p1-kz-012","expected":{"06":[10],"02":["yes"]},"authority":"User working interpretation for 06, not organizer GT."},
+    {"id":"p1-en-004","expected":{"06":[10]}},
+    {"id":"p1-en-008","expected":{},"disputed":{"06":[7,10],"04":[10,15,20]}},
+    {"id":"p1-en-013","expected":{"06":[10],"08":["yes"]}},
+    {"id":"p1-en-002","expected":{},"disputed":{"07":["yes","no"]}}
+  ],
+  "repeat_dev": ["p1-ru-025","p1-ru-004","p1-ru-027","p1-kz-012"]
+}
