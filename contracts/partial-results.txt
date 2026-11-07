@@ -1,0 +1,34 @@
+CQA partial contract v1 — 2026-11-07
+
+CriterionReview adds status: resolved | unresolved and missing_information: string[].
+Legacy rows with no status are resolved. Resolved: existing allowed value, missing_information=[] (legacy omission accepted).
+Unresolved: value=null, nonempty explanation, nonempty missing_information with specific missing facts, na_reason="".
+evidence/checked_ranges remain arrays. Every provided reference must validate; unresolved may have both arrays empty.
+All checklist IDs must be present exactly once. Broken JSON, bad quotes, forbidden N/A and invalid steps fail the run.
+
+Evaluation adds ai_status and final_status: completed | partial | failed (running during execution).
+ai_status describes the ORIGINAL machine result and is never changed by a human appeal.
+final_status describes final_review/final_score; status is the current final status for compatibility with UI.
+ai_review/original_score are immutable after the AI run. Successful partial runs retain all criterion rows.
+Transport/refusal/truncation/invalid review => failed, no usable AIReview; honest unresolved criterion(s) => partial.
+Legacy records: ai_status fallback from ai_review (resolved rows => completed), otherwise stored status;
+final_status fallback from final_review, otherwise stored status. Do not infer original AI completion from reviewed status.
+
+Score adds resolved_count, unresolved_count, unresolved_ids, total_reason.
+Any unresolved positive-weight non-flag criterion => total=null, applicable_weight=null,
+effective_weight/contribution=null for ALL rows and sections (no unofficial rescaled total).
+Known raw_points = original weight * normalized value; unresolved raw_points=null.
+Known N/A raw_points=null and is still resolved. Unresolved is not excluded as N/A.
+Only unresolved zero-weight flags => total may be numeric; gross_error=null unless any resolved flag is yes.
+gross_error: true if ANY confirmed flag=yes; otherwise null if ANY flag unresolved; otherwise false.
+No applicable positive weights => total=null as before. ROUND_HALF_UP to two places.
+
+Checklist adds optional criterion.na_channels: array of agent chat | voice call, restricting N/A even when allow_na=true.
+For the narrow voice exception, na_condition=recording_started_after_greeting must be explicitly returned with contextual sources and na_reason.
+New organizer rules are a versioned template with provenance; original v1 and stored evaluations remain untouched.
+01 voice N/A requires voice call, explicit evidence that recording started after the greeting, and a concrete na_reason.
+Generic channel gating is validated by code. Semantic truth of the narrow exception is checked from evidence by AI/human.
+
+GET /api/evaluations?view=original|final&gross_error=yes|no|unknown&conversation_id=...&status=...&checklist_version=...
+Default view=final. Rows include view, ai_status, final_status and selected status/total/gross_error.
+Missing/failed scores have gross_error=null, never false. Historical records are read, not rewritten.

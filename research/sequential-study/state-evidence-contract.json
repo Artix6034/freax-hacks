@@ -1,0 +1,81 @@
+{
+  "contract_version": "cqa-sequential-design-1",
+  "status": "research_design_not_an_application_or_provider_schema",
+  "bindings": ["conversation_id_for_storage_only", "transcript_hash", "checklist_id", "checklist_version", "checklist_hash", "reference_hash", "prompt_version", "schema_version", "pipeline_id"],
+  "state_fields": {
+    "source_coverage": "Ordered disjoint core message ranges processed; context overlap is not new coverage",
+    "processed_until_message_id": "Last contiguous processed source message, nullable before first chunk",
+    "previous_state_hash": "Hash of prior accepted state; state updates remain auditable",
+    "first_operator_ref": "Source message ID of first human operator response, including relevant client-language refs",
+    "initially_known_facts": "Claims with source IDs and origin; do not invent the policy meaning of 'initially'",
+    "identity_events": "Separate request/confirmation/protected-action candidates; preserve order, scope, roles and uncertainty",
+    "request_answer_graph": "Many-to-many substantial question/answer/next-step links and open questions",
+    "waiting_events": "Wait notice/promise/return links; no invented SLA threshold",
+    "complaint_response_links": "Complaint or inconvenience and subsequent operator acknowledgement/action",
+    "closure_events": "Final turns, goodbye, offer/summary, interruption, system-close and text after close",
+    "factual_claims": "Operator claims distinguished from independently verified company facts; versioned source refs",
+    "event_ledger": "Append-only observations and interpretation revisions, no deletion of source occurrence",
+    "criterion_states": "Keyed by IDs in checklist snapshot; never hardcode exactly eight for future checklists",
+    "unresolved_questions": "Pending factual/rubric/ASR uncertainties, with affected criteria and required source"
+  },
+  "criterion_state": {
+    "criterion_id": "Snapshot ID",
+    "status_enum": ["pending", "provisional", "final"],
+    "candidate_value": "One of this criterion's allowed_values OR null before resolved",
+    "evidence_refs": "Ledger event IDs",
+    "applicability_reason": "Rule-grounded reason; insufficient context is not N/A",
+    "open_questions": "Explicit unresolved decisions"
+  },
+  "event_revision_fields": {
+    "event_id": "Stable source-derived ID; overlap duplicates collapse",
+    "revision": "Positive integer",
+    "claim_status_enum": ["candidate", "accepted", "rejected", "superseded"],
+    "observation_kind": "Versioned event taxonomy; not a final criterion score",
+    "source_refs": "Message IDs / spans and exact quotes",
+    "supersedes_revision": "Nullable previous interpretation revision",
+    "correction_of_event_id": "Nullable link; does not erase occurrence of confirmed prior disclosure/offer",
+    "origin_enum": ["chunk_llm", "classifier", "final_review", "human_review"],
+    "factual_truth_status_enum": ["not_checked", "supported_by_reference", "contradicted_by_reference", "uncertain"]
+  },
+  "final_criterion_fields": {
+    "criterion_id": "Snapshot ID",
+    "final_value": "Allowed enum/scale value from that criterion only; null belongs to unresolved run, not completed review",
+    "explanation": "Concise rule application, in Russian for current app",
+    "evidence": "Zero or more Evidence items if checked_ranges supply valid support",
+    "checked_ranges": "Inclusive source ranges for absence/applicability/whole-dialogue review",
+    "na_reason": "Required iff final_value is na; must invoke that criterion's actual na_rule",
+    "uncertainties": "Limitations; decisive missing fact prevents fabricated final score"
+  },
+  "Evidence_fields": {
+    "criterion_id": "Parent ID; final_value inherited from parent, added to flattened export by server",
+    "event_kind_enum": ["performed_action", "violation", "omission", "NA_basis"],
+    "message_id": "Existing original ID; nullable for range-only support, omission needs expected_at",
+    "original_timestamp": "Server-enriched exact source string, not a generated time",
+    "speaker": "Server-enriched original role; no crediting bot as operator",
+    "exact_quote": "Nonempty exact source substring for positive observation; null for omission",
+    "span_utf16": "Nullable {start,end}; half-open UTF-16 units, unambiguous occurrence within message",
+    "rule_ref": "Checklist snapshot hash + criterion ID + relevant rule/scale/NA clause",
+    "rule_link_explanation": "Why observation/range supports this outcome; not just a repeated quote",
+    "expected_at": "For omission: existing anchor message/range where action was expected",
+    "checked_range": "For omission/absence: inclusive from_message_id/to_message_id and expected_action",
+    "domain_source_refs": "Versioned verified company references if claiming factual correctness",
+    "verification": "Separate quote_exists, relevance_review, sufficiency_review, factual_truth_status",
+    "uncertainties": "ASR/anonymisation, ambiguous applicability, missing company rule or other limitation"
+  },
+  "semantic_invariants": [
+    "Never average chunk scores or sum provisional values",
+    "Each source message has exactly one core owner; overlap is read-only context",
+    "Final judge sees all original messages plus current checklist and verified reference",
+    "Pending/unknown is not na/no; numeric rubric steps remain numeric",
+    "Identification request is not confirmation; preserve confirmation-before-action chronology and scope",
+    "Later evidence can reject an earlier mistaken interpretation; a real past violation is not erased by a correction",
+    "Quote existence does not establish relevance, sufficiency or company-policy truth",
+    "Omission has no quote of absence; use expected_at and all relevant checked ranges",
+    "Final-value validation, allowed N/A and existing evidence_policy remain authoritative from checklist snapshot",
+    "Source timestamps/speaker are taken from transcript; no inferred audio offset from ISO time",
+    "Repeated quote occurrences must resolve unambiguously before UI highlighting",
+    "Final score is computed once in existing scoring code; gross-error flag is separate for current checklist",
+    "Classifier labels/scores are untrusted suggestions and omitted in H_hidden judge input",
+    "Source text/roles/times and hashes are immutable across appeals; original AI and reviewed-final views stay distinct"
+  ]
+}

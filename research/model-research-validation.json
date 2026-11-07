@@ -1,0 +1,54 @@
+{
+  "checked_on": "2026-11-07",
+  "passed": true,
+  "checks": {
+    "unique_source_ids": true,
+    "ten_primary_papers": true,
+    "candidate_sources_resolve": true,
+    "four_cloud_candidates": true,
+    "no_claim_of_tested_account_access": true,
+    "api_only_primary_scope": true,
+    "fixed_pilot_matrix": true,
+    "single_locked_holdout": true,
+    "no_inference_claim": true,
+    "budget_reproduced": true,
+    "report_covers_all_papers": true,
+    "brief_exists": true,
+    "no_guessed_dated_openai_id": true
+  },
+  "files": {
+    "research\\model-architecture-research.txt": {
+      "bytes": 66463,
+      "sha256": "fcbf9937375d0c32307038286d406ed190be771730889fb9bc64a59857ed9603"
+    },
+    "research\\model-implementation-brief.txt": {
+      "bytes": 11587,
+      "sha256": "77bb0b6d0c09b848f69364af8d74ab8b8e6ff31429be8111e20a8b47bd03d694"
+    },
+    "research\\model-candidates.json": {
+      "bytes": 4646,
+      "sha256": "4616e72aa5b1fc2fe3e241ea48ab3ff64e4615046ee92e19bd277018f88290ee"
+    },
+    "research\\model-experiment-plan.json": {
+      "bytes": 1799,
+      "sha256": "b5931f611aef7f23c31ca395a0e22ba0de9bf2875b84075c40131a7a6be7bc96"
+    },
+    "research\\model-research-sources.json": {
+      "bytes": 14943,
+      "sha256": "d3b01b4f5e27d598ac0d18c081d3bbd4206050cbc57bbb0100e927bed9f780cc"
+    },
+    "research\\model-budget.json": {
+      "bytes": 2434,
+      "sha256": "8b8c2fd8fb567879fd4bcd036f4733c77cb58fbc59255bc335b06b24c697bf84"
+    },
+    "research\\calculate_model_budget.py": {
+      "bytes": 3886,
+      "sha256": "4e185355c0871956844ac692bb4f999497eb6b0dd4dc29402dd97ae3957d9b69"
+    }
+  },
+  "real_accuracy_measured": false,
+  "paid_or_external_AI_calls": 0,
+  "downloaded_models": 0,
+  "only_research_files_written_by_this_task": true,
+  "notice": "Offline artifact consistency checks, not a model benchmark or independent verification of provider claims."
+}

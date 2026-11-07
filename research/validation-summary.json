@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "checks": {
+    "source_hash_matches_frozen_split": true,
+    "expected_counts": true,
+    "disjoint_and_complete": true,
+    "indexed_messages_preserve_source": true,
+    "catalogue_only_uses_pilot": true,
+    "all_catalogue_message_ids_exist": true,
+    "catalogue_case_ids_unique": true,
+    "catalogue_has_no_scores": true,
+    "holdout10-expert-a.blank.jsonl:ids": true,
+    "holdout10-expert-a.blank.jsonl:empty_values": true,
+    "holdout10-expert-a.blank.jsonl:hashes": true,
+    "holdout10-expert-b.blank.jsonl:ids": true,
+    "holdout10-expert-b.blank.jsonl:empty_values": true,
+    "holdout10-expert-b.blank.jsonl:hashes": true,
+    "pilot20-expert-a.blank.jsonl:ids": true,
+    "pilot20-expert-a.blank.jsonl:empty_values": true,
+    "pilot20-expert-a.blank.jsonl:hashes": true,
+    "pilot20-expert-b.blank.jsonl:ids": true,
+    "pilot20-expert-b.blank.jsonl:empty_values": true,
+    "pilot20-expert-b.blank.jsonl:hashes": true,
+    "no_signed_urls_or_signatures_in_research": true
+  },
+  "catalogue_cases": 23,
+  "template_rows": 60,
+  "source_records": 65,
+  "source_messages": 1268,
+  "research_files_with_secret_leaks": [],
+  "ground_truth_created": false,
+  "external_AI_calls": 0
+}

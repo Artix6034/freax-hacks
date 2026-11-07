@@ -1,0 +1,1211 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cqa:contract:1.0",
+  "title": "CQA shared contracts v1.0",
+  "description": "Use a $defs reference for each API object. Runtime enforces cross-object semantics, allowed values, exact quotes and inclusive ranges in src/domain.js.",
+  "$defs": {
+    "Message": {
+      "type": "object",
+      "required": [
+        "message_id",
+        "timestamp",
+        "speaker",
+        "text"
+      ],
+      "properties": {
+        "message_id": {
+          "type": "string",
+          "pattern": "^m[0-9]{4,}$"
+        },
+        "timestamp": {
+          "type": "string",
+          "minLength": 1
+        },
+        "speaker": {
+          "enum": [
+            "client",
+            "operator",
+            "bot",
+            "system"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "Conversation": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "conversation_id",
+        "channel",
+        "language",
+        "audio_url",
+        "transcript"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "conversation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "channel": {
+          "enum": [
+            "agent chat",
+            "voice call"
+          ]
+        },
+        "language": {
+          "enum": [
+            "RU",
+            "KZ",
+            "EN"
+          ]
+        },
+        "audio_url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "transcript": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/Message"
+          }
+        }
+      }
+    },
+    "Criterion": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "section",
+        "type",
+        "instruction",
+        "weight",
+        "allow_na",
+        "na_rule",
+        "allowed_values",
+        "scale"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "section": {
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "boolean",
+            "scale",
+            "flag"
+          ]
+        },
+        "instruction": {
+          "type": "string",
+          "minLength": 1
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "allow_na": {
+          "type": "boolean"
+        },
+        "na_rule": {
+          "type": "string"
+        },
+        "allowed_values": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "type": [
+              "string",
+              "number"
+            ]
+          }
+        },
+        "scale": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "value",
+              "description"
+            ],
+            "properties": {
+              "value": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000000
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "evidence_policy": {
+          "type": "object",
+          "required": [
+            "positive_roles",
+            "positive_scope"
+          ],
+          "properties": {
+            "positive_roles": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "enum": [
+                  "operator",
+                  "client",
+                  "system",
+                  "bot"
+                ]
+              }
+            },
+            "positive_scope": {
+              "enum": [
+                "any",
+                "first_operator"
+              ]
+            }
+          }
+        },
+        "na_channels": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "agent chat",
+              "voice call"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "na_condition": {
+          "type": "string"
+        }
+      }
+    },
+    "Checklist": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "checklist_id",
+        "version",
+        "name",
+        "rounding",
+        "instructions",
+        "criteria"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "checklist_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rounding": {
+          "const": "ROUND_HALF_UP"
+        },
+        "instructions": {
+          "type": "string",
+          "minLength": 1
+        },
+        "criteria": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/Criterion"
+          }
+        },
+        "provenance": {
+          "type": "object"
+        }
+      }
+    },
+    "CriterionReview": {
+      "type": "object",
+      "required": [
+        "criterion_id",
+        "value",
+        "explanation",
+        "evidence",
+        "checked_ranges",
+        "na_reason"
+      ],
+      "properties": {
+        "criterion_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "oneOf": [
+            {
+              "enum": [
+                "yes",
+                "no",
+                "na"
+              ]
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "explanation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "na_reason": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "message_id",
+              "quote"
+            ],
+            "properties": {
+              "message_id": {
+                "type": "string"
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "checked_ranges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "from_message_id",
+              "to_message_id",
+              "expected_action"
+            ],
+            "properties": {
+              "from_message_id": {
+                "type": "string"
+              },
+              "to_message_id": {
+                "type": "string"
+              },
+              "expected_action": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "status": {
+          "enum": [
+            "resolved",
+            "unresolved"
+          ]
+        },
+        "missing_information": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "na_condition": {
+          "type": "string"
+        }
+      }
+    },
+    "AIReview": {
+      "type": "object",
+      "required": [
+        "criteria"
+      ],
+      "properties": {
+        "criteria": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/CriterionReview"
+          }
+        }
+      }
+    },
+    "Score": {
+      "type": "object",
+      "required": [
+        "total",
+        "applicable_weight",
+        "gross_error",
+        "rounding",
+        "criteria",
+        "sections"
+      ],
+      "properties": {
+        "total": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "applicable_weight": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "gross_error": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "rounding": {
+          "const": "ROUND_HALF_UP"
+        },
+        "criteria": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "criterion_id",
+              "value",
+              "weight",
+              "counted",
+              "normalized",
+              "effective_weight",
+              "contribution"
+            ],
+            "properties": {
+              "criterion_id": {
+                "type": "string"
+              },
+              "value": {
+                "type": [
+                  "string",
+                  "number",
+                  "null"
+                ]
+              },
+              "weight": {
+                "type": "number"
+              },
+              "counted": {
+                "type": "boolean"
+              },
+              "normalized": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "effective_weight": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "contribution": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "status": {
+                "enum": [
+                  "resolved",
+                  "unresolved"
+                ]
+              },
+              "raw_points": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            }
+          }
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "section",
+              "contribution",
+              "effective_weight"
+            ],
+            "properties": {
+              "section": {
+                "type": "string"
+              },
+              "contribution": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "effective_weight": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            }
+          }
+        },
+        "status": {
+          "enum": [
+            "completed",
+            "partial"
+          ]
+        },
+        "resolved_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unresolved_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unresolved_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "total_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "Appeal": {
+      "type": "object",
+      "required": [
+        "appeal_id",
+        "criterion_id",
+        "comment",
+        "status",
+        "created_at",
+        "disputed_review"
+      ],
+      "properties": {
+        "appeal_id": {
+          "type": "string"
+        },
+        "criterion_id": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "pending",
+            "resolved"
+          ]
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "disputed_review": {
+          "$ref": "#/$defs/CriterionReview"
+        },
+        "action": {
+          "enum": [
+            "confirm",
+            "change"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "resolved_at": {
+          "type": "string"
+        },
+        "decision_review": {
+          "$ref": "#/$defs/CriterionReview"
+        }
+      }
+    },
+    "Evaluation": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "evaluation_id",
+        "created_at",
+        "status",
+        "revision",
+        "conversation",
+        "conversation_hash",
+        "checklist",
+        "checklist_hash",
+        "reference_hash",
+        "prompt_version",
+        "ai_review",
+        "original_score",
+        "final_review",
+        "final_score",
+        "appeals"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "evaluation_id": {
+          "type": "string"
+        },
+        "run_id": { "type": ["string", "null"] },
+        "configuration_hash": { "type": "string" },
+        "execution_pid": { "type": "integer" },
+        "execution_snapshot": { "type": "object" },
+        "created_at": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "running",
+            "completed",
+            "partial",
+            "failed"
+          ]
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "conversation": {
+          "$ref": "#/$defs/Conversation"
+        },
+        "conversation_hash": {
+          "type": "string"
+        },
+        "checklist": {
+          "$ref": "#/$defs/Checklist"
+        },
+        "checklist_hash": {
+          "type": "string"
+        },
+        "reference_hash": {
+          "type": "string"
+        },
+        "prompt_version": {
+          "type": "string"
+        },
+        "ai_metadata": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AIExecutionMetadata"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "ai_review": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AIReview"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "final_review": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AIReview"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "original_score": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Score"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "final_score": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Score"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "error": {
+          "type": "string"
+        },
+        "appeals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Appeal"
+          }
+        },
+        "reference_snapshot": {
+          "$ref": "#/$defs/ReferenceSnapshot"
+        },
+        "ai_status": {
+          "enum": [
+            "running",
+            "completed",
+            "partial",
+            "failed"
+          ]
+        },
+        "final_status": {
+          "enum": [
+            "running",
+            "completed",
+            "partial",
+            "failed"
+          ]
+        },
+        "ai_facts": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DialogFacts"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Immutable public source observations from the original AI call. Optional for legacy records."
+        }
+      }
+    },
+    "ReferenceSnapshot": {
+      "type": "object",
+      "required": [
+        "version",
+        "text"
+      ],
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "AICall": {
+      "type": "object",
+      "properties": {
+        "attempt": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "stage": {
+          "enum": ["A1", "facts-then-evaluations"]
+        },
+        "provider": {
+          "type": "string"
+        },
+        "protocol": {
+          "enum": [
+            "openai-chat",
+            "chat-compatible"
+          ]
+        },
+        "requested_model": {
+          "type": "string"
+        },
+        "returned_model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "response_format": {
+          "enum": [
+            "json_schema",
+            "json_object",
+            "none"
+          ]
+        },
+        "prompt_version": {
+          "type": "string"
+        },
+        "schema_version": {
+          "type": "string"
+        },
+        "schema_hash": {
+          "type": "string"
+        },
+        "reasoning_effort": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "max_completion_tokens": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "started",
+            "parsed",
+            "failed"
+          ]
+        },
+        "http_status": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "finish_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "refused": {
+          "type": "boolean"
+        },
+        "usage": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "elapsed_ms": {
+          "type": "number",
+          "minimum": 0
+        },
+        "error_code": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "review_validation": {
+          "enum": [
+            "accepted",
+            "rejected"
+          ]
+        }
+      }
+    },
+    "AIExecutionMetadata": {
+      "type": "object",
+      "description": "Public diagnostics for the current facts pipeline and legacy A1. Additive fields preserve historical records; no credentials or raw provider bodies.",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "requested_model": {
+          "type": "string"
+        },
+        "returned_model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "protocol": {
+          "enum": [
+            "openai-chat",
+            "chat-compatible"
+          ]
+        },
+        "pipeline": {
+          "enum": ["A1", "facts-then-evaluations"]
+        },
+        "prompt_hash": {
+          "type": "string",
+          "description": "SHA-256 of the actual system prompt; optional for historical records."
+        },
+        "prompt_version": {
+          "type": "string"
+        },
+        "schema_version": {
+          "type": "string"
+        },
+        "schema_hash": {
+          "type": "string"
+        },
+        "schema_snapshot": {
+          "type": "object"
+        },
+        "response_format": {
+          "enum": [
+            "json_schema",
+            "json_object",
+            "none"
+          ]
+        },
+        "reasoning_effort": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "max_completion_tokens": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "timeout_ms": {
+          "type": "integer"
+        },
+        "endpoint_hash": { "type": "string" },
+        "attempts": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "calls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AICall"
+          }
+        },
+        "usage": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "elapsed_ms": {
+          "type": "number",
+          "minimum": 0
+        },
+        "finish_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cost_status": {
+          "const": "not_calculated"
+        }
+      }
+    },
+    "DialogFacts": {
+      "type": "object",
+      "properties": {
+        "client_language": {
+          "type": "object",
+          "properties": {
+            "languages": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "RU",
+                  "KZ",
+                  "EN",
+                  "other"
+                ]
+              }
+            },
+            "certainty": {
+              "type": "string",
+              "enum": [
+                "supported",
+                "uncertain"
+              ]
+            },
+            "explanation": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/evidence"
+              }
+            }
+          },
+          "required": [
+            "languages",
+            "certainty",
+            "explanation",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        "first_operator_message_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "client_questions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "question_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "summary": {
+                "type": "string",
+                "minLength": 1
+              },
+              "evidence": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/evidence"
+                }
+              },
+              "operator_responses": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "summary": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "evidence": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/evidence"
+                      }
+                    }
+                  },
+                  "required": [
+                    "summary",
+                    "evidence"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "response_state": {
+                "type": "string",
+                "enum": [
+                  "present",
+                  "not_observed",
+                  "uncertain"
+                ]
+              },
+              "checked_ranges": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/range"
+                }
+              },
+              "missing_information": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            "required": [
+              "question_id",
+              "summary",
+              "evidence",
+              "operator_responses",
+              "response_state",
+              "checked_ranges",
+              "missing_information"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "context_events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "verification_confirmation",
+                  "handoff",
+                  "closure",
+                  "other"
+                ]
+              },
+              "summary": {
+                "type": "string",
+                "minLength": 1
+              },
+              "evidence": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/evidence"
+                }
+              }
+            },
+            "required": [
+              "kind",
+              "summary",
+              "evidence"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "observations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "known_context",
+                  "complaint",
+                  "operator_statement",
+                  "interaction",
+                  "other"
+                ]
+              },
+              "statement": {
+                "type": "string",
+                "minLength": 1
+              },
+              "basis": {
+                "type": "string",
+                "enum": [
+                  "direct_quote",
+                  "checked_absence",
+                  "uncertain"
+                ]
+              },
+              "evidence": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/evidence"
+                }
+              },
+              "checked_ranges": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/range"
+                }
+              },
+              "uncertainty_reason": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "kind",
+              "statement",
+              "basis",
+              "evidence",
+              "checked_ranges",
+              "uncertainty_reason"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "client_language",
+        "first_operator_message_id",
+        "client_questions",
+        "context_events",
+        "observations",
+        "limitations"
+      ],
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "message_id": {
+          "type": "string"
+        },
+        "quote": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "message_id",
+        "quote"
+      ],
+      "additionalProperties": false
+    },
+    "range": {
+      "type": "object",
+      "properties": {
+        "from_message_id": {
+          "type": "string"
+        },
+        "to_message_id": {
+          "type": "string"
+        },
+        "expected_action": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "from_message_id",
+        "to_message_id",
+        "expected_action"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

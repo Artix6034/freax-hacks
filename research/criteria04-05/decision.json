@@ -1,0 +1,15 @@
+{
+  "production_change":false,
+  "prompt_version":"cqa-facts-1.3-dialogue-scale-grounding",
+  "decision":"Keep current production instructions. Baseline and transfer check completed; no semantic error on the frozen explicit pairs justified a candidate. The actual RU case remains disputed.",
+  "baseline":{"calls":20,"accepted":20,"completed":19,"partial":1,"frozen_target_matches":16,"diagnostic_without_frozen_target":4},
+  "criterion04":{"explicit_scales_checked":[20,15,10],"actual_RU_latest":10,"actual_RU_earlier":20,
+    "status":"disputed sufficiency of the next step, not proven wrong application",
+    "reason":"The lower score cites the operator's own request for a name that was not received; the higher score credits the stated handoff and complete report help. Independent adjudication is missing.",
+    "not_introduced":["universal escalation ceiling","mandatory account identifiers","automatic maximum for any handoff"]},
+  "criterion05":{"user_interpretation":"Polite practical help that addresses the specific inconvenience can satisfy the criterion; apology is not mandatory.","practical_KZ_repeats":["yes","yes"],"ignored_KZ_repeats":["no","no"],"actual_KZ_latest":"yes"},
+  "transfer_check":{"calls":6,"accepted":6,"frozen_target_matches":4,"diagnostic_without_target":2,"fresh_RU":{"conversation_id":"p1-ru-026","04":5,"05":"no"},"fresh_KZ":{"conversation_id":"p1-kz-003","04":20,"05":"yes"}},
+  "total_calls":26,
+  "partial_results_control":{"unknown_criterion":"04","remaining_seven":"resolved","total":null,"missing_information":"Exact individual contractual commission; operator admitted the quoted rate was an assumption."},
+  "limits":"Assistant-authored expectations and one user-approved interpretation are not official Ground Truth or independently verified transcript labels. Two repetitions do not establish general stability."
+}

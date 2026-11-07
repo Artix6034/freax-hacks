@@ -1,0 +1,82 @@
+Implementation brief для second_chat: API-only CQA
+Дата: 2026-11-07. Это предложение внедрения после исследования, не выполненное изменение приложения.
+Последнее уточнение пользователя: все модели через API; CUDA/Kaggle не нужны основному пути. В исследовании не было AI-вызовов, загрузок моделей, изменения src/config/tests или запуска платных сервисов.
+
+Попробовать первым:
+1. gpt-6-astra, один вызов на весь чек-лист, reasoning_effort=high, строгий JSON Schema.
+2. На пилоте сравнить с A2: extractor фактов -> grader, которому снова передан ПОЛНЫЙ транскрипт.
+3. Независимые кандидаты: claude-fable-5-1 и gemini-4-argon. gpt-6.1-sol — резерв по стоимости/совместимости.
+Это порядок эксперимента, не выбранный победитель. На KZ сравнительных CQA-результатов нет.
+
+Главные файлы:
+research/model-architecture-research.txt — полный отчёт с первичными ссылками и 10 papers;
+research/model-candidates.json — API IDs, параметры, опубликованные цены, источники;
+research/model-experiment-plan.json — 3 модели × A1/A2 × pilot20;
+research/model-research-sources.json — проверенные первичные ссылки и дата;
+research/compare_evaluations.py — измерение относительно людей, default original AI.
+Существующие data/dev и разбиение не менять. Архивные пустые шаблоны не GT.
+
+Минимальные изменения приложения, по порядку:
+A. src/ai/provider.js:
+— отделить transport от buildMessages/schema/pipeline; существующий fetch и общий Review сохранить;
+— добавить явную protocol/capabilities настройку (например отдельное поле AI_PROTOCOL, сохраняя совместимость текущего cloud/local);
+— OpenAI Chat: response_format json_schema, reasoning_effort и max_completion_tokens; для Responses — отдельное отображение text.format/reasoning/max_output_tokens;
+— не отправлять temperature/top_p/logprobs Astra/Sol, не задавать none reasoning;
+— Anthropic — native Messages с output_config.format и effort, text-блоками, stop_reason/refusal; не предполагать OpenAI совместимость и forced-tool обход;
+— Google — native или ПРОВЕРЕННАЯ compatibility поверхность с собственными thinking/usage/finish параметрами. Не копировать sampling поля старого Gemini. Если используется агрегатор, native IDs из отчёта не равны автоматически его IDs: проверить документацию агрегатора и зафиксировать actual provider routing;
+— отдельный искусственный smoke test для точного сочетания model/protocol/schema. Модель в каталоге не гарантирует доступ аккаунта;
+— актуальные формы запроса перепроверить Context7/официальной документацией при реализации. Цены Developer API Google не смешивать с Google Cloud.
+
+B. Новые небольшие модули при необходимости:
+src/ai/schema.js — схема из checklist snapshot, без зашитых восьми ID;
+src/ai/prompts.js — версии системной инструкции и отдельных stage prompts;
+src/ai/pipeline.js — A1/A2, позднее routing/reviewer.
+Это предлагаемые пути: в рамках исследования эти исходники не создавались.
+Для schema удобно обязательное поле на каждый ID и enum value конкретного критерия, затем преобразование в существующий Review.criteria[]. Поля evidence/checked_ranges/na_reason сохранять. Не считать JSON Schema семантическим проверяющим.
+A2 EvidenceLedger: observations с типом, message_id/диапазоном и точной цитатой, список запросов/ответов, хронология проверки/действия, ограничения. Он не устанавливает новые защищённые действия и не является GT. Вторая стадия проверяет ledger по исходному тексту.
+
+C. domain.js/scoring.js:
+— сохранить жёсткую проверку полноты, допустимых значений, N/A и цитат; schema не заменяет валидацию;
+— суммы/нормировка/ROUND_HALF_UP и отдельный 08 остаются кодом;
+— не вводить новые ответы uncertainty вместо official values. Технический unresolved/error -> human review/failed с явной причиной;
+— нельзя автоматически превращать недостаток предметной справки в 04=0 или N/A.
+При отсутствии надёжного выбора ступени текущий сервис может оставить весь run failed; полнота выдачи измеряется отдельно.
+
+D. service.js/store:
+— ai_review/original_score — результат ВСЕГО машинного pipeline до человека;
+— первый LLM review/второй reviewer/арбитраж сохраняются отдельными intermediate records, не перезаписываются;
+— final_review/final_score остаются human appeal; comparator исходного AI не подменять человеческим итогом;
+— cache key включает hashes входа, чек-листа, справок, schema/prompt/pipeline и модели; ID недостаточен.
+
+E. Логирование/ограничения:
+calls[] на каждый attempt/stage: model requested/returned, protocol/provider, настройки reasoning, hashes, длительность, finish/error/refusal, input/output/reasoning/cache tokens, цена и дата цены, cost status.
+Не удваивать reasoning, уже включённый в billed output. Суммировать все попытки, включая repair/reviewer/arbiter/translation. Если стоимость тайм-аута неизвестна, пометить unknown.
+Полные приватные reasoning-тексты, API-ключи и signed audio_url в лог не помещать; transcript не включать в обычный журнал.
+Один ограниченный технический repair допустим только по заранее заданному протоколу; никаких скрытых семантических повторов до понравившегося балла.
+По умолчанию timeout приложения 120s, максимальная настройка 600s. Для длинного reasoning/Argon это нужно измерить; если нужен больший срок — явный asynchronous job/polling, а не неограниченный HTTP/retry.
+Для OpenAI stateless путь store=false; это не равно ZDR. Fable 5.1 требует 30-day retention без специального исключения. Gemini использовать как Paid Service; не отправлять чувствительные данные в unpaid.
+
+Приёмка механики:
+— искусственный JSON happy path, refusal, malformed/truncated output, 429/5xx/timeout;
+— неверная ступень, запрещённый N/A, повтор/пропуск ID, вымышленная цитата отклоняются;
+— 03: цитата после действия не доказывает проверку до действия;
+— 08 не меняет итог;
+— новый критерий из UI появляется в schema/prompt без изменения логики;
+— transcript/reference содержат инструкции атакующего только как данные, tool use не разрешён;
+— смена conversation_id не подставляет результат, смена текста/правил инвалидирует кэш;
+— все промежуточные решения/расходы сохраняются;
+— апелляция не меняет original AI.
+Это не тесты качества модели относительно GT.
+
+Эксперимент:
+3 модели × A1/A2 × 20 пилотных = 120 оценок, 180 вызовов.
+Blind человеческая разметка A/B и разбор разногласий до просмотра AI.
+Основные показатели: matched/denominator и матрицы по критериям; N/A; отдельный 08; total MAE/RMSE/bias; completion rate; число числовых пар; причины/достаточность доказательств; RU/KZ/EN раздельно. Языковые срезы добавить в отчёт присоединением существующих метаданных, не подменяя Python comparator LLM-судьёй.
+По пилоту заморозить максимум два pipeline; один раз проверить на holdout10. Не подбирать промпт по holdout, не усреднять недопустимые ступени. Организаторские контрольные10 — отдельные.
+Few-shot/перевод/разбиение 03/04/07/ансамбль — отдельные зарегистрированные пилотные абляции только при выявленном типе ошибки; не нужны все сразу.
+
+Цена — расчётная, USD, Standard без кэша и дополнительных попыток:
+A1: I=6000/O=6000 (2000 visible+4000 reasoning) => Astra/Fable 0.360; Sol/Argon 0.072.
+A2: I=14000/O=9000 => Astra/Fable 0.590; Sol/Argon 0.118.
+Основной пилот: 41.80. Дополнительные повторы и дорогой holdout по допущениям полного отчёта: суммарно около 66.58.
+Это НЕ согласованный бюджет и НЕ измеренный расход. С per-call cap 32768 output лимитный сценарий всего плана около 368.57 при фиксированных входах, до retry. Не запускать платные вызовы без установленного лимита расходов и разрешённого доступа к данным. Цена Argon меняется после 30.11.2026.

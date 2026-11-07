@@ -1,0 +1,9 @@
+{
+  "source": "Explicit user decision in this chat",
+  "date": "2026-11-07",
+  "decision": "Preserve PDF rules; proposed stricter limits remain hypotheses for evaluation",
+  "fixed_escalation_score_cap": null,
+  "mandatory_apology_or_explicit_sympathy": false,
+  "note": "false means no extra mandatory condition is introduced; the original empathy criterion still applies.",
+  "expectations_are_official_GT": false
+}

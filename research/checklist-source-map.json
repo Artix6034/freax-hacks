@@ -1,0 +1,25 @@
+{
+  "source": "C:/Users/user/Downloads/Telegram Desktop/CQA_Chat_Quality_Checklist 1.pdf",
+  "reviewed_pages": [1, 2, 3],
+  "authority": "All three pages jointly define the hackathon rubric; external company information supplements factual checks, not score definitions.",
+  "resolved_by_document": [
+    {"topic":"Applicability before quality verdict","pages":[1,2,3]},
+    {"topic":"No means required action omitted/wrong; N/A means configured non-applicability","pages":[1,3]},
+    {"topic":"04 has five defined steps and can credit an appropriate next step","pages":[2]},
+    {"topic":"06 has defined 10/7/4/0 conditions; an incomplete consultation does not itself imply unclear dialogue","pages":[2,3]},
+    {"topic":"General tariff question needs no identification; required but unconfirmed verification means No","pages":[3]},
+    {"topic":"Evidence may be a replica or system event; missing actions need the location where expected; N/A needs its condition","pages":[3]},
+    {"topic":"A private paid-service offer is enough for 08; agreement/payment is not necessary","pages":[3]},
+    {"topic":"First-reaction three-minute threshold, tags and attachments are excluded","pages":[2]},
+    {"topic":"Weighted scale calculation, N/A redistribution and final two-decimal rounding","pages":[2]}
+  ],
+  "diagnostic_focus": "Test whether each selected step satisfies its already defined condition in the actual transcript. Do not treat every difficult application as a missing rule or import stricter rules from the internet.",
+  "remaining_application_questions": [
+    "Whether a particular escalation has enough context to qualify as the correct next step",
+    "Whether the operator's response addresses the specific inconvenience under the exact empathy wording",
+    "Whether the transcript evidences a clarification caused by unclear communication versus repetition of a known fact",
+    "Whether missing closing text reflects an omitted action or a supported interruption"
+  ],
+  "official_GT_created": false,
+  "runtime_changed_by_this_review": false
+}

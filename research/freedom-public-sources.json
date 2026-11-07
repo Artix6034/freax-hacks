@@ -1,0 +1,93 @@
+{
+  "checked_on": "2026-11-07",
+  "purpose": "Diagnostic source discovery; no changes to rubric, prompt, scores or runtime",
+  "authority_order": ["Hackathon checklist and explicit organizer clarifications", "Applicable company product/procedure facts", "Team interpretations and external QA methodology"],
+  "cautions": ["Public policy does not disclose the hackathon Ground Truth", "Check legal entity, product, publication date and applicability to the transcript", "A citation confirms only the claims actually supported by that source", "Do not transfer formal complaint deadlines to call holding or operator-grade appeals"],
+  "sources": [
+    {
+      "id": "FFG-HUMAN-RIGHTS-2025",
+      "url": "https://ffin.global/storage/files/ffg-politika-v-oblasti-prav-celoveka-utv_7c0f57fb-5764-439d-896d-50e0b898c00a.pdf",
+      "entity": "Freedom Finance Global PLC",
+      "effective_date_shown": "2025-03-27",
+      "access": "PDF text inspected; screenshot request timed out",
+      "locations": ["clause 13, printed page 4", "clause 30, printed page 5"],
+      "supports": "The company references internal customer-service QA guidance and weighted checklists.",
+      "does_not_establish": "The contents of that internal guidance, identity with the hackathon rubric, or exact scoring boundaries."
+    },
+    {
+      "id": "FFG-REGULATIONS-2026-02",
+      "url": "https://ffin.global/storage/files/reglament-okazaniia-brokerskix-agentskix-uslug-na-rcb-vstupaet-v-silu-s-23-fevralia-2026-goda_daa05348-3aa2-447f-9424-3fdb3101ab3c.pdf",
+      "entity": "Freedom Finance Global PLC",
+      "edition_date_in_filename": "2026-02-23",
+      "access": "PDF text inspected; screenshot request timed out",
+      "locations": ["section 18", "section 19"],
+      "supports": "Public communication and data-protection context.",
+      "does_not_establish": "A universal support-chat verification script; latest edition or applicability to every case is not established."
+    },
+    {
+      "id": "FFG-PRIVACY",
+      "url": "https://fbroker.kz/privacy-policy",
+      "entity": "Freedom Finance Global PLC",
+      "access": "Page opened and relevant sections inspected",
+      "locations": ["1.1", "1.5", "3.2", "4.1", "5.1"],
+      "supports": "Company web-resource scope, personal/financial-data context and protection against unauthorized disclosure.",
+      "does_not_establish": "Automatic criterion 08=yes for every criterion 03=no or exact verification steps for each support channel."
+    },
+    {
+      "id": "FFG-VOICE-PASSWORD",
+      "url": "https://fbroker.kz/faq/question/voice-password",
+      "entity": "Freedom Finance Global PLC",
+      "updated_shown": "2026-09-22",
+      "access": "Page opened",
+      "supports": "Telephone-order and fallback-identification context for voice passwords.",
+      "does_not_establish": "A requirement to use this method in every chat or to infer successful verification from a request alone."
+    },
+    {
+      "id": "FFG-SECURITY-SESSION",
+      "url": "https://fbroker.kz/faq/question/-how-to-open-a-security-session-3810",
+      "entity": "Freedom Finance Global PLC",
+      "updated_shown": "2026-09-22",
+      "access": "Page opened",
+      "supports": "Security sessions for platform orders and available activation methods, including app confirmation, SMS and biometrics.",
+      "does_not_establish": "That a customer in an arbitrary transcript has already completed verification."
+    },
+    {
+      "id": "FFG-BROKER-REPORT",
+      "url": "https://fbroker.kz/faq/question/generating-the-broker-report-and-the-depositary-report",
+      "entity": "Freedom Finance Global PLC, as indexed on the official FAQ domain",
+      "updated_shown_in_index": "2026-10-02",
+      "access": "Official-domain search-index text inspected; repeated direct page requests timed out",
+      "supports": "Mobile and web navigation for creating broker/depositary reports; useful for checking the report-related advice in p1-ru-010.",
+      "does_not_establish": "Whether all other client requests were resolved or whether an escalation had sufficient context."
+    },
+    {
+      "id": "FFG-SUPPORT-CHANNELS",
+      "url": "https://fbroker.kz/faq/question/how-to-get-advice-on-tradernet-3808",
+      "entity": "Freedom Finance Global PLC",
+      "updated_shown": "2026-10-29",
+      "access": "Page opened",
+      "supports": "Public channels for obtaining support through the platform, manager and other listed contacts.",
+      "does_not_establish": "An internal agent-evaluation script or guaranteed completeness of a promised escalation."
+    },
+    {
+      "id": "FFG-CUSTOMER-COMPLAINTS",
+      "url": "https://fbroker.kz/faq/question/how-to-send-an-online-request--complaint--claim--suggestion--",
+      "entity": "Freedom Finance Global PLC",
+      "updated_shown": "2026-09-22",
+      "access": "Page/search content inspected; later requests timed out",
+      "supports": "Registration and further investigation as part of formal customer-complaint handling.",
+      "does_not_establish": "QA appeal deadlines, a call-hold limit, or that every escalation deserves maximum consultation points.",
+      "version_note": "Complaint timelines differ from the 2025 human-rights policy. Resolve applicable edition/process before using any numeric deadline."
+    },
+    {
+      "id": "ZENDESK-QA-METHOD",
+      "url": "https://support.zendesk.com/hc/en-us/articles/10093676975898-Getting-started-with-Zendesk-QA-Admin-guide",
+      "entity": "Zendesk; methodology only, not a Freedom rule",
+      "access": "Page opened",
+      "supports": "Company-specific scorecard design and reviewer calibration as QA practices.",
+      "does_not_establish": "Any official Freedom criterion value or numeric threshold."
+    }
+  ],
+  "unresolved_public_search": ["Full internal customer-service QA instruction", "Exact hackathon rubric commentary for 02 initial context", "Mandatory empathy wording for 05", "Exact 7-versus-4 boundary for 06", "A requirement that all escalations include a fixed set of account/asset identifiers"],
+  "knowledge_base_in_runtime": "Not connected; discovered references are a research catalogue only"
+}

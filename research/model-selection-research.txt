@@ -1,0 +1,213 @@
+Freedom Broker CQA: выбор конкретных моделей для эксперимента
+Дата проверки источников: 7 ноября 2026. Это исследование моделей при уже определённых архитектурах. Сравнительных CQA-замеров и победителя по точности пока нет. Рабочее приложение не изменялось, платные inference-вызовы и загрузка весов не выполнялись.
+
+Предлагаемый небольшой набор: gpt-6-astra и claude-fable-5-1 как кандидаты финального судьи разных семейств; gpt-6.1-sol как более дешёвый финальный судья/контроль анализатора; gpt-6-luna как дешёвый fragment analyzer; Unbabel/M-Prometheus-7B как специализированный генеративный judge; jev-1.14.0 как специализированный typed-decision judge с отдельным evidence extractor. Начинать с Luna -> Sol и контрольного полного Astra. Это приоритет запуска по совместимости и цене, а не рейтинг точности. Для CPU event branch: TF-IDF + LogisticRegression, затем text-embedding-3-large + LogisticRegression при достаточных event labels.
+
+1. Карта терминов: это разные объекты
+
+Объект | Что это | Что выдаёт | Роль в CQA
+GPT/Claude/Gemini | Конкретные универсальные generative LLM, доступные через API | Текст/структурированный ответ | Факты, цитаты, применимость и финальные оценки; истинность проверяется отдельно
+Prometheus 2, M-Prometheus, Selene Mini, Flow Judge, JudgeLM, Skywork Critic | Конкретные дообученные generative judge-модели | Критика и оценка/предпочтение в своём формате | Возможная замена судьи, если задача/шкала/язык и endpoint совместимы
+Skywork Reward v0.2 | Sequence-classification reward model | Скаляр reward для instruction-response | Не готовый восьмикритериальный отчёт с цитатами
+Jev от TypeSafe AI | Hosted System One decision model | Choice, Score, Noul с вероятностями; свободный текст не генерирует | Новый вопрос задаётся в запросе; evidence/explanation требует другого компонента
+Perplexity Decider | Другое семейство decision models, отдельный API | Аналогичные typed decisions | Нишевый API-кандидат/резерв Jev, не чат-модель
+E5/BGE-M3/OpenAI embeddings | Конкретные энкодеры/embedding-модели | Вектор текста | Поиск/признаки событий; сами не выносят рубричный вердикт
+GLiNER / GLiNER2 | Энкодерные модели извлечения; также имена библиотек | Spans/сущности, у GLiNER2 ещё schema-based classification/extraction | Кандидаты локальных доказательств; не финальный judge полноты/NA
+JEPA | Joint-Embedding Predictive Architecture: семейство архитектур/обучающих целей | Предсказания в пространстве представлений | Не единая готовая модель-судья
+I-JEPA / V-JEPA | Конкретные реализации JEPA для изображений/видео | Visual representations | Для текстового DEV напрямую не подходят
+LLM-JEPA | Метод обучения/адаптации LLM с JEPA objective | Улучшенные представления/генерация базовой модели после обучения | Исследовательское направление, не hosted CQA endpoint
+G-Eval / LLM-as-a-judge | Методы оценивания | Результат выбранной моделью | Не отдельные веса модели
+accuracy/F1/MAE/QWK/Pearson/RewardBench accuracy | Метрики | Число по заданным данным/GT | Не взаимозаменяемые показатели
+AutoRubric/prometheus-eval/flow-judge/scikit-learn | Framework/библиотеки | Оркестрация/обучение/оценка | Не самостоятельное доказательство качества модели
+
+Пользователь отдельно подтвердил: JEV означает именно Jev от TypeSafe AI. Расшифровку аббревиатуры не выдумываем, к JEPA или G-Eval его не приравниваем. Первичная точка входа: https://typesafe.ai/ -> https://docs.typesafe.ai/introduction . Сайты jevmodel.org и сходные найденные страницы — независимые материалы; даже на jevmodel.org прямо указано отсутствие аффилиации. Их цены/названия не использованы как официальная документация.
+
+2. Данные и границы того, что сейчас можно доказать
+
+Повторный аудит 2026-11-07T10:31:22.551197+00:00: data/annotations/dev65.ai-provisional.jsonl содержит 65 ai_provisional записей; 492 ненулевые оценки из 520, 28 null, 50 needs_review, 46 вычисленных totals. Сводка human_verified=false, явно human_verified=true строк нет. Проверенные expert-a/b шаблоны pilot20/holdout10 остаются пустыми; artificial-references из tests/metrics — искусственные fixtures, не GT DEV. Ручных проверенных меток в проверенных data/annotations и экспертных формах не обнаружено. SHA256 и область аудита: model-selection/annotation-audit.json.
+
+Нельзя сейчас проверить сравнительную покритериальную accuracy, NA, 08 recall, MAE, достаточность evidence и качество KZ. Можно проверить контракты, арифметику, существование цитат, источник timestamps, механику разбиения и опубликованную доступность моделей. Согласие с ai_provisional допускается назвать consistency со слабой разметкой, а не точностью к человеческому/официальному GT.
+
+Все ветки должны видеть оригинальные source message IDs, роли, время и полный диалог на финальной стадии. Промежуточный state живёт в приложении: ни один stateless API не сохраняет надёжную память сам по себе. Нужны source-linked ledger, вопросы/ответы, хронология идентификации/действия, жалобы/ожидание, окончание и unresolved. Pending не N/A; итог из chunks не усредняется. Существующий проект контракта research/sequential-study/state-evidence-contract.json остаётся применимым.
+
+3. Универсальные API: конкретные кандидаты и ограничения
+
+Ставки USD за 1M input/output, Standard, обычные короткие запросы; reasoning входит в output. Это опубликованная цена, не измеренная стоимость CQA. Кэш/Batch/налоги/региональные надбавки не предполагаются. Доступ конкретного аккаунта не тестировался.
+
+Модель | Роль для эксперимента | Параметры / ограничения | Input / output | Первичный источник
+gpt-6-astra | Сильный final/control-кандидат | Context 1,050,000; output до 128,000; strict JSON Schema; reasoning low…max, без none/minimal; sampling не задавать | $10 / $50 | https://developers.openai.com/api/docs/models/gpt-6-astra
+gpt-6.1-sol | Бюджетный final judge, контроль более дорогого extraction | Те же context/output; strict schema; low…max; не переносить sampling-параметры от другой модели | $2 / $10 | https://developers.openai.com/api/docs/models/gpt-6.1-sol
+gpt-6-luna | Первый дешёвый fragment analyzer; low-cost judge control | Context 1,050,000; output128,000; strict schema; none/low/medium/high/xhigh/max, default medium; Chat function calling только при none, наши stages tools не требуют | $0.10 / $0.50 | https://developers.openai.com/api/docs/models/gpt-6-luna
+claude-fable-5-1 | Независимый по семейству final-кандидат | 1M/128K; native Messages, adaptive thinking и output_config.effort, JSON Schema через output_config.format; sampling не задавать | $10 / $50 | https://platform.claude.com/docs/en/models/fable-5-1/overview ; https://platform.claude.com/docs/en/build-with-claude/structured-outputs
+gemini-4-argon | Резерв третьего семейства при расширении бюджета | Stable; unified context1,048,576; default sync output65,536; JSON Schema; thinking low/medium/high; sampling не задавать | $2 / $10 до 30.11.2026; $4 / $20 с 01.12 | https://ai.google.dev/gemini-api/docs/models/gemini-4-argon ; https://ai.google.dev/gemini-api/docs/pricing
+
+Основание включения Astra/Fable — возможности контекстного генеративного судьи, управляемый вывод и сравнение разных семейств; основания включения Sol/Luna — та же практическая API-поверхность и существенно меньшая токенная цена. Это НЕ подтверждение их превосходства на CQA. Сопоставимого опубликованного benchmark RU/KZ/EN CQA для этих точных версий не найдено; reasoning/coding leaderboards в оценку пригодности не превращались. Независимость семейства не гарантирует независимость ошибок.
+
+Новые критерии задаются полным правилом, allowed_values, описаниями ступеней и NA condition из checklist snapshot. Schema подтверждает только форму. Хронология 03, полнота 04 против ясности 06, смысл грубого нарушения, применимость NA, язык/переключение RU-KZ и relevance/sufficiency цитат остаются проверяемыми гипотезами о каждой модели. Prompt injection и ложная предварительная оценка не объявлены решёнными ни у одного кандидата.
+
+OpenAI API/schema актуализированы через Context7. Chat: response_format.json_schema, reasoning_effort, max_completion_tokens; Responses: text.format/reasoning/max_output_tokens, это другая форма запроса. Refusal, length, incomplete, ошибка парсинга или решающий неизвестный факт -> технический failed/unresolved с причиной, не no/NA/нулевой балл. Источники: https://developers.openai.com/api/docs/guides/structured-outputs ; https://developers.openai.com/api/docs/guides/reasoning . Для Fable/Argon нужен native adapter либо проверенная compatibility поверхность. Для Fable отдельно учесть текущие правила хранения Covered Model; это не ZDR по умолчанию: https://platform.claude.com/docs/en/manage-claude/api-and-data-retention .
+
+4. Специализированные судьи: существование и реальная роль
+
+Точные HF IDs ниже — IDs весов, не обещание работающего hosted API. Даты — релизы/публикации указанных версий, не "последнее обновление всего семейства". Где есть API, отдельно указан фактический каталог провайдера.
+
+Кандидат | Назначение и сильная сторона | Ограничение для нашего checklist | Практическое решение
+prometheus-eval/prometheus-7b-v2.0 (Prometheus2,2024) | Absolute rubric grading и pairwise, английский; feedback+[RESULT], 1–5; Apache2 | Не native NA; не доказаны arbitrary discrete scales и RU/KZ; reference answer существенно влияет | Резерв/English diagnostic. Featherless listing FP8,4K, $0.40/$0.80; полный checklist+original должен помещаться без truncation
+Unbabel/M-Prometheus-7B (2025) | Multilingual absolute/pairwise judge, Qwen2.5-based; feedback и 1–5; reference-free обучение тоже есть | KZ не подтверждён; качество неанглийских длинных объяснений не оценивалось; формат/NA адаптируются отдельно, license card=other | Первый multilingual generative specialist в train audition. Featherless FP8,32K, $0.68/$0.80; не заявлять это тем же BF16 benchmark
+Unbabel/M-Prometheus-3B /14B | Те же роли, другие размеры | Нельзя переносить точность 7B на 3B/14B; KZ тоже не подтверждён | Не размножать первую матрицу. 3B API listing найден, точная текущая token rate не подтверждена
+AtlaAI/Selene-1-Mini-Llama-3.1-8B (2025-01) | Absolute scoring, classification и pairwise, объяснения, поддержка разных форматов; есть финансовая expert evaluation | В основном English; указанные дополнительные языки не включают RU/KZ; author training фильтрует нелатинские/негреческие символы; нет KZ CQA | Сильный reserve specialist/EN diagnostic, при train gate может заменить M-Prometheus. Featherless FP8,32K, $0.20/$0.32; model card128K не означает API128K
+flowaicom/Flow-Judge-v0.1 (2024-09) | 3.8B, binary/3/5-Likert, feedback/score, Apache2 | English-only SFT; max8192 у модели, длинные JSON/сложная многошаговая оценка вне обучения; 06 имеет 4 ступени, NA не native | Не первый multilingual judge. Внешний Featherless listing найден с 4K, cold; текущая token rate не подтверждена. HF отсутствие provider не доказывает отсутствие любого внешнего API
+BAAI/JudgeLM-7B-v1.0 (семейство 7/13/33B;paper2023,ICLR2025) | Основной режим — сравнение ответов/баллы+reasoning; есть расширения single-answer/multiturn | >90% в описании — согласие с GPT-4 teacher в отдельном опыте, не наша human accuracy; не готовая схема 8 критериев/NA/RU-KZ; weights card указывает non-commercial, Apache2 repo не заменяет лицензию весов | Не первая матрица, нет подтверждённого пригодного нам hosted endpoint; local heavy inference не разворачиваем
+WeOpenML/PandaLM-7B-v1 (2023,ICLR2024) | Pairwise A/B/tie, причина и reference answer | Не absolute arbitrary rubric judge; 1K human test отфильтрован от спорных случаев; inherited LLaMA weights license | Исторический pairwise baseline, не переводить A/B/tie в yes/no/NA для CQA
+Skywork/Skywork-Critic-Llama-3.1-8B и 70B (2024-09) | Генеративная критика, основной evidence — pairwise preference; есть пример pointwise score+rationale | Наличие pointwise demo не доказывает адаптацию к нашим ступеням/NA/цитатам; KZ неизвестен; Community License | В первую матрицу не включать. 8B Featherless FP8,32K,$0.20/$0.32;70B не нужен ради названия Critic
+Skywork/Skywork-Reward-Llama-3.1-8B-v0.2 (2024) | AutoModelForSequenceClassification, скаляр для preference/reward | Нет генерируемого объяснения/цитаты; скаляр не probability и не итог 0–100; новый критерий не гарантирован | Исключить как standalone final judge; возможен отдельный ranking эксперимент, сейчас не нужен
+PatronusAI/glider (paper2024-12) | Малый explainable evaluator, критика/оценка/grounding на источнике | CC-BY-NC4; в текущей card нет HF inference provider; прежний Patronus API официально retired | Исследовательский резерв при отдельно найденном endpoint. Не рекомендовать уже закрытый API и не считать наличие весов готовой интеграцией
+
+Первичные cards/repos:
+https://huggingface.co/prometheus-eval/prometheus-7b-v2.0 ; https://arxiv.org/html/2405.01535v2 ;
+https://huggingface.co/Unbabel/M-Prometheus-7B ; https://arxiv.org/html/2504.04953v2 ;
+https://huggingface.co/AtlaAI/Selene-1-Mini-Llama-3.1-8B ; https://arxiv.org/html/2501.17195v1 ;
+https://huggingface.co/flowaicom/Flow-Judge-v0.1 ; https://huggingface.co/BAAI/JudgeLM-7B-v1.0 ; https://github.com/baaivision/JudgeLM ; https://github.com/WeOpenML/PandaLM ;
+https://huggingface.co/Skywork/Skywork-Critic-Llama-3.1-8B ; https://huggingface.co/Skywork/Skywork-Critic-Llama-3.1-70B ;
+https://huggingface.co/Skywork/Skywork-Reward-Llama-3.1-8B-v0.2 ; https://huggingface.co/PatronusAI/glider ; https://docs.patronus.ai/docs/evaluators/concepts .
+
+Для 13 checkpoints/encoders дополнительно прочитаны только публичные metadata Hugging Face: SHA revision, lastModified и card language/license сохранены в model-selection/weights-metadata-snapshot.json. Веса не скачивались; этот SHA не доказывает, что внешний API обслуживает тем же экспортом или ревизией.
+
+API listings проверены у https://featherless.ai/models/Unbabel/M-Prometheus-7B , https://featherless.ai/models/AtlaAI/Selene-1-Mini-Llama-3.1-8B , https://featherless.ai/models/prometheus-eval/prometheus-7b-v2.0 , https://featherless.ai/models/flowaicom/Flow-Judge-v0.1 , https://featherless.ai/models/Skywork/Skywork-Critic-Llama-3.1-8B . Каталог — подтверждение предложения модели провайдером, не фактического access/uptime/latency. Provider summary иногда повторяет 128K, а deployment header32K; для запросов применять более строгий фактический runtime limit, затем smoke. Для API/benchmark нужен Developer metered plan, не Chat unlimited: актуальная pricing страница исключает benchmark/automation из Chat. https://featherless.ai/pricing .
+
+Не превращать обычную 1–5 шкалу в наши баллы линейным масштабированием. Для 04 можно отдельно проверять однозначное соответствие пяти описаний ступеням 0/5/10/15/20, но NA требует отдельного решения. Для 06 четыре ступени 0/4/7/10; придумывать пятую нельзя. Для любого judge с фиксированным привычным форматом проверять literal categorical output и новую формулировку на train. Если модель не выполняет контракт — это failure/adaptation limitation, а не незаметное исправление ответа другой сильной LLM.
+
+5. Jev и Decider: релевантны по устройству, но не заменяют evidence pipeline
+
+TypeSafe Jev подтверждён официальными docs; открытые веса или первичная публикация архитектуры/RLCD в проверенных first-party материалах не найдены. SDK/repo клиента не раскрывает веса. Подключение: POST https://api.typesafe.ai/v1/systemone, поля model/state/questions. Действующие pinned IDs jev-1.13.0 и jev-1.14.0;1.14 выпущен 14.10.2026, vendor заявляет улучшение multilingual. Цена обоих $0.042/M input, output free; default64K per request и 32K per question. Experimental long context262K выключен по умолчанию, в первый опыт не включать. Источники: https://docs.typesafe.ai/models ; https://docs.typesafe.ai/changelog ; документация получена также через Context7.
+
+Для CQA использовать Choice с ключами, однозначно отображаемыми кодом в allowed_values, и полными описаниями вариантов. 04: отдельные 0/5/10/15/20, 06:0/4/7/10; na добавлять только где разрешён и только с его точным условием. Choice может выбирать из нового набора без retraining. Noul даёт P(yes), но у 02/03/07 не заменяет applicability, а 08=yes означает нарушение, не выполнение. Score возвращает математическое ожидание по уровням, иногда дробное: округлить его в ближайший допустимый балл — новая недоказанная политика, поэтому primary эксперимент использует Choice. Упорядоченность ступеней передаётся описаниями, не придуманным интерполированным баллом. https://docs.typesafe.ai/primitives/choice ; https://docs.typesafe.ai/primitives/score .
+
+Технический unresolved/недостаток предметного reference хранится вне официального значения критерия; он не превращается в na. В typed question можно отдельно проверить достаточность информации, а отсутствие нужных фактов/поддержки отправляет на review. Пороги confidence выбираются только на train; вероятность/peaked distribution не доказательство калибровки именно на KZ CQA. Jev не делает сложную арифметику, сравнение времени или многошаговую косвенную логику надёжной по определению. В docs указаны literal-reading, option-order, large-state и adversarial риски: https://docs.typesafe.ai/model-jaggedness .
+
+Цитату Jev не генерирует. Общий для сравниваемых final judges extractor сначала строит event ledger с точными spans/omission anchors без предварительного final score. Jev получает полный оригинал + тот же журнал + рубрику/reference и выбирает оценку; можно отдельно выбирать event IDs из уже извлечённых кандидатов. Объяснение показывать с provenance: событие извлекла Luna/другая модель, вердикт вынес Jev. Если доказательство не поддерживает label или отсутствует существенный candidate, строгий completed review не формировать. Нельзя просить другую LLM сочинить удобную цитату после выбора Jev и называть её подтверждённой им. Для пропущенного действия сохраняются ожидаемое место и просмотренный source range, а не цитата отсутствия.
+
+Perplexity — полезная найденная альтернатива: актуальные pplx-decider-v1.2 (27B,$0.02/M) и pplx-decider-flash-v1.2 (4B,$0.01/M), output free, context256K, POST https://api.perplexity.ai/v1/decisions. Оба typed, объяснений не пишут. Для восьми вопросов обычный v1.2 биллит state один раз на группу; Flash повторно для каждого вопроса и может оказаться дороже. У v1.2 grouping влияет на решения — состав questions фиксировать. Web grounding в нашем опыте выключить: reference должен быть одинаковым и версионированным, поисковые расходы не нужны. https://docs.perplexity.ai/docs/decisions/quickstart ; Context7 подтвердил API и billing.
+
+Критический version caveat: текущие запросы с именем pplx-decider-v1.1-27b перенаправляются в v1.2, а поле response.model повторяет запрошенное имя. Просто логировать это поле недостаточно для воспроизведения старого benchmark. Хранить дату/docs snapshot/provider version metadata, не объявлять старый result1.1 измерением 1.2. Источник: та же официальная страница, Model names. Открытый checkpoint https://huggingface.co/perplexity-ai/pplx-decider-v1.1-27b — другой объект, не гарантия того, что API сейчас обслуживает этими весами. Тяжёлый 27B локально не разворачиваем.
+
+Для первого платного набора выбрать Jev1.14.0 как актуальный typed challenger (пользователь именно его упомянул);1.13.0 — короткая train ablation для связи с опубликованными опытами. Decider1.2 — второй typed резерв после первичного сравнения, не размножать сразу все flash/standard/версии. Новые версии не наследуют автоматически опубликованные показатели старых.
+
+6. Encoders и извлечение: какие задачи они решают
+
+Кандидат | Представление / подключение | Новый критерий / labels | Ограничения
+text-embedding-3-large | API, default3072dims, dimensions можно уменьшить,8192 tokens/item,$0.13/M input | Frozen embeddings + CPU LR: нужны event labels; семантический поиск по описанию допускает zero-shot, но не даёт final verdict | Сжатие в вектор не сохраняет дословные цитаты/хронологию автоматически; KZ CQA не измерен
+text-embedding-3-small | API,1536dims,$0.02/M | Бюджетная замена features после train сравнения | Не объявлять эквивалентом large на KZ
+Cohere embed-v5.0-pro/fast | API,128K; dimensions256…2048; classification input_type | Embedding features; classifier требует labels, новые фиксированные event classes требуют адаптации либо LLM fallback | Native per-token price не подтверждена на прочитанной pricing странице; не переносить цену Embed4/агрегатора
+intfloat/multilingual-e5-small | Небольшой CPU encoder,384dims; input512tokens, query prefix для classification/semantic tasks | Frozen encoder + LR; можно пробовать similarity новых label descriptions без retraining, но нужно проверить порог | Слишком длинные chunk/state нельзя молча truncate; низкоресурсные языки ограничены. Веса не скачивались
+BAAI/bge-m3 | Encoder1024dims,input8192, dense/sparse/multivector; CPU возможен с большей нагрузкой | Retrieval/evidence candidate search или features+classifier | Не генерирует объяснение; pooled embedding не доказывает event-before-action; локальная latency не измерена
+urchade/gliner_multi-v2.1 | Multilingual bidirectional span extractor; исходные start/end/text; CPU допустим | Новые названия entity types задаются prompt, не обязательно дообучать | Entity NER не произвольные сложные нарушения; max span/input зависят от checkpoint/config; KZ event recall неизвестен
+fastino/gliner2-base-v1 |205M English schema-driven extractor/classifier, CPU | Схема меняется без обязательного retraining, но event quality надо проверить | English version не выдавать за подтверждённый RU/KZ extractor; не global rubric judge
+TF-IDF + LogisticRegression/LinearSVC | CPU, word/char ngrams | Нужны human/silver event labels на train; fixed-class head не знает новый target | Простая сильная отправная точка; margin SVM не probability
+Небольшой MLP | CPU над compact/frozen embeddings | Тот же event supervision | На 46train высокая дисперсия; более сложная голова не доказано лучше линейной
+
+Источники: https://developers.openai.com/api/docs/models/text-embedding-3-large ; https://developers.openai.com/api/docs/models/text-embedding-3-small ; https://developers.openai.com/api/docs/guides/embeddings ; https://docs.cohere.com/docs/models ; https://docs.cohere.com/docs/embeddings ; https://cohere.com/pricing ; https://huggingface.co/intfloat/multilingual-e5-small ; https://huggingface.co/BAAI/bge-m3 ; https://huggingface.co/urchade/gliner_multi-v2.1 ; https://github.com/urchade/GLiNER ; https://huggingface.co/fastino/gliner2-base-v1 . GLiNER API/span/CPU usage проверены через Context7.
+
+Encoder multilingual coverage не измеряет точность событий. Например E5/BGE retrieval benchmark оценивает retrieval, а не наш 08 или NA. Для supervised branch нельзя использовать explanations/evidence/total_score разметчика как features; не копировать label всего диалога в каждое окно, null/unreviewed не negative. После добавления нового критерия fixed classifier остаётся вспомогательным, а новый criterion проходит через LLM/full original. Для GLiNER label prompt новый тип возможен без обучения, но это не гарантия понимания произвольной рубрики. Span offsets Python переводятся в UTF-16 для Node/UI; message/time/speaker восстанавливает сервер из оригинала.
+
+7. JEPA: что подтверждено и почему не входит в первый набор
+
+I-JEPA — Image-based Joint-Embedding Predictive Architecture, CVPR2023, официальная реализация https://github.com/facebookresearch/ijepa . V-JEPA — video representation learning, https://github.com/facebookresearch/jepa . Они обучают предсказание представлений частей visual input; роли сообщений, чек-лист и текстовые quotes не являются их готовым интерфейсом. Название JEPA не даёт им способности быть текстовым judge.
+
+LLM-JEPA — Hai Huang, Yann LeCun, Randall Balestriero; arXiv2509.14252v2 от 07.10.2025, https://arxiv.org/html/2509.14252v2 . Это дополнительная embedding-space objective для fine-tuning/pretraining LLM при сохранении генеративной цели. Работа изучает NL-RX/GSM8K/Spider и sentiment, а не CQA/NA/выделение доказательств. Первичный code link из paper перенаправляется к авторской реализации https://github.com/galilai-group/llm-jepa ; это не случайный похожий fork. Для больших моделей repo прямо предусматривает GPU training; готовый hosted CQA endpoint не подтверждён.
+
+Вывод не "JEPA бесполезна для текста": текстовая адаптация существует. Но чтобы использовать её здесь, потребовались бы выбранный обученный checkpoint, дополнительная CQA/event head или judge adaptation, данные, обучение и проверка, а также генеративный интерфейс объяснений/источников. Им могла бы быть та же адаптированная LLM: отдельная вторая модель не обязательна, но сама JEPA objective готового CQA-контракта не предоставляет. При API-first и 65DEV это отдельный исследовательский проект. Не включать JEPA как будто это взаимозаменяемая альтернатива gpt-6-astra или Jev. Semantic Tube Prediction в том же author repo — ещё обучающий метод; не самостоятельный безобучаемый judge.
+
+8. Что действительно измеряли первичные работы
+
+Реестр с полями version/source/date/benchmark/sample_size/metric/label_origin/limitation: model-selection/benchmark-evidence.json. Там null означает "размер в проверенном описании опыта не указан", не нулевую выборку. Если sample size/label provenance не раскрыты полностью, headline не используется для выбора победителя. Ни один результат не измеряет точность наших новых API-комплектов на RU/KZ/EN CQA.
+
+Результат | Данные/метрика/эталон | Что подтверждает и чего не подтверждает
+Prometheus2-7B, paperv2 2024 | FLASK:200instructions,2000responses,12rubrics; Pearson с людьми 0.545 c reference и 0.425 без; teacher labels других benchmarks отдельно | Есть absolute rubric grading и зависимость от reference; корреляция не exact accuracy, не NA и не KZ. https://arxiv.org/html/2405.01535v2 ,Table16
+M-Prometheus7B, paperv2 2025 | MM-Eval accuracy0.6966; M-RewardBench0.7754; MM mostly native-speaker pairs, M-RewardBench translated preferences; точный aggregate N в использованном описании не установлен | Multilingual pairwise quality относительно baseline, не доказательство KZ или span extraction. https://arxiv.org/html/2504.04953v2 ,Table1
+Selene Mini,2025-01-27 | FinanceBench expert agreement accuracy0.717 против base0.664; точное N этой сбалансированной подвыборки не указано; FLASK Pearson0.613 в Table1, происхождение разных benchmark labels различается | Полезный domain/rubric кандидат, но нельзя называть результат финансовым CQA, RU/KZ или приписать N полного FinanceBench подвыборке. https://arxiv.org/html/2501.17195v1
+Flow-Judge-v0.1,2024-09 | Synthetic heldout binary316rows,F1 .955;5-Likert274rows,Pearson .919; dataset-size metadata проверена отдельно; labels synthetic consensus | Хорошо воспроизводит синтетическую rubric-разметку, а не доказанная human CQA accuracy. https://huggingface.co/flowaicom/Flow-Judge-v0.1
+JudgeLM,2023/ICLR2025 |100Ktrain/5Kvalidation GPT-4-labelled samples; заявлено >90% teacher agreement в отдельном setting; human labels у PandaLM test — другой benchmark | Distillation teacher судьи; не 90% человеческой accuracy и не обещание любой версии. https://github.com/baaivision/JudgeLM
+PandaLM-7B-v1,2023/ICLR2024 | Human pairwise test999 после фильтрации≈1K;3annotators, A/B/tie; train300K GPT-3.5 synthetic | Подтверждён именно pairwise assessment, не новые absolute rubric values. https://github.com/WeOpenML/PandaLM
+Jev/Decider vs rubric LLM judges, arXiv2609.29769v3,2026-10-13 |9panels,1021units/5003criterion judgements; reused human labels, ordinal части English; Jev main alias unpinned, stability returned1.13.0, Decider1.1; ordinal exact/QWK и cost | Коррелированные ошибки; Jev-first cascade даже с oracle thresholds прибавил максимум 2.7 п.п. к best single с flash fallback. Не переносить на Jev1.14/Decider1.2 и KZ. https://arxiv.org/html/2609.29769v3
+KazMMLU,ACL2025-07 |23000questions,10969KZ/12031RU, authentic materials и ручная проверка носителями/педагогами; knowledge multiple-choice | Нужна отдельная KZ проверка; это knowledge QA, не rubric judge/evidence benchmark и не рейтинг текущих кандидатов. https://aclanthology.org/2025.acl-long.701/
+
+В paper Jev/Decider есть не только положительный cost result: более мощный fallback не гарантировал большого прироста accuracy. Это прямо релевантное основание измерять error overlap и не предполагать независимость двух моделей. Предупреждение о версиях берётся из их methods и текущей API-документации. Не смешивать неприменимое к нашей задаче "cannot assess" из чужих benchmarks с ограниченным official N/A.
+
+Числа Decision Index, RewardBench и community Judge Arena не сводились в единый балл пригодности. Peer-reviewed старый paper не равен гарантии текущего hosted deployment; новый arXiv preprint тоже требует проверки протокола. API catalogue/marketing — источник возможностей/цены, не независимый GT качества.
+
+9. Список для реального теста и три предварительных комплекта
+
+Основной shortlist на train, затем заранее сократить test:
+1) gpt-6-luna — cheap extraction baseline; проверить event recall/цитаты против Sol, не считать достаточной по цене.
+2) gpt-6.1-sol — основной balanced final baseline, допустим тот же model family для обоих stages.
+3) gpt-6-astra — более дорогой final control, нужный чтобы измерить, покупает ли цена качество.
+4) claude-fable-5-1 — final candidate другого семейства; отдельный adapter и бюджет.
+5) Unbabel/M-Prometheus-7B через Featherless — основной специализированный генеративный challenger, включён из-за DA+multilingual evidence, а не слова judge.
+6) jev-1.14.0 — typed challenger; общий evidence extractor, bounded Choice и отдельные ограничения. Train version check1.13.0 по возможности, не плюс бесконечное число версий в test.
+
+Reserve: Selene Mini как альтернативный generative specialist с финансовыми expert labels, но слабым обоснованием RU/KZ; Decider1.2 как дешёвый typed резерв с version-routing caveat; Argon как третье семейство. Не все reserves одновременно. Если M-Prometheus не проходит train contract/language gate, до freeze заменить его на Selene и честно отметить, что KZ всё ещё неизвестен. Не выбирать замену после просмотра test outcomes.
+
+Комплект | Analyzer -> final | Почему проверить | Известная цена и неопределённость
+Приоритет максимальной точности | Sol -> Astra; отдельный blind Fable review на заранее заданных случаях или на всём research test | Больше бюджета на extraction/reasoning, возможность выявить разногласия | Это цель, не доказанное максимальное качество; disagreement разрешает человек/заранее заданный review процесс, баллы двух судей не усреднять
+Баланс | Luna -> Sol; C0 Sol/Astra как controls | Дешёвый extractor и более дорогой rubric stage без лишней инфраструктуры | Первый практический инженерный комплект; проверить потерю recall от дешёвого extractor
+Минимальные расходы | Luna -> Luna; C0 Luna | Один API, генерация evidence и финальный контракт | Наиболее простой low-cost generative вариант; качество не доказано. Exploratory Luna evidence -> Jev/Decider labels может ещё удешевить label stage, но не заменяет проверку достаточности
+
+Специализированный judge и универсальная модель могут быть одинаково полезны в разных ролях. Здесь нет собственного выдуманного рейтинга 0–100 пригодности. "Первый/резерв" — наше предварительное инженерное суждение по типу задачи, языковым доказательствам, output contract и реальному API, а не агрегированный benchmark score.
+
+Стоимость полного pipeline, только иллюстративные допущения для сопоставления: на proposed test19 диалогов/33chunks; chunk3Kinput+3Koutput, финал 8Kinput+6Koutput, output включает reasoning. Ни эти длины, ни latency не измерены, это не верхний spending limit.
+— Sol -> Astra:33*$0.036 +19*$0.38 = $8.408; с 19 независимыми Fable reviews ещё$7.22, всего$15.628 при тех же допущениях и без extra adjudication calls.
+— Luna -> Sol:33*$0.0018 +19*$0.076 = $1.5034.
+— Luna -> Luna:33*$0.0018 +19*$0.0038 = $0.1316.
+— Luna -> Jev: extractor$0.0594 +19*(8000/1M*$0.042)=$0.065784 за label stage с extractor, БЕЗ дополнительных explanation/recovery/fallback calls. Это не полноценный доказанный комплект: все final evidence должны уже быть поддержаны, иначе extra review/failed.
+— Luna -> Decider1.2: те же extractor +19*$0.00016 = $0.06244; Flash при 8 вопросах биллит state8 раз, поэтому не автоматически дешевле.
+— M-Prometheus7B final через Featherless при 8K+6K: $0.01024 за один целый final request; Selene $0.00352. Если native one-criterion prompting требует 8requests, это уже другая сумма/режим. Developer subscription/top-up отдельно, cold start/FP8/effective context тоже влияют.
+
+Не выдавать низкую цену typed labels за стоимость готовых evidence/explanations. Реальный total = extraction+judge+review+embedding+retries/repair+account overhead; все failure/fallback calls учитываются. На коротком DEV один C0 может быть дешевле сложного hybrid. Фактический inference spend этого исследования $0.
+
+10. Сопоставимый эксперимент A/B/C/D
+
+Сохраняется proposed group-aware split research/sequential-study/split-70-30.proposed.json:46train/19test (70.77/29.23%), seed cqa-sequential-group-split-v1|2026-11-07. Все fragments одной беседы и близкие multilingual-сценарии вместе;16 предложенных family groups, train9/test7. Test RU10/KZ4/EN5,18chat/1voice. Группы требуют независимой проверки ДО freeze; exact/normalized/digit-template совпадений не найдено, но полная сертификация semantic duplicates не выполнена. Старое pilot20/holdout10 разбиение не смешивать с новым. DEV уже изучался — этот test внутренний, не официальный неизвестный контроль 10 организаторов.
+
+Сначала выбрать модели при фиксированной архитектуре, потом архитектуры при фиксированном judge:
+M1 final-model comparison на train: один полный original + одинаковые rubric/reference/schema, без предварительных вердиктов, Sol/Astra/Fable. Выбор prompts/settings и language gate только train.
+M2 comparable role для generative specialists: тот же complete input/schema для M-Prometheus, при необходимости train-only faithful native-format ablation. Если нужны individual-criterion calls, повторить такой же режим у общего judge; не приписывать эффект 8 вызовов самой модели. Никакого тихого strong-LLM repair.
+M3 typed role: общий закэшированный Luna evidence-first ledger без scores + полный original, одинаковый для Jev, generic judges и выбранного generative specialist. Labels и evidence quality учитывать раздельно, но completed valid review требует оба. Jev не штрафовать за отсутствие заявленной генерации как будто он обещал её; весь pipeline считать по реальному контракту и цене.
+После train freeze: A=выбранный generic full judge; B=Luna sequential -> тот же final; C1=тот же extractor/fulltext -> Jev, C2=generic specialist в сопоставимом режиме; D=CPU event detector -> тот же generic final, только после event supervision. Минимальный test можно сократить до A/B/C1 и одного заранее выбранного C2; D остаётся blocked по отсутствию labels, а не заполняется выдуманными метриками.
+
+Общий контроль критериев:
+— В train добавить реальные человеческие verdict labels и event/span coverage; test19 размечают независимо 2 оценщика с adjudication/уточнением спорных правил, не показывая outputs систем. Пока этого нет, accuracy-run не выполнен.
+— TF-IDF/IDF/scalers/features/class weights/calibration/thresholds/MLP settings только inner train folds по семействам; few-shot только train. Frozen pretrained embeddings на test вычисляются после freeze без использования test labels. Pipeline fit не на всех 65.
+— При новом критерии generic/typed prompts обновляют вопросы и allowed options без обязательного retraining; fixed supervised classifier для нового target имеет LLM fallback. Изменить criterion04 на binary, добавить произвольный NA или новые policy правила нельзя.
+— Одинаковые исходный checklist/reference/test, source hashes, grouping, model/provider settings, per-stage limits и parser/failure policy. Endpoint/quantization фактической модели фиксировать. Нет обещания bitwise reproducibility API.
+— Preregister boundary budgets8/12/20 и изменение состояния; при сравнениях судей использовать одинаковый cached ledger. H_hidden/H_visible с одинаковыми candidates отдельно измеряет sensitivity к classifier hints. Не давать судье label из gold/AI annotation.
+— Диагностики: роль bot/operator, идентификация в раннем chunk, disclosure до подтверждения, несколько вопросов, late correction, явное ожидание/обрыв, NA vs pending; adversarial transcript instruction и ошибочный предварительный score. Synthetic RU/KZ/EN cases заранее регистрируются отдельно от natural accuracy; KZ варианты проверяет носитель. Никакого избирательного исправления prompts по test.
+
+Метрики итогов: exact accuracy/macro-F1/confusion отдельно по каждому criterion (с allowedNA), falseNA/missedNA,08precision/recall с positive support, totalMAE/RMSE/bias с paircount и completion, RU/KZ/EN отдельно. Missing predictions остаются ошибкой завершения, null reference исключается perlabel, не заменяется no. MAE только валидных пар обязательно рядом с completion и сравнением на общем пересечении.
+
+Evidence: code existence/substring/ID/range/time/role; human span/messageID localization P/R и expert sufficiency отдельно; correctness of tariff/procedure по версионированному предметному reference. Exact quote не подтверждает factual truth. Timestamp серверный исходный, ISO не audio offset без mapping. Специально измерить evidence extraction recall до final score, unsupported quotes после финала, исправления/искажения судьи и устойчивость к границам.
+
+Latency: end-to-end p50/p95, все call counts/stages, queued/coldstart/retries/fallback/CPUfit+predict/embedding отдельно; при n19 p95 крайне нестабилен. Cost: actual usage/cached/reasoning/output и тарифная версия плюскомиссии/подписка; модельная probability не наша calibrated accuracy. Paired uncertainty по семействам; при 7testfamilies,4KZ и 1voice небольшие разницы не объявлять статистически надёжной победой. Официальная формула отбора top50 не раскрыта — наша сводка не является официальным рейтингом.
+
+11. Практическое подключение к существующему Node приложению
+
+Текущее приложение уже имеет A1 schema/transport, validation цитат и checklist enums, калькулятор и original/final appeals. В рамках исследования оно не изменялось. Предлагаемые следующие изменения, после доступа/бюджета:
+1) Сохранить A1 full как control; добавить pipeline ID и отдельные модели analyzer/final в конфигурации. Для одной модели разрешить одинаковый ID, без обязательного второго провайдера.
+2) Добавить source-preserving chunker, deterministic reducer и state/ledger из предыдущего контракта. Сначала artificial tests, затем реальные train с human review. Stage output не содержит weighted totals.
+3) OpenAI-compatible specialists через https://api.featherless.ai/v1/chat/completions, точный case-sensitive HF model ID; не отправлять OpenAI reasoning_effort не-OpenAI модели. Не считать advertised structured text strictJSON гарантией; protocol capability/schema support проверяется smoke. Endpoint32K/4K важнее общего modelcard128K. Без молчаливой truncation.
+4) Jev adapter отдельный /v1/systemone, state/questions, typed decoder; Decider отдельный /v1/decisions. Это не тот же /chat/completions. Генерировать choices из snapshot; final_value только allowed enum, не ожидаемый Score. Model response ошибки/недостающие answers/probability shape/отсутствующий required support -> failed/review, не default no.
+5) Shared evidence extractor формирует дословные sources прежде финала. Label judge не получает уже выбранные оценки. Причины и provenance хранятся отдельно. Для N/A требуется основание из правила, для omission — expected_at и range; final stage всегда получает полный original. Не указывать автором объяснения Jev, если его сгенерировала другая модель.
+6) Telemetry: requested_model, returned_model, resolved_version_known/unknown, endpoint/provider routing, quantization/runtime context, дата документации, prompt/schema/checklist/reference/split hashes; usage всех calls и failures. Decider response может повторять model name, поэтому returned_model не равен доказательству неизменных весов.
+7) CPU classifier/GLiNER sidecar только опционально: веса и пакеты установить позднее в согласованной реализации; сейчас они не загружались. Event taxonomy и thresholds версионируются; неподдерживаемый новый criterion проходит через LLM.
+
+Context7 использован для TypeSafe, Perplexity, Featherless, OpenAI и GLiNER; официальные model cards и papers — для назначения моделей и benchmark metadata. Дополнительный framework не обязателен: Node fetch может обслужить transport, existing code — валидацию и расчёт. Проверенный broker reference нужен для решающих продуктовых фактов; ни одна model card его не заменяет.
+
+12. Факты, гипотезы, неизвестные
+
+Подтверждено: указанные проекты существуют и имеют разные output/task contracts; Jev/Decider typed и не пишут prose; Score допускает дробные expectations; M-Prometheus/Prometheus/Selene имеют absolute grading; pairwise agreement — иной target; API-продукт Patronus retired; Featherless предлагает часть open judges без нашего GPU; актуальные Decider names могут перенаправляться на новые версии; ручного GT в проверенных артефактах нет.
+
+Наши предварительные гипотезы: Luna -> Sol окажется разумным balanced baseline; Astra/Fable могут улучшить сложные 03/04/07; M-Prometheus может превзойти English judges на RU; Jev/Decider могут удешевить bounded label stage; GLiNER/encoder classifier может помочь локализации. Ни одна из этих гипотез не выдаётся за измерение или доказанное KZ превосходство.
+
+Неизвестно: сравнительная CQA accuracy всех кандидатов, KZ и code-switch recall, реальная достаточность цитат и ошибки N/A, прирост от двух моделей, эффект runtime FP8 против BF16, доступ аккаунта, фактические cost/latency, число дополнительных evidence/fallback calls, точные N некоторых авторских подвыборок. Это ограничивает рейтинг, но не мешает выбрать конкретный небольшой набор для честного теста.
+
+Прямой вывод: наиболее непосредственно соответствуют изменяемому CQA генеративные rubric judges и instruction-following LLM; Jev/Decider подходят для конфигурируемого bounded grading при отдельном evidence pipeline. Encoders/GLiNER полезны как поиск/извлечение/признаки. Scalar reward, pairwise-only демонстрации и visual JEPA не заменяют финальную абсолютную оценку по чек-листу с N/A и доказательствами только потому, что называются critic/judge/intelligence. Победителя определит сопоставимая человеческая проверка, которой пока нет.

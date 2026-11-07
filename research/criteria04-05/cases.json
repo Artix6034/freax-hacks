@@ -1,0 +1,59 @@
+{
+  "version":"c04-c05-diagnostics-1",
+  "notice":"Assistant-authored development expectations, not official/human Ground Truth. Ambiguous cases have no target verdict. KZ fixtures require native review. Holdout is reserved for later execution; the author has seen its content.",
+  "source":{"path":"C:/Users/user/Downloads/Telegram Desktop/CQA_Chat_Quality_Checklist 1.pdf","pages":[1,2,3]},
+  "pairs":[
+    {"id":"c04-escalation","split":"development","language":"RU","criterion_id":"04",
+      "basis":"20 допускает корректный следующий шаг; 10 означает частично закрытый запрос с существенным открытым вопросом. Зависимость проверки от названия явно задана в этом сценарии, а не вводится как универсальное правило.",
+      "prefix":[["client","В портфеле пропала одна облигация. Нужно проверить именно её. Ещё не могу скачать отчёт."],["operator","Здравствуйте! Я Анна. Для проверки именно этой позиции нужно название бумаги: без него определить нужную позицию не получится. Отчёт скачайте через «Документы → Отчёт → Скачать»."],["system","Личность клиента подтверждена."]],
+      "variants":[
+        {"id":"supported-next-step","expected":20,"middle":[["client","Отчёт скачал. Название бумаги — Облигация А."],["operator","Спасибо. Передаю специалистам вопрос о позиции «Облигация А»."],["system","Обращение о позиции «Облигация А» зарегистрировано и передано специалистам."]]},
+        {"id":"substantial-open-question","expected":10,"middle":[["client","Отчёт скачал. Название бумаги ещё не нашёл, позицию пока определить не можем."],["operator","Передаю специалистам вопрос о позиции."],["system","Обращение пока не передано: отсутствует название бумаги для определения позиции."]]}
+      ],"suffix":[["operator","Если понадобится дополнительная помощь, напишите. До свидания!"]]
+    },
+    {"id":"c04-secondary-detail","split":"development","language":"EN","criterion_id":"04",
+      "basis":"Клиент прямо отделяет основной вопрос от второстепенной детали. Успешное скачивание наблюдаемо; отсутствие ответа на второстепенный вопрос соответствует ступени 15.",
+      "prefix":[["client","My main question is how to download my report. A minor extra question: what filename should I look for?"],["operator","Hello! I'm Anna. Open Documents, select Report and press Download."],["client","The download finished. What is the filename?"]],
+      "variants":[
+        {"id":"complete","expected":20,"middle":[["operator","The filename is report.pdf. Please check your Downloads folder."],["client","Yes, I see report.pdf. That answers both questions."]]},
+        {"id":"secondary-omission","expected":15,"middle":[["operator","You have downloaded the report."],["client","Yes, the report downloaded. You have not answered the filename question."]]}
+      ],"suffix":[["operator","Please contact us if you need further help. Goodbye!"]]
+    },
+    {"id":"c05-specific-response","split":"development","language":"RU","criterion_id":"05",
+      "basis":"По PDF проверяются вежливость и реакция на конкретное неудобство, а не наличие слова «извините».",
+      "prefix":[["client","Не могу найти поиск в приложении. Уже несколько раз искал, это неудобно."],["bot","Соединяю с оператором."],["system","Оператор подключён."]],
+      "variants":[
+        {"id":"addressed","expected":"yes","middle":[["operator","Здравствуйте! Я Анна. Понимаю неудобство с поиском. Чтобы открыть его, нажмите значок лупы в верхней части экрана."]]},
+        {"id":"ignored","expected":"no","middle":[["operator","Здравствуйте! Я Анна. Спасибо за обращение. Хорошего дня!"]]}
+      ],"suffix":[["system","Чат закрыт."]]
+    },
+    {"id":"c05-practical-response","split":"development","language":"KZ","criterion_id":"05",
+      "basis":"Отрицательный вариант игнорирует проблему. Достаточность практической помощи без слов сочувствия остаётся вопросом человеческой интерпретации, поэтому положительный вариант диагностический.",
+      "prefix":[["client","Қосымшадағы іздеуді таба алмай отырмын. Бұл ыңғайсыз."],["bot","Сізге операторды қосамын."],["system","Оператор қосылды."]],
+      "variants":[
+        {"id":"practical-only","expected":null,"middle":[["operator","Сәлеметсіз бе! Менің атым Анна. Іздеуді ашу үшін экранның жоғарғы жағындағы үлкейткіш белгісін басыңыз."]]},
+        {"id":"ignored","expected":"no","middle":[["operator","Сәлеметсіз бе! Менің атым Анна. Хабарласқаныңызға рақмет. Күніңіз жақсы өтсін!"]]}
+      ],"suffix":[["system","Чат жабылды."]]
+    },
+    {"id":"held-c04-two-main-requests","split":"holdout","language":"RU","criterion_id":"04",
+      "basis":"Два явно существенных запроса. Корректность инструкции видна по подтверждённому результату; для второго запроса не нужен тарифный справочник.",
+      "prefix":[["client","Мне одинаково важно скачать отчёт и найти его в телефоне. Подскажите оба действия."],["operator","Здравствуйте! Я Ольга. Нажмите «Отчёт → Скачать»."],["client","Скачивание завершилось, но где теперь найти файл?"]],
+      "variants":[
+        {"id":"both-answered","expected":20,"middle":[["operator","Откройте приложение «Файлы», затем папку «Загрузки»."],["client","Нашёл файл. Оба вопроса решены."]]},
+        {"id":"one-open","expected":10,"middle":[["operator","Нажмите «Отчёт → Скачать»."],["client","Скачивание уже завершилось, но где искать файл, так и не понял."]]}
+      ],"suffix":[["operator","Если нужна помощь, обращайтесь. До свидания!"]]
+    },
+    {"id":"held-c05-response","split":"holdout","language":"EN","criterion_id":"05",
+      "basis":"Перенос на другую формулировку жалобы. Нет требования извинения; адресное признание неудобства и помощь либо вежливое игнорирование.",
+      "prefix":[["client","The report screen is difficult to navigate. I have spent ages trying to locate the download button."],["system","Agent connected."]],
+      "variants":[
+        {"id":"addressed","expected":"yes","middle":[["operator","Hello! I'm Oliver. I understand the trouble finding that button. On the report screen, look at the lower-right corner for Download."]]},
+        {"id":"ignored","expected":"no","middle":[["operator","Hello! I'm Oliver. Thank you for using our service. Have a nice day!"]]}
+      ],"suffix":[["system","Chat closed."]]
+    }
+  ],
+  "controls":[
+    {"id":"c04-decisive-product-fact","language":"RU","criterion_id":"04","expected_status":"unresolved","basis":"Индивидуальная договорная комиссия является самим предметом запроса. Единственный источник числа — утверждение оператора; договора/справки нет. Это ожидание по принятой политике неизвестных фактов, не новая ступень PDF.","messages":[["client","У меня индивидуальный тариф по договору. Сколько точно составит комиссия по моему договору за вывод 100000 тенге? Нужна проверка именно моего условия, не общего тарифа."],["operator","Здравствуйте! Я Анна. По вашему индивидуальному договору комиссия ровно 0,5%, значит 500 тенге."],["client","Вы проверили мой договор?"],["operator","Условий вашего договора у меня нет, договора здесь не видно. Это моё предположение."],["system","Чат закрыт."]]},
+    {"id":"c05-no-inconvenience","language":"RU","criterion_id":"05","expected":"yes","basis":"Условие реакции на неудобство не активируется, если клиент его не выражал. Вежливость остаётся обязательной.","messages":[["client","Здравствуйте! Повторите, пожалуйста, слово «маяк»."],["operator","Здравствуйте! Я Анна. Маяк. Если нужна помощь, обращайтесь. До свидания!"]]}
+  ]
+}

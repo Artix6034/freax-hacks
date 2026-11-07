@@ -1,0 +1,35 @@
+{
+  "version":"criterion06-pairs-1",
+  "authority":"CQA_Chat_Quality_Checklist 1.pdf, page 2: one noticeable glitch versus customer clarification caused by wording/order; page 3: consultation and dialogue are separate.",
+  "notice":"Assistant-authored synthetic development expectations, not official/human Ground Truth. KZ wording needs native review. No expectations are sent to the model.",
+  "pairs":[
+    {"id":"ru-pair","language":"RU",
+      "prefix":[["client","Я в мобильном приложении. Как скачать отчёт?"],["bot","Соединяю вас с оператором."],["system","Оператор подключён."]],
+      "variants":[
+        {"id":"repeated-fact","expected":7,"operator":"Здравствуйте! Я Анна. Вы используете мобильное приложение или веб-версию?","client":"Мобильное приложение, я уже написал."},
+        {"id":"unclear-instruction","expected":4,"operator":"Здравствуйте! Я Анна. Сделайте это там, выбрав нужное, как обычно.","client":"Не понял вашу инструкцию: какой раздел открыть и что именно нажать?"}
+      ],
+      "suffix":[["operator","Откройте «Документы», выберите «Отчёт», затем нажмите «Скачать»."],["client","Файл скачался, спасибо."],["operator","Рада помочь. До свидания!"]]
+    },
+    {"id":"kz-pair","language":"KZ",
+      "prefix":[["client","Мен мобильді қосымшаны қолданып отырмын. Есепті қалай жүктеймін?"],["bot","Сізге операторды қосамын."],["system","Оператор қосылды."]],
+      "variants":[
+        {"id":"repeated-fact","expected":7,"operator":"Сәлеметсіз бе! Менің атым Анна. Сіз мобильді қосымшаны ма, әлде веб-нұсқаны ма қолданып отырсыз?","client":"Мобильді қосымшаны. Мұны жоғарыда жаздым."},
+        {"id":"unclear-instruction","expected":4,"operator":"Сәлеметсіз бе! Менің атым Анна. Сол жерден керегін таңдап, соны жасаңыз.","client":"Түсінбедім: қай бөлімді ашуым керек және қай батырманы басамын?"}
+      ],
+      "suffix":[["operator","«Құжаттар» бөлімін ашыңыз, «Есеп» тармағын таңдаңыз да, «Жүктеу» батырмасын басыңыз."],["client","Файл жүктелді, рақмет."],["operator","Көмегім тигеніне қуаныштымын. Сау болыңыз!"]]
+    },
+    {"id":"en-pair","language":"EN",
+      "prefix":[["client","I'm using the mobile app. How do I download a report?"],["bot","Connecting you to an agent."],["system","Agent connected."]],
+      "variants":[
+        {"id":"repeated-fact","expected":7,"operator":"Hello! I'm Anna. Are you using the mobile app or the web version?","client":"The mobile app, as I already said."},
+        {"id":"unclear-instruction","expected":4,"operator":"Hello! I'm Anna. Do that there after selecting the appropriate thing, as usual.","client":"I don't understand your instruction: which section should I open, and which button should I press?"}
+      ],
+      "suffix":[["operator","Open Documents, choose Report, then press Download."],["client","The file downloaded, thank you."],["operator","Glad to help. Goodbye!"]]
+    }
+  ],
+  "controls":[
+    {"id":"necessary-clarification","language":"RU","expected":10,"expected02":"yes","messages":[["client","Здравствуйте! Повторите, пожалуйста, слово."],["operator","Здравствуйте! Я Анна. Какое слово нужно повторить?"],["client","маяк"],["operator","маяк. Рада помочь. До свидания!"]]},
+    {"id":"incoherent-flow","language":"RU","expected":0,"messages":[["client","Здравствуйте! Как скачать отчёт?"],["operator","Здравствуйте! Я Анна. Откройте отчёт, который нельзя открыть, и скачайте до открытия. Не скачивайте: скачивание — это открытие."],["client","Не понимаю, какие действия выполнить и в каком порядке. Объясните, пожалуйста."],["operator","Никаких действий, но выполните их все до начала. Открывать нельзя, хотя это и есть скачивание."],["client","Ваши ответы противоречат друг другу, я так и не понимаю, что делать."]]}
+  ]
+}

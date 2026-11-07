@@ -1,0 +1,41 @@
+{
+  "status": "planning_estimate_NOT_measured",
+  "currency": "USD",
+  "prices_checked_on": "2026-11-07",
+  "assumptions": {
+    "C0_astra_input": 6000,
+    "C0_astra_output_including_reasoning": 6000,
+    "final_astra_input": 8000,
+    "final_astra_output_including_reasoning": 6000,
+    "chunk_sol_input": 3000,
+    "chunk_sol_output_including_reasoning": 3000,
+    "astra_usd_per_M_input_output": [
+      10,
+      50
+    ],
+    "sol_usd_per_M_input_output": [
+      2,
+      10
+    ],
+    "excludes": [
+      "embedding usage",
+      "retries",
+      "additional reviewers",
+      "tax",
+      "cache/batch discounts"
+    ],
+    "fixed_input_counts_not_a_cap": true
+  },
+  "n_test_dialogues": 19,
+  "k_test_chunks_budget12": 33,
+  "C0_calls": 19,
+  "C0_usd": 6.84,
+  "L_seq_calls": 52,
+  "L_seq_usd": 8.408,
+  "H_formula_calls": "n + s verified chunks (0<=s<=k) + embedding HTTP requests if used",
+  "H_formula_usd": "0.38*n + 0.036*s + embedding tokens*rate/1e6; s unknown until classifier run",
+  "H_visible_additional_calls_reusing_H_hidden_ledger": 19,
+  "H_visible_additional_usd": 7.22,
+  "all_test_boundary_L_seq_calls": 158,
+  "all_test_boundary_L_seq_usd": 25.296
+}

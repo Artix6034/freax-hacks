@@ -1,0 +1,41 @@
+Freedom Broker CQA — предложение внедрения после исследования, 2026-11-07
+
+Первым реализовать L_seq: фрагмент -> извлечение фактов -> проверка цитат -> журнал/состояние -> отдельный финальный вызов по ПОЛНОМУ оригиналу -> существующий валидатор -> расчёт кодом. Сохранить текущий A1 как C0 control. Отдельная финальная стадия не требует другой модели и не гарантирует независимость ошибок.
+
+Гибрид не выбран победителем. Classifier + LLM имеет смысл как CPU event detector/отбор промежуточных проверок, если докажет event recall, качество финальных критериев и пользу по всем расходам. Обязательный full judge не удалять на основании classifier negative. Новый criterion без поддерживаемого класса -> LLM fallback, не автоматическое переобучение и не "нарушений нет".
+
+Подтверждённое состояние данных: 65 ai_provisional записей; 492/520 значений, 28 null, 50 needs_review; 46 totals. Сводка human_verified=false. 1284 evidence entries с message_id/quote не являются исчерпывающей span/event разметкой. Официального/человеческого GT не найдено. Accuracy/F1/MAE моделей не измерены. Аудит имеет timestamp/hash и обновляется отдельно.
+
+Проект 70/30: 46 train / 19 test (70.77/29.23%), seed cqa-sequential-group-split-v1|2026-11-07. 16 предложенных topic families, целиком в одной части; train9/test7. Test RU10/KZ4/EN5, chats18/voice1. Требуется независимый review групп ДО freeze. Это внутренний test после знакомства с DEV, не официальный неизвестный контроль. Старый pilot20/holdout10 manifest не менять/не смешивать.
+
+Разбиение на фрагменты: полные обмены, soft budget12, previous2 source messages overlap, каждый message ровно один core; все bot/system и финальный неполный хвост сохранены. На DEV 138 chunks, test33. Oversized exchange не обрезается молча. Budgets8/12/20 зарегистрировать до test; не выбирать победившую границу по test.
+
+Первый обучаемый CPU baseline — TF-IDF word/char + LogisticRegression/LinearSVC. Далее frozen API embedding + LR; маленький MLP только train-ablation. Нужны human event labels; dialogue verdict нельзя копировать на все chunks. Все fit/calibration/thresholds/few-shot только train и group-aware folds. AI labels могут быть silver train, никогда gold test. Null/unreviewed не negative.
+
+Модели — кандидаты, не окончательный выбор:
+— Sol analyst / Astra final judge использованы только как прозрачное допущение бюджета.
+— Luna extraction и Sol judge — более дешёвая train-ablation, качество не доказано.
+— Fable/Argon — альтернативные API families после проверки adapter/access.
+— text-embedding-3-large, dimensions1024 — первый embedding-кандидат; small как price-ablation, Cohere Embed5 как резерв с неподтверждённой native token-price.
+Актуальные IDs/параметры/URLs в model-shortlist.json и sources.json. Ни на одной модели KZ CQA не измерен. CUDA и Kaggle не нужны; платные calls только после настроенного доступа и бюджета.
+
+Текущий A1 уже имеет schema.js/transport.js, strict-schema mode, reasoning/caps, usage/failure metadata (PROMPT_VERSION cqa-a1-2.0 при чтении). Не переписывать это заново. Добавить pipeline orchestration и stage metadata рядом. Глобальные исключения текущего rubric в prompt нужно сделать версионируемыми, если новый criterion сможет их изменять.
+
+Evidence: criterion/final value -> kind -> original message ID -> exact quote; server enriches original timestamp/speaker. Omission -> quote=null, expected_at+checked_range. UTF-16 offsets явно оговорить; ISO не превращать в audio offset без mapping. Разделить quote existence / relevance / sufficiency / factual truth. Для последнего — проверенный предметный reference, не слова оператора.
+
+Состояние: pending/provisional/final; pending не N/A. Хранить запросы/ответы, идентификацию до действия, жалобы, ожидание, окончание, нарушения/исправления и uncertainties с source refs. Журнал сохраняет исходное событие и историю отклонённых/принятых трактовок. Не закреплять ошибочный classifier positive навсегда.
+
+Минимальный опыт: C0, L_seq, один выбранный НА TRAIN hybrid H_hidden. Затем H_visible с теми же кандидатами/проверенным журналом. Отдельно evidence-first/score-first сначала train. Один финальный судья/лимиты/config/ref во всех архитектурах, чтобы не смешать эффект модели и процесса.
+
+Метрики: exact accuracy/macro-F1/matrices по каждому критерию, false/missed NA, 08 P/R, total MAE с pair count и completion, human span localization и blind sufficiency, RU/KZ/EN, boundary changes, все calls/usage/latency. Ошибки/отказы не заменять нулями и не скрывать. Только 7 test families, KZ4 и voice1: статистическая уверенность низкая, нужен последующий независимый набор.
+
+Плановые расходы Astra/Sol (токены — допущение): C0 test19 =19calls/$6.84; L_seq test33chunks+19judge =52calls/$8.408; hybrid=19+s calls/$7.22+$0.036*s+embedding overhead. Это не measured spend и не верхний лимит. Если analyst Luna, gating экономит меньше абсолютных денег. Все реальные inference расходы этого исследования =0.
+
+Полный отчёт: ../sequential-vs-hybrid-research.txt (14 papers, 36 primary URLs).
+Схема: state-evidence-contract.json.
+Протокол: experiment-plan.json.
+Механика: ../../research/prepare_sequential_study.py; воспроизводит manifests, не запускает модель.
+Проверки: ../../research/test_prepare_sequential_study.py — 9 mechanics tests прошли, это не CQA accuracy.
+Независимый deep-research-report (2).md прочитан как дополнительный непроверенный материал; его unrecoverable citation tokens не использованы, Luna перепроверена, чужие проценты не объявлены нашими результатами.
+
+Приложение в этом исследовании не изменялось. Окончательные модель и архитектура не выбраны.

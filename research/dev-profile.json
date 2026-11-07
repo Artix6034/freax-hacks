@@ -1,0 +1,377 @@
+{
+  "source_sha256": "7311f19010932804b1fd3391d50a311dd8699a04e8441e756ae94a8b51c0b455",
+  "isSuccess": true,
+  "dataset_group_id": "DEV",
+  "declared_records": 65,
+  "actual_records": 65,
+  "unique_conversation_ids": 65,
+  "duplicate_ids": [],
+  "languages": {
+    "RU": 35,
+    "KZ": 15,
+    "EN": 15
+  },
+  "channels": {
+    "agent chat": 60,
+    "voice call": 5
+  },
+  "strata": [
+    {
+      "language": "EN",
+      "channel": "agent chat",
+      "count": 15
+    },
+    {
+      "language": "KZ",
+      "channel": "agent chat",
+      "count": 15
+    },
+    {
+      "language": "RU",
+      "channel": "agent chat",
+      "count": 30
+    },
+    {
+      "language": "RU",
+      "channel": "voice call",
+      "count": 5
+    }
+  ],
+  "message_count": 1268,
+  "roles": {
+    "client": 505,
+    "bot": 315,
+    "system": 109,
+    "operator": 339
+  },
+  "record_keys": {
+    "conversation_id": 65,
+    "channel": 65,
+    "language": 65,
+    "transcript": 65,
+    "audio_url": 65
+  },
+  "message_keys": {
+    "timestamp": 1268,
+    "speaker": 1268,
+    "text": 1268
+  },
+  "unexpected_record_keys": [],
+  "structured_ground_truth_present": false,
+  "ground_truth_check_basis": "Only documented data/records/transcript fields exist; no scores, labels or annotation fields in this response. No claim about other endpoints.",
+  "audio_inventory": [
+    {
+      "conversation_id": "p1-ru-001",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-002",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-003",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-004",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-005",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-006",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-007",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-008",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-009",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-010",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-011",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-012",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-013",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-014",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-015",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-016",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-017",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-018",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-019",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-020",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-021",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-022",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-023",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-024",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-025",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-026",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-027",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-028",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-029",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-ru-030",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-kz-001",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-kz-002",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-kz-003",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-kz-004",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-kz-005",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-kz-006",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-kz-007",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-kz-008",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-kz-009",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-kz-010",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-kz-011",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-kz-012",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-kz-013",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-kz-014",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-kz-015",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-en-001",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-en-002",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-en-003",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-en-004",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-en-005",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-en-006",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-en-007",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-en-008",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-en-009",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-en-010",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-en-011",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-en-012",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-en-013",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-en-014",
+      "present": false
+    },
+    {
+      "conversation_id": "p1-en-015",
+      "present": false
+    },
+    {
+      "conversation_id": "p4-ru-003",
+      "present": true,
+      "scheme": "https",
+      "host": "ec88f21f1accecf38e20095a9fe175.a5.environment.api.powerplatform.com",
+      "query_parameter_names": [
+        "api-version",
+        "sig",
+        "sp",
+        "sv"
+      ],
+      "is_absolute_http_url": true,
+      "access_checked": false
+    },
+    {
+      "conversation_id": "p4-ru-002",
+      "present": true,
+      "scheme": "https",
+      "host": "ec88f21f1accecf38e20095a9fe175.a5.environment.api.powerplatform.com",
+      "query_parameter_names": [
+        "api-version",
+        "sig",
+        "sp",
+        "sv"
+      ],
+      "is_absolute_http_url": true,
+      "access_checked": false
+    },
+    {
+      "conversation_id": "p4-ru-001",
+      "present": true,
+      "scheme": "https",
+      "host": "ec88f21f1accecf38e20095a9fe175.a5.environment.api.powerplatform.com",
+      "query_parameter_names": [
+        "api-version",
+        "sig",
+        "sp",
+        "sv"
+      ],
+      "is_absolute_http_url": true,
+      "access_checked": false
+    },
+    {
+      "conversation_id": "p4-ru-005",
+      "present": true,
+      "scheme": "https",
+      "host": "ec88f21f1accecf38e20095a9fe175.a5.environment.api.powerplatform.com",
+      "query_parameter_names": [
+        "api-version",
+        "sig",
+        "sp",
+        "sv"
+      ],
+      "is_absolute_http_url": true,
+      "access_checked": false
+    },
+    {
+      "conversation_id": "p4-ru-004",
+      "present": true,
+      "scheme": "https",
+      "host": "ec88f21f1accecf38e20095a9fe175.a5.environment.api.powerplatform.com",
+      "query_parameter_names": [
+        "api-version",
+        "sig",
+        "sp",
+        "sv"
+      ],
+      "is_absolute_http_url": true,
+      "access_checked": false
+    }
+  ],
+  "exact_duplicate_transcript_groups_ignoring_timestamps": [],
+  "errors": [],
+  "warnings": []
+}

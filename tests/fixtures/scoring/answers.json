@@ -1,0 +1,10 @@
+{
+  "fixture_notice": "TEST ANSWERS ONLY. Hand-authored calculation inputs, never AI output or Ground Truth.",
+  "cases": [
+    {"name":"full", "values":["yes","yes","yes",20,"yes",10,"yes","no"],"total":100,"gross_error":false},
+    {"name":"mixed", "values":["yes","yes","yes",15,"yes",7,"no","no"],"total":85.5,"gross_error":false},
+    {"name":"na", "values":["yes","na","na",15,"yes",7,"no","no"],"total":77.69,"gross_error":false},
+    {"name":"zero", "values":["no","no","no",0,"no",0,"no","no"],"total":0,"gross_error":false},
+    {"name":"gross", "values":["yes","yes","yes",20,"yes",10,"yes","yes"],"total":100,"gross_error":true}
+  ]
+}

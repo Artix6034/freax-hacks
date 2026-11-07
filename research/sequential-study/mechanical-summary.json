@@ -1,0 +1,55 @@
+{
+  "source_sha256": "c5cb242f7d7fb0c07d56363a220ae960a3e036155a15843cefcaad879e9c156f",
+  "records": 65,
+  "messages": 1268,
+  "proposed_groups": 16,
+  "train_profile": {
+    "count": 46,
+    "language": {
+      "EN": 10,
+      "KZ": 11,
+      "RU": 25
+    },
+    "channel": {
+      "agent chat": 42,
+      "voice call": 4
+    }
+  },
+  "test_profile": {
+    "count": 19,
+    "language": {
+      "EN": 5,
+      "KZ": 4,
+      "RU": 10
+    },
+    "channel": {
+      "agent chat": 18,
+      "voice call": 1
+    }
+  },
+  "chunk_plans": {
+    "8": {
+      "all_chunks": 177,
+      "train_chunks": 131,
+      "test_chunks": 46,
+      "oversized_exchanges": 65,
+      "changed_from_12_test_dialogues": 18
+    },
+    "12": {
+      "all_chunks": 138,
+      "train_chunks": 105,
+      "test_chunks": 33,
+      "oversized_exchanges": 5,
+      "changed_from_12_test_dialogues": 0
+    },
+    "20": {
+      "all_chunks": 85,
+      "train_chunks": 63,
+      "test_chunks": 22,
+      "oversized_exchanges": 1,
+      "changed_from_12_test_dialogues": 11
+    }
+  },
+  "no_model_inference_or_training": true,
+  "no_paid_calls": true
+}

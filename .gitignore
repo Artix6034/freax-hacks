@@ -1,0 +1,13 @@
+node_modules/
+.env
+.env.*
+!.env.example
+data/
+tmp/
+test-results/
+.playwright-cli/
+output/
+reference/
+__pycache__/
+*.py[cod]
+research/**/prepared/

@@ -1,0 +1,59 @@
+{
+  "status": "illustrative_assumptions_NOT_measured_or_spending_cap",
+  "currency": "USD",
+  "assumptions": {
+    "n_test": 19,
+    "k_chunks": 33,
+    "chunk_input_output_incl_reasoning": [
+      3000,
+      3000
+    ],
+    "final_input_output_incl_reasoning": [
+      8000,
+      6000
+    ],
+    "prices_checked_on": "2026-11-07",
+    "excludes": [
+      "extra evidence generation",
+      "repairs/retries/fallback",
+      "embeddings",
+      "tax",
+      "account/subscription overhead"
+    ],
+    "no_cache_discount_assumed": true
+  },
+  "bundles": {
+    "accuracy_priority_not_proven_maximum": {
+      "analyzer": "gpt-6.1-sol",
+      "final": "gpt-6-astra",
+      "usd": 8.408,
+      "with_all19_blind_Fable_reviews_usd": 15.628
+    },
+    "balance": {
+      "analyzer": "gpt-6-luna",
+      "final": "gpt-6.1-sol",
+      "usd": 1.5034
+    },
+    "minimum_generative": {
+      "analyzer": "gpt-6-luna",
+      "final": "gpt-6-luna",
+      "usd": 0.1316
+    },
+    "exploratory_typed_Jev_excludes_extra_explanation": {
+      "analyzer": "gpt-6-luna",
+      "final": "jev-1.14.0",
+      "usd": 0.065784
+    },
+    "exploratory_typed_Decider_excludes_extra_explanation": {
+      "analyzer": "gpt-6-luna",
+      "final": "pplx-decider-v1.2",
+      "usd": 0.06244
+    }
+  },
+  "specialist_final_per_call_estimates": {
+    "M_Prometheus7B": 0.01024,
+    "Selene_Mini": 0.00352
+  },
+  "specialist_call_count_caveat": "one full call assumed; native8criterion requests cost8x and require matched generic mode",
+  "actual_inference_spend_usd": 0
+}

@@ -1,0 +1,23 @@
+{
+  "main_report": "../sequential-vs-hybrid-research.txt",
+  "brief": "implementation-brief.txt",
+  "files": [
+    "annotation-audit.json",
+    "topic-groups.proposed.json",
+    "split-70-30.proposed.json",
+    "fragment-manifest.json",
+    "event-annotation.blank.jsonl",
+    "state-evidence-contract.json",
+    "experiment-plan.json",
+    "model-shortlist.json",
+    "sources.json",
+    "mechanical-summary.json",
+    "cost-plan.json",
+    "validation.json",
+    "duplicate-audit.json"
+  ],
+  "reproduce_mechanics": "Run bundled Python research/prepare_sequential_study.py; refreshes annotation snapshot and proposed manifests, never trains or calls models",
+  "run_mechanics_tests": "python -m unittest discover -s research -p test_prepare_sequential_study.py",
+  "gold_labels_available": false,
+  "accuracy_results_available": false
+}

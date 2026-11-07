@@ -1,0 +1,35 @@
+{
+  "retrieved_at_utc": "2026-11-07T08:16:17.474698+00:00",
+  "method": "GET",
+  "source_pdf": "CQA_Hackathon_Student_Guide_v3 1.pdf",
+  "source_pdf_sha256": "8b2f79a685c6707749c780ee042d06c2bf4bff8741732698b4c8bac033ff1b5e",
+  "source_page_one_based": 3,
+  "host": "ec88f21f1accecf38e20095a9fe175.a5.environment.api.powerplatform.com",
+  "query_parameter_names": [
+    "api-version",
+    "group_id",
+    "sig",
+    "sp",
+    "sv"
+  ],
+  "dataset_group_requested": "DEV",
+  "signed_url_saved": false,
+  "http_status": 200,
+  "content_type": "application/json",
+  "byte_count": 222949,
+  "sha256": "7311f19010932804b1fd3391d50a311dd8699a04e8441e756ae94a8b51c0b455",
+  "raw_path": "data/dev/api-response.json",
+  "isSuccess": true,
+  "status": "downloaded",
+  "top_level_keys": [
+    "data",
+    "error",
+    "isSuccess"
+  ],
+  "data_keys": [
+    "dataset_group_id",
+    "records",
+    "total_records"
+  ],
+  "record_count": 65
+}

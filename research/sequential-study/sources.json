@@ -1,0 +1,319 @@
+{
+  "checked_on": "2026-11-07",
+  "sources": [
+    {
+      "id": "S001",
+      "url": "https://aclanthology.org/2020.acl-main.408/",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    },
+    {
+      "id": "S002",
+      "url": "https://aclanthology.org/2020.acl-main.409/",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    },
+    {
+      "id": "S003",
+      "title": "G-Eval",
+      "url": "https://aclanthology.org/2023.emnlp-main.153/",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open",
+      "scope": "EMNLP 2023 publication"
+    },
+    {
+      "id": "S004",
+      "url": "https://aclanthology.org/2023.findings-emnlp.435/",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    },
+    {
+      "id": "S005",
+      "title": "FineSurE",
+      "url": "https://aclanthology.org/2024.acl-long.51/",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open",
+      "scope": "ACL 2024 publication"
+    },
+    {
+      "id": "S006",
+      "url": "https://aclanthology.org/2024.tacl-1.9/",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    },
+    {
+      "id": "S007",
+      "title": "Gemini Argon model",
+      "url": "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "direct_official_markdown_get",
+      "scope": "Web parser rejected text/markdown; direct GET read model details"
+    },
+    {
+      "id": "S008",
+      "title": "Gemini Developer API pricing",
+      "url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_search_and_direct_official_markdown_get",
+      "scope": "Promo expires 2026-11-30; Developer API prices, not Cloud platform prices"
+    },
+    {
+      "id": "S009",
+      "url": "https://arxiv.org/abs/1711.10160",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    },
+    {
+      "id": "S010",
+      "url": "https://arxiv.org/abs/1811.00405",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    },
+    {
+      "id": "S011",
+      "url": "https://arxiv.org/abs/2305.04388",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    },
+    {
+      "id": "S012",
+      "url": "https://arxiv.org/abs/2305.05176",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    },
+    {
+      "id": "S013",
+      "url": "https://arxiv.org/abs/2406.18665",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    },
+    {
+      "id": "S014",
+      "title": "Multilingual judge reliability",
+      "url": "https://arxiv.org/abs/2505.12201v1",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open_base_abs",
+      "scope": "2025 v1; multilingual consistency, not CQA accuracy"
+    },
+    {
+      "id": "S015",
+      "title": "RubricEval",
+      "url": "https://arxiv.org/html/2603.25133v1",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open_and_method_limitations_sections",
+      "scope": "2026 v1; binary rubrics, partly model-generated reference labels"
+    },
+    {
+      "id": "S016",
+      "url": "https://cohere.com/pricing",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    },
+    {
+      "id": "S017",
+      "url": "https://developers.openai.com/api/docs/guides/embeddings",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    },
+    {
+      "id": "S018",
+      "title": "OpenAI reasoning",
+      "url": "https://developers.openai.com/api/docs/guides/reasoning",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "context7",
+      "scope": "Reasoning settings and unsupported sampling controls"
+    },
+    {
+      "id": "S019",
+      "title": "OpenAI structured outputs",
+      "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "context7_and_web_search",
+      "scope": "JSON Schema and refusal/incomplete handling"
+    },
+    {
+      "id": "S020",
+      "title": "OpenAI Astra model",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open",
+      "scope": "API ID, context, output, rates, structured output; not CQA accuracy"
+    },
+    {
+      "id": "S021",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    },
+    {
+      "id": "S022",
+      "title": "OpenAI Sol model",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open",
+      "scope": "API ID and cost comparison; no dated snapshot invented"
+    },
+    {
+      "id": "S023",
+      "url": "https://developers.openai.com/api/docs/models/text-embedding-3-large",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    },
+    {
+      "id": "S024",
+      "url": "https://developers.openai.com/api/docs/models/text-embedding-3-small",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    },
+    {
+      "id": "S025",
+      "url": "https://developers.openai.com/api/reference/resources/embeddings/methods/create",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    },
+    {
+      "id": "S026",
+      "url": "https://docs.cohere.com/changelog",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    },
+    {
+      "id": "S027",
+      "url": "https://docs.cohere.com/docs/embeddings",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    },
+    {
+      "id": "S028",
+      "url": "https://docs.cohere.com/docs/models",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    },
+    {
+      "id": "S029",
+      "title": "Claude structured outputs",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "context7_and_web_open",
+      "scope": "output_config.format, no forced tool shortcut; schema constraints"
+    },
+    {
+      "id": "S030",
+      "title": "Claude data retention",
+      "url": "https://platform.claude.com/docs/en/manage-claude/api-and-data-retention",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open_and_find",
+      "scope": "Fable Covered Model requires 30-day retention absent express exception"
+    },
+    {
+      "id": "S031",
+      "title": "Anthropic Fable model",
+      "url": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open",
+      "scope": "Exact ID, active release, pricing and adaptive thinking"
+    },
+    {
+      "id": "S032",
+      "url": "https://proceedings.mlr.press/v97/geifman19a.html",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    },
+    {
+      "id": "S033",
+      "url": "https://scikit-learn.org/stable/common_pitfalls.html",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    },
+    {
+      "id": "S034",
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.calibration.CalibratedClassifierCV.html",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    },
+    {
+      "id": "S035",
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GroupShuffleSplit.html",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    },
+    {
+      "id": "S036",
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "primary page read; Context7 additionally for OpenAI/embeddings/scikit APIs",
+      "scope": "Research finding or documented capability, not measured CQA quality"
+    }
+  ],
+  "additional_material": {
+    "path": "C:\\Users\\user\\Downloads\\deep-research-report (2).md",
+    "sha256": "d4ba58ca7eaabc49ddfe95c2bbc9f71a236f86ba04f8a4568d6d9d999e857059",
+    "status": "independent report, unverified secondary material; citation tokens not used as sources",
+    "audit": "See section 14 of main report"
+  },
+  "context7_resolved_ids": [
+    "/websites/developers_openai_api",
+    "/websites/platform_claude_en",
+    "/websites/ai_google_dev_gemini-api",
+    "/websites/scikit-learn_stable",
+    "/websites/cohere"
+  ]
+}

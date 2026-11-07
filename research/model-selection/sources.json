@@ -1,0 +1,439 @@
+{
+  "checked_on": "2026-11-07",
+  "sources": [
+    {
+      "id": "S001",
+      "url": "https://aclanthology.org/2025.acl-long.701/",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S002",
+      "url": "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S003",
+      "url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S004",
+      "url": "https://api.featherless.ai/v1/chat/completions",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S005",
+      "url": "https://api.perplexity.ai/v1/decisions",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S006",
+      "url": "https://api.typesafe.ai/v1/systemone",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S007",
+      "url": "https://arxiv.org/html/2405.01535v2",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S008",
+      "url": "https://arxiv.org/html/2501.17195v1",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S009",
+      "url": "https://arxiv.org/html/2504.04953v2",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S010",
+      "url": "https://arxiv.org/html/2509.14252v2",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S011",
+      "url": "https://arxiv.org/html/2609.29769v3",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S012",
+      "url": "https://cohere.com/pricing",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S013",
+      "url": "https://developers.openai.com/api/docs/guides/embeddings",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S014",
+      "url": "https://developers.openai.com/api/docs/guides/reasoning",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S015",
+      "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S016",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S017",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S018",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S019",
+      "url": "https://developers.openai.com/api/docs/models/text-embedding-3-large",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S020",
+      "url": "https://developers.openai.com/api/docs/models/text-embedding-3-small",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S021",
+      "url": "https://docs.cohere.com/docs/embeddings",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S022",
+      "url": "https://docs.cohere.com/docs/models",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S023",
+      "url": "https://docs.patronus.ai/docs/evaluators/concepts",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S024",
+      "url": "https://docs.perplexity.ai/docs/decisions/quickstart",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S025",
+      "url": "https://docs.typesafe.ai/changelog",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S026",
+      "url": "https://docs.typesafe.ai/introduction",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S027",
+      "url": "https://docs.typesafe.ai/model-jaggedness",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S028",
+      "url": "https://docs.typesafe.ai/models",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S029",
+      "url": "https://docs.typesafe.ai/primitives/choice",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S030",
+      "url": "https://docs.typesafe.ai/primitives/score",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S031",
+      "url": "https://featherless.ai/models/AtlaAI/Selene-1-Mini-Llama-3.1-8B",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S032",
+      "url": "https://featherless.ai/models/Skywork/Skywork-Critic-Llama-3.1-8B",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S033",
+      "url": "https://featherless.ai/models/Unbabel/M-Prometheus-7B",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S034",
+      "url": "https://featherless.ai/models/flowaicom/Flow-Judge-v0.1",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S035",
+      "url": "https://featherless.ai/models/prometheus-eval/prometheus-7b-v2.0",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S036",
+      "url": "https://featherless.ai/pricing",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S037",
+      "url": "https://github.com/WeOpenML/PandaLM",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S038",
+      "url": "https://github.com/baaivision/JudgeLM",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S039",
+      "url": "https://github.com/facebookresearch/ijepa",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S040",
+      "url": "https://github.com/facebookresearch/jepa",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S041",
+      "url": "https://github.com/galilai-group/llm-jepa",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S042",
+      "url": "https://github.com/urchade/GLiNER",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S043",
+      "url": "https://huggingface.co/AtlaAI/Selene-1-Mini-Llama-3.1-8B",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S044",
+      "url": "https://huggingface.co/BAAI/JudgeLM-7B-v1.0",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S045",
+      "url": "https://huggingface.co/BAAI/bge-m3",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S046",
+      "url": "https://huggingface.co/PatronusAI/glider",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S047",
+      "url": "https://huggingface.co/Skywork/Skywork-Critic-Llama-3.1-70B",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S048",
+      "url": "https://huggingface.co/Skywork/Skywork-Critic-Llama-3.1-8B",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S049",
+      "url": "https://huggingface.co/Skywork/Skywork-Reward-Llama-3.1-8B-v0.2",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S050",
+      "url": "https://huggingface.co/Unbabel/M-Prometheus-7B",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S051",
+      "url": "https://huggingface.co/fastino/gliner2-base-v1",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S052",
+      "url": "https://huggingface.co/flowaicom/Flow-Judge-v0.1",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S053",
+      "url": "https://huggingface.co/intfloat/multilingual-e5-small",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S054",
+      "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.1-27b",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S055",
+      "url": "https://huggingface.co/prometheus-eval/prometheus-7b-v2.0",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S056",
+      "url": "https://huggingface.co/urchade/gliner_multi-v2.1",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S057",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S058",
+      "url": "https://platform.claude.com/docs/en/manage-claude/api-and-data-retention",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S059",
+      "url": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    },
+    {
+      "id": "S060",
+      "url": "https://typesafe.ai/",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "scope": "Paper/model card or first-party capability, deployment, API or price documentation; not our measured CQA result"
+    }
+  ],
+  "context7_library_ids": [
+    "/websites/typesafe_ai",
+    "/llmstxt/perplexity_ai_llms_txt",
+    "/websites/featherless_ai",
+    "/websites/developers_openai_api",
+    "/urchade/gliner"
+  ],
+  "dataset_metadata_urls": [
+    "https://datasets-server.huggingface.co/size?dataset=flowaicom/Flow-Judge-v0.1-binary-heldout",
+    "https://datasets-server.huggingface.co/size?dataset=flowaicom/Flow-Judge-v0.1-3-likert-heldout",
+    "https://datasets-server.huggingface.co/size?dataset=flowaicom/Flow-Judge-v0.1-5-likert-heldout"
+  ],
+  "not_primary_Jev_domain": "jevmodel.org is explicitly unaffiliated; not used as official source",
+  "JEV_term": "user confirmed TypeSafe Jev on2026-11-07"
+}

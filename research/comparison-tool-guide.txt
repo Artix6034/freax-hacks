@@ -1,0 +1,74 @@
+Сравнение AI с экспертной разметкой: внутренние диагностические метрики
+
+Инструмент: research/compare_evaluations.py. Только стандартная библиотека Python, без сетевых и AI-вызовов. Исходники приложения и файлы reference/ не изменяются.
+Прочитан текущий формат Evaluation в src/service.js, src/domain.js, src/scoring.js. Обычный список /api/evaluations содержит краткие строки и НЕ подходит: нужны полные сохранённые Evaluation, один объект, массив объектов JSON или JSONL. Каталоги автоматически не сканируются.
+
+БЫСТРЫЙ ЗАПУСК ИЗ КОРНЯ ПРОЕКТА
+На этой машине python в PATH может быть системной заглушкой. В PowerShell можно один раз задать:
+$researchPython = 'C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe'
+
+Проверка текущего пустого пилотного шаблона, без каких-либо AI-ответов:
+& $researchPython research/compare_evaluations.py compare --references research/pilot20-expert-a.blank.jsonl --output research/metrics/blank-pilot-report.json
+Ожидается status=no_reference_annotations, 20 reference_records, 0 references_with_usable_labels, 0 числовых пар, accuracy/MAE/RMSE/bias=null. Это не нулевая точность и не успешная оценка.
+
+Воспроизводимые ИСКУССТВЕННЫЕ примеры (все ID начинаются с artificial-, это не DEV-оценки):
+& $researchPython research/make_metric_examples.py
+& $researchPython research/compare_evaluations.py compare --predictions research/fixtures/metrics/artificial-ai-evaluations.json --references research/fixtures/metrics/artificial-references.jsonl --reference-format internal --output research/metrics/artificial-original-report.json
+В примере 3 искусственных эталона и только 2 AI-ответа: отсутствие третьего снижает exact accuracy и видно в покрытии; MAE считается только для двух числовых пар. Также показаны частичный балл по 04, пропуск флага 08 при совпадающем числовом итоге и отличие исходного результата от пересмотренного.
+
+Явно выбрать пересмотренный результат того же искусственного запуска:
+& $researchPython research/compare_evaluations.py compare --predictions research/fixtures/metrics/artificial-ai-evaluations.json --references research/fixtures/metrics/artificial-references.jsonl --reference-format internal --view reviewed-final --output research/metrics/artificial-reviewed-report.json
+По умолчанию --view original: ТОЛЬКО ai_review.criteria и original_score.total. При --view reviewed-final: ТОЛЬКО final_review.criteria и final_score.total. Если выбранная часть пуста, подстановки другой нет. В каждом отчёте записан prediction_view.
+Статус выбранной части берётся из ai_status или final_status соответственно. Апелляция может завершить итоговую оценку, но исходный ответ AI остаётся partial. Для старых записей без этих полей статус восстанавливается из выбранного review; сохранённый failed/running не превращается в успех из-за случайно присутствующих значений.
+
+ПРИМЕР ДЛЯ БУДУЩИХ НАСТОЯЩИХ РЕЗУЛЬТАТОВ
+После получения полной Evaluation и независимой заполненной разметки:
+& $researchPython research/compare_evaluations.py compare --predictions <полная-оценка-или-массив.json> --references <согласованная-разметка.jsonl> --output research/metrics/<имя-эксперимента>.json
+Угловые скобки здесь означают будущие реальные пути; команды с ними буквально не запускать. Не объединять экспертов A/B или повторные AI-запуски в одну таблицу по одному ID: дубли ID и дубли критериев отклоняются. Сначала сохранить отдельную согласованную ревизию разметки с причинами разрешения разногласий.
+
+ЯВНАЯ КОНВЕРТАЦИЯ ВО ВНУТРЕННИЙ ФОРМАТ
+& $researchPython research/compare_evaluations.py convert --kind prediction --format evaluation --view original --input research/fixtures/metrics/artificial-ai-evaluations.json --output research/metrics/artificial-ai.internal.jsonl
+& $researchPython research/compare_evaluations.py compare --prediction-format internal --predictions research/metrics/artificial-ai.internal.jsonl --reference-format internal --references research/fixtures/metrics/artificial-references.jsonl --output research/metrics/artificial-converted-report.json
+Для экспертных форм: convert --kind reference --format expert --input <форма> --output <новый-файл.jsonl>. Исходные файлы не перезаписывать. Для .jsonl выход содержит по объекту на строку; для .json — массив.
+
+Внутренняя запись:
+format_version: cqa-comparison-1
+record_kind: prediction или reference
+conversation_id: исходный ID
+criteria: [{criterion_id: "01", value: "yes"/"no"/"na"/допустимое число/null, status: "resolved"/"unresolved", needs_adjudication: true/false/null}, ...]
+total_score: число или null
+checklist_binding: {checklist_id, version}; опционально checklist_fingerprint полного снимка и transcript_hash
+prediction: source_view=original_ai или reviewed_final, record_status=completed/partial/failed/...
+reference: annotation_status, reference_kind
+Конвертер оставляет только поля, нужные метрикам и происхождению записи. Тексты транскрипта, цитаты, audio_url, комментарии экспертов и иные лишние поля в конвертированный файл не копируются. Оригиналы сохраняются отдельно.
+
+РАЗМЕТКА И ЗНАМЕНАТЕЛИ
+1. Текущие *.blank.jsonl имеют annotation_status=unannotated и все value=null, поэтому ничего из них не считается эталоном.
+2. Допустимые статусы для использования заполненных индивидуальных меток: annotated, adjudicated, final, partial, needs_adjudication. При needs_adjudication=true у конкретного критерия именно его метка пропускается. null всегда пропускается независимо от статуса. При unannotated не используются даже случайно заполненные значения или вручную вписанный итог.
+3. Готовность разметки задаёт человек. Инструмент не проверяет истинность экспертной оценки и не превращает provisional reference в официальный GT. reference_kind сохраняется в отчёте. Отдельно показаны пустые, спорные, недопустимые и несовместимые метки.
+4. Для допустимой экспертной метки отсутствие/сбой/недопустимое значение AI входит в знаменатель exact accuracy как несовпадение. Матрица различает __missing__, __unresolved__, __failed__, __invalid__, __incompatible__. Успешная числовая пара не возникает из пропуска. Ошибки N/A не исчезают из exact accuracy из-за отсутствия числовой пары.
+4а. В результате partial известные resolved-ответы сравниваются обычным способом; unresolved с value=null учитывается отдельно как воздержание, не как N/A, 0 или технический сбой. Отсутствующее поле status у старой строки означает resolved. Противоречие unresolved с непустым value считается invalid. Покрытие содержит prediction_record_statuses; prediction_unresolved показан для каждого критерия. Эта строгая accuracy не является штрафной формулой организаторов: она лишь не выдаёт отсутствие ответа за совпадение.
+5. Для применимости есть матрица reference na/applicable -> prediction na/applicable/unavailable, FP/FN, precision/recall/F1 и отдельное число недоступных ответов. FN включает пропущенные положительные случаи; при отсутствии знаменателя precision/recall/F1=null, а не выдуманная единица.
+6. 08 показан как самостоятельный zero-weight flag с матрицей и precision/recall/F1 по yes=нарушение. Пропуск нарушения может сосуществовать с точным совпадением итогового балла.
+7. Для 04/06 MAE/RMSE/bias по исходной шкале считаются только на валидных числовых парах. Рядом count, число числовых эталонов и количество исключений из-за N/A/недоступности AI. Удобный основной показатель по критерию — matched/reference_labeled и accuracy, а не условная MAE сама по себе.
+
+ИТОГИ И АРИФМЕТИКА
+Задан один снимок конфигурации --checklist (по умолчанию config/checklist.v1.json). Поддерживаются текущие типы boolean/scale/flag и числовые шкалы от нуля. Это не универсальный конвертер произвольной шкалы с ненулевым минимумом.
+Для экспертного итога нужны все взвешенные метки, допустимые и не требующие разбора. Если total_score отсутствует/null, инструмент вычисляет итог из этих меток точными Fraction и ROUND_HALF_UP, с нормировкой N/A до 100. Отсутствующая метка 08 не мешает числовому итогу, но сам 08 остаётся неразмеченным, и полный вектор из восьми не считается готовым.
+Если эксперт указал число, оно сверяется с метками. Несогласованный экспертный итог отмечается inconsistent_declared_reference_total и исключается из числовых метрик; молча не исправляется. Если заполнен только итог, но взвешенные критерии неполны, этот строгий режим не использует его как отдельный GT итогового балла. Поддержка официального набора «только итог» потребует отдельного явно выбранного режима.
+По умолчанию сравнивается именно ЗАЯВЛЕННЫЙ AI итог выбранной версии. Он не подменяется корректным пересчётом: арифметическая ошибка должна остаться видимой. Независимый пересчёт даёт prediction_arithmetic_error. Число не используется как полный AI итог при неполных/невалидных взвешенных ответах.
+Если исходный AI-формат содержит только метки, можно явно включить --derive-prediction-total. Тогда источник итогов будет explicitly_derived_from_prediction_labels; это другой диагностический режим, его не смешивать с проверкой заявленной арифметики приложения.
+Неизвестный критерий с положительным весом блокирует полный итог даже при --derive-prediction-total: prediction_total_status=unresolved_weighted_labels. Если при этом заявлен числовой итог, статус incomplete_prediction_labels и число исключается из сравнения. Известные критерии продолжают сравниваться. Если неизвестен только флаг с нулевым весом, числовой итог может сравниваться, а флаг остаётся __unresolved__ и полный вектор не совпадает.
+При отсутствии применимых весов законный итог null, не 0; согласованность такой доступности проверяется отдельно и не создаёт числовую пару.
+В totals: count, MAE, RMSE, bias_prediction_minus_reference, максимальная ошибка, точные совпадения, доли ошибок <=1 и <=5. Эти допуски внутренние. MAE сопровождается количеством пропущенных/недоступных итогов; по одной MAE нельзя сравнивать решения с разным покрытием.
+
+СОВМЕСТИМОСТЬ И ОГРАНИЧЕНИЯ
+Совпадение ID не достаточно: если заданы и расходятся версия/полный снимок чек-листа или transcript_hash, это видно как несовместимость. Не считать её точным ответом; числовые итоги не сравниваются. Отсутствующая привязка/хэш даёт предупреждение: данные можно сравнить, но их тождество не доказано. Старый research-тег initial-pdf-v1 явно преобразуется в freedom-chat/version=1; другой тег не должен использоваться для новых правил.
+Хэш транскрипта приложения пересчитывается из исходных timestamp/speaker/text без message_id, что соответствует research-формам. conversation_hash приложения включает другой объект и НЕ приравнивается к transcript_hash.
+Нет семантической проверки цитат, экспертных объяснений, предметной базы, автоматического арбитража, доверительных интервалов или доказательства отсутствия утечки между темами. Это отдельные проверки. По умолчанию нет языковых/канальных срезов; archive benchmark.py их имеет, а текущие исследовательские формы не содержат этих полей. Набор из 10 контрольных диалогов требует просмотра каждого расхождения.
+Архивный baseline имеет другой формат (c01, findings/status/score, original_findings/summary), иную версию правил и некоторые дополнительные трактовки. Он не приводится молча к текущему приложению; см. research/baseline-methodology-review.txt. Его пустой шаблон не является GT.
+Файлы с оценками и отчёты могут содержать чувствительные ID; не публиковать без отдельного разрешения. Сам инструмент не выполняет коммиты/публикацию.
+
+ПРОВЕРКИ
+& $researchPython -m unittest discover -s research -p test_compare_evaluations.py -v
+На момент обновления для partial: 34 проверки прошли. Все назначенные в тестах значения относятся только к artificial-фикстурам. Реальные шаблоны только читаются для проверки состояния «разметки нет». Внешних AI-вызовов не было.

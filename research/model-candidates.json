@@ -1,0 +1,145 @@
+{
+  "checked_on": "2026-11-07",
+  "status": "documented_candidates_not_benchmarked",
+  "models": [
+    {
+      "id": "openai_astra",
+      "provider": "OpenAI",
+      "api_model_id": "gpt-6-astra",
+      "context_tokens": 1050000,
+      "max_output_tokens": 128000,
+      "standard_usd_per_million": {
+        "input": 10,
+        "output_including_reasoning": 50
+      },
+      "initial_reasoning_setting": {
+        "reasoning_effort": "high"
+      },
+      "sampling_policy": "omit temperature/top_p/logprobs; do not assume seed repeatability",
+      "structured_output": "strict JSON Schema; Chat Completions or Responses",
+      "role": "first provisional quality candidate; not an empirically selected winner",
+      "source_ids": [
+        "O1",
+        "O3",
+        "O4",
+        "O5",
+        "O6",
+        "O7"
+      ],
+      "account_access_tested": false
+    },
+    {
+      "id": "openai_sol",
+      "provider": "OpenAI",
+      "api_model_id": "gpt-6.1-sol",
+      "context_tokens": 1050000,
+      "max_output_tokens": 128000,
+      "standard_usd_per_million": {
+        "input": 2,
+        "output_including_reasoning": 10
+      },
+      "initial_reasoning_setting": {
+        "reasoning_effort": "high"
+      },
+      "sampling_policy": "omit unsupported sampling controls; none/minimal reasoning not supported",
+      "structured_output": "strict JSON Schema",
+      "role": "same-provider cost reserve; not an independent family verifier",
+      "source_ids": [
+        "O2",
+        "O3",
+        "O4",
+        "O5",
+        "O6"
+      ],
+      "account_access_tested": false
+    },
+    {
+      "id": "anthropic_fable",
+      "provider": "Anthropic",
+      "api_model_id": "claude-fable-5-1",
+      "context_tokens": 1000000,
+      "max_output_tokens": 128000,
+      "standard_usd_per_million": {
+        "input": 10,
+        "output_including_reasoning": 50
+      },
+      "initial_reasoning_setting": {
+        "thinking": {
+          "type": "adaptive"
+        },
+        "output_config": {
+          "effort": "high"
+        }
+      },
+      "sampling_policy": "omit temperature/top_p/top_k",
+      "structured_output": "Messages API output_config.format JSON Schema; native adapter",
+      "role": "independent-family candidate and optional reviewer; not guaranteed KZ superiority",
+      "data_handling_note": "Covered Model, 30-day retention; no ZDR unless expressly authorized",
+      "source_ids": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "A5",
+        "A6"
+      ],
+      "account_access_tested": false,
+      "context_tokens_documented_as": "1M",
+      "max_output_tokens_documented_as": "128K"
+    },
+    {
+      "id": "google_argon",
+      "provider": "Google Gemini Developer API",
+      "api_model_id": "gemini-4-argon",
+      "context_tokens": 1048576,
+      "context_is_unified_input_plus_output": true,
+      "max_output_tokens": 65536,
+      "standard_usd_per_million": {
+        "input": 2,
+        "output_including_reasoning": 10
+      },
+      "price_effective_until": "2026-11-30",
+      "standard_usd_per_million_from_2026_12_01": {
+        "input": 4,
+        "output_including_reasoning": 20
+      },
+      "initial_reasoning_setting": {
+        "thinking_level": "high"
+      },
+      "sampling_policy": "omit temperature/top_p/top_k/candidate_count",
+      "structured_output": "JSON Schema documented; native/compatibility payload and finish handling must be smoke-tested",
+      "role": "third independent-family candidate; introductory price does not prove quality",
+      "source_ids": [
+        "G1",
+        "G2",
+        "G3",
+        "G4",
+        "G5",
+        "G6",
+        "G7",
+        "G8",
+        "G9"
+      ],
+      "account_access_tested": false,
+      "max_output_tokens_mode": "default_synchronous; optional long decode not used"
+    },
+    {
+      "id": "optional_cpu_only",
+      "provider": "self-hosted optional, outside primary API matrix",
+      "weights_model_id": "Qwen/Qwen3-4B-Instruct-2507",
+      "quantization_repository": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
+      "quantization": "Q4_K_M",
+      "approximate_weights_file_gb": 2.5,
+      "license": "Apache-2.0",
+      "inference_api_fee_usd": 0,
+      "inference_api_fee_is_not_total_operating_cost": true,
+      "role": "appendix only after user's API-only clarification; no deployment/download authorized by this research",
+      "source_ids": [
+        "L1",
+        "L2",
+        "L3"
+      ],
+      "inference_tested": false
+    }
+  ]
+}

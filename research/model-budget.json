@@ -1,0 +1,73 @@
+{
+  "is_estimate": true,
+  "currency": "USD",
+  "prices_checked_on": "2026-11-07",
+  "no_external_AI_calls": true,
+  "assumptions": {
+    "standard_tier": true,
+    "cache_tools_retries_discounts_taxes_included": false,
+    "reasoning_already_in_output_estimate": true,
+    "fixed_input_tokens_are_an_assumption_not_a_guarantee": true,
+    "per_call_output_cap": 32768,
+    "repeat_scenario": "Each of 3 models uses A2, 5 cases, 2 additional repeats",
+    "holdout_scenario": "2 expensive A2 finalists, 10 cases each; not an actual selection"
+  },
+  "per_model": {
+    "gpt-6-astra": {
+      "architectures": {
+        "A1": {
+          "estimated_usd_per_evaluation": "0.36",
+          "output_cap_scenario_usd_per_evaluation": "1.6984"
+        },
+        "A2": {
+          "estimated_usd_per_evaluation": "0.59",
+          "output_cap_scenario_usd_per_evaluation": "3.4168"
+        }
+      },
+      "pilot_estimated_usd": "19.00",
+      "pilot_output_cap_scenario_usd": "102.3040"
+    },
+    "claude-fable-5-1": {
+      "architectures": {
+        "A1": {
+          "estimated_usd_per_evaluation": "0.36",
+          "output_cap_scenario_usd_per_evaluation": "1.6984"
+        },
+        "A2": {
+          "estimated_usd_per_evaluation": "0.59",
+          "output_cap_scenario_usd_per_evaluation": "3.4168"
+        }
+      },
+      "pilot_estimated_usd": "19.00",
+      "pilot_output_cap_scenario_usd": "102.3040"
+    },
+    "gemini-4-argon": {
+      "architectures": {
+        "A1": {
+          "estimated_usd_per_evaluation": "0.072",
+          "output_cap_scenario_usd_per_evaluation": "0.33968"
+        },
+        "A2": {
+          "estimated_usd_per_evaluation": "0.118",
+          "output_cap_scenario_usd_per_evaluation": "0.68336"
+        }
+      },
+      "pilot_estimated_usd": "3.800",
+      "pilot_output_cap_scenario_usd": "20.46080"
+    }
+  },
+  "totals": {
+    "pilot_estimated_usd": "41.800",
+    "repeats_estimated_usd": "12.980",
+    "holdout_estimated_usd": "11.80",
+    "complete_scenario_estimated_usd": "66.580",
+    "pilot_output_cap_scenario_usd": "225.06880",
+    "repeats_output_cap_scenario_usd": "75.16960",
+    "holdout_output_cap_scenario_usd": "68.3360",
+    "complete_output_cap_scenario_usd": "368.57440",
+    "pilot_calls": 180,
+    "repeats_calls_if_A2": 60,
+    "holdout_calls_if_A2": 40,
+    "complete_calls_if_A2": 280
+  }
+}

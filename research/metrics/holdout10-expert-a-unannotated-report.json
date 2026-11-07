@@ -1,0 +1,810 @@
+{
+  "report_version": "cqa-diagnostics-1",
+  "status": "no_reference_annotations",
+  "notice": "Internal diagnostic metrics, not the official jury formula. Human references are not automatically official Ground Truth.",
+  "prediction_view": "original_ai",
+  "checklist_binding": {
+    "checklist_id": "freedom-chat",
+    "version": 1
+  },
+  "checklist_fingerprint": "48e4dd7aaaec47f3fb7b03de35fa4c5c704bd800eea9fa17f92509a055d83e52",
+  "coverage": {
+    "reference_records": 10,
+    "prediction_records": 0,
+    "references_with_usable_labels": 0,
+    "reference_annotation_statuses": {
+      "unannotated": 10
+    },
+    "reference_kinds": {
+      "unannotated_template_not_ground_truth": 10
+    },
+    "prediction_ids_without_reference": [],
+    "reference_ids_without_prediction": [
+      "p1-en-008",
+      "p1-en-011",
+      "p1-kz-002",
+      "p1-kz-005",
+      "p1-kz-010",
+      "p1-ru-012",
+      "p1-ru-013",
+      "p1-ru-019",
+      "p1-ru-025",
+      "p4-ru-003"
+    ]
+  },
+  "criteria": {
+    "01": {
+      "matched": 0,
+      "reference_labeled": 0,
+      "reference_unlabeled": 10,
+      "reference_pending": 0,
+      "reference_invalid": 0,
+      "reference_incompatible": 0,
+      "prediction_valid": 0,
+      "prediction_missing": 0,
+      "prediction_invalid": 0,
+      "prediction_failed": 0,
+      "prediction_incompatible": 0,
+      "accuracy": null,
+      "confusion_matrix": {
+        "rows": "reference",
+        "columns": "prediction; unavailable states are explicit",
+        "counts": {}
+      },
+      "allowed_values": [
+        "yes",
+        "no"
+      ],
+      "yes_metrics": {
+        "positive_label": "yes",
+        "tp": 0,
+        "fp": 0,
+        "fn_including_unavailable": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      }
+    },
+    "02": {
+      "matched": 0,
+      "reference_labeled": 0,
+      "reference_unlabeled": 10,
+      "reference_pending": 0,
+      "reference_invalid": 0,
+      "reference_incompatible": 0,
+      "prediction_valid": 0,
+      "prediction_missing": 0,
+      "prediction_invalid": 0,
+      "prediction_failed": 0,
+      "prediction_incompatible": 0,
+      "accuracy": null,
+      "confusion_matrix": {
+        "rows": "reference",
+        "columns": "prediction; unavailable states are explicit",
+        "counts": {}
+      },
+      "allowed_values": [
+        "yes",
+        "no",
+        "na"
+      ],
+      "yes_metrics": {
+        "positive_label": "yes",
+        "tp": 0,
+        "fp": 0,
+        "fn_including_unavailable": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      },
+      "na_selection": {
+        "reference_na": 0,
+        "tp": 0,
+        "fp": 0,
+        "fn_including_unavailable": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "wrong_applicability_valid_predictions": 0,
+        "prediction_unavailable": 0,
+        "applicability_accuracy_including_unavailable": null,
+        "confusion_matrix": {
+          "na": {
+            "na": 0,
+            "applicable": 0,
+            "unavailable": 0
+          },
+          "applicable": {
+            "na": 0,
+            "applicable": 0,
+            "unavailable": 0
+          }
+        }
+      }
+    },
+    "03": {
+      "matched": 0,
+      "reference_labeled": 0,
+      "reference_unlabeled": 10,
+      "reference_pending": 0,
+      "reference_invalid": 0,
+      "reference_incompatible": 0,
+      "prediction_valid": 0,
+      "prediction_missing": 0,
+      "prediction_invalid": 0,
+      "prediction_failed": 0,
+      "prediction_incompatible": 0,
+      "accuracy": null,
+      "confusion_matrix": {
+        "rows": "reference",
+        "columns": "prediction; unavailable states are explicit",
+        "counts": {}
+      },
+      "allowed_values": [
+        "yes",
+        "no",
+        "na"
+      ],
+      "yes_metrics": {
+        "positive_label": "yes",
+        "tp": 0,
+        "fp": 0,
+        "fn_including_unavailable": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      },
+      "na_selection": {
+        "reference_na": 0,
+        "tp": 0,
+        "fp": 0,
+        "fn_including_unavailable": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "wrong_applicability_valid_predictions": 0,
+        "prediction_unavailable": 0,
+        "applicability_accuracy_including_unavailable": null,
+        "confusion_matrix": {
+          "na": {
+            "na": 0,
+            "applicable": 0,
+            "unavailable": 0
+          },
+          "applicable": {
+            "na": 0,
+            "applicable": 0,
+            "unavailable": 0
+          }
+        }
+      }
+    },
+    "04": {
+      "matched": 0,
+      "reference_labeled": 0,
+      "reference_unlabeled": 10,
+      "reference_pending": 0,
+      "reference_invalid": 0,
+      "reference_incompatible": 0,
+      "prediction_valid": 0,
+      "prediction_missing": 0,
+      "prediction_invalid": 0,
+      "prediction_failed": 0,
+      "prediction_incompatible": 0,
+      "accuracy": null,
+      "confusion_matrix": {
+        "rows": "reference",
+        "columns": "prediction; unavailable states are explicit",
+        "counts": {}
+      },
+      "allowed_values": [
+        0,
+        5,
+        10,
+        15,
+        20,
+        "na"
+      ],
+      "na_selection": {
+        "reference_na": 0,
+        "tp": 0,
+        "fp": 0,
+        "fn_including_unavailable": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "wrong_applicability_valid_predictions": 0,
+        "prediction_unavailable": 0,
+        "applicability_accuracy_including_unavailable": null,
+        "confusion_matrix": {
+          "na": {
+            "na": 0,
+            "applicable": 0,
+            "unavailable": 0
+          },
+          "applicable": {
+            "na": 0,
+            "applicable": 0,
+            "unavailable": 0
+          }
+        }
+      },
+      "numeric_scale": {
+        "count": 0,
+        "mae": null,
+        "rmse": null,
+        "bias_prediction_minus_reference": null,
+        "max_absolute_error": null,
+        "reference_numeric_count": 0,
+        "excluded_numeric_references_due_to_na_or_unavailable_prediction": 0,
+        "scope": "Only pairs with valid numeric values on both sides; N/A errors remain in exact and applicability metrics."
+      }
+    },
+    "05": {
+      "matched": 0,
+      "reference_labeled": 0,
+      "reference_unlabeled": 10,
+      "reference_pending": 0,
+      "reference_invalid": 0,
+      "reference_incompatible": 0,
+      "prediction_valid": 0,
+      "prediction_missing": 0,
+      "prediction_invalid": 0,
+      "prediction_failed": 0,
+      "prediction_incompatible": 0,
+      "accuracy": null,
+      "confusion_matrix": {
+        "rows": "reference",
+        "columns": "prediction; unavailable states are explicit",
+        "counts": {}
+      },
+      "allowed_values": [
+        "yes",
+        "no"
+      ],
+      "yes_metrics": {
+        "positive_label": "yes",
+        "tp": 0,
+        "fp": 0,
+        "fn_including_unavailable": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      }
+    },
+    "06": {
+      "matched": 0,
+      "reference_labeled": 0,
+      "reference_unlabeled": 10,
+      "reference_pending": 0,
+      "reference_invalid": 0,
+      "reference_incompatible": 0,
+      "prediction_valid": 0,
+      "prediction_missing": 0,
+      "prediction_invalid": 0,
+      "prediction_failed": 0,
+      "prediction_incompatible": 0,
+      "accuracy": null,
+      "confusion_matrix": {
+        "rows": "reference",
+        "columns": "prediction; unavailable states are explicit",
+        "counts": {}
+      },
+      "allowed_values": [
+        0,
+        4,
+        7,
+        10
+      ],
+      "numeric_scale": {
+        "count": 0,
+        "mae": null,
+        "rmse": null,
+        "bias_prediction_minus_reference": null,
+        "max_absolute_error": null,
+        "reference_numeric_count": 0,
+        "excluded_numeric_references_due_to_na_or_unavailable_prediction": 0,
+        "scope": "Only pairs with valid numeric values on both sides; N/A errors remain in exact and applicability metrics."
+      }
+    },
+    "07": {
+      "matched": 0,
+      "reference_labeled": 0,
+      "reference_unlabeled": 10,
+      "reference_pending": 0,
+      "reference_invalid": 0,
+      "reference_incompatible": 0,
+      "prediction_valid": 0,
+      "prediction_missing": 0,
+      "prediction_invalid": 0,
+      "prediction_failed": 0,
+      "prediction_incompatible": 0,
+      "accuracy": null,
+      "confusion_matrix": {
+        "rows": "reference",
+        "columns": "prediction; unavailable states are explicit",
+        "counts": {}
+      },
+      "allowed_values": [
+        "yes",
+        "no",
+        "na"
+      ],
+      "yes_metrics": {
+        "positive_label": "yes",
+        "tp": 0,
+        "fp": 0,
+        "fn_including_unavailable": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      },
+      "na_selection": {
+        "reference_na": 0,
+        "tp": 0,
+        "fp": 0,
+        "fn_including_unavailable": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "wrong_applicability_valid_predictions": 0,
+        "prediction_unavailable": 0,
+        "applicability_accuracy_including_unavailable": null,
+        "confusion_matrix": {
+          "na": {
+            "na": 0,
+            "applicable": 0,
+            "unavailable": 0
+          },
+          "applicable": {
+            "na": 0,
+            "applicable": 0,
+            "unavailable": 0
+          }
+        }
+      }
+    },
+    "08": {
+      "matched": 0,
+      "reference_labeled": 0,
+      "reference_unlabeled": 10,
+      "reference_pending": 0,
+      "reference_invalid": 0,
+      "reference_incompatible": 0,
+      "prediction_valid": 0,
+      "prediction_missing": 0,
+      "prediction_invalid": 0,
+      "prediction_failed": 0,
+      "prediction_incompatible": 0,
+      "accuracy": null,
+      "confusion_matrix": {
+        "rows": "reference",
+        "columns": "prediction; unavailable states are explicit",
+        "counts": {}
+      },
+      "allowed_values": [
+        "yes",
+        "no"
+      ],
+      "yes_metrics": {
+        "positive_label": "yes",
+        "tp": 0,
+        "fp": 0,
+        "fn_including_unavailable": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      }
+    }
+  },
+  "gross_error_flags": {
+    "08": {
+      "matched": 0,
+      "reference_labeled": 0,
+      "reference_unlabeled": 10,
+      "reference_pending": 0,
+      "reference_invalid": 0,
+      "reference_incompatible": 0,
+      "prediction_valid": 0,
+      "prediction_missing": 0,
+      "prediction_invalid": 0,
+      "prediction_failed": 0,
+      "prediction_incompatible": 0,
+      "accuracy": null,
+      "confusion_matrix": {
+        "rows": "reference",
+        "columns": "prediction; unavailable states are explicit",
+        "counts": {}
+      },
+      "allowed_values": [
+        "yes",
+        "no"
+      ],
+      "yes_metrics": {
+        "positive_label": "yes",
+        "tp": 0,
+        "fp": 0,
+        "fn_including_unavailable": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      }
+    }
+  },
+  "summary": {
+    "macro_criterion_accuracy": null,
+    "macro_criteria_denominator": 0,
+    "fully_labeled_dialogs": 0,
+    "exact_matching_full_vectors": 0,
+    "full_vector_accuracy": null
+  },
+  "totals": {
+    "count": 0,
+    "mae": null,
+    "rmse": null,
+    "bias_prediction_minus_reference": null,
+    "max_absolute_error": null,
+    "counts": {
+      "reference_missing_weighted_labels": 10,
+      "prediction_missing_prediction": 10
+    },
+    "exact_matches": 0,
+    "exact_match_rate": null,
+    "within_1_rate": null,
+    "within_5_rate": null,
+    "tolerances_are_internal_diagnostics": true
+  },
+  "per_dialog": [
+    {
+      "conversation_id": "p1-en-008",
+      "reference_usable_criteria": 0,
+      "reference_skipped_criteria": {
+        "01": "unannotated_or_null",
+        "02": "unannotated_or_null",
+        "03": "unannotated_or_null",
+        "04": "unannotated_or_null",
+        "05": "unannotated_or_null",
+        "06": "unannotated_or_null",
+        "07": "unannotated_or_null",
+        "08": "unannotated_or_null"
+      },
+      "criterion_errors": [],
+      "reference_compatibility_issues": [],
+      "prediction_compatibility_issues": [],
+      "unknown_reference_criterion_ids": [],
+      "unknown_prediction_criterion_ids": [],
+      "reference_total": {
+        "status": "missing_weighted_labels",
+        "value": null
+      },
+      "reference_total_source": "derived_from_complete_weighted_reference_labels",
+      "prediction_total": null,
+      "prediction_total_status": "missing_prediction",
+      "prediction_total_source": "reported_selected_view",
+      "reported_prediction_total": null,
+      "recalculated_prediction_total": {
+        "status": "missing_weighted_labels",
+        "value": null
+      },
+      "prediction_arithmetic_error": null,
+      "total_error_prediction_minus_reference": null,
+      "warnings": []
+    },
+    {
+      "conversation_id": "p1-en-011",
+      "reference_usable_criteria": 0,
+      "reference_skipped_criteria": {
+        "01": "unannotated_or_null",
+        "02": "unannotated_or_null",
+        "03": "unannotated_or_null",
+        "04": "unannotated_or_null",
+        "05": "unannotated_or_null",
+        "06": "unannotated_or_null",
+        "07": "unannotated_or_null",
+        "08": "unannotated_or_null"
+      },
+      "criterion_errors": [],
+      "reference_compatibility_issues": [],
+      "prediction_compatibility_issues": [],
+      "unknown_reference_criterion_ids": [],
+      "unknown_prediction_criterion_ids": [],
+      "reference_total": {
+        "status": "missing_weighted_labels",
+        "value": null
+      },
+      "reference_total_source": "derived_from_complete_weighted_reference_labels",
+      "prediction_total": null,
+      "prediction_total_status": "missing_prediction",
+      "prediction_total_source": "reported_selected_view",
+      "reported_prediction_total": null,
+      "recalculated_prediction_total": {
+        "status": "missing_weighted_labels",
+        "value": null
+      },
+      "prediction_arithmetic_error": null,
+      "total_error_prediction_minus_reference": null,
+      "warnings": []
+    },
+    {
+      "conversation_id": "p1-kz-005",
+      "reference_usable_criteria": 0,
+      "reference_skipped_criteria": {
+        "01": "unannotated_or_null",
+        "02": "unannotated_or_null",
+        "03": "unannotated_or_null",
+        "04": "unannotated_or_null",
+        "05": "unannotated_or_null",
+        "06": "unannotated_or_null",
+        "07": "unannotated_or_null",
+        "08": "unannotated_or_null"
+      },
+      "criterion_errors": [],
+      "reference_compatibility_issues": [],
+      "prediction_compatibility_issues": [],
+      "unknown_reference_criterion_ids": [],
+      "unknown_prediction_criterion_ids": [],
+      "reference_total": {
+        "status": "missing_weighted_labels",
+        "value": null
+      },
+      "reference_total_source": "derived_from_complete_weighted_reference_labels",
+      "prediction_total": null,
+      "prediction_total_status": "missing_prediction",
+      "prediction_total_source": "reported_selected_view",
+      "reported_prediction_total": null,
+      "recalculated_prediction_total": {
+        "status": "missing_weighted_labels",
+        "value": null
+      },
+      "prediction_arithmetic_error": null,
+      "total_error_prediction_minus_reference": null,
+      "warnings": []
+    },
+    {
+      "conversation_id": "p1-kz-002",
+      "reference_usable_criteria": 0,
+      "reference_skipped_criteria": {
+        "01": "unannotated_or_null",
+        "02": "unannotated_or_null",
+        "03": "unannotated_or_null",
+        "04": "unannotated_or_null",
+        "05": "unannotated_or_null",
+        "06": "unannotated_or_null",
+        "07": "unannotated_or_null",
+        "08": "unannotated_or_null"
+      },
+      "criterion_errors": [],
+      "reference_compatibility_issues": [],
+      "prediction_compatibility_issues": [],
+      "unknown_reference_criterion_ids": [],
+      "unknown_prediction_criterion_ids": [],
+      "reference_total": {
+        "status": "missing_weighted_labels",
+        "value": null
+      },
+      "reference_total_source": "derived_from_complete_weighted_reference_labels",
+      "prediction_total": null,
+      "prediction_total_status": "missing_prediction",
+      "prediction_total_source": "reported_selected_view",
+      "reported_prediction_total": null,
+      "recalculated_prediction_total": {
+        "status": "missing_weighted_labels",
+        "value": null
+      },
+      "prediction_arithmetic_error": null,
+      "total_error_prediction_minus_reference": null,
+      "warnings": []
+    },
+    {
+      "conversation_id": "p1-kz-010",
+      "reference_usable_criteria": 0,
+      "reference_skipped_criteria": {
+        "01": "unannotated_or_null",
+        "02": "unannotated_or_null",
+        "03": "unannotated_or_null",
+        "04": "unannotated_or_null",
+        "05": "unannotated_or_null",
+        "06": "unannotated_or_null",
+        "07": "unannotated_or_null",
+        "08": "unannotated_or_null"
+      },
+      "criterion_errors": [],
+      "reference_compatibility_issues": [],
+      "prediction_compatibility_issues": [],
+      "unknown_reference_criterion_ids": [],
+      "unknown_prediction_criterion_ids": [],
+      "reference_total": {
+        "status": "missing_weighted_labels",
+        "value": null
+      },
+      "reference_total_source": "derived_from_complete_weighted_reference_labels",
+      "prediction_total": null,
+      "prediction_total_status": "missing_prediction",
+      "prediction_total_source": "reported_selected_view",
+      "reported_prediction_total": null,
+      "recalculated_prediction_total": {
+        "status": "missing_weighted_labels",
+        "value": null
+      },
+      "prediction_arithmetic_error": null,
+      "total_error_prediction_minus_reference": null,
+      "warnings": []
+    },
+    {
+      "conversation_id": "p1-ru-012",
+      "reference_usable_criteria": 0,
+      "reference_skipped_criteria": {
+        "01": "unannotated_or_null",
+        "02": "unannotated_or_null",
+        "03": "unannotated_or_null",
+        "04": "unannotated_or_null",
+        "05": "unannotated_or_null",
+        "06": "unannotated_or_null",
+        "07": "unannotated_or_null",
+        "08": "unannotated_or_null"
+      },
+      "criterion_errors": [],
+      "reference_compatibility_issues": [],
+      "prediction_compatibility_issues": [],
+      "unknown_reference_criterion_ids": [],
+      "unknown_prediction_criterion_ids": [],
+      "reference_total": {
+        "status": "missing_weighted_labels",
+        "value": null
+      },
+      "reference_total_source": "derived_from_complete_weighted_reference_labels",
+      "prediction_total": null,
+      "prediction_total_status": "missing_prediction",
+      "prediction_total_source": "reported_selected_view",
+      "reported_prediction_total": null,
+      "recalculated_prediction_total": {
+        "status": "missing_weighted_labels",
+        "value": null
+      },
+      "prediction_arithmetic_error": null,
+      "total_error_prediction_minus_reference": null,
+      "warnings": []
+    },
+    {
+      "conversation_id": "p1-ru-025",
+      "reference_usable_criteria": 0,
+      "reference_skipped_criteria": {
+        "01": "unannotated_or_null",
+        "02": "unannotated_or_null",
+        "03": "unannotated_or_null",
+        "04": "unannotated_or_null",
+        "05": "unannotated_or_null",
+        "06": "unannotated_or_null",
+        "07": "unannotated_or_null",
+        "08": "unannotated_or_null"
+      },
+      "criterion_errors": [],
+      "reference_compatibility_issues": [],
+      "prediction_compatibility_issues": [],
+      "unknown_reference_criterion_ids": [],
+      "unknown_prediction_criterion_ids": [],
+      "reference_total": {
+        "status": "missing_weighted_labels",
+        "value": null
+      },
+      "reference_total_source": "derived_from_complete_weighted_reference_labels",
+      "prediction_total": null,
+      "prediction_total_status": "missing_prediction",
+      "prediction_total_source": "reported_selected_view",
+      "reported_prediction_total": null,
+      "recalculated_prediction_total": {
+        "status": "missing_weighted_labels",
+        "value": null
+      },
+      "prediction_arithmetic_error": null,
+      "total_error_prediction_minus_reference": null,
+      "warnings": []
+    },
+    {
+      "conversation_id": "p1-ru-019",
+      "reference_usable_criteria": 0,
+      "reference_skipped_criteria": {
+        "01": "unannotated_or_null",
+        "02": "unannotated_or_null",
+        "03": "unannotated_or_null",
+        "04": "unannotated_or_null",
+        "05": "unannotated_or_null",
+        "06": "unannotated_or_null",
+        "07": "unannotated_or_null",
+        "08": "unannotated_or_null"
+      },
+      "criterion_errors": [],
+      "reference_compatibility_issues": [],
+      "prediction_compatibility_issues": [],
+      "unknown_reference_criterion_ids": [],
+      "unknown_prediction_criterion_ids": [],
+      "reference_total": {
+        "status": "missing_weighted_labels",
+        "value": null
+      },
+      "reference_total_source": "derived_from_complete_weighted_reference_labels",
+      "prediction_total": null,
+      "prediction_total_status": "missing_prediction",
+      "prediction_total_source": "reported_selected_view",
+      "reported_prediction_total": null,
+      "recalculated_prediction_total": {
+        "status": "missing_weighted_labels",
+        "value": null
+      },
+      "prediction_arithmetic_error": null,
+      "total_error_prediction_minus_reference": null,
+      "warnings": []
+    },
+    {
+      "conversation_id": "p1-ru-013",
+      "reference_usable_criteria": 0,
+      "reference_skipped_criteria": {
+        "01": "unannotated_or_null",
+        "02": "unannotated_or_null",
+        "03": "unannotated_or_null",
+        "04": "unannotated_or_null",
+        "05": "unannotated_or_null",
+        "06": "unannotated_or_null",
+        "07": "unannotated_or_null",
+        "08": "unannotated_or_null"
+      },
+      "criterion_errors": [],
+      "reference_compatibility_issues": [],
+      "prediction_compatibility_issues": [],
+      "unknown_reference_criterion_ids": [],
+      "unknown_prediction_criterion_ids": [],
+      "reference_total": {
+        "status": "missing_weighted_labels",
+        "value": null
+      },
+      "reference_total_source": "derived_from_complete_weighted_reference_labels",
+      "prediction_total": null,
+      "prediction_total_status": "missing_prediction",
+      "prediction_total_source": "reported_selected_view",
+      "reported_prediction_total": null,
+      "recalculated_prediction_total": {
+        "status": "missing_weighted_labels",
+        "value": null
+      },
+      "prediction_arithmetic_error": null,
+      "total_error_prediction_minus_reference": null,
+      "warnings": []
+    },
+    {
+      "conversation_id": "p4-ru-003",
+      "reference_usable_criteria": 0,
+      "reference_skipped_criteria": {
+        "01": "unannotated_or_null",
+        "02": "unannotated_or_null",
+        "03": "unannotated_or_null",
+        "04": "unannotated_or_null",
+        "05": "unannotated_or_null",
+        "06": "unannotated_or_null",
+        "07": "unannotated_or_null",
+        "08": "unannotated_or_null"
+      },
+      "criterion_errors": [],
+      "reference_compatibility_issues": [],
+      "prediction_compatibility_issues": [],
+      "unknown_reference_criterion_ids": [],
+      "unknown_prediction_criterion_ids": [],
+      "reference_total": {
+        "status": "missing_weighted_labels",
+        "value": null
+      },
+      "reference_total_source": "derived_from_complete_weighted_reference_labels",
+      "prediction_total": null,
+      "prediction_total_status": "missing_prediction",
+      "prediction_total_source": "reported_selected_view",
+      "reported_prediction_total": null,
+      "recalculated_prediction_total": {
+        "status": "missing_weighted_labels",
+        "value": null
+      },
+      "prediction_arithmetic_error": null,
+      "total_error_prediction_minus_reference": null,
+      "warnings": []
+    }
+  ],
+  "errors_by_dialog": []
+}

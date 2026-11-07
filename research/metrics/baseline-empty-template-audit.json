@@ -1,0 +1,11 @@
+{
+  "source": "reference/baseline/cqa-baseline/annotation/DEV_gold_template.json",
+  "records": 65,
+  "findings": 520,
+  "status_null_count": 520,
+  "score_null_count": 520,
+  "total_score_null_count": 65,
+  "all_findings_unannotated": true,
+  "contains_ground_truth": false,
+  "notice": "Structural audit only; no labels created and no baseline files modified."
+}

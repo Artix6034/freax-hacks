@@ -1,0 +1,213 @@
+{
+  "checked_on": "2026-11-07",
+  "not_final_selection": true,
+  "generation_models": [
+    {
+      "id": "openai_astra",
+      "provider": "OpenAI",
+      "api_model_id": "gpt-6-astra",
+      "context_tokens": 1050000,
+      "max_output_tokens": 128000,
+      "standard_usd_per_million": {
+        "input": 10,
+        "output_including_reasoning": 50
+      },
+      "initial_reasoning_setting": {
+        "reasoning_effort": "high"
+      },
+      "sampling_policy": "omit temperature/top_p/logprobs; do not assume seed repeatability",
+      "structured_output": "strict JSON Schema; Chat Completions or Responses",
+      "role": "first provisional quality candidate; not an empirically selected winner",
+      "account_access_tested": false,
+      "selection_status": "candidate_not_selected_by_CQA_results",
+      "source_urls": [
+        "https://developers.openai.com/api/docs/models/gpt-6-astra",
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/guides/reasoning",
+        "https://developers.openai.com/api/docs/guides/structured-outputs",
+        "https://developers.openai.com/api/docs/guides/your-data",
+        "https://developers.openai.com/api/docs/guides/latest-model"
+      ]
+    },
+    {
+      "id": "openai_sol",
+      "provider": "OpenAI",
+      "api_model_id": "gpt-6.1-sol",
+      "context_tokens": 1050000,
+      "max_output_tokens": 128000,
+      "standard_usd_per_million": {
+        "input": 2,
+        "output_including_reasoning": 10
+      },
+      "initial_reasoning_setting": {
+        "reasoning_effort": "high"
+      },
+      "sampling_policy": "omit unsupported sampling controls; none/minimal reasoning not supported",
+      "structured_output": "strict JSON Schema",
+      "role": "same-provider cost reserve; not an independent family verifier",
+      "account_access_tested": false,
+      "selection_status": "candidate_not_selected_by_CQA_results",
+      "source_urls": [
+        "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/guides/reasoning",
+        "https://developers.openai.com/api/docs/guides/structured-outputs",
+        "https://developers.openai.com/api/docs/guides/your-data"
+      ]
+    },
+    {
+      "id": "anthropic_fable",
+      "provider": "Anthropic",
+      "api_model_id": "claude-fable-5-1",
+      "context_tokens": 1000000,
+      "max_output_tokens": 128000,
+      "standard_usd_per_million": {
+        "input": 10,
+        "output_including_reasoning": 50
+      },
+      "initial_reasoning_setting": {
+        "thinking": {
+          "type": "adaptive"
+        },
+        "output_config": {
+          "effort": "high"
+        }
+      },
+      "sampling_policy": "omit temperature/top_p/top_k",
+      "structured_output": "Messages API output_config.format JSON Schema; native adapter",
+      "role": "independent-family candidate and optional reviewer; not guaranteed KZ superiority",
+      "data_handling_note": "Covered Model, 30-day retention; no ZDR unless expressly authorized",
+      "account_access_tested": false,
+      "context_tokens_documented_as": "1M",
+      "max_output_tokens_documented_as": "128K",
+      "selection_status": "candidate_not_selected_by_CQA_results",
+      "source_urls": [
+        "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+        "https://platform.claude.com/docs/en/models/fable-5-1/whats-new-fable-5-1",
+        "https://platform.claude.com/docs/en/build-with-claude/structured-outputs",
+        "https://platform.claude.com/docs/en/build-with-claude/thinking",
+        "https://platform.claude.com/docs/en/build-with-claude/effort",
+        "https://platform.claude.com/docs/en/manage-claude/api-and-data-retention"
+      ]
+    },
+    {
+      "id": "google_argon",
+      "provider": "Google Gemini Developer API",
+      "api_model_id": "gemini-4-argon",
+      "context_tokens": 1048576,
+      "context_is_unified_input_plus_output": true,
+      "max_output_tokens": 65536,
+      "standard_usd_per_million": {
+        "input": 2,
+        "output_including_reasoning": 10
+      },
+      "price_effective_until": "2026-11-30",
+      "standard_usd_per_million_from_2026_12_01": {
+        "input": 4,
+        "output_including_reasoning": 20
+      },
+      "initial_reasoning_setting": {
+        "thinking_level": "high"
+      },
+      "sampling_policy": "omit temperature/top_p/top_k/candidate_count",
+      "structured_output": "JSON Schema documented; native/compatibility payload and finish handling must be smoke-tested",
+      "role": "third independent-family candidate; introductory price does not prove quality",
+      "account_access_tested": false,
+      "max_output_tokens_mode": "default_synchronous; optional long decode not used",
+      "selection_status": "candidate_not_selected_by_CQA_results",
+      "source_urls": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/structured-output",
+        "https://ai.google.dev/gemini-api/docs/text-generation",
+        "https://ai.google.dev/gemini-api/docs/generate-content/thinking",
+        "https://ai.google.dev/gemini-api/docs/openai",
+        "https://ai.google.dev/gemini-api/terms",
+        "https://ai.google.dev/gemini-api/docs/generate-content/latest-model",
+        "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/4-argon"
+      ]
+    },
+    {
+      "id": "openai_luna",
+      "provider": "OpenAI",
+      "api_model_id": "gpt-6-luna",
+      "context_tokens": 1050000,
+      "max_output_tokens": 128000,
+      "standard_usd_per_million": {
+        "input": 0.1,
+        "output_including_reasoning": 0.5
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "initial_experiment_setting": {
+        "reasoning_effort": "medium"
+      },
+      "structured_output": "strict JSON Schema",
+      "role": "train-only cheap extraction ablation before analyst freeze; no measured CQA result",
+      "restrictions": [
+        "Chat function calling requires reasoning_effort none; planned stages have no tools",
+        "Omit sampling controls; do not assume seed repeatability",
+        "Above 272K input, higher rates apply"
+      ],
+      "account_access_tested": false,
+      "selection_status": "candidate_not_selected_by_CQA_results",
+      "source_urls": [
+        "https://developers.openai.com/api/docs/models/gpt-6-luna"
+      ]
+    }
+  ],
+  "embedding_candidates": [
+    {
+      "model_id": "text-embedding-3-large",
+      "provider": "OpenAI",
+      "default_dimensions": 3072,
+      "proposed_dimensions": 1024,
+      "max_input_tokens_per_item": 8192,
+      "usd_per_million_input": 0.13,
+      "source_url": "https://developers.openai.com/api/docs/models/text-embedding-3-large",
+      "KZ_CQA_accuracy_measured": false
+    },
+    {
+      "model_id": "text-embedding-3-small",
+      "provider": "OpenAI",
+      "default_dimensions": 1536,
+      "usd_per_million_input": 0.02,
+      "role": "optional budget ablation",
+      "source_url": "https://developers.openai.com/api/docs/models/text-embedding-3-small",
+      "KZ_CQA_accuracy_measured": false
+    },
+    {
+      "model_id": "embed-v5.0-pro",
+      "provider": "Cohere native",
+      "context_tokens_documented_as": "128K",
+      "dimensions": [
+        256,
+        512,
+        768,
+        1024,
+        1536,
+        2048
+      ],
+      "proposed_dimensions": 1024,
+      "input_type": "classification",
+      "embedding_types": [
+        "float"
+      ],
+      "usd_per_million_input": null,
+      "price_status": "native public per-token price not confirmed; obtain actual quote before comparing costs",
+      "role": "reserve, not mandatory first matrix",
+      "source_urls": [
+        "https://docs.cohere.com/docs/models",
+        "https://docs.cohere.com/docs/embeddings",
+        "https://cohere.com/pricing"
+      ],
+      "KZ_CQA_accuracy_measured": false
+    }
+  ]
+}

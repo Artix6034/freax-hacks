@@ -1,0 +1,411 @@
+{
+  "checked_on": "2026-11-07",
+  "timezone": "Asia/Qyzylorda",
+  "sources": [
+    {
+      "id": "O1",
+      "title": "OpenAI Astra model",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open",
+      "scope": "API ID, context, output, rates, structured output; not CQA accuracy"
+    },
+    {
+      "id": "O2",
+      "title": "OpenAI Sol model",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open",
+      "scope": "API ID and cost comparison; no dated snapshot invented"
+    },
+    {
+      "id": "O3",
+      "title": "OpenAI pricing",
+      "url": "https://developers.openai.com/api/docs/pricing",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_search_and_open_model_pages",
+      "scope": "Standard token rates; no caching or batch discount assumed"
+    },
+    {
+      "id": "O4",
+      "title": "OpenAI reasoning",
+      "url": "https://developers.openai.com/api/docs/guides/reasoning",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "context7",
+      "scope": "Reasoning settings and unsupported sampling controls"
+    },
+    {
+      "id": "O5",
+      "title": "OpenAI structured outputs",
+      "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "context7_and_web_search",
+      "scope": "JSON Schema and refusal/incomplete handling"
+    },
+    {
+      "id": "O6",
+      "title": "OpenAI data controls",
+      "url": "https://developers.openai.com/api/docs/guides/your-data",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open_and_find",
+      "scope": "No training by default; retention and endpoint distinctions"
+    },
+    {
+      "id": "O7",
+      "title": "OpenAI current model guide",
+      "url": "https://developers.openai.com/api/docs/guides/latest-model",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open",
+      "scope": "Current API controls, not proof of CQA performance"
+    },
+    {
+      "id": "A1",
+      "title": "Anthropic Fable model",
+      "url": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open",
+      "scope": "Exact ID, active release, pricing and adaptive thinking"
+    },
+    {
+      "id": "A2",
+      "title": "Anthropic Fable changes",
+      "url": "https://platform.claude.com/docs/en/models/fable-5-1/whats-new-fable-5-1",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open",
+      "scope": "All-customer model versus restricted Mythos; structured output alternative to forced tools"
+    },
+    {
+      "id": "A3",
+      "title": "Claude structured outputs",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "context7_and_web_open",
+      "scope": "output_config.format, no forced tool shortcut; schema constraints"
+    },
+    {
+      "id": "A4",
+      "title": "Claude thinking",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/thinking",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "context7",
+      "scope": "Sampling restrictions on current models"
+    },
+    {
+      "id": "A5",
+      "title": "Claude effort",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/effort",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "context7",
+      "scope": "Adaptive effort configuration, no repeatability guarantee"
+    },
+    {
+      "id": "A6",
+      "title": "Claude data retention",
+      "url": "https://platform.claude.com/docs/en/manage-claude/api-and-data-retention",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open_and_find",
+      "scope": "Fable Covered Model requires 30-day retention absent express exception"
+    },
+    {
+      "id": "G1",
+      "title": "Gemini Argon model",
+      "url": "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "direct_official_markdown_get",
+      "scope": "Web parser rejected text/markdown; direct GET read model details"
+    },
+    {
+      "id": "G2",
+      "title": "Gemini Developer API pricing",
+      "url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_search_and_direct_official_markdown_get",
+      "scope": "Promo expires 2026-11-30; Developer API prices, not Cloud platform prices"
+    },
+    {
+      "id": "G3",
+      "title": "Gemini structured outputs",
+      "url": "https://ai.google.dev/gemini-api/docs/structured-output",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "context7_and_direct_official_markdown_get",
+      "scope": "Schema subset and syntactic versus semantic correctness"
+    },
+    {
+      "id": "G4",
+      "title": "Gemini text generation",
+      "url": "https://ai.google.dev/gemini-api/docs/text-generation",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "context7",
+      "scope": "Current models ignore deprecated sampling controls"
+    },
+    {
+      "id": "G5",
+      "title": "Gemini thinking",
+      "url": "https://ai.google.dev/gemini-api/docs/generate-content/thinking",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "context7",
+      "scope": "Provider-specific thinking level"
+    },
+    {
+      "id": "G6",
+      "title": "Gemini OpenAI compatibility",
+      "url": "https://ai.google.dev/gemini-api/docs/openai",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "context7",
+      "scope": "Compatibility surface does not establish every parameter mapping"
+    },
+    {
+      "id": "G7",
+      "title": "Gemini API terms",
+      "url": "https://ai.google.dev/gemini-api/terms",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "direct_official_markdown_get",
+      "scope": "Paid versus unpaid data use; not an authorization to upload DEV"
+    },
+    {
+      "id": "G8",
+      "title": "Gemini current-model migration",
+      "url": "https://ai.google.dev/gemini-api/docs/generate-content/latest-model",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "context7",
+      "scope": "Output caps and long-decode timeout planning"
+    },
+    {
+      "id": "G9",
+      "title": "Argon API surfaces",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/4-argon",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open",
+      "scope": "Unified context and supported API surfaces; do not use its Cloud prices for Developer API"
+    },
+    {
+      "id": "P1",
+      "title": "G-Eval",
+      "url": "https://aclanthology.org/2023.emnlp-main.153/",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open",
+      "scope": "EMNLP 2023 publication"
+    },
+    {
+      "id": "P2",
+      "title": "MT-Bench judge study",
+      "url": "https://arxiv.org/abs/2306.05685v4",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open_base_abs",
+      "scope": "NeurIPS 2023; v4 2023-12-24"
+    },
+    {
+      "id": "P3",
+      "title": "Prometheus",
+      "url": "https://arxiv.org/abs/2310.08491v2",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open_base_abs",
+      "scope": "ICLR 2024; v2 2024-03-09"
+    },
+    {
+      "id": "P4",
+      "title": "FineSurE",
+      "url": "https://aclanthology.org/2024.acl-long.51/",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open",
+      "scope": "ACL 2024 publication"
+    },
+    {
+      "id": "P5",
+      "title": "LLMBar",
+      "url": "https://arxiv.org/abs/2310.07641v2",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open_base_abs",
+      "scope": "ICLR 2024; v2 2024-04-16"
+    },
+    {
+      "id": "P6",
+      "title": "Limits of intrinsic self-correction",
+      "url": "https://arxiv.org/html/2310.01798v2",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open_and_method_sections",
+      "scope": "ICLR 2024; v2 2024-03-14"
+    },
+    {
+      "id": "P7",
+      "title": "Multilingual judge reliability",
+      "url": "https://arxiv.org/abs/2505.12201v1",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open_base_abs",
+      "scope": "2025 v1; multilingual consistency, not CQA accuracy"
+    },
+    {
+      "id": "P8",
+      "title": "Language bias in evaluators",
+      "url": "https://arxiv.org/html/2607.14480v3",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open_and_method_sections",
+      "scope": "2026 v3 2026-08-26; title changed since v1"
+    },
+    {
+      "id": "P9",
+      "title": "RubricEval",
+      "url": "https://arxiv.org/html/2603.25133v1",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open_and_method_limitations_sections",
+      "scope": "2026 v1; binary rubrics, partly model-generated reference labels"
+    },
+    {
+      "id": "P10",
+      "title": "KazMMLU",
+      "url": "https://aclanthology.org/2025.acl-long.701/",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open",
+      "scope": "ACL 2025 publication; knowledge QA, not CQA judging"
+    },
+    {
+      "id": "E1",
+      "title": "Amazon Connect AI evaluation",
+      "url": "https://docs.aws.amazon.com/connect/latest/adminguide/generative-ai-performance-evaluations.html",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open",
+      "scope": "Documented scorecard, justification and transcript references; no independent accuracy claim"
+    },
+    {
+      "id": "E2",
+      "title": "Google Quality AI overview",
+      "url": "https://docs.cloud.google.com/contact-center/ccai-platform/docs/conversational-insights",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open",
+      "scope": "Documented product workflow; not a validated CQA evaluator"
+    },
+    {
+      "id": "E3",
+      "title": "Langfuse judge calibration",
+      "url": "https://langfuse.com/guides/llm-as-a-judge-calibration-skill",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open_and_context7_related_docs",
+      "scope": "Human labels, experiments and prompt versions; not installed"
+    },
+    {
+      "id": "E4",
+      "title": "Promptfoo rubric evaluation",
+      "url": "https://www.promptfoo.dev/docs/configuration/expected-outputs/model-graded/llm-rubric/",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open_and_context7",
+      "scope": "Judge and deterministic assertions; no new framework dependency recommended"
+    },
+    {
+      "id": "L1",
+      "title": "Qwen CPU fallback weights",
+      "url": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open",
+      "scope": "4B non-thinking, Apache-2.0; no KZ judge evidence"
+    },
+    {
+      "id": "L2",
+      "title": "Qwen CPU fallback quantization",
+      "url": "https://huggingface.co/unsloth/Qwen3-4B-Instruct-2507-GGUF",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open",
+      "scope": "Third-party quantization publisher; Q4_K_M about 2.5 GB file"
+    },
+    {
+      "id": "L3",
+      "title": "llama.cpp server",
+      "url": "https://github.com/ggml-org/llama.cpp/blob/master/tools/server/README.md",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "context7",
+      "scope": "OpenAI-inspired interface and schema support; exact build requires smoke test"
+    },
+    {
+      "id": "K1",
+      "title": "Kaggle current CLI",
+      "url": "https://raw.githubusercontent.com/Kaggle/kaggle-cli/main/docs/kernels.md",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open_and_context7",
+      "scope": "Account-dependent GPU types; no user session inspected"
+    },
+    {
+      "id": "K2",
+      "title": "Kaggle P100 announcement",
+      "url": "https://www.kaggle.com/discussions/product-announcements/735239",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_search_and_direct_html_metadata_get",
+      "scope": "Retirement 2026-09-15; stale notebook docs still mention P100"
+    },
+    {
+      "id": "K3",
+      "title": "Kaggle notebook metadata",
+      "url": "https://github.com/Kaggle/kaggle-cli/blob/main/docs/kernels_metadata.md",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "context7",
+      "scope": "Private/internet configuration; not executed"
+    },
+    {
+      "id": "K4",
+      "title": "Qwen optional Kaggle weights",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open_and_raw_model_card_get",
+      "scope": "Optional only after user's latest API-only clarification"
+    },
+    {
+      "id": "K5",
+      "title": "Qwen optional GPU quantization",
+      "url": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "web_open",
+      "scope": "No model downloaded; no inference verified"
+    },
+    {
+      "id": "K6",
+      "title": "llama.cpp multi-GPU",
+      "url": "https://github.com/ggml-org/llama.cpp/blob/master/docs/multi-gpu.md",
+      "checked_on": "2026-11-07",
+      "primary_source": true,
+      "verification_method": "context7_and_web_open",
+      "scope": "Two GPU memories require explicit split; not needed for API path"
+    }
+  ]
+}

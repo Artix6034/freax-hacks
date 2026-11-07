@@ -1,0 +1,16 @@
+{
+  "method": "Source transcript hashes; exact normalized human-role text; same text with digit runs replaced. No fitted features/embeddings used.",
+  "limitations": "These checks do not detect all paraphrases/translations or certify proposed semantic groups.",
+  "raw_transcript_hash": {
+    "duplicate_groups": [],
+    "cross_partition_duplicate_groups": []
+  },
+  "normalized_human_text": {
+    "duplicate_groups": [],
+    "cross_partition_duplicate_groups": []
+  },
+  "digit_template_human_text": {
+    "duplicate_groups": [],
+    "cross_partition_duplicate_groups": []
+  }
+}

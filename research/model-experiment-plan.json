@@ -1,0 +1,56 @@
+{
+  "date": "2026-11-07",
+  "scope": "API-only primary plan per user's latest clarification; Kaggle not required",
+  "official_gt_available": false,
+  "official_jury_metric_known": false,
+  "model_ids": [
+    "gpt-6-astra",
+    "claude-fable-5-1",
+    "gemini-4-argon"
+  ],
+  "pilot_split_path": "research/dev-split-v1.json",
+  "pilot_cases": 20,
+  "architectures": [
+    {
+      "id": "A1",
+      "calls_per_evaluation": 1,
+      "input_tokens_estimate": 6000,
+      "output_billed_tokens_estimate": 6000,
+      "visible_output_estimate": 2000,
+      "reasoning_estimate": 4000,
+      "description": "One whole-checklist call, criterion-specific evidence before verdict in the output"
+    },
+    {
+      "id": "A2",
+      "calls_per_evaluation": 2,
+      "input_tokens_estimate": 14000,
+      "output_billed_tokens_estimate": 9000,
+      "visible_output_estimate": 3000,
+      "reasoning_estimate": 6000,
+      "description": "Fact extraction, then grading with full original transcript still present"
+    }
+  ],
+  "per_call_output_cap_assumption": 32768,
+  "caching_assumption": "none",
+  "pricing_tier": "Standard, no tools or discounts",
+  "pilot_model_architecture_cells": 6,
+  "pilot_evaluations": 120,
+  "pilot_calls": 180,
+  "repeat_design": {
+    "cases": 5,
+    "additional_repeats": 2,
+    "models": 3,
+    "architecture": "one selected pipeline per model after pilot",
+    "maximum_calls_if_two_stage": 60
+  },
+  "holdout_design": {
+    "cases": 10,
+    "finalists": 2,
+    "one_locked_comparison": true,
+    "no_repeated_tuning_on_holdout": true
+  },
+  "known_split_limitation": "ID disjointness is not scenario-family independence; human annotation still required",
+  "all_inferences_executed": false,
+  "external_ai_calls_during_research": 0,
+  "model_downloads_during_research": 0
+}

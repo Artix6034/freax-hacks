@@ -1,0 +1,14 @@
+{
+  "fixture_notice": "SYNTHETIC TEST TRANSCRIPT. Not an organizer record or Ground Truth.",
+  "conversation_id": "synthetic-ru-test",
+  "channel": "agent chat",
+  "language": "RU",
+  "audio_url": null,
+  "transcript": [
+    {"speaker":"client","timestamp":"00:00","text":"Здравствуйте! Где посмотреть тарифы?"},
+    {"speaker":"operator","timestamp":"00:02","text":"Здравствуйте! Я Анна. Тарифы доступны в разделе «Документы» на сайте компании."},
+    {"speaker":"client","timestamp":"00:10","text":"Спасибо!"},
+    {"speaker":"operator","timestamp":"00:12","text":"Рада помочь! Если появятся вопросы, обращайтесь. До свидания!"},
+    {"speaker":"system","timestamp":"00:13","text":"Чат закрыт."}
+  ]
+}

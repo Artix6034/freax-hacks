@@ -1,0 +1,125 @@
+{
+  "version": "cqa-sequential-experiment-proposed-1",
+  "date": "2026-11-07",
+  "status": "design_only_no_training_or_AI_calls",
+  "preconditions": [
+    "independent grouping review then freeze split",
+    "human dialogue labels/adjudication for test",
+    "event/span labels for claimed detector recall/localization",
+    "configured provider access and explicit spend budget before paid calls"
+  ],
+  "split_manifest": "split-70-30.proposed.json",
+  "train_count": 46,
+  "test_count": 19,
+  "test_language": {
+    "EN": 5,
+    "KZ": 4,
+    "RU": 10
+  },
+  "test_family_count": 7,
+  "old_split_unchanged": "../dev-split-v1.json",
+  "source_manifest": "fragment-manifest.json",
+  "source_coverage": "every source message exactly once in core, overlap previous 2 source messages",
+  "chunk_budgets": [
+    8,
+    12,
+    20
+  ],
+  "primary_chunk_budget": 12,
+  "context_policy": "structured state + event ledger + overlap; complete original re-read by final judge",
+  "systems": [
+    {
+      "id": "C0",
+      "path": "full original once"
+    },
+    {
+      "id": "L_seq",
+      "path": "all k chunks sequential extraction + full original judge"
+    },
+    {
+      "id": "H_hidden_tfidf",
+      "path": "TFIDF CPU event candidates, s chunks LLM verification, original full judge, hidden preliminary scores/classes"
+    },
+    {
+      "id": "H_hidden_embedding",
+      "path": "frozen API embeddings + CPU classifier; same verification/judge",
+      "optional_after_train_selection": true
+    },
+    {
+      "id": "H_visible",
+      "path": "reuse preregistered selected H_hidden candidates and accepted ledger, expose preliminary classes/scores only in final judge input"
+    }
+  ],
+  "classifier_candidates": [
+    "TFIDF + LogisticRegression",
+    "TFIDF + LinearSVC",
+    "frozen embedding + LogisticRegression",
+    "small one-hidden-layer MLP ablation"
+  ],
+  "inner_validation": "3 folds by train topic family if class support permits, otherwise unsupported; every fitted preprocessing component stays inside fold",
+  "feature_allowlist": [
+    "original text in core and prior context",
+    "source speaker",
+    "original timestamps/relative positions with documented interpretation"
+  ],
+  "feature_denylist": [
+    "conversation_id as model feature",
+    "target criterion values",
+    "total_score",
+    "annotation explanations",
+    "evidence from labels",
+    "review flags",
+    "annotation source/status"
+  ],
+  "null_policy": "missing labels remain unlabelled, never negative",
+  "initial_event_types": [
+    "greeting_introduction",
+    "waiting_notice",
+    "farewell",
+    "private_service_offer_candidate"
+  ],
+  "rare_event_policy": "unsupported event/language/new criterion -> LLM fallback, never absence inferred from classifier negative",
+  "LLM_choice": "select analyst/judge on train and freeze identical pair across architectures; Sol/Astra in cost sheet only an assumption",
+  "all_models_access_tested": false,
+  "final_value_source": "current checklist snapshot allowed_values, NA rule and scales",
+  "final_score": "existing deterministic calculator, no chunk averaging",
+  "primary_metrics": [
+    "percriterion exact accuracy and macro-F1/matrices",
+    "false/missed NA",
+    "08 precision/recall",
+    "total MAE with paired count and completion"
+  ],
+  "secondary_metrics": [
+    "event/message/span localization with gold labels",
+    "blinded expert evidence sufficiency",
+    "boundary robustness",
+    "RU/KZ/EN",
+    "end-to-end latency/calls/all usage costs"
+  ],
+  "missing_prediction_policy": "known GT remains in accuracy denominator; missing is not correct abstention; expose perlabel coverage",
+  "unlabelled_reference_policy": "exclude only that unknown label with explicit count; not zero or no",
+  "total_policy": "pairs with valid computable totals; report common-pair comparison and completion, no zero imputation",
+  "F1_class_policy": "configured classes, publish support; jointly absent/unpredicted classes undefined and omitted with explicit convention",
+  "uncertainty": "paired bootstrap by family; only 7 test families and one voice, no strong significance claims",
+  "anchoring_ablation": "same candidates and verified ledger, hidden versus visible untrusted classifier class/score",
+  "evidence_order_ablation": "train first: separate evidence-first extraction committed before grade vs score-then-explanation, comparable total budget",
+  "boundary_ablation": "pre-register all 8/12/20; reuse 12 outputs; do not select prompt/budget on test",
+  "logging_fields": [
+    "requested_model",
+    "returned_model",
+    "provider/protocol",
+    "stage/pipeline",
+    "split_hash",
+    "transcript_hash",
+    "checklist/reference/schema/prompt hashes",
+    "classifier artifact/threshold hashes",
+    "usage incl reasoning/cached tokens",
+    "latency",
+    "retry/repair/fallback",
+    "finish_reason/refusal/failure",
+    "price version and unknown billed usage"
+  ],
+  "provider_settings": "capabilities-specific; no sampling by default; per-stage output caps fixed on train before test",
+  "leakage_disclosure": "DEV contents and provisional labels already inspected; proposed internal fixed test is not an unseen official set",
+  "release_policy": "research artifacts only; do not publish raw transcripts, signed audio URLs or tokens"
+}

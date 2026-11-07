@@ -1,0 +1,555 @@
+{
+  "checked_on": "2026-11-07",
+  "status": "proposed_candidates_not_CQA_rankings",
+  "primary_shortlist": [
+    "gpt-6-astra",
+    "gpt-6.1-sol",
+    "gpt-6-luna",
+    "claude-fable-5-1",
+    "Unbabel/M-Prometheus-7B",
+    "jev-1.14.0"
+  ],
+  "candidates": [
+    {
+      "id": "openai_astra",
+      "provider": "OpenAI",
+      "api_model_id": "gpt-6-astra",
+      "context_tokens": 1050000,
+      "max_output_tokens": 128000,
+      "standard_usd_per_million": {
+        "input": 10,
+        "output_including_reasoning": 50
+      },
+      "initial_reasoning_setting": {
+        "reasoning_effort": "high"
+      },
+      "sampling_policy": "omit temperature/top_p/logprobs; do not assume seed repeatability",
+      "structured_output": "strict JSON Schema; Chat Completions or Responses",
+      "role": "first provisional quality candidate; not an empirically selected winner",
+      "account_access_tested": false,
+      "selection_status": "candidate_not_selected_by_CQA_results",
+      "source_urls": [
+        "https://developers.openai.com/api/docs/models/gpt-6-astra",
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/guides/reasoning",
+        "https://developers.openai.com/api/docs/guides/structured-outputs",
+        "https://developers.openai.com/api/docs/guides/your-data",
+        "https://developers.openai.com/api/docs/guides/latest-model"
+      ],
+      "object_type": "general_generative_LLM",
+      "experiment_role": "expensive final/control candidate, not measured best",
+      "KZ_CQA_result": null
+    },
+    {
+      "id": "openai_sol",
+      "provider": "OpenAI",
+      "api_model_id": "gpt-6.1-sol",
+      "context_tokens": 1050000,
+      "max_output_tokens": 128000,
+      "standard_usd_per_million": {
+        "input": 2,
+        "output_including_reasoning": 10
+      },
+      "initial_reasoning_setting": {
+        "reasoning_effort": "high"
+      },
+      "sampling_policy": "omit unsupported sampling controls; none/minimal reasoning not supported",
+      "structured_output": "strict JSON Schema",
+      "role": "same-provider cost reserve; not an independent family verifier",
+      "account_access_tested": false,
+      "selection_status": "candidate_not_selected_by_CQA_results",
+      "source_urls": [
+        "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/guides/reasoning",
+        "https://developers.openai.com/api/docs/guides/structured-outputs",
+        "https://developers.openai.com/api/docs/guides/your-data"
+      ],
+      "object_type": "general_generative_LLM",
+      "experiment_role": "balanced final baseline / extraction control",
+      "KZ_CQA_result": null
+    },
+    {
+      "id": "anthropic_fable",
+      "provider": "Anthropic",
+      "api_model_id": "claude-fable-5-1",
+      "context_tokens": 1000000,
+      "max_output_tokens": 128000,
+      "standard_usd_per_million": {
+        "input": 10,
+        "output_including_reasoning": 50
+      },
+      "initial_reasoning_setting": {
+        "thinking": {
+          "type": "adaptive"
+        },
+        "output_config": {
+          "effort": "high"
+        }
+      },
+      "sampling_policy": "omit temperature/top_p/top_k",
+      "structured_output": "Messages API output_config.format JSON Schema; native adapter",
+      "role": "independent-family candidate and optional reviewer; not guaranteed KZ superiority",
+      "data_handling_note": "Covered Model, 30-day retention; no ZDR unless expressly authorized",
+      "account_access_tested": false,
+      "context_tokens_documented_as": "1M",
+      "max_output_tokens_documented_as": "128K",
+      "selection_status": "candidate_not_selected_by_CQA_results",
+      "source_urls": [
+        "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+        "https://platform.claude.com/docs/en/models/fable-5-1/whats-new-fable-5-1",
+        "https://platform.claude.com/docs/en/build-with-claude/structured-outputs",
+        "https://platform.claude.com/docs/en/build-with-claude/thinking",
+        "https://platform.claude.com/docs/en/build-with-claude/effort",
+        "https://platform.claude.com/docs/en/manage-claude/api-and-data-retention"
+      ],
+      "object_type": "general_generative_LLM",
+      "experiment_role": "different-family final candidate",
+      "KZ_CQA_result": null
+    },
+    {
+      "id": "google_argon",
+      "provider": "Google Gemini Developer API",
+      "api_model_id": "gemini-4-argon",
+      "context_tokens": 1048576,
+      "context_is_unified_input_plus_output": true,
+      "max_output_tokens": 65536,
+      "standard_usd_per_million": {
+        "input": 2,
+        "output_including_reasoning": 10
+      },
+      "price_effective_until": "2026-11-30",
+      "standard_usd_per_million_from_2026_12_01": {
+        "input": 4,
+        "output_including_reasoning": 20
+      },
+      "initial_reasoning_setting": {
+        "thinking_level": "high"
+      },
+      "sampling_policy": "omit temperature/top_p/top_k/candidate_count",
+      "structured_output": "JSON Schema documented; native/compatibility payload and finish handling must be smoke-tested",
+      "role": "third independent-family candidate; introductory price does not prove quality",
+      "account_access_tested": false,
+      "max_output_tokens_mode": "default_synchronous; optional long decode not used",
+      "selection_status": "candidate_not_selected_by_CQA_results",
+      "source_urls": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/structured-output",
+        "https://ai.google.dev/gemini-api/docs/text-generation",
+        "https://ai.google.dev/gemini-api/docs/generate-content/thinking",
+        "https://ai.google.dev/gemini-api/docs/openai",
+        "https://ai.google.dev/gemini-api/terms",
+        "https://ai.google.dev/gemini-api/docs/generate-content/latest-model",
+        "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/4-argon"
+      ],
+      "object_type": "general_generative_LLM",
+      "experiment_role": "reserve third family",
+      "KZ_CQA_result": null
+    },
+    {
+      "id": "openai_luna",
+      "provider": "OpenAI",
+      "api_model_id": "gpt-6-luna",
+      "context_tokens": 1050000,
+      "max_output_tokens": 128000,
+      "standard_usd_per_million": {
+        "input": 0.1,
+        "output_including_reasoning": 0.5
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "initial_experiment_setting": {
+        "reasoning_effort": "medium"
+      },
+      "structured_output": "strict JSON Schema",
+      "role": "train-only cheap extraction ablation before analyst freeze; no measured CQA result",
+      "restrictions": [
+        "Chat function calling requires reasoning_effort none; planned stages have no tools",
+        "Omit sampling controls; do not assume seed repeatability",
+        "Above 272K input, higher rates apply"
+      ],
+      "account_access_tested": false,
+      "selection_status": "candidate_not_selected_by_CQA_results",
+      "source_urls": [
+        "https://developers.openai.com/api/docs/models/gpt-6-luna"
+      ],
+      "object_type": "general_generative_LLM",
+      "experiment_role": "cheap fragment analyzer",
+      "KZ_CQA_result": null
+    },
+    {
+      "api_or_weights_id": "prometheus-eval/prometheus-7b-v2.0",
+      "object_type": "generative_judge",
+      "native_task": "absolute_and_pairwise",
+      "language_evidence": "English",
+      "experiment_role": "reserve",
+      "KZ_CQA_result": null,
+      "account_access_tested": false,
+      "source_urls": [
+        "https://huggingface.co/prometheus-eval/prometheus-7b-v2.0"
+      ],
+      "hosted_runtime_context_tokens": 4096,
+      "usd_per_million_input_output": [
+        0.4,
+        0.8
+      ],
+      "not_final_selection": true,
+      "catalog_provider": "Featherless",
+      "catalog_url": "https://featherless.ai/models/prometheus-eval/prometheus-7b-v2.0",
+      "deployment_quantization": "FP8",
+      "catalog_does_not_prove_live_access_or_latency": true,
+      "hf_metadata_sha_at_check": "66ffb1fc20beebfb60a3964a957d9011723116c5",
+      "hosted_export_revision_not_verified": true
+    },
+    {
+      "api_or_weights_id": "Unbabel/M-Prometheus-7B",
+      "object_type": "generative_judge",
+      "native_task": "absolute_and_pairwise",
+      "language_evidence": "multilingual_with_RU_evidence_KZ_unverified",
+      "experiment_role": "primary_specialist",
+      "KZ_CQA_result": null,
+      "account_access_tested": false,
+      "source_urls": [
+        "https://huggingface.co/Unbabel/M-Prometheus-7B"
+      ],
+      "hosted_runtime_context_tokens": 32768,
+      "usd_per_million_input_output": [
+        0.68,
+        0.8
+      ],
+      "not_final_selection": true,
+      "catalog_provider": "Featherless",
+      "catalog_url": "https://featherless.ai/models/Unbabel/M-Prometheus-7B",
+      "deployment_quantization": "FP8",
+      "catalog_does_not_prove_live_access_or_latency": true,
+      "hf_metadata_sha_at_check": "030fb74806e4228c466a98706a297d43b31ce5df",
+      "hosted_export_revision_not_verified": true
+    },
+    {
+      "api_or_weights_id": "AtlaAI/Selene-1-Mini-Llama-3.1-8B",
+      "object_type": "generative_judge",
+      "native_task": "absolute_classification_pairwise",
+      "language_evidence": "primarily_English_RU_KZ_unverified",
+      "experiment_role": "reserve_specialist",
+      "KZ_CQA_result": null,
+      "account_access_tested": false,
+      "source_urls": [
+        "https://huggingface.co/AtlaAI/Selene-1-Mini-Llama-3.1-8B"
+      ],
+      "hosted_runtime_context_tokens": 32768,
+      "usd_per_million_input_output": [
+        0.2,
+        0.32
+      ],
+      "not_final_selection": true,
+      "catalog_provider": "Featherless",
+      "catalog_url": "https://featherless.ai/models/AtlaAI/Selene-1-Mini-Llama-3.1-8B",
+      "deployment_quantization": "FP8",
+      "catalog_does_not_prove_live_access_or_latency": true,
+      "hf_metadata_sha_at_check": "427792f1c3e2073cb7da216924fd884b1ba496e0",
+      "hosted_export_revision_not_verified": true
+    },
+    {
+      "api_or_weights_id": "flowaicom/Flow-Judge-v0.1",
+      "object_type": "generative_judge",
+      "native_task": "binary_3point_5point",
+      "language_evidence": "English_SFT_RU_KZ_unverified",
+      "experiment_role": "excluded_first_multilingual_matrix",
+      "KZ_CQA_result": null,
+      "account_access_tested": false,
+      "source_urls": [
+        "https://huggingface.co/flowaicom/Flow-Judge-v0.1"
+      ],
+      "hosted_runtime_context_tokens": 4096,
+      "usd_per_million_input_output": null,
+      "not_final_selection": true,
+      "catalog_provider": "Featherless",
+      "catalog_url": "https://featherless.ai/models/flowaicom/Flow-Judge-v0.1",
+      "deployment_quantization": "BF16",
+      "catalog_does_not_prove_live_access_or_latency": true,
+      "hf_metadata_sha_at_check": "b7a47acd7c86e981145168e4dea1bef7d84a0894",
+      "hosted_export_revision_not_verified": true
+    },
+    {
+      "api_or_weights_id": "Skywork/Skywork-Critic-Llama-3.1-8B",
+      "object_type": "generative_critic",
+      "native_task": "primarily_pairwise_pointwise_demo_exists",
+      "language_evidence": "RU_KZ_unverified",
+      "experiment_role": "excluded_first_absolute_matrix",
+      "KZ_CQA_result": null,
+      "account_access_tested": false,
+      "source_urls": [
+        "https://huggingface.co/Skywork/Skywork-Critic-Llama-3.1-8B"
+      ],
+      "hosted_runtime_context_tokens": 32768,
+      "usd_per_million_input_output": [
+        0.2,
+        0.32
+      ],
+      "not_final_selection": true,
+      "catalog_provider": "Featherless",
+      "catalog_url": "https://featherless.ai/models/Skywork/Skywork-Critic-Llama-3.1-8B",
+      "deployment_quantization": "FP8",
+      "catalog_does_not_prove_live_access_or_latency": true,
+      "hf_metadata_sha_at_check": "825f34599593c0145be91644be233d5c634b2380",
+      "hosted_export_revision_not_verified": true
+    },
+    {
+      "api_or_weights_id": "WeOpenML/PandaLM-7B-v1",
+      "object_type": "generative_judge",
+      "native_task": "pairwise_A_B_tie",
+      "language_evidence": "RU_KZ_unverified",
+      "experiment_role": "historical_pairwise_not_final",
+      "KZ_CQA_result": null,
+      "account_access_tested": false,
+      "source_urls": [
+        "https://huggingface.co/WeOpenML/PandaLM-7B-v1"
+      ],
+      "hosted_runtime_context_tokens": null,
+      "usd_per_million_input_output": null,
+      "not_final_selection": true,
+      "hf_metadata_sha_at_check": "f7e28bda625e6e72b4638165ef9964a35a12a4fc",
+      "hosted_export_revision_not_verified": true
+    },
+    {
+      "api_or_weights_id": "BAAI/JudgeLM-7B-v1.0",
+      "object_type": "generative_judge",
+      "native_task": "primarily_pairwise_extended_single_multiturn",
+      "language_evidence": "RU_KZ_unverified",
+      "experiment_role": "reserve_no_verified_hosted_endpoint",
+      "KZ_CQA_result": null,
+      "account_access_tested": false,
+      "source_urls": [
+        "https://huggingface.co/BAAI/JudgeLM-7B-v1.0"
+      ],
+      "hosted_runtime_context_tokens": null,
+      "usd_per_million_input_output": null,
+      "not_final_selection": true,
+      "hf_metadata_sha_at_check": "dfbebe054b24c946d76bfc85c977b0d68a8be913",
+      "hosted_export_revision_not_verified": true
+    },
+    {
+      "api_or_weights_id": "Skywork/Skywork-Reward-Llama-3.1-8B-v0.2",
+      "object_type": "scalar_reward_model",
+      "native_task": "sequence_classification_scalar",
+      "language_evidence": "RU_KZ_unverified",
+      "experiment_role": "not_standalone_rubric_judge",
+      "KZ_CQA_result": null,
+      "account_access_tested": false,
+      "source_urls": [
+        "https://huggingface.co/Skywork/Skywork-Reward-Llama-3.1-8B-v0.2"
+      ],
+      "hosted_runtime_context_tokens": null,
+      "usd_per_million_input_output": null,
+      "not_final_selection": true,
+      "hf_metadata_sha_at_check": "d4117fbfd81b72f41b96341238baa1e3e90a4ce1",
+      "hosted_export_revision_not_verified": true
+    },
+    {
+      "api_or_weights_id": "PatronusAI/glider",
+      "object_type": "generative_judge",
+      "native_task": "evaluation_explanation",
+      "language_evidence": "RU_KZ_CQA_unverified",
+      "experiment_role": "former_native_API_retired_external_endpoint_unverified",
+      "KZ_CQA_result": null,
+      "account_access_tested": false,
+      "source_urls": [
+        "https://huggingface.co/PatronusAI/glider"
+      ],
+      "hosted_runtime_context_tokens": null,
+      "usd_per_million_input_output": null,
+      "not_final_selection": true,
+      "hf_metadata_sha_at_check": "5639434e21faee47a8d3a092cd3105ab051c8b01",
+      "hosted_export_revision_not_verified": true
+    },
+    {
+      "api_model_id": "jev-1.14.0",
+      "provider": "TypeSafe AI",
+      "object_type": "typed_decision_model",
+      "experiment_role": "primary_typed_challenger",
+      "endpoint": "https://api.typesafe.ai/v1/systemone",
+      "context_tokens_request_question": [
+        64000,
+        32000
+      ],
+      "long_context_experiment_enabled": false,
+      "usd_per_million_input": 0.042,
+      "output_free": true,
+      "generates_explanation_or_quotes": false,
+      "primary_primitive": "choice",
+      "score_expectation_must_not_be_used_as_official_discrete_value": true,
+      "KZ_CQA_result": null,
+      "account_access_tested": false,
+      "source_urls": [
+        "https://docs.typesafe.ai/models",
+        "https://docs.typesafe.ai/changelog",
+        "https://docs.typesafe.ai/primitives/choice",
+        "https://docs.typesafe.ai/primitives/score"
+      ]
+    },
+    {
+      "api_model_id": "jev-1.13.0",
+      "provider": "TypeSafe AI",
+      "object_type": "typed_decision_model",
+      "experiment_role": "train_version_ablation",
+      "endpoint": "https://api.typesafe.ai/v1/systemone",
+      "context_tokens_request_question": [
+        64000,
+        32000
+      ],
+      "long_context_experiment_enabled": false,
+      "usd_per_million_input": 0.042,
+      "output_free": true,
+      "generates_explanation_or_quotes": false,
+      "primary_primitive": "choice",
+      "score_expectation_must_not_be_used_as_official_discrete_value": true,
+      "KZ_CQA_result": null,
+      "account_access_tested": false,
+      "source_urls": [
+        "https://docs.typesafe.ai/models",
+        "https://docs.typesafe.ai/changelog",
+        "https://docs.typesafe.ai/primitives/choice",
+        "https://docs.typesafe.ai/primitives/score"
+      ]
+    },
+    {
+      "api_model_id": "pplx-decider-v1.2",
+      "provider": "Perplexity",
+      "object_type": "typed_decision_model",
+      "experiment_role": "reserve_not_mandatory_first_matrix",
+      "endpoint": "https://api.perplexity.ai/v1/decisions",
+      "context_tokens": 256000,
+      "usd_per_million_input": 0.02,
+      "output_free": true,
+      "generates_explanation_or_quotes": false,
+      "state_billing": "once_per_group",
+      "old_id_v1_1_routes_to_v1_2": true,
+      "response_model_field_is_echo_not_resolved_version": true,
+      "web_grounding_enabled_in_experiment": false,
+      "KZ_CQA_result": null,
+      "account_access_tested": false,
+      "source_urls": [
+        "https://docs.perplexity.ai/docs/decisions/quickstart"
+      ]
+    },
+    {
+      "api_model_id": "pplx-decider-flash-v1.2",
+      "provider": "Perplexity",
+      "object_type": "typed_decision_model",
+      "experiment_role": "reserve_not_mandatory_first_matrix",
+      "endpoint": "https://api.perplexity.ai/v1/decisions",
+      "context_tokens": 256000,
+      "usd_per_million_input": 0.01,
+      "output_free": true,
+      "generates_explanation_or_quotes": false,
+      "state_billing": "once_per_question",
+      "old_id_v1_1_routes_to_v1_2": true,
+      "response_model_field_is_echo_not_resolved_version": true,
+      "web_grounding_enabled_in_experiment": false,
+      "KZ_CQA_result": null,
+      "account_access_tested": false,
+      "source_urls": [
+        "https://docs.perplexity.ai/docs/decisions/quickstart"
+      ]
+    }
+  ],
+  "encoders": [
+    {
+      "model_id": "text-embedding-3-large",
+      "provider": "OpenAI",
+      "default_dimensions": 3072,
+      "proposed_dimensions": 1024,
+      "max_input_tokens_per_item": 8192,
+      "usd_per_million_input": 0.13,
+      "source_url": "https://developers.openai.com/api/docs/models/text-embedding-3-large",
+      "KZ_CQA_accuracy_measured": false
+    },
+    {
+      "model_id": "text-embedding-3-small",
+      "provider": "OpenAI",
+      "default_dimensions": 1536,
+      "usd_per_million_input": 0.02,
+      "role": "optional budget ablation",
+      "source_url": "https://developers.openai.com/api/docs/models/text-embedding-3-small",
+      "KZ_CQA_accuracy_measured": false
+    },
+    {
+      "model_id": "embed-v5.0-pro",
+      "provider": "Cohere native",
+      "context_tokens_documented_as": "128K",
+      "dimensions": [
+        256,
+        512,
+        768,
+        1024,
+        1536,
+        2048
+      ],
+      "proposed_dimensions": 1024,
+      "input_type": "classification",
+      "embedding_types": [
+        "float"
+      ],
+      "usd_per_million_input": null,
+      "price_status": "native public per-token price not confirmed; obtain actual quote before comparing costs",
+      "role": "reserve, not mandatory first matrix",
+      "source_urls": [
+        "https://docs.cohere.com/docs/models",
+        "https://docs.cohere.com/docs/embeddings",
+        "https://cohere.com/pricing"
+      ],
+      "KZ_CQA_accuracy_measured": false
+    },
+    {
+      "model_id": "intfloat/multilingual-e5-small",
+      "object_type": "text_encoder",
+      "dimensions": 384,
+      "max_tokens": 512,
+      "role": "optional_CPU_frozen_features",
+      "requires_event_labels_for_supervised_head": true,
+      "hf_metadata_sha_at_check": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+      "hosted_export_revision_not_verified": true
+    },
+    {
+      "model_id": "BAAI/bge-m3",
+      "object_type": "text_encoder",
+      "dimensions": 1024,
+      "max_tokens": 8192,
+      "role": "optional_retrieval_features_not_final_judge",
+      "requires_event_labels_for_supervised_head": true,
+      "hf_metadata_sha_at_check": "5617a9f61b028005a4858fdac845db406aefb181",
+      "hosted_export_revision_not_verified": true
+    },
+    {
+      "model_id": "urchade/gliner_multi-v2.1",
+      "object_type": "prompted_span_extractor",
+      "role": "optional_CPU_local_evidence_candidates",
+      "KZ_event_recall": null,
+      "hf_metadata_sha_at_check": "443d26d654e0324125a96bebd8e796c14ff2efe6",
+      "hosted_export_revision_not_verified": true
+    },
+    {
+      "model_id": "fastino/gliner2-base-v1",
+      "object_type": "schema_extractor_classifier",
+      "parameters_M": 205,
+      "language": "English",
+      "role": "diagnostic_not_verified_RU_KZ",
+      "hf_metadata_sha_at_check": "f9634218e53580c56edf0de97ca1a7d3f1c2354e",
+      "hosted_export_revision_not_verified": true
+    }
+  ],
+  "fixed_class_CPU_baselines": [
+    "TF-IDF + LogisticRegression",
+    "TF-IDF + LinearSVC",
+    "frozen embedding + LogisticRegression",
+    "small MLP ablation"
+  ],
+  "JEPA_status": "training_architecture_or_method_not_interchangeable_hosted_judge"
+}

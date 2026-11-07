@@ -1,0 +1,139 @@
+{
+  "checked_on": "2026-11-07",
+  "no_results_measured_by_this_research": true,
+  "records": [
+    {
+      "id": "B1",
+      "model": "Prometheus-2-7B",
+      "source": "https://arxiv.org/html/2405.01535v2",
+      "date": "2024",
+      "benchmark": "FLASK Table16",
+      "sample_size": {
+        "instructions": 200,
+        "responses": 2000,
+        "rubrics": 12
+      },
+      "metric": "Pearson correlation",
+      "result_reference_based": 0.545,
+      "result_reference_free": 0.425,
+      "reference_origin": "human",
+      "confirms": "absolute rubric grading and reference sensitivity",
+      "does_not_confirm": "exact criterion/NA/evidence/KZ CQA accuracy"
+    },
+    {
+      "id": "B2",
+      "model": "Unbabel/M-Prometheus-7B",
+      "source": "https://arxiv.org/html/2504.04953v2",
+      "date": "2025",
+      "benchmark": "MM-Eval; M-RewardBench Table1",
+      "sample_size": null,
+      "sample_size_note": "exact aggregate item count not established in checked report section",
+      "metric": "pairwise accuracy",
+      "results": {
+        "MM-Eval": 0.6966,
+        "M-RewardBench": 0.7754
+      },
+      "reference_origin": "native-speaker preference data versus translated benchmark preferences; not our CQA",
+      "confirms": "multilingual pairwise assessment; not KZ CQA or evidence quality"
+    },
+    {
+      "id": "B3",
+      "model": "Atla Selene Mini",
+      "source": "https://arxiv.org/html/2501.17195v1",
+      "date": "2025-01-27",
+      "benchmark": "FinanceBench expert evaluation Table2",
+      "sample_size": null,
+      "sample_size_note": "balanced subset N not stated; full dataset size must not be substituted",
+      "metric": "judgment accuracy",
+      "result": 0.717,
+      "base_result": 0.664,
+      "reference_origin": "human domain experts",
+      "confirms": "domain prompted evaluation improves over base in this study; not RU/KZ CQA"
+    },
+    {
+      "id": "B4",
+      "model": "flowaicom/Flow-Judge-v0.1",
+      "source": "https://huggingface.co/flowaicom/Flow-Judge-v0.1",
+      "date": "2024-09",
+      "benchmark": "released synthetic heldout sets",
+      "sample_size": {
+        "binary": 316,
+        "likert_3": 300,
+        "likert_5": 274
+      },
+      "metric": "binary F1 / five-level Pearson",
+      "results": {
+        "binary_F1": 0.955,
+        "likert_5_Pearson": 0.919
+      },
+      "reference_origin": "synthetic dual-evaluation consensus, not independent human GT",
+      "size_verification": "Hugging Face datasets-server /size metadata read 2026-11-07",
+      "confirms": "synthetic rubric reproduction, not human CQA"
+    },
+    {
+      "id": "B5",
+      "model": "JudgeLM family",
+      "source": "https://github.com/baaivision/JudgeLM",
+      "date": "2023; ICLR2025",
+      "benchmark": "JudgeLM GPT4-labelled corpus",
+      "sample_size": {
+        "train": 100000,
+        "validation": 5000
+      },
+      "metric": "teacher agreement",
+      "result": "headline >90% in specific author setting, not assigned to every checkpoint",
+      "reference_origin": "GPT-4",
+      "confirms": "teacher distillation, not >90% human CQA accuracy"
+    },
+    {
+      "id": "B6",
+      "model": "WeOpenML/PandaLM-7B-v1",
+      "source": "https://github.com/WeOpenML/PandaLM",
+      "date": "2023; ICLR2024",
+      "benchmark": "filtered human A/B/tie test",
+      "sample_size": {
+        "test": 999,
+        "raters": 3
+      },
+      "sample_size_note": "999 from published class-count sum 105+422+472, described as about1K",
+      "metric": "pairwise classification evaluation",
+      "result": null,
+      "reference_origin": "human; disagreements filtered",
+      "training_origin": "300K GPT3.5 synthetic",
+      "confirms": "pairwise target, not arbitrary absolute rubric"
+    },
+    {
+      "id": "B7",
+      "model": "Jev (main alias unpinned; stability returned1.13.0), Decider1.1",
+      "source": "https://arxiv.org/html/2609.29769v3",
+      "date": "2026-10-13",
+      "benchmark": "9panels from7benchmarks",
+      "sample_size": {
+        "units": 1021,
+        "criterion_pairs": 5003
+      },
+      "metric": "ordinal exact/QWK, binary accuracy, cascade gain",
+      "result": "Jev-first flash fallback oracle cascade gain <=2.7 percentage points over best single",
+      "reference_origin": "reused human ratings; ordinal panels English",
+      "confirms": "error correlation limits cascade accuracy gains",
+      "limitations": "not Jev1.14/Decider1.2; public-label and alias risks; no KZ evidence"
+    },
+    {
+      "id": "B8",
+      "model": "several 2025 multilingual LLMs; not current shortlist",
+      "source": "https://aclanthology.org/2025.acl-long.701/",
+      "date": "2025-07",
+      "benchmark": "KazMMLU",
+      "sample_size": {
+        "total": 23000,
+        "KZ": 10969,
+        "RU": 12031
+      },
+      "metric": "knowledge multiple-choice QA",
+      "result": null,
+      "reference_origin": "authentic educational materials manually checked by native speakers/educators",
+      "confirms": "need language-specific evaluation; not CQA/evidence ranking"
+    }
+  ],
+  "missing_sample_size_policy": "null means unestablished, not zero; do not use headline as decisive superiority claim"
+}

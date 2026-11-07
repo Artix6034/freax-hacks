@@ -1,0 +1,49 @@
+{
+  "captured_at_utc": "2026-11-07T09:51:49.248838+00:00",
+  "status": "passed",
+  "mechanics_tests": {
+    "count": 9,
+    "exit_code": 0,
+    "output": "test_all_dev_messages_once_per_plan (test_prepare_sequential_study.Mechanics.test_all_dev_messages_once_per_plan) ... ok\ntest_blank_annotation_is_not_negative (test_prepare_sequential_study.Mechanics.test_blank_annotation_is_not_negative) ... ok\ntest_bot_prefix_is_preserved (test_prepare_sequential_study.Mechanics.test_bot_prefix_is_preserved) ... ok\ntest_client_tail_after_close_is_not_discarded (test_prepare_sequential_study.Mechanics.test_client_tail_after_close_is_not_discarded) ... ok\ntest_contract_distinguishes_pending_na_and_four_checks (test_prepare_sequential_study.Mechanics.test_contract_distinguishes_pending_na_and_four_checks) ... ok\ntest_core_and_context_are_disjoint (test_prepare_sequential_study.Mechanics.test_core_and_context_are_disjoint) ... ok\ntest_messages_before_operator_remain_together (test_prepare_sequential_study.Mechanics.test_messages_before_operator_remain_together) ... ok\ntest_oversized_exchange_is_explicit (test_prepare_sequential_study.Mechanics.test_oversized_exchange_is_explicit) ... ok\ntest_proposed_split_whole_groups_and_reproducible (test_prepare_sequential_study.Mechanics.test_proposed_split_whole_groups_and_reproducible) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.139s\n\nOK\n"
+  },
+  "json_files_parsed": [
+    "annotation-audit.json",
+    "artifact-index.json",
+    "cost-plan.json",
+    "duplicate-audit.json",
+    "experiment-plan.json",
+    "fragment-manifest.json",
+    "mechanical-summary.json",
+    "model-shortlist.json",
+    "sources.json",
+    "split-70-30.proposed.json",
+    "state-evidence-contract.json",
+    "topic-groups.proposed.json"
+  ],
+  "source_transcript_hash_matches_known_snapshot": true,
+  "signed_url_findings": [],
+  "raw_transcripts_copied_to_research": false,
+  "source_application_modified_by_this_research": false,
+  "no_training_or_external_AI_inference": true,
+  "accuracy_test_performed": false,
+  "reference_labels_available": false,
+  "artifacts_sha256": {
+    "research\\sequential-vs-hybrid-research.txt": "171ee08d98f2716925ed7586b3f2f057306bef70feb907bbea287ac79ddfc06d",
+    "research\\prepare_sequential_study.py": "3532225f6be2490d097a48af5fee5c7994928b1ef561295cf7019061c296ecc5",
+    "research\\test_prepare_sequential_study.py": "ab399ea91f32e683a1c41319cb77d3e275014bbdf98889a503afee1cd80512eb",
+    "research\\sequential-study\\annotation-audit.json": "0d622b4bdcb744bcbdd170fbaabac9c4a45cfee175c7ee9da1df2e701ebfdb1a",
+    "research\\sequential-study\\artifact-index.json": "9988e6171a1ce4ce68756a210a03e5f684f21e6627ad41e3224ef49202318a15",
+    "research\\sequential-study\\cost-plan.json": "3f4da9692a69ae62e7b5f4b935ce216c775c3b8b6a356dddb2711cf855cc2168",
+    "research\\sequential-study\\duplicate-audit.json": "70af1a2372d7f0b1e85c463cdfc96c37d7d7bf6bc210a4cf0c65810f4ac3c546",
+    "research\\sequential-study\\event-annotation.blank.jsonl": "bf4db1f0ab976efd397819a5b49c83a45206d2a9885926edd0bdf7dad1e4a836",
+    "research\\sequential-study\\experiment-plan.json": "ced1062f6ff9cef41f894d4be66e047442433bf80658b1405328e8f3398d7088",
+    "research\\sequential-study\\fragment-manifest.json": "1c824fe145fba192cdd6e7635a736dff823f9365d36b3d6f17ab0ce9ad05cdec",
+    "research\\sequential-study\\implementation-brief.txt": "dda7715c0212b68611b7f7143377a1eda838796a38b700a197e720c36fa1d4fe",
+    "research\\sequential-study\\mechanical-summary.json": "1521223603562660cb23e07532e6d01bb2a509d78fa29634b28233411d997284",
+    "research\\sequential-study\\model-shortlist.json": "503746f27a27478545e6ce871102f955f65849780947e1ce484237a574869262",
+    "research\\sequential-study\\sources.json": "ef5119d2cde107c2927b4d2aed3c6ddb12a38cf3b281a56dec13be3998e04a59",
+    "research\\sequential-study\\split-70-30.proposed.json": "b3477a440edbf195865f6d0631d5d42ea3d79dc7b63e4e8b8a4a0e638c782708",
+    "research\\sequential-study\\state-evidence-contract.json": "833892e470bf5866a27f86793df4d369e9ce926feafa049af2363255ebb6b128",
+    "research\\sequential-study\\topic-groups.proposed.json": "1abbd51a592c0dd6c9ee8211302bed1679fcf9f4b800a0224642a4b7c26ff16b"
+  }
+}

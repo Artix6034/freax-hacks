@@ -1,0 +1,50 @@
+{
+  "captured_at_utc": "2026-11-07T16:36:57.990780+00:00",
+  "read_only_review": true,
+  "app_files_modified_by_this_review": false,
+  "paid_AI_calls_run": false,
+  "source_hashes": {
+    "config\\checklist.organizer-2026-11-07.json": "a83fecbb78604ef7621d09989429f7691aec245184cbaea118082c72d0d7457c",
+    "config\\checklist.v1.json": "9d4a94abe03aa500eb90df06cda7edd55b695386b4494e276e1dac8081817d9e",
+    "config\\submission.json": "a4deaeddcdab0d57c07e47580de79160f0c59431db07cec86278ab5b66fe758e",
+    "package.json": "b8e19f28d41912fdc45f9468b0468dc015c44bbd27b740ce593b919e60e0aa53",
+    "src\\ai\\facts.js": "d86bb141a715e8d8a394798a63a53eb3d58e6ead9d7795b80c8eaca09a930619",
+    "src\\ai\\prompt.js": "c6a629477d4026cb25ff7c9d1f21b60bbc07fa07f255ca4a44152dac92b4cab4",
+    "src\\ai\\provider.js": "b8c1a1b6016e63f5aeeb8dd5e9fccee619e12eb08d137d7cd1f3656375387387",
+    "src\\ai\\schema.js": "701a2deff4f22de58aa4d0eee644e08f23a3ffaa828d60628ce0032aa4876f5a",
+    "src\\ai\\transport.js": "4fb9eb4a79691d67d2f095446eec10b7499dfef9c6914444190b819d254f4a32",
+    "src\\batch.js": "8f1dfbc4d3f540949502c80794ad4d601afd6b7ee9a02b29eff62ba9939b296c",
+    "src\\datasets.js": "5ff53e61a6cfeafd93e857dc09250b998c6a88348be58fbacd154fd99a797e17",
+    "src\\domain.js": "4ec3d11cc471013f1b8eb8dae492e2811a7b4cfe29ddca2f72e513d1bb86d56f",
+    "src\\execution.js": "25aa917777ab0bfa5caf6e11fd866f24c449f2fe5d46f3d6f528bf5c1d5419c8",
+    "src\\history.js": "ccf8b003cbe93f758681e1d07885e75bcfe873d29c951b29d4ecfc89fdba6884",
+    "src\\scoring.js": "f73ffcce1b575e7f9bc498c29a20a38ae959b608f260adb67b2ee69cdab67445",
+    "src\\server.js": "ceb98f7522afac20edbca6596c5a2785f7209228b8dc5e52d3a8c6a837290776",
+    "src\\service.js": "4f12d7625c01265bbea303162b44333e3ebbaf08321c7821adea7b7ccc12ef79",
+    "src\\store.js": "6e7da2edaf0c886f45161a7fd1d96681a7553ee4f005aefc3d4a6a1a242917f3",
+    "src\\submission.js": "3619f5abbab4e0e4863c78244b292d512e301afb99d7815e841a45333e95a44d",
+    "src\\web\\app.js": "aba359161d5f9e88af6cde723717199447d945a118b241294e429b24811ac71f",
+    "src\\web\\evidence.js": "e91a6a0d2cd675590b3bdf1ab484f0799f4edb52552c563ce9d0c87ee52ac5b7",
+    "src\\web\\index.html": "03d2116cc6277d44f3b19deb72910ebcc9f0070b3720249ef482732a04d5347c",
+    "src\\web\\style.css": "7b060e3b8a3ed381ba321485717dc7bf39879d3dcaa939dc2cc72ed396ce2353",
+    "tests\\a1.test.js": "5fbe99b7724e426179147720924f40993a7647798edff3f400208c42765924df",
+    "tests\\core.test.js": "6a108dace2cabbbd56051a3c9f5814cdc5066b06fce8d53865a550a045f46afa",
+    "tests\\evidence.test.js": "f543fb4a9845e1bea1eca76ba0f3ab3d9826509ed75b78a3afaae955f826db93",
+    "tests\\facts.test.js": "a28c424cb77822af8e162c146fe992ef65eab6b7d7f26ff56a9c02537bfece17",
+    "tests\\fixtures\\dialog-facts.js": "4f7ccf2f9aac6b6f83a5eebb6c95ae9bfde8b9192c69d86a37681eb88a650ab7",
+    "tests\\partial.test.js": "cb9a59edf2a2ee6cdf358bf13d3656a1b9fd2b8b02a4bd30f5b90e3f58419e38",
+    "tests\\submission.test.js": "6d7c53009a338199ccc96f448769ec2dfaa4a8abaf6d4a31aa2ac92b4d46952d"
+  },
+  "changed_during_node_tests": [],
+  "node_tests": {
+    "exit_code": 0,
+    "tests": 60,
+    "passed": 60,
+    "failed": 0
+  },
+  "research_python_tests": {
+    "exit_code": 0,
+    "summary": "...........................................\n----------------------------------------------------------------------\nRan 43 tests in 0.236s\n\nOK"
+  },
+  "status": "tests_passed"
+}

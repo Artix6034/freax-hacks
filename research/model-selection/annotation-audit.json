@@ -1,0 +1,65 @@
+{
+  "captured_at_utc": "2026-11-07T10:31:22.551197+00:00",
+  "source": "data\\annotations\\dev65.ai-provisional.jsonl",
+  "sha256": "019a736d62e8e0262f1e29b3af0f13fb07e99280b895c7d36ce199edcbe06152",
+  "concurrent_updates_possible": true,
+  "row_count": 65,
+  "unique_ids": 65,
+  "status_counts": {
+    "ai_provisional": 65
+  },
+  "source_counts": {
+    "data_chat_ai": 65
+  },
+  "language": {
+    "RU": 35,
+    "KZ": 15,
+    "EN": 15
+  },
+  "channel": {
+    "agent chat": 60,
+    "voice call": 5
+  },
+  "non_null_criterion_values": 492,
+  "null_criterion_values": 28,
+  "needs_review_cells": 50,
+  "non_null_totals": 46,
+  "evidence_entries": 1284,
+  "evidence_field_sets": [
+    [
+      "message_id",
+      "quote"
+    ]
+  ],
+  "rows_explicitly_human_verified": 0,
+  "rows_missing_human_verified_field": 65,
+  "summary_declares_human_verified": false,
+  "summary_processed_count_at_separate_read": 65,
+  "transcript_hash_mismatches": [],
+  "data_chat_directory_present": false,
+  "gold_reference_available": false,
+  "conclusion": "AI provisional dialogue labels/evidence only; not human GT, not exhaustive event/span labels; missing human_verified is not itself proof of false.",
+  "expert_forms_checked": [
+    {
+      "path": "research\\holdout10-expert-a.blank.jsonl",
+      "records": 10,
+      "non_null_values": 0
+    },
+    {
+      "path": "research\\holdout10-expert-b.blank.jsonl",
+      "records": 10,
+      "non_null_values": 0
+    },
+    {
+      "path": "research\\pilot20-expert-a.blank.jsonl",
+      "records": 20,
+      "non_null_values": 0
+    },
+    {
+      "path": "research\\pilot20-expert-b.blank.jsonl",
+      "records": 20,
+      "non_null_values": 0
+    }
+  ],
+  "audit_scope": "data/annotations plus named expert forms; artificial metric fixtures excluded from DEV references"
+}

@@ -1,0 +1,120 @@
+{
+  "version": "cqa-model-selection-proposed-1",
+  "date": "2026-11-07",
+  "status": "design_only_no_model_calls",
+  "split_path": "research\\sequential-study\\split-70-30.proposed.json",
+  "split_sha256": "b3477a440edbf195865f6d0631d5d42ea3d79dc7b63e4e8b8a4a0e638c782708",
+  "train_count": 46,
+  "test_count": 19,
+  "ratio_percent": [
+    70.77,
+    29.23
+  ],
+  "test_languages": {
+    "EN": 5,
+    "KZ": 4,
+    "RU": 10
+  },
+  "group_review_and_freeze_pending": true,
+  "human_reference_labels_available": false,
+  "prerequisites": [
+    "independent family review before freeze",
+    "human/adjudicated criteria labels and evidence review",
+    "event spans for D claims",
+    "configured access and explicit paid-call budget"
+  ],
+  "primary_models": [
+    "gpt-6-astra",
+    "gpt-6.1-sol",
+    "gpt-6-luna",
+    "claude-fable-5-1",
+    "Unbabel/M-Prometheus-7B",
+    "jev-1.14.0"
+  ],
+  "analyst_default_for_planned_comparison": "gpt-6-luna",
+  "final_for_architecture_control": "gpt-6-astra",
+  "selection_is_not_measured_superiority": true,
+  "phases": [
+    "train: generic final-model comparison with identical full original input",
+    "train: generative specialist format/language gate; native percriterion mode matched in generic baseline if used",
+    "train: typed judges with shared score-free evidence-first ledger and full original",
+    "freeze settings/prompts/models/grouping/failures before test",
+    "single preregistered A/B/C1/C2 test; D only with adequate event labels"
+  ],
+  "test_systems": [
+    {
+      "id": "A_astra",
+      "architecture": "single full original call",
+      "model": "gpt-6-astra"
+    },
+    {
+      "id": "A_sol",
+      "architecture": "same single full original call",
+      "model": "gpt-6.1-sol"
+    },
+    {
+      "id": "A_fable",
+      "architecture": "same single full original call, native transport",
+      "model": "claude-fable-5-1"
+    },
+    {
+      "id": "B",
+      "architecture": "sequential Luna extraction, then full original plus ledger",
+      "model": "gpt-6-astra"
+    },
+    {
+      "id": "C1",
+      "architecture": "same cached Luna ledger and full original as B, typed final judge",
+      "model": "jev-1.14.0"
+    },
+    {
+      "id": "C2",
+      "architecture": "same cached Luna ledger and full original as B, generative specialist",
+      "model": "Unbabel/M-Prometheus-7B",
+      "requires_train_contract_language_gate": true
+    },
+    {
+      "id": "D",
+      "architecture": "CPU event detector, contextual verification, same Astra full original final",
+      "status": "not_eligible_until_event_supervision"
+    }
+  ],
+  "reserves": [
+    "AtlaAI/Selene-1-Mini-Llama-3.1-8B",
+    "pplx-decider-v1.2",
+    "gemini-4-argon"
+  ],
+  "new_criterion_policy": "update rubric/schema/questions; unsupported fixed-class detector falls back to LLM; no invented NA or scale remapping",
+  "primary_metrics": [
+    "percriterion accuracy/macroF1/confusion",
+    "false/missedNA",
+    "08precision/recall",
+    "totalMAE with paircount/completion",
+    "quote existence vs expert sufficiency",
+    "RU/KZ/EN",
+    "all-stage costs and end-to-end latency"
+  ],
+  "leakage_rules": [
+    "no fragments/families cross train/test",
+    "all fitted features/calibration/threshold tuning inside train group folds",
+    "fewshot train only",
+    "annotation explanations/evidence/target scores never model features",
+    "null/unreviewed not negative",
+    "AI provisional never human GT",
+    "test not reused to select prompts/models/budgets"
+  ],
+  "typed_model_rules": [
+    "Choice selected enum, not interpolated Score expectation",
+    "evidence/explanation provenance separate from typed label",
+    "unknown/unresolved outside official criterion class",
+    "full original final input even with candidates",
+    "pin grouping and log version routing; echoed model ID not proof of immutable deployment"
+  ],
+  "boundary_ablation": "preregister budgets8/12/20, same model and state policy; do not pick best on test",
+  "limitations": [
+    "DEV already inspected, not unseen official control",
+    "7test families,4KZ,1voice",
+    "specialist hosted FP8 not identical to published BF16",
+    "no controlled CQA results yet"
+  ]
+}

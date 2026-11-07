@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "checks": {
+    "conversion_preserves_original_diagnostics": true,
+    "original_view_explicit": true,
+    "reviewed_view_explicit": true,
+    "original_and_reviewed_results_differ": true,
+    "artificial_missing_dialog_stays_in_accuracy_denominator": true,
+    "numeric_total_pairs_explicit": true,
+    "blank_pilot_has_no_reference_annotations": true,
+    "blank_pilot_has_no_fake_scores": true,
+    "baseline_template_has_no_ground_truth": true,
+    "only_artificial_ids_in_scored_reports": true,
+    "all_four_blank_templates_unannotated": true
+  },
+  "unit_tests_last_success_count": 26,
+  "unit_test_command": "python -m unittest discover -s research -p test_compare_evaluations.py -v",
+  "unit_tests_last_run": "passed",
+  "third_party_dependencies_for_comparison_tool": [],
+  "external_AI_calls": 0,
+  "real_dialog_scores_created": 0,
+  "source_file_hashes": {
+    "src\\service.js": "0f4be8e855afba6bfb8ce3568e0f6d4d86c7a6d2e35a1078c22037f9a4fcb90f",
+    "src\\scoring.js": "e95a5df26bd08ed3a80278d3b5ed713bbff784b72758d76ac3eb912824b982fc",
+    "config\\checklist.v1.json": "9d4a94abe03aa500eb90df06cda7edd55b695386b4494e276e1dac8081817d9e",
+    "research\\compare_evaluations.py": "5552589d5352c887eeedb999036b77b0f8b1edbeff5045cd021ffc43e81e66e2"
+  },
+  "blank_template_checks": {
+    "holdout10-expert-a.blank.jsonl": {
+      "reference_records": 10,
+      "status": "no_reference_annotations",
+      "paired_totals": 0
+    },
+    "holdout10-expert-b.blank.jsonl": {
+      "reference_records": 10,
+      "status": "no_reference_annotations",
+      "paired_totals": 0
+    },
+    "pilot20-expert-a.blank.jsonl": {
+      "reference_records": 20,
+      "status": "no_reference_annotations",
+      "paired_totals": 0
+    },
+    "pilot20-expert-b.blank.jsonl": {
+      "reference_records": 20,
+      "status": "no_reference_annotations",
+      "paired_totals": 0
+    }
+  }
+}

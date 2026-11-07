@@ -1,0 +1,17 @@
+{
+  "source":"User clarification in the current chat, plus explicitly separated assistant interpretation",
+  "official_GT":false,
+  "human_verified_transcripts":false,
+  "criterion05":{
+    "user_statement":"Да — оператор вежлив и, если клиент выразил недовольство или описал неудобство, отреагировал на конкретную проблему. То есть он вежливо ему ответил на его описывание неудобства.",
+    "interpretation":"Polite practical help directed at the stated inconvenience can satisfy 05. Mandatory apology or special sympathy words are not introduced.",
+    "diagnostic_expectation":{"case_id":"c05-practical-response/practical-only","value":"yes","source":"User-approved interpretation applied by the assistant; exact KZ wording has not been independently reviewed."}
+  },
+  "criterion04":{
+    "user_statement":"Мы оцениваем именно работу оператора и реально ли помог он решить вопрос клиента.",
+    "assistant_interpretation":{"case_id":"actual-p1-ru-010","value":20,"basis":"Observed report help plus a described escalation of the missing-position issue. The PDF permits a correct next step; no universal requirement to collect a security name before escalation is stated.","is_direct_human_score":false},
+    "guard":"Helping one question does not automatically resolve every other material question. No fixed escalation ceiling or mandatory fields added.",
+    "post_baseline_review":{"observed_value":10,"source":"Current model diagnostic, not ground truth","basis":"The model cites the operator's own request for a security name and the fact that no name was supplied. This is a plausible incomplete-next-step interpretation, not an invented universal escalation cap.","conclusion":"Keep the case disputed. The assistant's earlier 20 is not the sole defensible reading. Do not change the prompt merely to force 20; obtain independent adjudication of actual next-step sufficiency."}
+  },
+  "frozen_run_policy":"Do not rewrite prepared expectations or results after seeing outcomes. Evaluate this interpretation separately and disclose provenance."
+}
