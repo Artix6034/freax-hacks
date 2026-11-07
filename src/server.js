@@ -133,7 +133,7 @@ export async function createApp({ directory = resolve(root, 'data'), provider, c
         if (req.method === 'GET' && !match[2]) return json(res, 200, await store.read(match[1]));
         if (req.method === 'POST' && match[2]) return json(res, 200, await service[match[2] === 'appeals' ? 'appeal' : 'resolve'](match[1], await body(req)));
       }
-      const assets = { '/': ['index.html', 'text/html'], '/app.js': ['app.js', 'text/javascript'], '/evidence.js':['evidence.js','text/javascript'], '/style.css': ['style.css', 'text/css'] };
+      const assets = { '/': ['index.html', 'text/html'], '/app.js': ['app.js', 'text/javascript'], '/evidence.js':['evidence.js','text/javascript'], '/submission-compatibility.js':['submission-compatibility.js','text/javascript'], '/style.css': ['style.css', 'text/css'] };
       if (req.method === 'GET' && assets[url.pathname]) {
         const [name, type] = assets[url.pathname];
         res.writeHead(200, { 'Content-Type': `${type}; charset=utf-8` });

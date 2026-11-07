@@ -10,8 +10,8 @@ import {EvaluationService} from '../../src/service.js';
 import {Store} from '../../src/store.js';
 
 const args=process.argv.slice(2);
-assert.ok(args.every(a=>['--live','--stage=before','--stage=after','--stage=confirmed'].includes(a)));
-const live=args.includes('--live'),stage=args.includes('--stage=confirmed')?'confirmed':args.includes('--stage=after')?'after':'before';
+assert.ok(args.every(a=>['--live','--stage=before','--stage=after','--stage=confirmed','--stage=shared','--stage=validate','--stage=recap'].includes(a)));
+const live=args.includes('--live'),stage=args.includes('--stage=recap')?'recap':args.includes('--stage=validate')?'validate':args.includes('--stage=shared')?'shared':args.includes('--stage=confirmed')?'confirmed':args.includes('--stage=after')?'after':'before';
 const suite=JSON.parse(await readFile(new URL('./cases.json',import.meta.url),'utf8'));
 const checklist=JSON.parse(await readFile(new URL('../../config/checklist.organizer-2026-11-07.json',import.meta.url),'utf8'));
 validateChecklist(checklist);
@@ -31,7 +31,15 @@ if(stage==='confirmed'){
  activeSuite=JSON.parse(await readFile(new URL('./closing-controls.json',import.meta.url),'utf8'));cases.length=0;
  for(const c of activeSuite.controls)cases.push({case_id:c.id,kind:'closing control',expected:c.expected,conversation:make(c.language,c.messages)});
 }
-if(stage==='after'||stage==='confirmed'){
+if(stage==='shared'){
+ activeSuite=JSON.parse(await readFile(new URL('./shared-facts-controls.json',import.meta.url),'utf8'));cases.length=0;
+ const previous=JSON.parse(await readFile(new URL('./closing-controls.json',import.meta.url),'utf8'));
+ const controls=[...activeSuite.controls,...previous.controls.filter(c=>activeSuite.reuse_closing_controls.includes(c.id))];
+ for(const c of controls)cases.push({case_id:c.id,kind:'shared facts control',expected:c.expected,conversation:make(c.language,c.messages)});
+}
+if(stage==='validate'){activeSuite=JSON.parse(await readFile(new URL('./chat-validation.json',import.meta.url),'utf8'));cases.length=0;}
+if(stage==='recap'){activeSuite=JSON.parse(await readFile(new URL('./chat-recap-validation.json',import.meta.url),'utf8'));cases.length=0;}
+if(['after','confirmed','shared','validate','recap'].includes(stage)){
  for(const c of activeSuite.dev){
   const task=oldRun.tasks.find(t=>t.conversation_id===c.id);assert.ok(task);
   const old=JSON.parse(await readFile(join('data',task.evaluation_id+'.json'),'utf8'));
@@ -40,7 +48,7 @@ if(stage==='after'||stage==='confirmed'){
  }
  for(const id of activeSuite.repeat_dev){const c=cases.find(c=>c.case_id===id);cases.push({...c,case_id:id+'/repeat',repeat_of:id});}
 }
-assert.equal(cases.length,stage==='before'?20:stage==='confirmed'?12:44);
+assert.equal(cases.length,['validate','recap'].includes(stage)?5:stage==='before'?20:['confirmed','shared'].includes(stage)?12:44);
 const directory=resolve('data/rubric-regression',live?stage:'prepared-'+stage);
 if(live){try{await access(directory);throw Error('Existing experiment preserved; choose a new explicit experiment directory in code before another paid run.');}catch(e){if(e.code!=='ENOENT')throw e;}}
 await mkdir(directory,{recursive:true});

@@ -1,4 +1,5 @@
 import { renderEvidenceHTML, roleLabel } from './evidence.js';
+import { submissionCompatibility } from './submission-compatibility.js';
 const $ = s => document.querySelector(s);
 let conversations = [], checklists = [], activeConversation = null, evaluation = null, modelReady = false, running = false;
 let focusedRange = null;
@@ -11,14 +12,34 @@ const flagLabel = v => v===true?'Обнаружены грубые ошибки'
 const missingHTML = r => r?.status==='unresolved'?`<div class="missing-information"><strong>Не определено — чего не хватает:</strong><ul>${(r.missing_information??[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:'';
 const fmt = v => v === null ? 'Не рассчитан' : Number(v).toLocaleString('ru-RU', { minimumFractionDigits:2, maximumFractionDigits:2 });
 const selectedChecklist = () => checklists[Number($('#checklist-select').value)];
+let compatibilityKey=null;
+function compatibilityHTML(c){
+  const report=submissionCompatibility(c);
+  return `<p><strong>${report.compatible?'Структура совместима с JSON 1.0':'Эта версия несовместима с JSON 1.0'}</strong></p>`+
+    (report.issues.length?`<ul>${report.issues.map(i=>`<li>${esc(i.message)}</li>`).join('')}</ul><p>Чек-лист можно сохранить и использовать в приложении. Для сдачи согласуйте изменение формата; критерии и баллы автоматически не подменяются.</p>`:'<p class="hint">Проверены коды, типы и шкалы. Формулировки и веса можно менять; итог рассчитывается по сохранённой версии. Проверка не подтверждает полноту набора, доказательства и готовность файла.</p>')+
+    (report.warnings.length?`<ul class="hint">${report.warnings.map(i=>`<li>${esc(i.message)}</li>`).join('')}</ul>`:'');
+}
+function refreshCompatibility(){
+  const c=selectedChecklist(),key=JSON.stringify(c??null);
+  if(key!==compatibilityKey){$('#allow-incompatible').checked=false;compatibilityKey=key;}
+  $('#selected-compatibility').innerHTML=compatibilityHTML(c);
+  $('#compatibility-consent').hidden=submissionCompatibility(c).compatible;
+}
+function mayEvaluate(){return submissionCompatibility(selectedChecklist()).compatible||$('#allow-incompatible').checked;}
+function requireEvaluationConsent(){if(!mayEvaluate())throw Error('Выбранная версия несовместима с форматом сдачи. Прочитайте предупреждение и отметьте согласие на оценку только в приложении.');}
+function refreshDraftCompatibility(){
+  try{$('#draft-compatibility').innerHTML='<strong>Черновик — ещё не выбранная версия:</strong>'+compatibilityHTML(collectChecklist());}
+  catch(e){$('#draft-compatibility').textContent='Черновик не проверен: '+e.message;}
+}
 function notice(message = '') { $('#notice').textContent = message; $('#notice').hidden = !message; }
 async function api(path, data) {
   const response = await fetch(path, data === undefined ? {} : { method:'POST', headers:{ 'Content-Type':'application/json' }, body:JSON.stringify(data) });
   const result = await response.json(); if (!response.ok) throw Error(result.error || 'Ошибка запроса.'); return result;
 }
 function updateLaunch() {
-  $('#batch-start').disabled=!batchEnabled||!conversations.length||!modelReady||running||batchRun?.status==='running';
-  $('#evaluate').disabled = running || !activeConversation || !modelReady;
+  refreshCompatibility();
+  $('#batch-start').disabled=!batchEnabled||!conversations.length||!modelReady||running||batchRun?.status==='running'||!mayEvaluate();
+  $('#evaluate').disabled = running || !activeConversation || !modelReady ||!mayEvaluate();
   $('#run-state').textContent = running ? 'Модель анализирует переданный транскрипт…' : !modelReady ? 'Настройте модель на сервере и перезапустите сервис.' : !activeConversation ? 'Загрузите диалог для оценки.' : 'Будет выполнен новый запрос к модели. Заполненные настройки не подтверждают доступ.';
 }
 function renderTranscript(c) {
@@ -70,6 +91,7 @@ function renderSelectedRules(c) {
   $('#selected-rule-version').textContent = `Общие инструкции · версия ${c.version}`;
 }
 function renderEditor(c) {
+  if(!$('#draft-compatibility'))$('#criteria-editor').insertAdjacentHTML('beforebegin','<div id="draft-compatibility" class="compatibility-note" aria-live="polite"></div>');
   $('#checklist-name').value = c.name; $('#checklist-instructions').value = c.instructions;
   $('#criteria-editor').innerHTML = c.criteria.map((x, i) => `<details class="criterion-editor" data-id="${esc(x.id)}" open><summary>${esc(x.id)} · ${esc(x.name)}</summary><div class="row"><label>Название<input name="name" value="${esc(x.name)}"></label><label>Секция<input name="section" value="${esc(x.section)}"></label></div><div class="row"><label>Тип ответа<select name="type">${['boolean','scale','flag'].map(t => `<option value="${t}" ${x.type===t?'selected':''}>${{boolean:'Да / Нет',scale:'Числовая шкала',flag:'Отдельный флаг'}[t]}</option>`).join('')}</select></label><label>Вес<input name="weight" type="number" min="0" max="10000" step="0.001" value="${x.weight}"></label><label><input name="allow_na" type="checkbox" ${x.allow_na?'checked':''}> Разрешить N/A</label></div><label>Инструкция<textarea name="instruction" rows="3">${esc(x.instruction)}</textarea></label><label>Условие N/A<textarea name="na_rule" rows="2">${esc(x.na_rule)}</textarea></label><label>Каналы, где допускается N/A<select name="na_channels"><option value="all">Все каналы</option><option value="voice call" ${x.na_channels?.length===1&&x.na_channels[0]==='voice call'?'selected':''}>Только звонки</option><option value="agent chat" ${x.na_channels?.length===1&&x.na_channels[0]==='agent chat'?'selected':''}>Только чаты</option></select></label><label>Ступени числовой шкалы — каждая с новой строки: число | описание<textarea name="scale" rows="${Math.max(2,x.scale.length)}">${esc(x.scale.map(s => `${s.value} | ${s.description}`).join('\n'))}</textarea></label><div class="row"><label>Роли доказательств для положительного ответа (через запятую)<input name="positive_roles" value="${esc((x.evidence_policy?.positive_roles || ['operator']).join(','))}"></label><label>Область положительного доказательства<select name="positive_scope"><option value="any">Любая подходящая реплика</option><option value="first_operator" ${x.evidence_policy?.positive_scope==='first_operator'?'selected':''}>Первый ответ оператора</option></select></label></div><button type="button" class="danger-button remove-criterion">Удалить критерий</button></details>`).join('');
 }
@@ -92,6 +114,7 @@ async function loadChecklists(selectLatest = true) {
   $('#checklist-select').innerHTML = checklists.map((c,i) => `<option value="${i}">${esc(c.name)} · v${c.version}</option>`).join('');
   if (selectLatest) $('#checklist-select').value = String(checklists.length-1);
   renderSelectedRules(selectedChecklist()); renderEditor(selectedChecklist());
+  refreshDraftCompatibility();updateLaunch();
 }
 function useConversations(records) {
   conversations = records;
@@ -114,11 +137,15 @@ for (const [id,path] of [['local-dev','local-dev'],['remote-import','import']]) 
 }
 $('#conversation-select').addEventListener('change', () => { renderResult(null); renderTranscript(conversations[Number($('#conversation-select').value)]); });
 $('#editor-toggle').onclick = () => { $('#editor').hidden = !$('#editor').hidden; };
-$('#checklist-select').onchange = () => { renderSelectedRules(selectedChecklist()); renderEditor(selectedChecklist()); };
-$('#criteria-editor').onclick = e => { if(e.target.closest('.remove-criterion')) e.target.closest('.criterion-editor').remove(); };
-$('#add-criterion').onclick = () => { try { const c = collectChecklist(); c.criteria.push({id:`custom-${Date.now()}`, name:'Новый критерий', section:'', type:'boolean', weight:5, allow_na:false, na_rule:'', instruction:'Опишите условия ответа Да и Нет.', scale:[], allowed_values:['yes','no']}); renderEditor(c); } catch(e) { notice(e.message); } };
+$('#checklist-select').onchange = () => { renderSelectedRules(selectedChecklist()); renderEditor(selectedChecklist());refreshDraftCompatibility();updateLaunch(); };
+$('#criteria-editor').onclick = e => { if(e.target.closest('.remove-criterion')){e.target.closest('.criterion-editor').remove();refreshDraftCompatibility();} };
+$('#editor').addEventListener('input',refreshDraftCompatibility);
+$('#editor').addEventListener('change',refreshDraftCompatibility);
+$('#allow-incompatible').onchange=updateLaunch;
+$('#add-criterion').onclick = () => { try { const c = collectChecklist(); c.criteria.push({id:`custom-${Date.now()}`, name:'Новый критерий', section:'', type:'boolean', weight:5, allow_na:false, na_rule:'', instruction:'Опишите условия ответа Да и Нет.', scale:[], allowed_values:['yes','no']}); renderEditor(c);refreshDraftCompatibility(); } catch(e) { notice(e.message); } };
 $('#save-checklist').onclick = async () => { try { const c = await api('/api/checklists', collectChecklist()); await loadChecklists(); notice(`Чек-лист сохранён: версия ${c.version}. Для применения запустите новую оценку.`); } catch(e) { notice(e.message); } };
 $('#evaluate').onclick = async () => { running = true; updateLaunch(); notice(); try {
+  requireEvaluationConsent();
   const c = selectedChecklist();
   const r = await api('/api/evaluations', { conversation:activeConversation, checklist_id:c.checklist_id, checklist_version:c.version });
   renderResult(r); if (r.status === 'failed') notice(r.error);
@@ -181,7 +208,7 @@ $('#batch-refresh').onclick=async()=>{try{await refreshRuns();}catch(e){notice(e
 $('#batch-select').onchange=async()=>{try{renderBatch(await api(`/api/runs/${$('#batch-select').value}`));}catch(e){notice(e.message);}};
 $('#batch-start').onclick=async()=>{
   const button=$('#batch-start');button.disabled=true;
-  try{notice();const c=selectedChecklist(),run=await api('/api/runs',{conversations,checklist_id:c.checklist_id,checklist_version:c.version,subset:$('#batch-subset').value,concurrency:Number($('#batch-concurrency').value)});await refreshRuns(run.run_id);}
+  try{notice();requireEvaluationConsent();const c=selectedChecklist(),run=await api('/api/runs',{conversations,checklist_id:c.checklist_id,checklist_version:c.version,subset:$('#batch-subset').value,concurrency:Number($('#batch-concurrency').value)});await refreshRuns(run.run_id);}
   catch(e){notice(e.message);}finally{updateLaunch();}
 };
 for(const [id,action,retry] of [['batch-pause','pause',false],['batch-resume','resume',false],['batch-retry','resume',true]]){

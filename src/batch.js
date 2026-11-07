@@ -14,11 +14,23 @@ export function summarizeRun(run){
 
 // A local OS socket is a cross-process mutex. It is released by the OS even on a
 // hard crash, so resuming does not rely on deleting potentially live PID locks.
-async function acquireWorkspace(directory){
-  const port=40000+(parseInt(hash(resolve(directory).toLowerCase()).slice(0,8),16)%20000);
-  const lock=createServer(socket=>socket.destroy());
-  await new Promise((ok,no)=>{lock.once('error',e=>no(new InputError(e.code==='EADDRINUSE'?'Уже выполняется пакетный прогон в этом рабочем каталоге.':'Не удалось заблокировать очередь.',409)));lock.listen(port,'127.0.0.1',ok);});
-  return ()=>new Promise(ok=>lock.close(ok));
+export async function acquireWorkspace(directory,{serverFactory=createServer}={}){
+  const key=resolve(directory).toLowerCase();
+  // Windows can reserve TCP ranges (EACCES). Every process tries the same
+  // ordered ports. An occupied port is NEVER skipped: it may be our live lock.
+  for(let index=0;index<16;index++){
+    const port=40000+(parseInt(hash(index?`${key}:${index}`:key).slice(0,8),16)%20000);
+    const lock=serverFactory(socket=>socket.destroy());
+    try{
+      await new Promise((ok,no)=>{lock.once('error',no);lock.listen(port,'127.0.0.1',ok);});
+      return ()=>new Promise(ok=>lock.close(ok));
+    }catch(e){
+      try{lock.close(()=>{});}catch{}
+      if(e.code==='EACCES'&&index<15)continue;
+      const error=new InputError(e.code==='EADDRINUSE'?'Уже выполняется пакетный прогон в этом рабочем каталоге.':`Не удалось заблокировать очередь (${e.code==='EACCES'?'EACCES':'LISTEN_ERROR'}).`,409);
+      error.code=e.code==='EADDRINUSE'?'WORKSPACE_BUSY':e.code==='EACCES'?'LOCK_PORT_DENIED':'LOCK_LISTEN_ERROR';throw error;
+    }
+  }
 }
 
 export class BatchManager{

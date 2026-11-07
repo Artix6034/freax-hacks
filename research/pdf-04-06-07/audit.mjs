@@ -8,7 +8,7 @@ import {calculate} from '../../src/scoring.js';
 const root=resolve('data/rubric-regression'),json=async p=>JSON.parse(await readFile(p,'utf8'));
 const before=await json(join(root,'before/report.json')),after=await json(join(root,'after/report.json'));
 const followup=[];
-for(const stage of ['confirmed','clarification']){
+for(const stage of ['confirmed','clarification','shared','validate','recap']){
  try{const r=await json(join(root,stage,'report.json'));assert.ok(r.completed_at);followup.push(r);}catch(e){if(e.code!=='ENOENT')throw e;}
 }
 assert.ok(before.completed_at&&after.completed_at);
@@ -86,12 +86,29 @@ for(const c of followupControls)for(const check of c.checks)if(check.result!=='m
 const latest=new Map();
 for(const report of [after,...followup])for(const a of report.attempts)for(const c of a.checks)latest.set(`${a.case_id}:${c.id}`,{stage:report.stage,case_id:a.case_id,...c});
 const latestFindings=[...latest.values()].filter(c=>c.result!=='match'&&!dispute(c.case_id,c.id));
+const sharedComparisons=[];
+const sharedCost={known_usage_usd:0,unknown_usage_calls:0,input_tokens:0,output_tokens:0};
+const historical=[before,after,...followup.filter(r=>r.stage!=='shared')];
+for(const item of followup.find(r=>r.stage==='shared')?.attempts??[]){
+ const current=records.get(item.evaluation_id);
+ const u=current.ai_metadata?.usage,cached=u?.prompt_tokens_details?.cached_tokens??0,written=u?.prompt_tokens_details?.cache_write_tokens??0;
+ sharedCost.input_tokens+=u?.prompt_tokens??0;sharedCost.output_tokens+=u?.completion_tokens??0;
+ if(!u||!Number.isFinite(u.prompt_tokens)||!Number.isFinite(u.completion_tokens)||u.prompt_tokens<cached+written||u.prompt_tokens>272000)sharedCost.unknown_usage_calls++;
+ else sharedCost.known_usage_usd+=((u.prompt_tokens-cached-written)*pricing.input+cached*pricing.cached_input+written*pricing.cache_write_30m+u.completion_tokens*pricing.output)/1e6;
+ const previous=historical.flatMap(report=>report.attempts.filter(a=>a.case_id===item.case_id).map(a=>({report,item:a}))).at(-1);
+ const old=previous?records.get(previous.item.evaluation_id):item.baseline_evaluation_id?await json(join('data',item.baseline_evaluation_id+'.json')):null;
+ if(old){assert.deepEqual(old.conversation.transcript,current.conversation.transcript);assert.deepEqual(old.checklist,current.checklist);}
+ sharedComparisons.push({case_id:item.case_id,reference_prompt:old?.prompt_version??null,current_prompt:current.prompt_version,
+  reference_type:previous?'saved historical experiment':old?'saved DEV 1.3':'new synthetic case; no baseline',checks:item.checks,
+  changes:old?current.ai_review?.criteria.filter(c=>old.ai_review?.criteria.some(o=>o.criterion_id===c.criterion_id&&o.value!==c.value)).map(c=>({id:c.criterion_id,before:old.ai_review.criteria.find(o=>o.criterion_id===c.criterion_id).value,after:c.value,explanation:c.explanation})):[],
+  status:current.status,error:current.error??null});
+}
 const repeats=[after,...followup].flatMap(report=>report.attempts.filter(b=>b.repeat_of).map(b=>{
  const a=report.attempts.find(a=>a.case_id===b.repeat_of);assert.ok(a);
  return {stage:report.stage,id:b.repeat_of,checks:Object.keys({...a.values,...b.values}).map(c=>({id:c,first:a.values[c]??null,second:b.values[c]??null,same:a.values[c]===b.values[c]}))};
 }));
 const summary={notice:'Development diagnostics and assistant/user working interpretations only; no official or independent human GT. Not an accuracy estimate.',
- versions:{before:before.prompt_version,after:after.prompt_version,current:followup.at(-1)?.prompt_version??after.prompt_version},runs,synthetic,dev,repeats,findings,latest_findings:latestFindings,followup_controls:followupControls,interpretation_review:interpretationReview,
+ versions:{before:before.prompt_version,after:after.prompt_version,current:followup.at(-1)?.prompt_version??after.prompt_version},runs,synthetic,dev,repeats,findings,latest_findings:latestFindings,shared_comparisons:sharedComparisons,shared_cost:{...sharedCost,estimated_usd:sharedCost.unknown_usage_calls?null:sharedCost.known_usage_usd},followup_controls:followupControls,interpretation_review:interpretationReview,
  source_validation:sources,cost:{...cost,estimated_usd:cost.unknown_usage_calls?null:cost.known_usage_usd,pricing_source:pricing.source??'research/reliability/pricing.json',notice:'Estimate at saved Standard pricing, not a provider invoice.'},
  limitations:['Synthetic fixtures are development cases, not unseen test data. KZ needs native review.','Synthetic transcript text, roles and timestamps are identical between stages; anonymous conversation_id differs.','DEV baseline uses the saved previous run with matching transcript/checklist and model settings, not a simultaneous repeated A/B test.','Unresolved and failed checks are not counted as correct; disputed interpretations are not forced into a single GT.','A verified quote proves that text exists, not that the semantic verdict is correct.','Live web service is not restarted and official submission files are not rewritten.']};
 await writeFile(join(root,'comparison.json'),JSON.stringify(summary,null,2));
@@ -105,4 +122,4 @@ const lines=['Freax — проверка 04, 06, 07 по PDF',summary.notice,`${
  '', 'ПОВТОРЫ',...repeats.map(r=>`${r.id}: изменились ${r.checks.filter(c=>!c.same).map(c=>`${c.id} ${fmt(c.first)} → ${fmt(c.second)}`).join(', ')||'нет изменений'}`),
  '', `Исторические несовпадения/ошибки: ${findings.length}; остаточные после последних проверок: ${latestFindings.length}.`, `Источники: ${JSON.stringify(sources)}.`, `Стоимость: ${JSON.stringify(summary.cost)}.`, '',...summary.limitations];
 await writeFile(join(root,'report.txt'),lines.join('\n')+'\n');
-console.log(JSON.stringify({runs,latest_findings:latestFindings,source_validation:sources,cost:summary.cost},null,2));
+console.log(JSON.stringify({runs,latest_findings:latestFindings,shared_comparisons:sharedComparisons,source_validation:sources,cost:summary.cost},null,2));

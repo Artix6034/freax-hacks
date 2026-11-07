@@ -1,0 +1,10 @@
+{
+  "notice": "Known DEV regression cases, not official GT or a blind test. No external reference.",
+  "dev": [
+    {"id":"p1-ru-027","expected":{"06":[10]}},
+    {"id":"p1-ru-023","expected":{"07":["no"],"08":["yes"],"06":[10]}},
+    {"id":"p1-kz-012","expected":{"06":[10],"02":["yes"]}},
+    {"id":"p1-en-004","expected":{"06":[10]}}
+  ],
+  "repeat_dev": ["p1-ru-027"]
+}

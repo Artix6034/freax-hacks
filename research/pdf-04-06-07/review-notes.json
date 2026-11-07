@@ -4,8 +4,13 @@
     {
       "case_id": "p1-en-013",
       "criterion_id": "06",
-      "initial_expected": [10],
-      "working_values": [4, 7],
+      "initial_expected": [
+        10
+      ],
+      "working_values": [
+        4,
+        7
+      ],
       "authority": "User review: operator's gross violation makes client restate the goal; user is uncertain between an understandable glitch and forced clarification. Not official Ground Truth.",
       "reason": "Initial 10 is not an established reference. The client can continue after a glitch (7), but also restates the purpose after wrong-topic conduct (4). Preserve the original 10 expectation and raw mismatch, keep this interpretation disputed rather than claiming that either 4 or 7 is uniquely correct. No per-conversation override and no automatic verdict derived from 08."
     }
@@ -14,10 +19,26 @@
     {
       "case_id": "p1-ru-023",
       "criterion_id": "07",
-      "initial_expected": ["no"],
-      "working_values": ["no"],
+      "initial_expected": [
+        "no"
+      ],
+      "working_values": [
+        "no"
+      ],
       "authority": "User clarification: это не дальнейшая помощь а грубое нарушение. Not organizer Ground Truth.",
       "reason": "The private paid service bypassing the company is not the further-help component of proper service closing. It remains a gross violation under 08. A separate valid summary or legitimate further-help offer may still satisfy 07 with a farewell; no automatic penalty from 08 alone. Prompt 1.4 failed this expectation; recheck prompt 1.5 separately."
+    },
+    {
+      "case_id": "p4-ru-002",
+      "criterion_id": "04",
+      "initial_expected": [
+        15
+      ],
+      "working_values": [
+        10
+      ],
+      "authority": "User confirmation after seeing the 1.6 result; post-run review, not independent GT.",
+      "reason": "User accepts 10 because the practical next step for buying is missing. Preserve frozen expected 15 and raw mismatch in the experiment; do not use this relabeling to claim independent accuracy. No model score or prompt changed."
     }
   ]
 }

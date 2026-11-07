@@ -2,18 +2,10 @@ import { isDeepStrictEqual } from 'node:util';
 import { hash, importConversations, validateChecklist, validateReview, reviewStatus, nonempty, InputError } from './domain.js';
 import { calculate } from './scoring.js';
 import {legacyExecutionKey} from './execution.js';
+import {SUBMISSION_CRITERIA,submissionCompatibility} from './web/submission-compatibility.js';
+export {SUBMISSION_CRITERIA,submissionCompatibility};
 
 // Appendix Results, JSON 1.0. These are submission codes, not internal IDs.
-export const SUBMISSION_CRITERIA = Object.freeze([
-  { id:'01', code:'contact', type:'boolean', values:[true,false], weight:10 },
-  { id:'02', code:'discovery', type:'boolean', values:[true,false,null], weight:15 },
-  { id:'03', code:'identification', type:'boolean', values:[true,false,null], weight:20 },
-  { id:'04', code:'consultation', type:'scale', values:[0,5,10,15,20,null], weight:20 },
-  { id:'05', code:'empathy', type:'boolean', values:[true,false], weight:15 },
-  { id:'06', code:'dialogue', type:'scale', values:[0,4,7,10], weight:15 },
-  { id:'07', code:'closure', type:'boolean', values:[true,false,null], weight:5 },
-  { id:'08', code:'critical', type:'flag', values:[true,false], weight:0 }
-].map(c=>Object.freeze({...c,values:Object.freeze(c.values)})));
 const byCode=new Map(SUBMISSION_CRITERIA.map(c=>[c.code,c]));
 const VIEWS=['original','reviewed-final'];
 
@@ -41,16 +33,8 @@ export function submissionDataset(input,subset) {
 
 function compatibleChecklist(checklist) {
   validateChecklist(checklist);
-  check(checklist.criteria.length===8&&SUBMISSION_CRITERIA.every(c=>checklist.criteria.some(x=>x.id===c.id)),
-    'INCOMPATIBLE_CHECKLIST','Формат сдачи 1.0 требует исходные восемь кодов критериев; другой набор нужно согласовать с организаторами.');
-  for(const spec of SUBMISSION_CRITERIA){
-    const c=checklist.criteria.find(c=>c.id===spec.id);
-    check(c.type===spec.type,'INCOMPATIBLE_CHECKLIST',`Изменён тип критерия ${spec.code}; экспорт без согласованного соответствия невозможен.`);
-    if(spec.type==='scale'){
-      const values=c.scale.map(s=>s.value).sort((a,b)=>a-b),expected=spec.values.filter(v=>typeof v==='number');
-      check(isDeepStrictEqual(values,expected),'INCOMPATIBLE_CHECKLIST',`Шкала ${spec.code} не соответствует формату сдачи 1.0.`);
-    }
-  }
+  const result=submissionCompatibility(checklist);
+  check(result.compatible,'INCOMPATIBLE_CHECKLIST',result.issues.map(i=>i.message).join(' '));
   return checklist;
 }
 
@@ -58,7 +42,8 @@ function standardChecklist() {
   return {schema_version:'1.0',checklist_id:'submission-format-1',name:'Математика приложения JSON 1.0',version:1,
     rounding:'ROUND_HALF_UP',instructions:'Веса и шкалы из приложения к гайду; только проверка арифметики.',
     criteria:SUBMISSION_CRITERIA.map(c=>({id:c.id,name:c.code,section:'',type:c.type,weight:c.weight,
-      allow_na:c.values.includes(null),na_rule:c.values.includes(null)?'Условие N/A определяется действующим чек-листом.':'',
+      allow_na:c.values.includes(null),na_rule:c.id==='01'?'Приветствие не попало в запись из-за отсутствия начала записи.':c.values.includes(null)?'Условие N/A определяется действующим чек-листом.':'',
+      ...(c.id==='01'?{na_channels:['voice call'],na_condition:'recording_started_after_greeting'}:{}),
       instruction:'Проверка формата, не инструкция оценщику.',
       scale:c.type==='scale'?c.values.filter(v=>typeof v==='number').map(value=>({value,description:String(value)})):[],
       allowed_values:c.values.map(v=>v===true?'yes':v===false?'no':v===null?'na':v)}))};
@@ -156,7 +141,9 @@ function exportResult(record,conversation,view) {
     const rows=new Map(review.criteria.map(c=>[c.criterion_id,c]));
     const criteria=SUBMISSION_CRITERIA.map(spec=>{
       const row=rows.get(spec.id),value=row.value==='yes'?true:row.value==='no'?false:row.value==='na'?null:row.value;
-      check(spec.values.includes(value),'UNSUPPORTED_VALUE',`Значение ${spec.code} не представимо в формате сдачи 1.0. В частности, contact не допускает null.`);
+      check(spec.values.includes(value),'UNSUPPORTED_VALUE',`Значение ${spec.code} не представимо в формате сдачи 1.0.`);
+      if(spec.id==='01'&&value===null)check(conversation.channel==='voice call'&&row.na_condition==='recording_started_after_greeting',
+        'CONTACT_NA_SCOPE','contact=null допустим только для DEV-звонка: подтверждено отсутствие начала записи и приветствия.');
       const turns=new Set(row.evidence.map(e=>position.get(e.message_id)));
       for(const range of row.checked_ranges){
         for(let i=position.get(range.from_message_id);i<=position.get(range.to_message_id);i++)turns.add(i);
@@ -219,10 +206,16 @@ export function validateSubmission(document,{dataset,subset,checklist}={}) {
         'INVALID_CRITERION','Неизвестный/повторный код или поля критерия.');seen.add(spec.code);
       check(spec.values.includes(criterion.value),'INVALID_VALUE',`Недопустимое значение ${spec.code}. null означает только разрешённый N/A.`);
       check(nonempty(criterion.rationale),'EMPTY_RATIONALE','Нет rationale критерия.');
+      if(spec.id==='01'&&criterion.value===null){
+        const contact=mathChecklist.criteria.find(c=>c.id==='01');
+        check(subset==='dev'&&sources.get(result.conversation_id).channel==='voice call'&&contact.allow_na&&contact.na_condition==='recording_started_after_greeting'&&(!contact.na_channels||contact.na_channels.includes('voice call')),
+          'CONTACT_NA_SCOPE','contact=null допустим только для DEV-звонка с условием отсутствующего начала записи; для чатов запрещён.');
+      }
       const turns=criterion.evidence_turns,length=sources.get(result.conversation_id).transcript.length;
       check(Array.isArray(turns)&&turns.length>0&&turns.every(n=>Number.isInteger(n)&&n>=1&&n<=length)&&new Set(turns).size===turns.length,
         'INVALID_TURNS','evidence_turns должны ссылаться с 1 на исходный массив, включая клиента, бота и события.');
-      internal.push({criterion_id:spec.id,value:criterion.value===true?'yes':criterion.value===false?'no':criterion.value===null?'na':criterion.value});
+      internal.push({criterion_id:spec.id,value:criterion.value===true?'yes':criterion.value===false?'no':criterion.value===null?'na':criterion.value,
+        ...(spec.id==='01'&&criterion.value===null?{na_condition:'recording_started_after_greeting'}:{})});
     }
     check(exactKeys(result.score,['final_score','critical_flag'])&&typeof result.score.final_score==='number'&&Number.isFinite(result.score.final_score)&&result.score.final_score>=0&&result.score.final_score<=100&&Math.abs(result.score.final_score*100-Math.round(result.score.final_score*100))<1e-8,
       'INVALID_SCORE','final_score должен быть числом 0–100 с округлением до двух знаков.');
@@ -246,6 +239,6 @@ export function submissionSchema() {
     score:obj({final_score:{type:'number',minimum:0,maximum:100,multipleOf:0.01},critical_flag:{type:'boolean'}})});
   const error=obj({conversation_id:{type:'string',minLength:1},status:{const:'error'},criteria:{type:'array',maxItems:0},score:{type:'null'},error:{type:'string',minLength:1}});
   return {$schema:'https://json-schema.org/draft/2020-12/schema',title:'CQA submission JSON 1.0',
-    $comment:'Appendix Results. Dataset coverage, source turn bounds, flag equality and exact arithmetic also require src/submission.js.',
+    $comment:'Appendix Results plus organizer clarification 2026-11-08: contact=null only for DEV voice calls with missing recording start/greeting. Channel/condition checks, dataset coverage, source turn bounds, flag equality and arithmetic require src/submission.js.',
     ...obj({schema_version:{const:'1.0'},team_name:{type:'string',minLength:1},model:obj({mode:{enum:['local','external_api','hybrid']},name:{type:'string',minLength:1}}),results:{type:'array',minItems:1,items:{oneOf:[ok,error]}}})};
 }

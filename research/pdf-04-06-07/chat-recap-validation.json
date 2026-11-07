@@ -1,0 +1,10 @@
+{
+  "notice":"Known development cases and user working interpretations, not official GT. No external reference.",
+  "dev":[
+    {"id":"p1-kz-012","expected":{"02":["yes"],"06":[10]}},
+    {"id":"p1-kz-008","expected":{"02":["na"],"06":[7]}},
+    {"id":"p1-ru-027","expected":{"06":[10]}},
+    {"id":"p1-ru-023","expected":{"07":["no"],"08":["yes"],"06":[10]}}
+  ],
+  "repeat_dev":["p1-kz-012"]
+}

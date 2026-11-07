@@ -101,11 +101,19 @@ test('unknown zero-weight critical is an error in submission even with an intern
   const r=buildSubmission(b).document.results[0];assert.equal(r.status,'error');assert.equal(r.score,null);assert.match(r.error,/critical/);
 });
 
-test('voice contact NA remains internally valid but cannot become null contact in the official file',()=>{
+test('organizer permits contact null for DEV voice late-start only; chat null and unknown ASR stay rejected',()=>{
   const b=batch('dev',updated),r=b.evaluations[60];
   Object.assign(r.ai_review.criteria[0],{value:'na',na_reason:'ARTIFICIAL: late recording start.',na_condition:'recording_started_after_greeting'});
   r.original_score=calculate(r.checklist,r.ai_review,r.conversation.channel);
-  const item=buildSubmission(b).document.results[60];assert.equal(item.status,'error');assert.match(item.error,/contact/);
+  const document=buildSubmission(b).document,item=document.results[60];assert.equal(item.status,'ok');assert.equal(item.criteria[0].value,null);
+  validateSubmission(document,{dataset:b.dataset,subset:'dev',checklist:updated});
+  validateSubmission(document,{dataset:b.dataset,subset:'dev'});
+  const invalid=structuredClone(document);invalid.results[0].criteria[0].value=null;
+  assert.throws(()=>validateSubmission(invalid,{dataset:b.dataset,subset:'dev',checklist:updated}),e=>e.code==='CONTACT_NA_SCOPE');
+  const prod=batch(),pdoc=buildSubmission(prod).document;pdoc.results[0].criteria[0].value=null;
+  assert.throws(()=>validateSubmission(pdoc,{dataset:prod.dataset,subset:'prod'}),e=>e.code==='CONTACT_NA_SCOPE');
+  const unknown=batch('dev',updated);partial(unknown.evaluations[60],'01');
+  assert.equal(buildSubmission(unknown).document.results[60].status,'error');
 });
 
 test('original partial never inherits a completed human-final result; view must be explicit',()=>{

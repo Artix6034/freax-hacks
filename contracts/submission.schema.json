@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "CQA submission JSON 1.0",
-  "$comment": "Appendix Results. Dataset coverage, source turn bounds, flag equality and exact arithmetic also require src/submission.js.",
+  "$comment": "Appendix Results plus organizer clarification 2026-11-08: contact=null only for DEV voice calls with missing recording start/greeting. Channel/condition checks, dataset coverage, source turn bounds, flag equality and arithmetic require src/submission.js.",
   "type": "object",
   "properties": {
     "schema_version": {
@@ -62,7 +62,8 @@
                         "value": {
                           "enum": [
                             true,
-                            false
+                            false,
+                            null
                           ]
                         },
                         "rationale": {

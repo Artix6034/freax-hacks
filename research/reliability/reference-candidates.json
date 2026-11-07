@@ -1,0 +1,64 @@
+{
+  "status": "rejected_external_sources_prohibited",
+  "use_in_evaluation": false,
+  "user_constraint": "User categorically prohibits external resources including public Freedom Broker documents. All entries below are historical rejected research, not approved reference. Never load them into verified_reference, prompts, retrieval, labels or scoring.",
+  "checked_on": "2026-11-08",
+  "notice": "Public source observations, not organizer policy or Ground Truth. Publication update date is not necessarily effective-from date. Check company, product, jurisdiction and transcript period before approving use. No runtime CQA_REFERENCE_FILE was changed.",
+  "facts": [
+    {
+      "id": "1042-language",
+      "source": "https://fbroker.kz/faq/question/what-is-1042-s-form",
+      "source_title": "Что такое форма 1042-S, как ее получить и чем она полезна",
+      "source_updated_on": "2026-09-22",
+      "effective_from": null,
+      "company": "Freedom Finance Global PLC",
+      "product": "Форма 1042-S, предоставляемая компанией",
+      "statement": "FAQ компании описывает доступность формы на английском языке и исключает другие языковые версии в указанном контексте.",
+      "does_not_establish": [
+        "Применимость к клиентам другой компании Freedom",
+        "Налоговые обязанности конкретного клиента",
+        "Доступность формы за конкретный год",
+        "Действие этого правила до даты публикации"
+      ],
+      "retrieval": "Search result plus full HTML fetched successfully with Node fetch; main article inspected after removing markup. Web open timed out.",
+      "local_source_snapshot": "data/partial-review/sources/form1042.html",
+      "approval": "rejected_external_sources_prohibited"
+    },
+    {
+      "id": "trading-vs-d-account",
+      "source": "https://fbroker.kz/file/kak-kupit-akcii.pdf",
+      "source_title": "Как купить акции в приложении Freedom Broker",
+      "source_updated_on": null,
+      "effective_from": null,
+      "company": "Official fbroker.kz publication; confirm relevant legal entity per dialogue",
+      "product": "Приложение Freedom Broker, торговый счёт и накопительный D-счёт",
+      "statement": "В инструкции покупка ценных бумаг относится к торговому счёту; D-счёт описан как неторговый и связанный с хранением средств и пополнением торгового счёта.",
+      "does_not_establish": [
+        "Любые комиссии и сроки перевода",
+        "Возможности конкретного счёта клиента",
+        "Правила других продуктов с похожим названием",
+        "Историческую дату начала действия"
+      ],
+      "retrieval": "Official two-page PDF retrieved by web tool; relevant text on first page.",
+      "approval": "rejected_external_sources_prohibited"
+    },
+    {
+      "id": "profile-update-limit",
+      "source": "https://fbroker.kz/faq/question/updating-personal-data--requestionnaire-",
+      "source_title": "Обновление персональных данных (переанкетирование)",
+      "source_updated_on": "2026-09-28",
+      "effective_from": null,
+      "company": "Freedom Finance Global PLC, subject to distinctions stated in article",
+      "product": "Актуализация сведений действующего клиента",
+      "statement": "FAQ допускает временное ограничение исполнения поручений, включая вывод, до подтверждения актуальности сведений. Список документов зависит от ситуации.",
+      "does_not_establish": [
+        "Обязательность повторной заявки на вывод после обновления",
+        "Запрет подать заявку заранее",
+        "Правила первичной регистрации гражданина Кыргызстана с ВНЖ Казахстана",
+        "Необязательность предоставления ВНЖ"
+      ],
+      "local_source_snapshot": "data/partial-review/sources/requestionnaire.html",
+      "approval": "rejected_external_sources_prohibited"
+    }
+  ]
+}

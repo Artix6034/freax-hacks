@@ -3,7 +3,7 @@ import { SCHEMA_VERSION, buildReviewSchema, decodeSchemaResponse } from './schem
 import { aiFailure, cleanUsage, requestChat } from './transport.js';
 import { SYSTEM_PROMPT } from './prompt.js';
 
-export const PROMPT_VERSION = 'cqa-facts-1.5-service-closing-grounding';
+export const PROMPT_VERSION = 'cqa-facts-1.6.1-contextual-recap';
 export function providerConfig(env = process.env) {
   const config = { provider: env.AI_PROVIDER || '', baseUrl: env.AI_BASE_URL || '', model: env.AI_MODEL || '',
     apiKey: env.AI_API_KEY || '', timeoutMs: Number(env.AI_TIMEOUT_MS || 120000), jsonMode: env.AI_JSON_MODE !== 'false',
