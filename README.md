@@ -17,7 +17,7 @@ node --env-file-if-exists=.env scripts/start-prod.mjs
 ## Сдача
 
 - [DEV results.json](results/dev/results.json): 65 диалогов, 54 полных.
-- [PROD results.json](results/prod/results.json): 10 FBroker, 9 полных после отдельного пересмотра; один неопределённый 04. [Детали и расходы](docs/prod-terra-2026-11-08.txt).
+- [PROD results.json](results/prod/results.json): исходные ответы GPT-6.1 Terra по 10 FBroker, без ручных правок; 8 полных и 2 частичных. [Детали и расходы](docs/prod-terra-2026-11-08.txt).
 - [Презентация, 2 слайда](presentations/Freax-CQA-Doomsday-demo.pptx): стек и стоимость (~$0.041/чат).
 - [Порядок сдачи](docs/submission-morning-guide-2026-11-08.txt) · [Форма организаторов](https://forms.gle/Nz34xz4yK4XurwAt7).
 
