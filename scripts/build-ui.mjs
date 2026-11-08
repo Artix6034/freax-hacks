@@ -1,0 +1,11 @@
+import {build} from 'esbuild';
+import {readFileSync,writeFileSync,mkdirSync,rmSync} from 'node:fs';
+import {resolve} from 'node:path';
+import {execFileSync} from 'node:child_process';
+const root=resolve(import.meta.dirname,'..');
+mkdirSync(resolve(root,'.ui-build'),{recursive:true});
+execFileSync(process.execPath,[resolve(root,'node_modules/@tailwindcss/cli/dist/index.mjs'),'-i',resolve(root,'frontend/styles/widgets.css'),'-o',resolve(root,'.ui-build/tailwind.css'),'--minify'],{cwd:root,stdio:'inherit'});
+const css=readFileSync(resolve(root,'.ui-build/tailwind.css'),'utf8')+'\n'+readFileSync(resolve(root,'frontend/components/widgets-extracted.css'),'utf8')+'\n'+readFileSync(resolve(root,'frontend/styles/widget-overrides.css'),'utf8');
+writeFileSync(resolve(root,'src/web/ui-widgets.css'),css);
+await build({entryPoints:[resolve(root,'frontend/widgets.tsx')],outfile:resolve(root,'src/web/ui-widgets.js'),bundle:true,minify:true,format:'esm',platform:'browser',target:'es2022',jsx:'automatic',define:{'process.env.NODE_ENV':'"production"'},legalComments:'inline'});
+console.log('Built local UI widgets. No runtime configuration is included.');

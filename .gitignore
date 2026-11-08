@@ -11,3 +11,6 @@ reference/
 __pycache__/
 *.py[cod]
 research/**/prepared/
+
+.ui-build/
+.npm-cache/

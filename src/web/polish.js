@@ -2,7 +2,7 @@ import {mountSelectMenus} from './select-menu.js';
 import {mountHeroDots} from './hero-dots.js';
 
 export function mountPolish(){
- mountSelectMenus();mountHeroDots(document.querySelector('#hero-dot-stage'));
+ mountSelectMenus();if(!document.querySelector('#hero-widget'))mountHeroDots(document.querySelector('#hero-dot-stage'));
  const reduced=matchMedia('(prefers-reduced-motion: reduce)'),animations=new Set();
  const disabled=()=>reduced.matches||document.documentElement.dataset.motion==='off';
  const groups=[['.landing-header',0],['.hero-copy > *',65],['.hero-visual',0],['.landing-section-heading',0],['.how-grid > article',70],['.feature-list > article',70],['.landing-cta',0],['.service-header',0],['.intro',0],['.metric',55],['.setup-card',65]];

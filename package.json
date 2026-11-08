@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=24" },
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "start": "node --env-file-if-exists=.env scripts/start-prod.mjs",
     "prod:preflight": "node --env-file-if-exists=.env scripts/prepare-prod.mjs --preflight",
@@ -11,6 +13,15 @@
     "evaluate:batch": "node --env-file-if-exists=.env scripts/evaluate-batch.mjs",
     "export:results": "node scripts/export-results.mjs export",
     "check:results": "node scripts/export-results.mjs validate",
-    "submission:ready": "node scripts/export-results.mjs readiness"
+    "submission:ready": "node scripts/export-results.mjs readiness",
+    "build:ui": "node scripts/build-ui.mjs"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.5",
+    "esbuild": "^0.25.12",
+    "lucide-react": "^1.70.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tailwindcss": "^4.3.5"
   }
 }

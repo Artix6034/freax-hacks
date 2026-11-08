@@ -5,11 +5,12 @@ const $=selector=>document.querySelector(selector);
 function renderView(){
  const hash=location.hash.slice(1),service=new URLSearchParams(location.search).get('embed')==='1'||['service','overview','workspace','import-panel','batch-panel','editor','history'].includes(hash);
  document.documentElement.dataset.view=service?'service':'landing';$('#landing-view').hidden=service;$('#service-view').hidden=!service;
+ if(hash==='history'&&$('#history').hidden&&typeof $('#history-toggle').onclick==='function')$('#history-toggle').click();
  if(hash==='batch-panel')$('#batch-disclosure').open=true;
  if(hash==='editor'){$('#editor').hidden=false;$('#editor-toggle').setAttribute('aria-expanded','true');}
  requestAnimationFrame(()=>{if(!hash||hash==='home'||hash==='service')window.scrollTo({top:0,behavior:'instant'});else document.getElementById(hash)?.scrollIntoView({block:'start'});});
 }
-window.addEventListener('hashchange',renderView);renderView();
+window.addEventListener('hashchange',renderView);window.addEventListener('cqa:ready',renderView);renderView();
 if(new URLSearchParams(location.search).get('embed')==='1')document.documentElement.dataset.embed='true';
 const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
 let motionOff=reduced.matches;

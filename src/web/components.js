@@ -2,9 +2,10 @@ import {workflowState,appendNotice} from './ui-model.js';
 import {mountHalftone} from './halftone.js';
 import {mountPolish} from './polish.js';
 import {mountService} from './service.js';
+import {filterCollection} from './examples.js';
 
-// Framework-neutral adaptations: preserve the interactions of the supplied
-// components while the existing Node backend and HTML controller stay intact.
+// Native controls and React widgets share controller events. Model requests
+// and saved results remain managed by the existing API controller.
 export function mountComponents(){
  queueMicrotask(()=>{mountPolish();mountService();});
  const $=s=>document.querySelector(s);
@@ -31,7 +32,22 @@ export function mountComponents(){
  document.addEventListener('pointerdown',e=>{if(!notifications.hidden&&!notifications.contains(e.target)&&!trigger.contains(e.target))setNotifications(false);});
  notifications.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();setNotifications(false,true);}});
  window.addEventListener('cqa:notice',e=>{notices=appendNotice(notices,e.detail.message);drawNotices();});
- let priorRunning=false,folderKey='';
+ let priorRunning=false,folderKey='',files=[],selectedIndex='';
+ function drawCollection(){
+  const shown=filterCollection(files,$('#collection-search').value,$('#collection-language').value);
+  $('#collection-count').textContent=`Показано: ${shown.length} из ${files.length}`;
+  $('#folder-conversations').replaceChildren();
+  for(const file of shown){
+   const b=document.createElement('button');b.type='button';b.className='folder-file';b.dataset.index=String(file.index);b.setAttribute('aria-current',String(String(file.index)===selectedIndex));
+   const name=document.createElement('span');name.className='folder-file-name';name.textContent=file.id;
+   const meta=document.createElement('small');meta.textContent=`${file.language} · ${file.channel==='voice call'?'Звонок':'Чат'}`;
+   const preview=document.createElement('span');preview.className='folder-file-preview';preview.textContent=file.preview||'В диалоге нет реплик клиента.';
+   b.append(name,meta,preview);b.onclick=()=>{const select=$('#conversation-select');select.value=String(file.index);select.dispatchEvent(new Event('change',{bubbles:true}));location.hash='workspace';};
+   $('#folder-conversations').append(b);
+  }
+  if(!shown.length){const p=document.createElement('p');p.className='hint';p.textContent='По этим условиям диалоги не найдены.';$('#folder-conversations').append(p);}
+ }
+ $('#collection-search').addEventListener('input',drawCollection);$('#collection-language').addEventListener('change',drawCollection);
  window.addEventListener('cqa:state',e=>{
   const s=e.detail,workflow=workflowState(s);
   $('#pipeline-summary').textContent=workflow.summary;$('#pipeline-mode').textContent=workflow.mode;$('#pipeline-log').textContent=workflow.log;
@@ -40,19 +56,13 @@ export function mountComponents(){
   if(s.running&&!priorRunning){notices=appendNotice(notices,`Запущена оценка диалога ${s.activeId}.`);drawNotices();$('#workflow-panel').open=true;}
   if(!s.running&&priorRunning){notices=appendNotice(notices,'Запрос завершён.');drawNotices();}
   priorRunning=s.running;
-  const key=JSON.stringify(s.files??[]);
+  const key=JSON.stringify(s.files??[]);selectedIndex=$('#conversation-select').value;
   if(key!==folderKey){
-   folderKey=key;$('#folder-tray').hidden=!s.count;$('#folder-meta').textContent=s.count?`В папке: ${s.count} · ${s.chats} чатов · ${s.calls} звонков`:'Один диалог или набор';
-   $('#folder-conversations').replaceChildren();
-   for(const file of s.files??[]){
-    const b=document.createElement('button');b.type='button';b.className='folder-file';b.dataset.index=file.index;
-    const name=document.createElement('span');name.textContent=file.id;
-    const meta=document.createElement('small');meta.textContent=`${file.language} · ${file.channel==='voice call'?'Звонок':'Чат'}`;
-    b.append(name,meta);b.onclick=()=>{const select=$('#conversation-select');select.value=String(file.index);select.dispatchEvent(new Event('change',{bubbles:true}));$('#workspace').scrollIntoView({block:'start'});};
-    $('#folder-conversations').append(b);
-   }
+   folderKey=key;files=s.files??[];$('#folder-tray').hidden=!s.count;
+   $('#folder-meta').textContent=s.count?`${s.count} диалогов · ${s.chats} чатов · ${s.calls} звонков`:'Набор не загружен';
+   drawCollection();
   }
-  for(const file of $('#folder-conversations').children)file.setAttribute('aria-current',String(file.dataset.index===$('#conversation-select').value));
+  for(const file of $('#folder-conversations').children)if(file.dataset.index!==undefined)file.setAttribute('aria-current',String(file.dataset.index===selectedIndex));
  });
  mountHalftone($('#halftone-footer'),$('#footer-dots'));
 }

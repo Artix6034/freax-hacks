@@ -1,0 +1,19 @@
+.dotfield-stage{height:640px;min-height:560px;color:#000;background:radial-gradient(ellipse at 50% 43%,rgb(79 175 61 / .035),transparent 65%),#fff;font-family:Manrope,Arial,sans-serif}
+.dotfield-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}.dotfield-actions .button{min-width:183px;font-size:13px}.dotfield-actions .secondary{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;padding:13px 21px;font-size:12px;border-radius:9px}
+.dotfield-eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid rgb(0 0 0 / .08);border-radius:20px;padding:7px 12px;font-size:10px;background:rgb(255 255 255 / .8);color:rgb(0 0 0 / .6)}
+.dotfield-eyebrow:before{content:"";height:5px;width:5px;border-radius:50%;background:#4FAF3D}
+#hero-widget .text-muted-foreground{color:rgb(0 0 0 / .6)}
+#hero-widget{min-height:640px}
+.gf-root .gf-hit:hover:not(:disabled){background:transparent;border-color:transparent;color:var(--gf-ink);box-shadow:none}
+.gf-root .gf-key:hover:not(:disabled){background:rgb(255 255 255 / .65);border-color:rgb(0 0 0 / .1);color:var(--gf-ink);box-shadow:none}
+.gf-root .gf-menu-item:hover:not(:disabled){background:rgb(0 0 0 / .035);border-color:transparent;color:var(--gf-ink);box-shadow:none}
+#history-motion [data-slot=changelog-timeline]{max-width:none;border-radius:12px;width:100%;box-shadow:none}
+#history-motion [data-entry-trigger]{padding:5px 8px 5px 0;background:transparent;color:#000;border:0;box-shadow:none;font-family:Manrope,Arial,sans-serif;font-weight:450;border-radius:8px}
+#history-motion [data-entry-trigger]:hover:not(:disabled){background:rgb(0 0 0 / .015);color:#000;border:0;box-shadow:none}
+#history-motion h2{font-size:16px;line-height:1.5;font-weight:600}
+#history-motion [data-entry-copy] p{font-family:Manrope,Arial,sans-serif;font-size:11px;line-height:1.8}
+#history-motion [data-list-viewport]{scrollbar-width:thin;scrollbar-color:rgb(0 0 0 / .18) transparent}
+.collection-folders{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;padding:0 10px 25px}
+.collection-folders:empty{display:none}.collection-folders .gf-root{max-width:100%}
+.tour-artifacts{display:flex;justify-content:center;align-items:center;min-height:335px;padding:12px}
+@media(max-width:620px){.dotfield-stage{height:620px;min-height:580px}#hero-widget{min-height:620px}.dotfield-stage p{font-size:14px;line-height:1.8;max-width:330px}.dotfield-actions .button{min-width:155px;font-size:11px}.dotfield-actions .secondary{font-size:11px;padding:12px 15px}.collection-folders{gap:0}#history-motion [data-entry-trigger]{grid-template-columns:20px 32px 58px minmax(0,1fr) 12px;gap:5px}#history-motion [data-entry-trigger]>span:nth-child(4){font-size:10px}}

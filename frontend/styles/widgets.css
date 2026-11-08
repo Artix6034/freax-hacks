@@ -1,0 +1,19 @@
+@import "tailwindcss" source(none);
+@source "../components/*.tsx";
+@source "../widgets.tsx";
+@theme {
+ --color-background:#fff;
+ --color-foreground:#000;
+ --color-card:#fff;
+ --color-card-foreground:#000;
+ --color-primary:#4FAF3D;
+ --color-muted:rgb(0 0 0 / .035);
+ --color-muted-foreground:rgb(0 0 0 / .55);
+ --color-border:rgb(0 0 0 / .1);
+ --color-ring:#4FAF3D;
+ --color-chart-1:#4FAF3D;
+ --color-chart-2:#4FAF3D;
+ --color-chart-3:#000;
+ --font-sans:Manrope,Arial,sans-serif;
+ --font-mono:ui-monospace,SFMono-Regular,monospace;
+}

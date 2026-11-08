@@ -6,6 +6,7 @@ import {calculate} from '../src/scoring.js';
 import {submissionCompatibility} from '../src/web/submission-compatibility.js';
 import {connectEmbed} from '../src/web/embed.js';
 import {importConversations} from '../src/domain.js';
+import {TEACHING_CONVERSATION} from '../src/web/examples.js';
 
 // A small DOM boundary for exercising the actual controller, without a browser
 // or AI calls. Presentation/rendering is not simulated as a visual test.
@@ -23,24 +24,40 @@ const checklist=JSON.parse(await readFile(new URL('../config/checklist.v1.json',
 async function controller({search='',status={}}={}){
   const elements=new Map([...html.matchAll(/\bid="([^"]+)"/g)].map(m=>[`#${m[1]}`,new Element()]));
   const document={querySelector:s=>elements.get(s)??null,querySelectorAll:()=>[],createElement:()=>new Element()};
-  const requests=[],messages=[],handlers=new Map();let finish;
+  const requests=[],imports=[],messages=[],handlers=new Map();let finish;
   const parent={postMessage:(data,origin)=>messages.push({data,origin})};
   const win={location:{search},addEventListener:(type,fn)=>{if(!handlers.has(type))handlers.set(type,[]);handlers.get(type).push(fn);},dispatchEvent(event){for(const fn of handlers.get(event.type)??[])fn(event);}};
   win.parent=search.includes('embed=1')?parent:win;
   const fetch=async(path,options)=>{
     if(path==='/api/status')return {ok:true,json:async()=>({ready:true,model:'TEST ONLY',missing:[],batch_supported:false,...status})};
-    if(path==='/api/import')return {ok:true,json:async()=>({conversations:importConversations(JSON.parse(options.body))})};
+    if(path==='/api/import'){imports.push(JSON.parse(options.body));return {ok:true,json:async()=>({conversations:importConversations(JSON.parse(options.body))})};}
     if(path==='/api/checklists')return {ok:true,json:async()=>[structuredClone(checklist)]};
     if(path==='/api/evaluations'){
       requests.push(JSON.parse(options.body));return new Promise(resolve=>{finish=result=>resolve({ok:true,json:async()=>result});});
     }
     throw Error(`Unexpected request: ${path}`);
   };
-  const fn=new (Object.getPrototypeOf(async function(){}).constructor)('document','window','fetch','CustomEvent','renderEvidenceHTML','roleLabel','submissionCompatibility','connectEmbed',source.replace(/^import[^\n]+\n/gm,'')+'\nreturn {useConversations,renderResult,getChecklist:selectedChecklist,state:()=>({activeConversation,evaluation,running})};');
-  const app=await fn(document,win,fetch,class{constructor(type,init){this.type=type;Object.assign(this,init);}},renderEvidenceHTML,roleLabel,submissionCompatibility,connectEmbed);
-  return {app,elements,requests,messages,parent,receive:async event=>{for(const fn of handlers.get('message')??[])await fn(event);},finish:r=>finish(r)};
+  const fn=new (Object.getPrototypeOf(async function(){}).constructor)('document','window','fetch','CustomEvent','renderEvidenceHTML','roleLabel','submissionCompatibility','connectEmbed','TEACHING_CONVERSATION',source.replace(/^import[^\n]+\n/gm,'')+'\nreturn {useConversations,renderResult,getChecklist:selectedChecklist,state:()=>({activeConversation,evaluation,running})};');
+  const app=await fn(document,win,fetch,class{constructor(type,init){this.type=type;Object.assign(this,init);}},renderEvidenceHTML,roleLabel,submissionCompatibility,connectEmbed,TEACHING_CONVERSATION);
+  return {app,elements,requests,imports,messages,parent,receive:async event=>{for(const fn of handlers.get('message')??[])await fn(event);},finish:r=>finish(r)};
 }
 const conversation=id=>({conversation_id:id,channel:'agent chat',language:'RU',audio_url:null,transcript:[{message_id:'m0001',speaker:'operator',timestamp:'00:01',text:`СИНТЕТИЧЕСКИЙ ТЕСТ ${id}`} ]});
+
+test('the teaching example is imported and never starts a model request',async()=>{
+  const c=await controller();await c.elements.get('#example-import').onclick();
+  assert.equal(c.app.state().activeConversation.conversation_id,'TEACHING_EXAMPLE_RU');
+  assert.equal(c.app.state().evaluation,null);assert.equal(c.requests.length,0);
+  assert.deepEqual(c.imports,[TEACHING_CONVERSATION]);
+  assert.match(c.elements.get('#notice').textContent,/вымышленный учебный диалог/);
+  assert.equal(c.elements.get('#example-import').disabled,false);
+});
+
+test('the teaching example cannot replace an already imported collection',async()=>{
+  const c=await controller();c.app.useConversations([conversation('KEEP_EXISTING')]);
+  await c.elements.get('#example-import').onclick();
+  assert.equal(c.app.state().activeConversation.conversation_id,'KEEP_EXISTING');
+  assert.equal(c.imports.length,0);assert.equal(c.requests.length,0);
+});
 
 test('response for A preserves B after selection changes, next request uses B',async()=>{
   const c=await controller();c.app.useConversations([conversation('A'),conversation('B')]);

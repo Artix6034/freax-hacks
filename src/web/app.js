@@ -1,11 +1,12 @@
 import { renderEvidenceHTML, roleLabel } from './evidence.js';
 import { submissionCompatibility } from './submission-compatibility.js';
 import { connectEmbed } from './embed.js';
+import {TEACHING_CONVERSATION} from './examples.js';
 const $ = s => document.querySelector(s);
 let conversations = [], checklists = [], activeConversation = null, evaluation = null, modelReady = false, running = false;
 let focusedRange = null;
 let selectionRevision = 0;
-let notifyParent=()=>{},compatibilityKey=null;
+let notifyParent=()=>{},compatibilityKey=null,exampleLoading=false,lastHistoryRecords=null;
 let batchEnabled=false,batchRun=null,batchRefreshing=false,browserBatch=false;
 const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
 const labelValue = v => v===null?'Не определено':({ yes:'Да', no:'Нет', na:'N/A' }[v] ?? v);
@@ -52,10 +53,26 @@ function publishState() {
     criteria:selectedChecklist()?.criteria.length,version:selectedChecklist()?.version,
     score:evaluation?.final_score?.total??null,evaluated:Boolean(evaluation),evaluationStatus:evaluation?.status??null,modelReady,running,
     batch:batchRun?{status:batchRun.status,finished:batchRun.finished,total:batchRun.total}:null,
-    files:conversations.map((c,index)=>({index,id:c.conversation_id,channel:c.channel,language:c.language})),activeId:activeConversation?.conversation_id??null
+    files:conversations.map((c,index)=>({index,id:c.conversation_id,channel:c.channel,language:c.language,preview:c.transcript.find(m=>m.speaker==='client')?.text.slice(0,100)||''})),activeId:activeConversation?.conversation_id??null
   }}));
 }
 window.addEventListener?.('cqa:request-state',publishState);
+async function openTeachingExample(){
+ if(running||exampleLoading)return;
+ if(conversations.length){notice('Набор уже загружен. Можно оценить выбранный диалог.');return;}
+ const button=$('#example-import');exampleLoading=true;button.disabled=true;button.setAttribute('aria-busy','true');
+ try{const data=await api('/api/import',TEACHING_CONVERSATION);useConversations(data.conversations);notice('Загружен вымышленный учебный диалог. Для AI-оценки нажмите «Оценить диалог».');}
+ catch(e){notice(e.message);}finally{exampleLoading=false;button.disabled=false;button.setAttribute('aria-busy','false');}
+}
+async function openSavedEvaluation(id){
+ if(!/^[0-9a-f-]{36}$/.test(id))return;
+ try{renderResult(await api(`/api/evaluations/${id}`));window.location.hash='workspace';$('#workspace').scrollIntoView({block:'start'});}catch(e){notice(e.message);}
+}
+window.addEventListener?.('cqa:example-request',()=>{openTeachingExample();});
+window.addEventListener?.('cqa:open-record',event=>{openSavedEvaluation(event.detail?.id||'');});
+window.addEventListener?.('cqa:history-request',()=>{if(lastHistoryRecords)window.dispatchEvent(new CustomEvent('cqa:history-loaded',{detail:{records:lastHistoryRecords}}));});
+$('#example-import').onclick=openTeachingExample;
+
 function updateLaunch() {
   refreshCompatibility();
   $('#batch-start').disabled=!batchEnabled||!conversations.length||!modelReady||running||batchRun?.status==='running'||!mayEvaluate();
@@ -219,21 +236,21 @@ $('#result').addEventListener('submit', async e => {
 });
 let historyRequest=0;
 async function loadHistory() {
-  const request=++historyRequest;$('#history-list').innerHTML=skeletonHTML('history');$('#history-list').setAttribute('aria-busy','true');
+  const request=++historyRequest;window.dispatchEvent(new Event('cqa:history-loading'));$('#history-list').innerHTML=skeletonHTML('history');$('#history-list').setAttribute('aria-busy','true');
   try {
   const params=new URLSearchParams();
   for(const key of ['view','gross_error','conversation_id','status','checklist_version']) {
     const value=$(`#history-${key}`).value; if(value)params.set(key,value);
   }
-  const records=await api(`/api/evaluations?${params}`);if(request!==historyRequest)return;
+  const records=await api(`/api/evaluations?${params}`);if(request!==historyRequest)return;lastHistoryRecords=records;window.dispatchEvent(new CustomEvent('cqa:history-loaded',{detail:{records}}));
   $('#history-list').innerHTML=records.length?`<ol class="history-timeline">${records.map(r=>{
     const date=new Date(r.created_at),version=r.checklist_version==null?'Версия неизвестна':`Версия ${r.checklist_version}`;
     return `<li><details class="history-entry" data-status="${esc(r.status)}"><summary><span class="history-entry-copy"><span class="history-entry-meta"><time datetime="${esc(r.created_at)}">${esc(date.toLocaleString('ru-RU',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}))}</time><span class="history-status">${esc(statusLabel(r.status))}</span></span><strong>${esc(r.conversation_id)}</strong></span><span class="history-entry-score">${fmt(r.total)}<small>из 100</small></span><span class="history-chevron" aria-hidden="true"></span></summary><div class="history-entry-body"><p>${esc(r.checklist_name||r.checklist_id||'Чек-лист')} · ${esc(version)}</p><p>${r.view==='original'?'Исходная оценка AI':'Финальная версия'} · ${esc(flagLabel(r.gross_error))}</p><p class="hint">AI: ${esc(statusLabel(r.ai_status))} · финальный: ${esc(statusLabel(r.final_status))}${r.human_reviewed?' · есть ручной пересмотр':''}</p><button class="secondary history-open" data-id="${esc(r.evaluation_id)}">Открыть оценку<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8"/></svg></button></div></details></li>`;
   }).join('')}</ol>`:'<p class="hint">По выбранным фильтрам оценок нет.</p>';
-  } catch(e){if(request===historyRequest)$('#history-list').innerHTML='<p class="hint">История не загружена.</p>';throw e;}
+  } catch(e){if(request===historyRequest){$('#history-list').innerHTML='<p class="hint">История не загружена.</p>';window.dispatchEvent(new Event('cqa:history-failed'));}throw e;}
   finally {if(request===historyRequest)$('#history-list').setAttribute('aria-busy','false');}
 }
-$('#history-toggle').onclick=async()=>{ $('#history').hidden=!$('#history').hidden;publishState();if(!$('#history').hidden)try{await loadHistory();}catch(e){notice(e.message);} };
+$('#history-toggle').onclick=async()=>{ $('#history').hidden=false;publishState();if(!$('#history').hidden)try{await loadHistory();}catch(e){notice(e.message);} };
 $('#history-filters').onsubmit=async e=>{e.preventDefault();try{await loadHistory();}catch(err){notice(err.message);}};
 for(const id of ['view','gross_error','status'])$(`#history-${id}`).onchange=async()=>{try{await loadHistory();}catch(e){notice(e.message);}};
 $('#organizer-update').onclick=async()=>{try{
@@ -285,7 +302,7 @@ try {
   $('#model-status').textContent = status.ready ? status.model : 'AI не подключён';
   batchEnabled=Boolean(status.batch_supported);$('#batch-panel').hidden=!batchEnabled;
   if (!status.ready) notice(status.interface_preview?'Демонстрация интерфейса. Оценка и сохранение доступны в проекте с подключённым backend.':'Подключите модель на сервере, чтобы запускать оценку.');
-  await loadChecklists(); updateLaunch();
+  await loadChecklists(); updateLaunch();window.dispatchEvent(new Event('cqa:ready'));
   if(new URLSearchParams(window.location?.search??'').get('embed')==='1'){
     notifyParent=connectEmbed({window,origins:status.embed_origins??[],loadConversation:async conversation=>{const data=await api('/api/import',conversation);useConversations(data.conversations);notice();},onError:notice});
   }
