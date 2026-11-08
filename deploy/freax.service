@@ -1,0 +1,27 @@
+[Unit]
+Description=Freax CQA
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=freax
+Group=freax
+WorkingDirectory=/opt/freax
+ExecStart=/usr/local/bin/node --env-file=/etc/freax.env scripts/start-prod.mjs
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=130
+Environment=HOST=127.0.0.1
+Environment=PORT=3000
+Environment=CQA_DATA_DIR=/var/lib/freax
+StateDirectory=freax
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/freax
+
+[Install]
+WantedBy=multi-user.target

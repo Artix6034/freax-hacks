@@ -1,0 +1,12 @@
+{
+  "version": "cqa-facts-1.6.2-request-anchor-experiment",
+  "base_prompt_hash": "56e19a32a84ae80add2f28418ce3a0a9b92cbf60bd3e970a7ee4aba201a31c4d",
+  "created_from": "Organizer checklist pp. 1-3; completed baseline h2-request-timing-a/b and h2-essential-detail-a. No holdout results observed. Other hypotheses are unchanged because their new target checks have passed so far.",
+  "status": "Experimental interpretation, not official organizer clarification; active prompt remains unchanged.",
+  "edits": [
+    {
+      "old": "When the configured condition concerns sufficient initial information, judge sufficiency from the complete context available before the first human operator reply, including client messages to the bot and system context. Name any genuinely missing information relevant to answering the request.",
+      "new": "When the configured condition concerns sufficient initial information and specifies no different time boundary, assess the context when the client first formulates the material request, including prior client messages to the bot and system context. A greeting or generic invitation to state the request is not itself substantive clarification. If that formulated request already contains enough information, this N/A condition is met even when a human greeted earlier. If an essential detail was missing at request formulation, later clarification does not retroactively establish initial sufficiency. Name any genuinely missing information relevant to answering the actual request."
+    }
+  ]
+}

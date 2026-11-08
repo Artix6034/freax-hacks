@@ -24,8 +24,18 @@ async function body(req, objectOnly = true) {
   return parsed;
 }
 
+export function parseEmbedOrigins(value=''){
+  requireThat(typeof value==='string','CQA_EMBED_ORIGINS должен содержать адреса через запятую.');
+  const origins=value.split(',').map(v=>v.trim()).filter(Boolean);requireThat(origins.length<=10,'Допускается до 10 источников встраивания.');
+  return [...new Set(origins.map(v=>{let u;try{u=new URL(v);}catch{throw new InputError('Некорректный адрес встраивания.');}
+    requireThat((u.protocol==='https:'||u.protocol==='http:'&&['localhost','127.0.0.1','[::1]'].includes(u.hostname))&&!u.username&&!u.password&&!u.search&&!u.hash&&u.pathname==='/','Нужен точный HTTPS origin без пути и параметров.');return u.origin;}))];
+}
+
 export async function createApp({ directory = resolve(root, 'data'), provider, config = providerConfig(), referenceText,
-  datasetUrl = process.env.CQA_DATASET_URL, devFile = resolve(root, 'data/dev/api-response.json') } = {}) {
+  datasetUrl = process.env.CQA_DATASET_URL, devFile = resolve(root, 'data/dev/api-response.json'),embedOrigins=process.env.CQA_EMBED_ORIGINS||'',publicOrigin=process.env.CQA_PUBLIC_ORIGIN||'' } = {}) {
+  const allowedEmbedOrigins=parseEmbedOrigins(embedOrigins),publicOrigins=parseEmbedOrigins(publicOrigin);
+  requireThat(publicOrigins.length<=1,'CQA_PUBLIC_ORIGIN должен содержать один origin.');
+  const allowedPublicOrigin=publicOrigins[0]??null;
   const store = new Store(directory); await store.init();
   // Single-process local store: interrupted work must not look indefinitely active.
   for (const r of await store.list()) {
@@ -48,16 +58,17 @@ export async function createApp({ directory = resolve(root, 'data'), provider, c
   const server = http.createServer(async (req, res) => {
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('Cache-Control', 'no-store');
-    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; base-uri 'none'; frame-ancestors 'self'");
+    res.setHeader('Content-Security-Policy', `default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; base-uri 'none'; object-src 'none'; frame-ancestors 'self' ${allowedEmbedOrigins.join(' ')}`.trim());
     try {
       const url = new URL(req.url, 'http://localhost');
       if (req.method === 'GET' && url.pathname === '/favicon.ico') { res.writeHead(204); return res.end(); }
       // This prototype is intentionally local; prevent cross-site writes to the local AI proxy.
       if (req.method !== 'GET') {
-        if (req.headers.origin && req.headers.origin !== `http://${req.headers.host}`) throw new InputError('Запрос с другого сайта запрещён.', 403);
+        if (req.headers.origin && ![`http://${req.headers.host}`,`https://${req.headers.host}`,allowedPublicOrigin].includes(req.headers.origin)) throw new InputError('Запрос с другого сайта запрещён.', 403);
         requireThat(req.headers['content-type']?.startsWith('application/json'), 'Ожидается Content-Type: application/json.');
       }
-      if (req.method === 'GET' && url.pathname === '/api/status') return json(res, 200, { ready: config.ready, configured:config.ready, access_status:'not_verified', provider: config.provider, model: config.model, missing: config.missing, reference_loaded: Boolean(referenceText), dataset_ready:datasetReady(datasetUrl), local_dev_ready:localDevReady,
+      if (req.method === 'GET' && url.pathname === '/healthz') return json(res,200,{status:'ok',model_configured:config.ready});
+      if (req.method === 'GET' && url.pathname === '/api/status') return json(res, 200, { ready: config.ready, configured:config.ready, access_status:'not_verified', provider: config.provider, model: config.model, missing: config.missing, reference_loaded: Boolean(referenceText), dataset_ready:datasetReady(datasetUrl), local_dev_ready:localDevReady,embed_origins:allowedEmbedOrigins,
         prompt_version:PROMPT_VERSION,prompt_hash:hash(SYSTEM_PROMPT),schema_version:SCHEMA_VERSION,reference_hash:hash(referenceText),active_run_id:batches.active?.id??null,batch_supported:true });
       if(req.method==='GET'&&url.pathname==='/api/runs')return json(res,200,await batches.list());
       if(req.method==='POST'&&url.pathname==='/api/runs'){
@@ -133,7 +144,7 @@ export async function createApp({ directory = resolve(root, 'data'), provider, c
         if (req.method === 'GET' && !match[2]) return json(res, 200, await store.read(match[1]));
         if (req.method === 'POST' && match[2]) return json(res, 200, await service[match[2] === 'appeals' ? 'appeal' : 'resolve'](match[1], await body(req)));
       }
-      const assets = { '/': ['index.html', 'text/html'], '/app.js': ['app.js', 'text/javascript'], '/evidence.js':['evidence.js','text/javascript'], '/submission-compatibility.js':['submission-compatibility.js','text/javascript'], '/style.css': ['style.css', 'text/css'] };
+      const assets = { '/': ['index.html', 'text/html'], '/app.js': ['app.js', 'text/javascript'], '/evidence.js':['evidence.js','text/javascript'], '/embed.js':['embed.js','text/javascript'], '/submission-compatibility.js':['submission-compatibility.js','text/javascript'], '/style.css': ['style.css', 'text/css'], '/assets/freax.svg':['assets/freax.svg','image/svg+xml'], '/assets/manrope-variable.ttf':['assets/manrope-variable.ttf','font/ttf'] };
       if (req.method === 'GET' && assets[url.pathname]) {
         const [name, type] = assets[url.pathname];
         res.writeHead(200, { 'Content-Type': `${type}; charset=utf-8` });
@@ -147,5 +158,5 @@ export async function createApp({ directory = resolve(root, 'data'), provider, c
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const { server } = await createApp();
-  server.listen(Number(process.env.PORT || 3000), '127.0.0.1', () => console.log(`CQA: http://127.0.0.1:${server.address().port}`));
+  server.listen(Number(process.env.PORT || 3000), process.env.HOST||'127.0.0.1', () => console.log(`CQA: http://${process.env.HOST||'127.0.0.1'}:${server.address().port}`));
 }

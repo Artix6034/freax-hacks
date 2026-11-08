@@ -1,0 +1,2904 @@
+{
+  "version": "new-hypotheses-v1",
+  "notice": "Assistant-authored synthetic expectations, not official GT or independent accuracy. No DEV text/IDs used as fixtures. KZ translations require native review. Disputed slots fixed before calls; never remove new mismatches.",
+  "created_at": "2026-11-07T21:04:01.530Z",
+  "cases": [
+    {
+      "id": "h1-action-RU-a",
+      "hypothesis": 1,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "Намерение не сообщает текущее состояние.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-action-RU-a",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Я собираюсь открыть панель «Файлы». Помогите сохранить документ."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Панель «Файлы» уже открыта?"
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Да, панель открыта."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Нажмите «Сохранить» в этой панели."
+          },
+          {
+            "message_id": "m0005",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "Документ сохранён."
+          },
+          {
+            "message_id": "m0006",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "Если нужна ещё помощь, напишите. До свидания!"
+          }
+        ]
+      },
+      "pair_id": "h1-action-RU",
+      "changed_fact": "Только намерение открыть / панель уже открыта."
+    },
+    {
+      "id": "h1-action-RU-b",
+      "hypothesis": 1,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            7
+          ],
+          "reason": "Сразу повторно запрошено явно сообщённое состояние; один изолированный повтор.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-action-RU-b",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Я уже открыл панель «Файлы». Помогите сохранить документ."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Панель «Файлы» уже открыта?"
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Да, панель открыта."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Нажмите «Сохранить» в этой панели."
+          },
+          {
+            "message_id": "m0005",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "Документ сохранён."
+          },
+          {
+            "message_id": "m0006",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "Если нужна ещё помощь, напишите. До свидания!"
+          }
+        ]
+      },
+      "pair_id": "h1-action-RU",
+      "changed_fact": "Только намерение открыть / панель уже открыта."
+    },
+    {
+      "id": "h1-exact-RU-a",
+      "hypothesis": 1,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "Местонахождение названия не сообщает само название.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-exact-RU-a",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Название нужного раздела есть в письме. Помогите выбрать его."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Как точно называется нужный раздел?"
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Архив."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Выберите раздел «Архив»."
+          },
+          {
+            "message_id": "m0005",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "Раздел выбран."
+          },
+          {
+            "message_id": "m0006",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "Если нужна ещё помощь, напишите. До свидания!"
+          }
+        ]
+      },
+      "pair_id": "h1-exact-RU",
+      "changed_fact": "Факт существования названия / точное название уже сообщено."
+    },
+    {
+      "id": "h1-exact-RU-b",
+      "hypothesis": 1,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            7
+          ],
+          "reason": "Повтор точного названия без изменения состояния.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-exact-RU-b",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Нужный раздел называется «Архив». Помогите выбрать его."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Как точно называется нужный раздел?"
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Архив."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Выберите раздел «Архив»."
+          },
+          {
+            "message_id": "m0005",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "Раздел выбран."
+          },
+          {
+            "message_id": "m0006",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "Если нужна ещё помощь, напишите. До свидания!"
+          }
+        ]
+      },
+      "pair_id": "h1-exact-RU",
+      "changed_fact": "Факт существования названия / точное название уже сообщено."
+    },
+    {
+      "id": "h1-state-RU-a",
+      "hypothesis": 1,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "После изменения состояния его результат ещё неизвестен.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-state-RU-a",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "После перезапуска я ещё не проверил, появился ли список."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. После перезапуска список появился?"
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Да, список появился."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Выберите нужную строку из списка."
+          },
+          {
+            "message_id": "m0005",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "Строка выбрана."
+          },
+          {
+            "message_id": "m0006",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "Если нужна ещё помощь, напишите. До свидания!"
+          }
+        ]
+      },
+      "pair_id": "h1-state-RU",
+      "changed_fact": "Результат перезапуска ещё не проверен / результат явно подтверждён."
+    },
+    {
+      "id": "h1-state-RU-b",
+      "hypothesis": 1,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            7
+          ],
+          "reason": "Результат после перезапуска уже сообщён, запрос действительно повторён.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-state-RU-b",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "После перезапуска я проверил: список появился."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. После перезапуска список появился?"
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Да, список появился."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Выберите нужную строку из списка."
+          },
+          {
+            "message_id": "m0005",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "Строка выбрана."
+          },
+          {
+            "message_id": "m0006",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "Если нужна ещё помощь, напишите. До свидания!"
+          }
+        ]
+      },
+      "pair_id": "h1-state-RU",
+      "changed_fact": "Результат перезапуска ещё не проверен / результат явно подтверждён."
+    },
+    {
+      "id": "h3-practical-RU-a",
+      "hypothesis": 3,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "05": {
+          "values": [
+            "yes"
+          ],
+          "reason": "Адресная практическая помощь; извинения не нужны.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h3-practical-RU-a",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Не получается сохранить файл: я не вижу кнопку. Это неудобно."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Кнопка «Сохранить» находится внизу открытой панели."
+          }
+        ]
+      },
+      "pair_id": "h3-practical-RU",
+      "changed_fact": "Только реакция оператора: практическая помощь / общая вежливость."
+    },
+    {
+      "id": "h3-practical-RU-b",
+      "hypothesis": 3,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "05": {
+          "values": [
+            "no"
+          ],
+          "reason": "Вежливость без реакции на описанное неудобство.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h3-practical-RU-b",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Не получается сохранить файл: я не вижу кнопку. Это неудобно."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Спасибо за сообщение. Хорошего дня!"
+          }
+        ]
+      },
+      "pair_id": "h3-practical-RU",
+      "changed_fact": "Только реакция оператора: практическая помощь / общая вежливость."
+    },
+    {
+      "id": "h3-later-RU-a",
+      "hypothesis": 3,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "05": {
+          "values": [
+            "no"
+          ],
+          "reason": "Ответ на старую проблему не охватывает явно новое опасение.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h3-later-RU-a",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Не получается сохранить файл: я не вижу кнопку. Это неудобно."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Кнопка «Сохранить» находится внизу открытой панели."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Но теперь меня беспокоит другое: я ещё не подтверждал личность, а вы предлагаете обсуждать мой счёт."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "По файлу: кнопка «Сохранить» внизу панели. До свидания!"
+          }
+        ]
+      },
+      "pair_id": "h3-later-RU",
+      "changed_fact": "Только реакция на новое опасение; баллы 03/08 не назначают 05."
+    },
+    {
+      "id": "h3-later-RU-b",
+      "hypothesis": 3,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "05": {
+          "values": [
+            "yes"
+          ],
+          "reason": "Адресная реакция без обязательных извинений и без завершённой идентификации.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h3-later-RU-b",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Не получается сохранить файл: я не вижу кнопку. Это неудобно."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Кнопка «Сохранить» находится внизу открытой панели."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Но теперь меня беспокоит другое: я ещё не подтверждал личность, а вы предлагаете обсуждать мой счёт."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "По вашему опасению: данные счёта сейчас обсуждать не будем. Сначала запросим подтверждение личности; его завершение пока не подтверждено."
+          }
+        ]
+      },
+      "pair_id": "h3-later-RU",
+      "changed_fact": "Только реакция на новое опасение; баллы 03/08 не назначают 05."
+    },
+    {
+      "id": "h1-action-KZ-a",
+      "hypothesis": 1,
+      "language": "KZ",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "Намерение не сообщает текущее состояние.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-action-KZ-a",
+        "channel": "agent chat",
+        "language": "KZ",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "«Файлдар» панелін ашқалы жатырмын. Құжатты сақтауға көмектесіңізші."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Сәлеметсіз бе! Мен Линамын. «Файлдар» панелі ашық па?"
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Иә, панель ашық."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Осы панельдегі «Сақтау» батырмасын басыңыз."
+          },
+          {
+            "message_id": "m0005",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "Құжат сақталды."
+          },
+          {
+            "message_id": "m0006",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "Тағы көмек қажет болса, жазыңыз. Сау болыңыз!"
+          }
+        ]
+      },
+      "pair_id": "h1-action-KZ",
+      "changed_fact": "Только намерение открыть / панель уже открыта."
+    },
+    {
+      "id": "h1-action-KZ-b",
+      "hypothesis": 1,
+      "language": "KZ",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            7
+          ],
+          "reason": "Сразу повторно запрошено явно сообщённое состояние; один изолированный повтор.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-action-KZ-b",
+        "channel": "agent chat",
+        "language": "KZ",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "«Файлдар» панелін ашып қойдым. Құжатты сақтауға көмектесіңізші."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Сәлеметсіз бе! Мен Линамын. «Файлдар» панелі ашық па?"
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Иә, панель ашық."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Осы панельдегі «Сақтау» батырмасын басыңыз."
+          },
+          {
+            "message_id": "m0005",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "Құжат сақталды."
+          },
+          {
+            "message_id": "m0006",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "Тағы көмек қажет болса, жазыңыз. Сау болыңыз!"
+          }
+        ]
+      },
+      "pair_id": "h1-action-KZ",
+      "changed_fact": "Только намерение открыть / панель уже открыта."
+    },
+    {
+      "id": "h1-exact-KZ-a",
+      "hypothesis": 1,
+      "language": "KZ",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "Местонахождение названия не сообщает само название.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-exact-KZ-a",
+        "channel": "agent chat",
+        "language": "KZ",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Қажетті бөлімнің атауы хатта бар. Оны таңдауға көмектесіңізші."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Сәлеметсіз бе! Мен Линамын. Қажетті бөлімнің нақты атауы қандай?"
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Мұрағат."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "«Мұрағат» бөлімін таңдаңыз."
+          },
+          {
+            "message_id": "m0005",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "Бөлім таңдалды."
+          },
+          {
+            "message_id": "m0006",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "Тағы көмек қажет болса, жазыңыз. Сау болыңыз!"
+          }
+        ]
+      },
+      "pair_id": "h1-exact-KZ",
+      "changed_fact": "Факт существования названия / точное название уже сообщено."
+    },
+    {
+      "id": "h1-exact-KZ-b",
+      "hypothesis": 1,
+      "language": "KZ",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            7
+          ],
+          "reason": "Повтор точного названия без изменения состояния.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-exact-KZ-b",
+        "channel": "agent chat",
+        "language": "KZ",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Қажетті бөлімнің атауы — «Мұрағат». Оны таңдауға көмектесіңізші."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Сәлеметсіз бе! Мен Линамын. Қажетті бөлімнің нақты атауы қандай?"
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Мұрағат."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "«Мұрағат» бөлімін таңдаңыз."
+          },
+          {
+            "message_id": "m0005",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "Бөлім таңдалды."
+          },
+          {
+            "message_id": "m0006",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "Тағы көмек қажет болса, жазыңыз. Сау болыңыз!"
+          }
+        ]
+      },
+      "pair_id": "h1-exact-KZ",
+      "changed_fact": "Факт существования названия / точное название уже сообщено."
+    },
+    {
+      "id": "h1-state-KZ-a",
+      "hypothesis": 1,
+      "language": "KZ",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "После изменения состояния его результат ещё неизвестен.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-state-KZ-a",
+        "channel": "agent chat",
+        "language": "KZ",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Қайта іске қосқаннан кейін тізімнің пайда болғанын әлі тексермедім."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Сәлеметсіз бе! Мен Линамын. Қайта іске қосқаннан кейін тізім пайда болды ма?"
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Иә, тізім пайда болды."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Тізімнен қажетті жолды таңдаңыз."
+          },
+          {
+            "message_id": "m0005",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "Жол таңдалды."
+          },
+          {
+            "message_id": "m0006",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "Тағы көмек қажет болса, жазыңыз. Сау болыңыз!"
+          }
+        ]
+      },
+      "pair_id": "h1-state-KZ",
+      "changed_fact": "Результат перезапуска ещё не проверен / результат явно подтверждён."
+    },
+    {
+      "id": "h1-state-KZ-b",
+      "hypothesis": 1,
+      "language": "KZ",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            7
+          ],
+          "reason": "Результат после перезапуска уже сообщён, запрос действительно повторён.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-state-KZ-b",
+        "channel": "agent chat",
+        "language": "KZ",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Қайта іске қосқаннан кейін тексердім: тізім пайда болды."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Сәлеметсіз бе! Мен Линамын. Қайта іске қосқаннан кейін тізім пайда болды ма?"
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Иә, тізім пайда болды."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Тізімнен қажетті жолды таңдаңыз."
+          },
+          {
+            "message_id": "m0005",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "Жол таңдалды."
+          },
+          {
+            "message_id": "m0006",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "Тағы көмек қажет болса, жазыңыз. Сау болыңыз!"
+          }
+        ]
+      },
+      "pair_id": "h1-state-KZ",
+      "changed_fact": "Результат перезапуска ещё не проверен / результат явно подтверждён."
+    },
+    {
+      "id": "h3-practical-KZ-a",
+      "hypothesis": 3,
+      "language": "KZ",
+      "split": "discovery",
+      "expected": {
+        "05": {
+          "values": [
+            "yes"
+          ],
+          "reason": "Адресная практическая помощь; извинения не нужны.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h3-practical-KZ-a",
+        "channel": "agent chat",
+        "language": "KZ",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Файлды сақтай алмаймын: батырманы көрмей тұрмын. Бұл қолайсыз."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Сәлеметсіз бе! Мен Линамын. «Сақтау» батырмасы ашық панельдің төменгі жағында орналасқан."
+          }
+        ]
+      },
+      "pair_id": "h3-practical-KZ",
+      "changed_fact": "Только реакция оператора: практическая помощь / общая вежливость."
+    },
+    {
+      "id": "h3-practical-KZ-b",
+      "hypothesis": 3,
+      "language": "KZ",
+      "split": "discovery",
+      "expected": {
+        "05": {
+          "values": [
+            "no"
+          ],
+          "reason": "Вежливость без реакции на описанное неудобство.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h3-practical-KZ-b",
+        "channel": "agent chat",
+        "language": "KZ",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Файлды сақтай алмаймын: батырманы көрмей тұрмын. Бұл қолайсыз."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Сәлеметсіз бе! Мен Линамын. Хабарламаңызға рақмет. Күніңіз жақсы өтсін!"
+          }
+        ]
+      },
+      "pair_id": "h3-practical-KZ",
+      "changed_fact": "Только реакция оператора: практическая помощь / общая вежливость."
+    },
+    {
+      "id": "h3-later-KZ-a",
+      "hypothesis": 3,
+      "language": "KZ",
+      "split": "discovery",
+      "expected": {
+        "05": {
+          "values": [
+            "no"
+          ],
+          "reason": "Ответ на старую проблему не охватывает явно новое опасение.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h3-later-KZ-a",
+        "channel": "agent chat",
+        "language": "KZ",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Файлды сақтай алмаймын: батырманы көрмей тұрмын. Бұл қолайсыз."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Сәлеметсіз бе! Мен Линамын. «Сақтау» батырмасы ашық панельдің төменгі жағында орналасқан."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Енді мені басқа нәрсе алаңдатады: жеке басымды әлі растаған жоқпын, ал сіз шотымды талқылауды ұсынасыз."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Файл бойынша: «Сақтау» батырмасы панельдің төменгі жағында. Сау болыңыз!"
+          }
+        ]
+      },
+      "pair_id": "h3-later-KZ",
+      "changed_fact": "Только реакция на новое опасение; баллы 03/08 не назначают 05."
+    },
+    {
+      "id": "h3-later-KZ-b",
+      "hypothesis": 3,
+      "language": "KZ",
+      "split": "discovery",
+      "expected": {
+        "05": {
+          "values": [
+            "yes"
+          ],
+          "reason": "Адресная реакция без обязательных извинений и без завершённой идентификации.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h3-later-KZ-b",
+        "channel": "agent chat",
+        "language": "KZ",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Файлды сақтай алмаймын: батырманы көрмей тұрмын. Бұл қолайсыз."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Сәлеметсіз бе! Мен Линамын. «Сақтау» батырмасы ашық панельдің төменгі жағында орналасқан."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Енді мені басқа нәрсе алаңдатады: жеке басымды әлі растаған жоқпын, ал сіз шотымды талқылауды ұсынасыз."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Сіздің алаңдаушылығыңыз бойынша: қазір шот деректерін талқыламаймыз. Алдымен жеке басты растауды сұраймыз; оның аяқталғаны әзірге расталған жоқ."
+          }
+        ]
+      },
+      "pair_id": "h3-later-KZ",
+      "changed_fact": "Только реакция на новое опасение; баллы 03/08 не назначают 05."
+    },
+    {
+      "id": "h1-action-EN-a",
+      "hypothesis": 1,
+      "language": "EN",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "Намерение не сообщает текущее состояние.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-action-EN-a",
+        "channel": "agent chat",
+        "language": "EN",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "I'm going to open the Files panel. Please help me save the document."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Hello! I'm Lina. Is the Files panel open yet?"
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Yes, the panel is open."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Press Save in that panel."
+          },
+          {
+            "message_id": "m0005",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "The document has been saved."
+          },
+          {
+            "message_id": "m0006",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "If you need more help, please contact us. Goodbye!"
+          }
+        ]
+      },
+      "pair_id": "h1-action-EN",
+      "changed_fact": "Только намерение открыть / панель уже открыта."
+    },
+    {
+      "id": "h1-action-EN-b",
+      "hypothesis": 1,
+      "language": "EN",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            7
+          ],
+          "reason": "Сразу повторно запрошено явно сообщённое состояние; один изолированный повтор.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-action-EN-b",
+        "channel": "agent chat",
+        "language": "EN",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "I've already opened the Files panel. Please help me save the document."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Hello! I'm Lina. Is the Files panel open yet?"
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Yes, the panel is open."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Press Save in that panel."
+          },
+          {
+            "message_id": "m0005",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "The document has been saved."
+          },
+          {
+            "message_id": "m0006",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "If you need more help, please contact us. Goodbye!"
+          }
+        ]
+      },
+      "pair_id": "h1-action-EN",
+      "changed_fact": "Только намерение открыть / панель уже открыта."
+    },
+    {
+      "id": "h1-exact-EN-a",
+      "hypothesis": 1,
+      "language": "EN",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "Местонахождение названия не сообщает само название.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-exact-EN-a",
+        "channel": "agent chat",
+        "language": "EN",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "The name of the section I need is in the email. Please help me select it."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Hello! I'm Lina. What is the exact name of the section you need?"
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Archive."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Select the Archive section."
+          },
+          {
+            "message_id": "m0005",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "The section is selected."
+          },
+          {
+            "message_id": "m0006",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "If you need more help, please contact us. Goodbye!"
+          }
+        ]
+      },
+      "pair_id": "h1-exact-EN",
+      "changed_fact": "Факт существования названия / точное название уже сообщено."
+    },
+    {
+      "id": "h1-exact-EN-b",
+      "hypothesis": 1,
+      "language": "EN",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            7
+          ],
+          "reason": "Повтор точного названия без изменения состояния.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-exact-EN-b",
+        "channel": "agent chat",
+        "language": "EN",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "The section I need is called Archive. Please help me select it."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Hello! I'm Lina. What is the exact name of the section you need?"
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Archive."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Select the Archive section."
+          },
+          {
+            "message_id": "m0005",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "The section is selected."
+          },
+          {
+            "message_id": "m0006",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "If you need more help, please contact us. Goodbye!"
+          }
+        ]
+      },
+      "pair_id": "h1-exact-EN",
+      "changed_fact": "Факт существования названия / точное название уже сообщено."
+    },
+    {
+      "id": "h1-state-EN-a",
+      "hypothesis": 1,
+      "language": "EN",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "После изменения состояния его результат ещё неизвестен.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-state-EN-a",
+        "channel": "agent chat",
+        "language": "EN",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "After restarting, I haven't checked yet whether the list has appeared."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Hello! I'm Lina. Has the list appeared after restarting?"
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Yes, the list has appeared."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Select the row you need from the list."
+          },
+          {
+            "message_id": "m0005",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "The row is selected."
+          },
+          {
+            "message_id": "m0006",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "If you need more help, please contact us. Goodbye!"
+          }
+        ]
+      },
+      "pair_id": "h1-state-EN",
+      "changed_fact": "Результат перезапуска ещё не проверен / результат явно подтверждён."
+    },
+    {
+      "id": "h1-state-EN-b",
+      "hypothesis": 1,
+      "language": "EN",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            7
+          ],
+          "reason": "Результат после перезапуска уже сообщён, запрос действительно повторён.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-state-EN-b",
+        "channel": "agent chat",
+        "language": "EN",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "After restarting, I checked: the list has appeared."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Hello! I'm Lina. Has the list appeared after restarting?"
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Yes, the list has appeared."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Select the row you need from the list."
+          },
+          {
+            "message_id": "m0005",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "The row is selected."
+          },
+          {
+            "message_id": "m0006",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "If you need more help, please contact us. Goodbye!"
+          }
+        ]
+      },
+      "pair_id": "h1-state-EN",
+      "changed_fact": "Результат перезапуска ещё не проверен / результат явно подтверждён."
+    },
+    {
+      "id": "h3-practical-EN-a",
+      "hypothesis": 3,
+      "language": "EN",
+      "split": "discovery",
+      "expected": {
+        "05": {
+          "values": [
+            "yes"
+          ],
+          "reason": "Адресная практическая помощь; извинения не нужны.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h3-practical-EN-a",
+        "channel": "agent chat",
+        "language": "EN",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "I can't save the file: I can't see the button. This is inconvenient."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Hello! I'm Lina. The Save button is at the bottom of the open panel."
+          }
+        ]
+      },
+      "pair_id": "h3-practical-EN",
+      "changed_fact": "Только реакция оператора: практическая помощь / общая вежливость."
+    },
+    {
+      "id": "h3-practical-EN-b",
+      "hypothesis": 3,
+      "language": "EN",
+      "split": "discovery",
+      "expected": {
+        "05": {
+          "values": [
+            "no"
+          ],
+          "reason": "Вежливость без реакции на описанное неудобство.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h3-practical-EN-b",
+        "channel": "agent chat",
+        "language": "EN",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "I can't save the file: I can't see the button. This is inconvenient."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Hello! I'm Lina. Thank you for your message. Have a good day!"
+          }
+        ]
+      },
+      "pair_id": "h3-practical-EN",
+      "changed_fact": "Только реакция оператора: практическая помощь / общая вежливость."
+    },
+    {
+      "id": "h3-later-EN-a",
+      "hypothesis": 3,
+      "language": "EN",
+      "split": "discovery",
+      "expected": {
+        "05": {
+          "values": [
+            "no"
+          ],
+          "reason": "Ответ на старую проблему не охватывает явно новое опасение.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h3-later-EN-a",
+        "channel": "agent chat",
+        "language": "EN",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "I can't save the file: I can't see the button. This is inconvenient."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Hello! I'm Lina. The Save button is at the bottom of the open panel."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "But now I have a different concern: I haven't verified my identity yet, and you are offering to discuss my account."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "About the file: the Save button is at the bottom of the panel. Goodbye!"
+          }
+        ]
+      },
+      "pair_id": "h3-later-EN",
+      "changed_fact": "Только реакция на новое опасение; баллы 03/08 не назначают 05."
+    },
+    {
+      "id": "h3-later-EN-b",
+      "hypothesis": 3,
+      "language": "EN",
+      "split": "discovery",
+      "expected": {
+        "05": {
+          "values": [
+            "yes"
+          ],
+          "reason": "Адресная реакция без обязательных извинений и без завершённой идентификации.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h3-later-EN-b",
+        "channel": "agent chat",
+        "language": "EN",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "I can't save the file: I can't see the button. This is inconvenient."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Hello! I'm Lina. The Save button is at the bottom of the open panel."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "But now I have a different concern: I haven't verified my identity yet, and you are offering to discuss my account."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "About your concern: we will not discuss account data now. We will first request identity verification; its completion has not yet been confirmed."
+          }
+        ]
+      },
+      "pair_id": "h3-later-EN",
+      "changed_fact": "Только реакция на новое опасение; баллы 03/08 не назначают 05."
+    },
+    {
+      "id": "h2-request-timing-a",
+      "hypothesis": 2,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "02": {
+          "values": [
+            "na"
+          ],
+          "reason": "Полный запрос известен боту до человека.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h2-request-timing-a",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Нужно выбрать одну из двух видимых вкладок: «Входящие» или «Исходящие». Мне нужна вкладка «Исходящие»."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "bot",
+            "text": "Перевожу на человека."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Чем могу помочь?"
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Выберите «Исходящие»."
+          }
+        ]
+      },
+      "pair_id": "h2-request-timing",
+      "changed_fact": "Только положение полностью сформулированного запроса относительно приветствия."
+    },
+    {
+      "id": "h2-request-timing-b",
+      "hypothesis": 2,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "02": {
+          "values": [
+            "na",
+            "yes"
+          ],
+          "reason": "PDF не фиксирует технический момент; рабочее N/A от начала сформулированного запроса, текущая трактовка может зачесть приглашение.",
+          "disputed": true,
+          "preferred": "na"
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h2-request-timing-b",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Соедините с человеком."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "bot",
+            "text": "Перевожу на человека."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Чем могу помочь?"
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "client",
+            "text": "Нужно выбрать одну из двух видимых вкладок: «Входящие» или «Исходящие». Мне нужна вкладка «Исходящие»."
+          },
+          {
+            "message_id": "m0005",
+            "timestamp": "00:40",
+            "speaker": "operator",
+            "text": "Выберите «Исходящие»."
+          }
+        ]
+      },
+      "pair_id": "h2-request-timing",
+      "changed_fact": "Только положение полностью сформулированного запроса относительно приветствия."
+    },
+    {
+      "id": "h2-essential-detail-a",
+      "hypothesis": 2,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "02": {
+          "values": [
+            "yes"
+          ],
+          "reason": "Конкретная необходимая деталь запрошена до ответа.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h2-essential-detail-a",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Чем могу помочь?"
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "client",
+            "text": "Нужно выбрать одну из двух видимых вкладок: «Входящие» или «Исходящие». Я ещё не указал, какую из них мне нужно."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "operator",
+            "text": "Какая вкладка вам нужна?"
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "client",
+            "text": "Исходящие."
+          },
+          {
+            "message_id": "m0005",
+            "timestamp": "00:40",
+            "speaker": "operator",
+            "text": "Выберите «Исходящие»."
+          }
+        ]
+      },
+      "pair_id": "h2-essential-detail",
+      "changed_fact": "Оператор получает отсутствующий выбор / отвечает без получения выбора."
+    },
+    {
+      "id": "h2-essential-detail-b",
+      "hypothesis": 2,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "02": {
+          "values": [
+            "no"
+          ],
+          "reason": "Нужная из двух вкладок не установлена; оператор выбрал без уточнения.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h2-essential-detail-b",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Чем могу помочь?"
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "client",
+            "text": "Нужно выбрать одну из двух видимых вкладок: «Входящие» или «Исходящие». Я ещё не указал, какую из них мне нужно."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "operator",
+            "text": "Выберите «Исходящие»."
+          }
+        ]
+      },
+      "pair_id": "h2-essential-detail",
+      "changed_fact": "Оператор получает отсутствующий выбор / отвечает без получения выбора."
+    },
+    {
+      "id": "h4-completeness-a",
+      "hypothesis": 4,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "04": {
+          "values": [
+            10
+          ],
+          "reason": "Закрыт один из двух равно существенных вопросов.",
+          "disputed": false,
+          "preferred": null
+        },
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "Оставшаяся неполнота сама по себе не доказывает сбой ведения.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h4-completeness-a",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "На экране есть «Счета», «Файлы» и «Сообщения». Мне одинаково важно открыть «Файлы» и «Сообщения». Назовите оба пункта для выбора."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Выберите «Файлы»."
+          }
+        ]
+      },
+      "pair_id": "h4-completeness",
+      "changed_fact": "Только полнота ответа; 06 должен сохраниться."
+    },
+    {
+      "id": "h4-completeness-b",
+      "hypothesis": 4,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "04": {
+          "values": [
+            20
+          ],
+          "reason": "Оба существенных пункта названы из видимого клиентом списка.",
+          "disputed": false,
+          "preferred": null
+        },
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "Обе реплики ясны.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h4-completeness-b",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "На экране есть «Счета», «Файлы» и «Сообщения». Мне одинаково важно открыть «Файлы» и «Сообщения». Назовите оба пункта для выбора."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Выберите «Файлы» и «Сообщения»."
+          }
+        ]
+      },
+      "pair_id": "h4-completeness",
+      "changed_fact": "Только полнота ответа; 06 должен сохраниться."
+    },
+    {
+      "id": "h4-wrong-topic-a",
+      "hypothesis": 4,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            4,
+            7
+          ],
+          "reason": "Явный возврат к цели: разумная граница сбоя порядка 4 / отдельного ухода от темы 7.",
+          "disputed": true,
+          "preferred": 4
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h4-wrong-topic-a",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Вижу вкладки «Файлы» и «Сообщения». Хочу открыть «Файлы»."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Выберите «Сообщения»."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Я спрашивал про «Файлы». Вернитесь, пожалуйста, к моему вопросу."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Выберите «Файлы»."
+          }
+        ]
+      },
+      "pair_id": "h4-wrong-topic",
+      "changed_fact": "Подмена темы и её причинный ответ / прямой ответ и результат.",
+      "minimality": "Один причинный эпизод; изменены ответ и зависимая реакция клиента, а не только один токен."
+    },
+    {
+      "id": "h4-wrong-topic-b",
+      "hypothesis": 4,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "Прямое ведение к исходной цели.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h4-wrong-topic-b",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Вижу вкладки «Файлы» и «Сообщения». Хочу открыть «Файлы»."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Выберите «Файлы»."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Вкладка открылась."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Вы выбрали нужную вкладку."
+          }
+        ]
+      },
+      "pair_id": "h4-wrong-topic",
+      "changed_fact": "Подмена темы и её причинный ответ / прямой ответ и результат.",
+      "minimality": "Один причинный эпизод; изменены ответ и зависимая реакция клиента, а не только один токен."
+    },
+    {
+      "id": "h4-wording-a",
+      "hypothesis": 4,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            4
+          ],
+          "reason": "Есть непонятная формулировка и вызванный ею переспрос.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h4-wording-a",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Вижу вкладки «Файлы» и «Сообщения». Хочу открыть «Файлы»."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Нажмите там это, но не то, и потом туда."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Я не понимаю вашу инструкцию: какую вкладку нужно нажать?"
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Нажмите вкладку «Файлы»."
+          }
+        ]
+      },
+      "pair_id": "h4-wording",
+      "changed_fact": "Непонятная формулировка с вынужденным переспросом / ясная инструкция с новым вопросом.",
+      "minimality": "Контраст взаимодействий, не строгая лексическая минимальная пара; анализировать отдельно."
+    },
+    {
+      "id": "h4-wording-b",
+      "hypothesis": 4,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "Клиент достиг первой цели и задаёт новый вопрос.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h4-wording-b",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Вижу вкладки «Файлы» и «Сообщения». Хочу открыть «Файлы»."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Нажмите вкладку «Файлы»."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Вкладка открылась. Что дальше, если хочу открыть «Сообщения»?"
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Тогда нажмите вкладку «Сообщения»."
+          }
+        ]
+      },
+      "pair_id": "h4-wording",
+      "changed_fact": "Непонятная формулировка с вынужденным переспросом / ясная инструкция с новым вопросом.",
+      "minimality": "Контраст взаимодействий, не строгая лексическая минимальная пара; анализировать отдельно."
+    },
+    {
+      "id": "h4-refusal-a",
+      "hypothesis": 4,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "Простой отказ от необязательной услуги не означает путаницу.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h4-refusal-a",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Вижу вкладки «Файлы» и «Сообщения». Хочу открыть «Файлы»."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Чтобы открыть файлы, выберите «Файлы». Могу ещё рассказать про уведомления."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Нет, дополнительная помощь не нужна. Вкладка «Файлы» открылась."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Вкладка открыта. До свидания!"
+          }
+        ]
+      },
+      "pair_id": "h4-refusal",
+      "changed_fact": "Только согласие/отказ от необязательной помощи; оценка сохраняется."
+    },
+    {
+      "id": "h4-refusal-b",
+      "hypothesis": 4,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "Отложенное новое обсуждение не означает путаницу.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h4-refusal-b",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Вижу вкладки «Файлы» и «Сообщения». Хочу открыть «Файлы»."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Чтобы открыть файлы, выберите «Файлы». Могу ещё рассказать про уведомления."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Да, расскажите позже. Вкладка «Файлы» открылась."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Вкладка открыта. До свидания!"
+          }
+        ]
+      },
+      "pair_id": "h4-refusal",
+      "changed_fact": "Только согласие/отказ от необязательной помощи; оценка сохраняется."
+    },
+    {
+      "id": "h3-incorrect-reassurance",
+      "hypothesis": 3,
+      "language": "RU",
+      "split": "discovery",
+      "expected": {
+        "05": {
+          "values": [
+            "yes",
+            "no"
+          ],
+          "reason": "Ответ адресный, но ошибочное успокоение: PDF не задаёт достаточность такой реакции.",
+          "disputed": true,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h3-incorrect-reassurance",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Меня тревожит, что вы раскрыли данные до проверки личности."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Не беспокойтесь: проверку всегда можно пропустить."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hold-intent",
+      "hypothesis": 1,
+      "language": "EN",
+      "split": "holdout",
+      "expected": {
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "Future checking is not a reported status.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-hold-intent",
+        "channel": "agent chat",
+        "language": "EN",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "I'll check the upload status shortly; please help me continue."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Hello! I'm Lina. Does the upload show Complete or Pending right now?"
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Pending."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Please wait for it to complete before opening the uploaded file."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hold-precise",
+      "hypothesis": 1,
+      "language": "KZ",
+      "split": "holdout",
+      "expected": {
+        "06": {
+          "values": [
+            7
+          ],
+          "reason": "Нақты код қайталап сұралды.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-hold-precise",
+        "channel": "agent chat",
+        "language": "KZ",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Қате коды: Q42. Оны жазып алуға көмектесіңізші."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Сәлеметсіз бе! Мен Линамын. Қате коды қандай?"
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Q42, жоғарыда жаздым."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Q42 кодын жазып алыңыз."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hold-greeting",
+      "hypothesis": 2,
+      "language": "EN",
+      "split": "holdout",
+      "expected": {
+        "02": {
+          "values": [
+            "na",
+            "yes"
+          ],
+          "reason": "Same disputed time anchor, different surface.",
+          "disputed": true,
+          "preferred": "na"
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-hold-greeting",
+        "channel": "agent chat",
+        "language": "EN",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Please connect me."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Hello! I'm Lina. How can I help?"
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "I see Red and Blue buttons; I want Blue. Which one should I press?"
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Press Blue."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hold-clarify",
+      "hypothesis": 2,
+      "language": "KZ",
+      "split": "holdout",
+      "expected": {
+        "02": {
+          "values": [
+            "yes"
+          ],
+          "reason": "Жетпеген таңдау мазмұнды жауапқа дейін анықталды.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-hold-clarify",
+        "channel": "agent chat",
+        "language": "KZ",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Экранда «Ашу» және «Жабу» батырмалары бар. Қай әрекет керек екенін әлі айтқан жоқпын."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Сәлеметсіз бе! Мен Линамын. Қай әрекет керек?"
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Ашу."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "«Ашу» батырмасын басыңыз."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hold-concern-ignored",
+      "hypothesis": 3,
+      "language": "EN",
+      "split": "holdout",
+      "expected": {
+        "05": {
+          "values": [
+            "no"
+          ],
+          "reason": "New explicit concern ignored.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-hold-concern-ignored",
+        "channel": "agent chat",
+        "language": "EN",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "The preview will not open."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Hello! I'm Lina. Try the Preview button."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Now I'm worried that my private account data will be discussed without verification."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "You can open the preview using Preview. Goodbye."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hold-practical",
+      "hypothesis": 3,
+      "language": "KZ",
+      "split": "holdout",
+      "expected": {
+        "05": {
+          "values": [
+            "yes"
+          ],
+          "reason": "Нақты көмек бар, кешірім міндетті емес.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-hold-practical",
+        "channel": "agent chat",
+        "language": "KZ",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Терезені жаба алмаймын, бұл қолайсыз. Экранда «Жабу» батырмасы бар."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Сәлеметсіз бе! Мен Линамын. «Жабу» батырмасын басыңыз."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Терезе жабылды."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hold-partial",
+      "hypothesis": 4,
+      "language": "EN",
+      "split": "holdout",
+      "expected": {
+        "04": {
+          "values": [
+            10
+          ],
+          "reason": "One of two essential parts answered.",
+          "disputed": false,
+          "preferred": null
+        },
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "Clear partial answer remains clear.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-hold-partial",
+        "channel": "agent chat",
+        "language": "EN",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "The menu shows Export and Print. I need both files exported and pages printed. Name both buttons."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Hello! I'm Lina. Select Export."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hold-followup",
+      "hypothesis": 4,
+      "language": "RU",
+      "split": "holdout",
+      "expected": {
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "Новый вопрос после успеха, не вынужденный переспрос.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-hold-followup",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "На экране есть «Обзор» и «Правка». Как открыть обзор?"
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Нажмите «Обзор»."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:20",
+            "speaker": "client",
+            "text": "Обзор открыт. А как перейти к правке?"
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:30",
+            "speaker": "operator",
+            "text": "Нажмите «Правка»."
+          }
+        ]
+      }
+    },
+    {
+      "id": "control-no-request",
+      "hypothesis": 0,
+      "language": "RU",
+      "split": "controls",
+      "expected": {
+        "04": {
+          "values": [
+            "na"
+          ],
+          "reason": "Предмет запроса ещё не сформулирован.",
+          "disputed": false,
+          "preferred": null
+        },
+        "01": {
+          "values": [
+            "yes"
+          ],
+          "reason": "Первый человек приветствовал и представился.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-control-no-request",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Соедините меня с человеком."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Чем могу помочь?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "control-unknown-fee",
+      "hypothesis": 0,
+      "language": "RU",
+      "split": "controls",
+      "expected": {
+        "04": {
+          "values": [
+            null
+          ],
+          "reason": "Точный решающий тариф не подтверждён материалами; только 04 unresolved.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-control-unknown-fee",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Назовите точную комиссию по моему тарифу."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Комиссия равна 37 единицам."
+          }
+        ]
+      }
+    },
+    {
+      "id": "control-dynamic-discovery",
+      "hypothesis": 0,
+      "language": "RU",
+      "split": "controls",
+      "expected": {
+        "02": {
+          "values": [
+            "yes"
+          ],
+          "reason": "Новый критерий: оператор повторил запрошенное число; прежняя применимость потребности не действует.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-control-dynamic-discovery",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Повторите число 23."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. 23"
+          }
+        ]
+      },
+      "checklist_edit": {
+        "id": "02",
+        "name": "Повторение числа",
+        "instruction": "Да — оператор дословно повторил число, запрошенное клиентом. Нет — не повторил. Не оценивайте выявление потребности.",
+        "allow_na": false,
+        "na_rule": "",
+        "allowed_values": [
+          "yes",
+          "no"
+        ]
+      }
+    },
+    {
+      "id": "control-dynamic-scale",
+      "hypothesis": 0,
+      "language": "RU",
+      "split": "controls",
+      "expected": {
+        "06": {
+          "values": [
+            2
+          ],
+          "reason": "Новая шкала: полное повторение числа.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-control-dynamic-scale",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Повторите число 23."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. 23"
+          }
+        ]
+      },
+      "checklist_edit": {
+        "id": "06",
+        "name": "Повторение числа по новой шкале",
+        "instruction": "Оцените только повторение запрошенного числа.",
+        "allowed_values": [
+          0,
+          2
+        ],
+        "scale": [
+          {
+            "value": 0,
+            "description": "Число не повторено."
+          },
+          {
+            "value": 2,
+            "description": "Число повторено полностью."
+          }
+        ]
+      }
+    }
+  ]
+}

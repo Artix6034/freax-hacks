@@ -1,0 +1,1155 @@
+{
+  "notice": "Assistant-authored synthetic expectations, not official GT or independent accuracy. No DEV text/IDs used as fixtures. KZ translations require native review. Disputed slots fixed before calls; never remove new mismatches.",
+  "protected_source_hashes_unchanged": true,
+  "original_package_files_unchanged": 155,
+  "pdf_pages_read": [
+    1,
+    2,
+    3
+  ],
+  "stages": [
+    {
+      "stage": "baseline",
+      "split": "discovery",
+      "calls": 47,
+      "statuses": {
+        "completed": 41,
+        "partial": 6
+      },
+      "clear_checks": 47,
+      "clear_matches": 47,
+      "disputed_checks": 3,
+      "disputed_values": [
+        {
+          "case_id": "h2-request-timing-b",
+          "id": "02",
+          "values": [
+            "na",
+            "yes"
+          ],
+          "reason": "PDF не фиксирует технический момент; рабочее N/A от начала сформулированного запроса, текущая трактовка может зачесть приглашение.",
+          "disputed": true,
+          "preferred": "na",
+          "actual_status": "resolved",
+          "value": "yes",
+          "result": "within_disputed_set",
+          "explanation": "Условие N/A не выполнено: до первого ответа оператора предмет обращения ещё не был известен. Оператор спросил, чем помочь, получил описание задачи в m0004 и только затем дал предметный ответ."
+        },
+        {
+          "case_id": "h4-wrong-topic-a",
+          "id": "06",
+          "values": [
+            4,
+            7
+          ],
+          "reason": "Явный возврат к цели: разумная граница сбоя порядка 4 / отдельного ухода от темы 7.",
+          "disputed": true,
+          "preferred": 4,
+          "actual_status": "resolved",
+          "value": 4,
+          "result": "within_disputed_set",
+          "explanation": "Первоначальное указание выбрать «Сообщения» подменило прямо названную клиентом вкладку. Из-за этого клиенту пришлось возвращать оператора к вопросу о «Файлах». Это соответствует ступени вынужденного повторного обращения из-за ответа, а не просто единичному сбою без уточнения. Последующее исправление не устраняет уже возникшую необходимость повторить запрос."
+        },
+        {
+          "case_id": "h3-incorrect-reassurance",
+          "id": "05",
+          "values": [
+            "yes",
+            "no"
+          ],
+          "reason": "Ответ адресный, но ошибочное успокоение: PDF не задаёт достаточность такой реакции.",
+          "disputed": true,
+          "preferred": null,
+          "actual_status": "resolved",
+          "value": "yes",
+          "result": "within_disputed_set",
+          "explanation": "Оператор вежливо поздоровался и прямо отреагировал на выраженную тревогу словами «Не беспокойтесь», связав ответ с проверкой личности. Это соответствует требованию вежливой реакции на конкретную проблему; достоверность приведённого успокоения отдельно не установлена в критерии 04."
+        }
+      ],
+      "mismatches": [],
+      "quotes": 590,
+      "ranges": 105,
+      "partial": 6,
+      "cost": {
+        "known_usage_estimate_usd": 2.0672847,
+        "unpriced_calls": 0,
+        "total_estimate_usd": 2.0672847,
+        "input_tokens": 764712,
+        "output_tokens": 146730,
+        "rate_source": "research/reliability/pricing.json (2026-11-07 historical estimate, not invoice)"
+      },
+      "prompt_hash": "56e19a32a84ae80add2f28418ce3a0a9b92cbf60bd3e970a7ee4aba201a31c4d",
+      "prompt_version": "cqa-facts-1.6.1-contextual-recap"
+    },
+    {
+      "stage": "baseline",
+      "split": "holdout",
+      "calls": 8,
+      "statuses": {
+        "completed": 8
+      },
+      "clear_checks": 8,
+      "clear_matches": 8,
+      "disputed_checks": 1,
+      "disputed_values": [
+        {
+          "case_id": "hold-greeting",
+          "id": "02",
+          "values": [
+            "na",
+            "yes"
+          ],
+          "reason": "Same disputed time anchor, different surface.",
+          "disputed": true,
+          "preferred": "na",
+          "actual_status": "resolved",
+          "value": "yes",
+          "result": "within_disputed_set",
+          "explanation": "Изначально был известен только запрос на соединение, но не предмет консультации, поэтому условие N/A не выполнено. Оператор спросил, чем помочь, получил описание кнопок и желаемого выбора в m0003 и лишь затем дал ответ."
+        }
+      ],
+      "mismatches": [],
+      "quotes": 100,
+      "ranges": 23,
+      "partial": 0,
+      "cost": {
+        "known_usage_estimate_usd": 0.351116,
+        "unpriced_calls": 0,
+        "total_estimate_usd": 0.351116,
+        "input_tokens": 130160,
+        "output_tokens": 23280,
+        "rate_source": "research/reliability/pricing.json (2026-11-07 historical estimate, not invoice)"
+      },
+      "prompt_hash": "56e19a32a84ae80add2f28418ce3a0a9b92cbf60bd3e970a7ee4aba201a31c4d",
+      "prompt_version": "cqa-facts-1.6.1-contextual-recap"
+    },
+    {
+      "stage": "baseline",
+      "split": "invariance",
+      "calls": 6,
+      "statuses": {
+        "completed": 6
+      },
+      "clear_checks": 6,
+      "clear_matches": 6,
+      "disputed_checks": 0,
+      "disputed_values": [],
+      "mismatches": [],
+      "quotes": 70,
+      "ranges": 6,
+      "partial": 0,
+      "cost": {
+        "known_usage_estimate_usd": 0.28223,
+        "unpriced_calls": 0,
+        "total_estimate_usd": 0.28223,
+        "input_tokens": 97826,
+        "output_tokens": 14121,
+        "rate_source": "research/reliability/pricing.json (2026-11-07 historical estimate, not invoice)"
+      },
+      "prompt_hash": "56e19a32a84ae80add2f28418ce3a0a9b92cbf60bd3e970a7ee4aba201a31c4d",
+      "prompt_version": "cqa-facts-1.6.1-contextual-recap"
+    },
+    {
+      "stage": "candidate",
+      "split": "dev",
+      "calls": 9,
+      "statuses": {
+        "completed": 8,
+        "partial": 1
+      },
+      "clear_checks": 10,
+      "clear_matches": 2,
+      "disputed_checks": 0,
+      "disputed_values": [],
+      "mismatches": [
+        {
+          "case_id": "p1-ru-017",
+          "id": "02",
+          "values": [
+            "yes"
+          ],
+          "reason": "Оператор уточняет наличие точного тикера и способ предыдущего поиска до конкретной рекомендации поиска.",
+          "disputed": false,
+          "actual_status": "resolved",
+          "value": "na",
+          "result": "mismatch",
+          "explanation": "Первоначальный запрос содержал достаточно информации для общей навигационной подсказки: клиент хотел найти облигацию и перейти к покупке в приложении. Само значение тикера для объяснения последовательности действий не требовалось. Позднейший вопрос оператора о наличии тикера не доказывает нехватку исходных данных."
+        },
+        {
+          "case_id": "p1-ru-007",
+          "id": "06",
+          "values": [
+            7
+          ],
+          "reason": "Последняя реплика не отвечает на вопрос о времени вывода, хотя её смысл понятен. Это один заметный сбой соответствия ответа, а не неясность навигационной формулировки.",
+          "disputed": false,
+          "actual_status": "resolved",
+          "value": 10,
+          "result": "mismatch",
+          "explanation": "Навигационная инструкция ясная и последовательная; клиент подтвердил её понимание словом «Нашёл». Вопрос о повторном выводе — продолжение запроса, а не переспрос из-за запутанной формулировки. Последняя реплика не отвечает на него по существу, но остаётся понятной; это недостаток полноты, а не доказательство сбоя ясности. Отдельного ожидания по инициативе оператора не наблюдается; предупреждение бота не засчитывается оператору."
+        },
+        {
+          "case_id": "p1-ru-009",
+          "id": "05",
+          "values": [
+            "no"
+          ],
+          "reason": "Клиент выразил конкретное опасение о неподтверждённой личности; оператор его не признаёт и отмахивается утверждением, что подтверждение не нужно, переводя разговор на зависание приложения.",
+          "disputed": false,
+          "actual_status": "resolved",
+          "value": "yes",
+          "result": "mismatch",
+          "explanation": "Оператор общался вежливо и отреагировал на конкретное неудобство с выводом: уточнил проявление проблемы, а затем предложил дальнейшую проверку. Отдельная формула сочувствия правилом не требуется. Ошибки безопасности и ухода от темы оцениваются по своим критериям."
+        },
+        {
+          "case_id": "p1-ru-018",
+          "id": "02",
+          "values": [
+            "no"
+          ],
+          "reason": "Без выяснения бумаги, параметров приказа или места подробной ошибки оператор сразу категорически называет причину. После замечания клиента необходимые сведения не уточняет.",
+          "disputed": false,
+          "actual_status": "resolved",
+          "value": "na",
+          "result": "mismatch",
+          "explanation": "Исходный запрос уже позволял объяснить, где посмотреть причину отклонения, либо назвать способ её выяснения. Название бумаги могло понадобиться для диагностики конкретного отказа, но клиент первоначально просил не такую диагностику. Необоснованный переход оператора к установлению причины не отменяет начальную достаточность запроса."
+        },
+        {
+          "case_id": "p1-ru-022",
+          "id": "06",
+          "values": [
+            10
+          ],
+          "reason": "Несмотря на недопустимое содержание, предложение сформулировано ясно и последовательно. Нарушение отражено в 04 и 08, без выдуманного штрафа за бессвязность.",
+          "disputed": false,
+          "actual_status": "resolved",
+          "value": 4,
+          "result": "mismatch",
+          "explanation": "Подмена темы в m0010 вынудила клиента в m0011 повторно пояснить, что ему нужна консультация в приложении. Это соответствует необходимости уточнения из-за порядка и содержания ответов и препятствует оценкам 7 или 10. При этом реплики понятны по смыслу, поэтому оснований для 0 нет. Оценка основана не на самом флаге нарушения, а на наблюдаемом возврате клиента к исходному запросу."
+        },
+        {
+          "case_id": "p1-kz-015",
+          "id": "05",
+          "values": [
+            "no"
+          ],
+          "reason": "Оператор не реагирует на конкретное опасение клиента об отсутствии идентификации, а просто отрицает её необходимость.",
+          "disputed": false,
+          "actual_status": "resolved",
+          "value": "yes",
+          "result": "mismatch",
+          "explanation": "Оператор общался вежливо и отреагировал на конкретную проблему с выводом денег, обозначив проверку обращения. Явного оскорбления или выраженного клиентом недовольства, оставленного без реакции, нет. Неправомерный отказ от идентификации не приравнивается автоматически к невежливости."
+        },
+        {
+          "case_id": "p1-en-007",
+          "id": "06",
+          "values": [
+            7
+          ],
+          "reason": "Один заметный сбой: вместо ответа о повторном выводе оператор повторяет, где находится запрос. Реплики понятны; проблема в соответствии ответа текущему вопросу.",
+          "disputed": false,
+          "actual_status": "resolved",
+          "value": 10,
+          "result": "mismatch",
+          "explanation": "Навигация изложена ясно и последовательно; клиент подтвердил, что нашёл нужное место. Вопрос m0011 касается следующего существенного условия, а не непонятных формулировок инструкции. Его незакрытость сама по себе не доказывает сбой ясности диалога. Оператор не объявлял ожидание или консультацию; ожидание при передаче было обозначено ботом и не засчитывается как действие оператора."
+        },
+        {
+          "case_id": "p1-en-014",
+          "id": "06",
+          "values": [
+            7
+          ],
+          "reason": "Один заметный сбой соответствия ответа: на прямой вопрос о канале обратной связи следует только Goodbye. Остальные формулировки понятны.",
+          "disputed": false,
+          "actual_status": "resolved",
+          "value": 10,
+          "result": "mismatch",
+          "explanation": "Формулировки оператора краткие, ясные и связные: он сообщает статус и намерение передать вопрос на проверку. Вопросы клиента относятся к безопасности и получению результата, а не вызваны непонятными формулировками или порядком инструкций. Отдельного ожидания при работе оператора не наблюдается. Небезопасное содержание и незакрытый вопрос оцениваются по другим критериям и сами по себе не доказывают сбой ясности."
+        }
+      ],
+      "quotes": 151,
+      "ranges": 26,
+      "partial": 1,
+      "cost": {
+        "known_usage_estimate_usd": 0.8457674,
+        "unpriced_calls": 0,
+        "total_estimate_usd": 0.8457674,
+        "input_tokens": 153881,
+        "output_tokens": 49596,
+        "rate_source": "research/reliability/pricing.json (2026-11-07 historical estimate, not invoice)"
+      },
+      "prompt_hash": "21dfb6f39d81f130f78a4e32548eb9859bbe86c96a477d41b9980e7726a451ef",
+      "prompt_version": "cqa-facts-1.6.2-request-anchor-experiment"
+    },
+    {
+      "stage": "candidate",
+      "split": "discovery",
+      "calls": 47,
+      "statuses": {
+        "completed": 41,
+        "partial": 6
+      },
+      "clear_checks": 47,
+      "clear_matches": 47,
+      "disputed_checks": 3,
+      "disputed_values": [
+        {
+          "case_id": "h2-request-timing-b",
+          "id": "02",
+          "values": [
+            "na",
+            "yes"
+          ],
+          "reason": "PDF не фиксирует технический момент; рабочее N/A от начала сформулированного запроса, текущая трактовка может зачесть приглашение.",
+          "disputed": true,
+          "preferred": "na",
+          "actual_status": "resolved",
+          "value": "na",
+          "result": "within_disputed_set",
+          "explanation": "При первой формулировке предметного запроса в m0004 уже были известны оба варианта и желаемая вкладка. Более раннее общее приглашение оператора изложить вопрос не меняет достаточность исходных данных запроса."
+        },
+        {
+          "case_id": "h4-wrong-topic-a",
+          "id": "06",
+          "values": [
+            4,
+            7
+          ],
+          "reason": "Явный возврат к цели: разумная граница сбоя порядка 4 / отдельного ухода от темы 7.",
+          "disputed": true,
+          "preferred": 4,
+          "actual_status": "resolved",
+          "value": 4,
+          "result": "within_disputed_set",
+          "explanation": "В m0002 оператор подменил нужную вкладку «Файлы» вкладкой «Сообщения», из-за чего клиенту пришлось возвращать его к исходному вопросу в m0003. Это соответствует ступени 4: повторное обращение вызвано содержанием и порядком ответа. Последующее исправление не устраняет уже возникшую необходимость переспросить; при этом весь ход диалога остаётся понятным."
+        },
+        {
+          "case_id": "h3-incorrect-reassurance",
+          "id": "05",
+          "values": [
+            "yes",
+            "no"
+          ],
+          "reason": "Ответ адресный, но ошибочное успокоение: PDF не задаёт достаточность такой реакции.",
+          "disputed": true,
+          "preferred": null,
+          "actual_status": "resolved",
+          "value": "no",
+          "result": "within_disputed_set",
+          "explanation": "Приветствие вежливое, но на конкретную тревогу о конфиденциальности оператор отвечает обесценивающим успокоением: представляет пропуск проверки как нормальное основание не беспокоиться. Это не внимательный отклик на заявленную проблему."
+        }
+      ],
+      "mismatches": [],
+      "quotes": 608,
+      "ranges": 106,
+      "partial": 6,
+      "cost": {
+        "known_usage_estimate_usd": 2.0664878999999994,
+        "unpriced_calls": 0,
+        "total_estimate_usd": 2.0664878999999994,
+        "input_tokens": 767720,
+        "output_tokens": 146482,
+        "rate_source": "research/reliability/pricing.json (2026-11-07 historical estimate, not invoice)"
+      },
+      "prompt_hash": "21dfb6f39d81f130f78a4e32548eb9859bbe86c96a477d41b9980e7726a451ef",
+      "prompt_version": "cqa-facts-1.6.2-request-anchor-experiment"
+    },
+    {
+      "stage": "candidate",
+      "split": "holdout",
+      "calls": 8,
+      "statuses": {
+        "completed": 8
+      },
+      "clear_checks": 8,
+      "clear_matches": 7,
+      "disputed_checks": 1,
+      "disputed_values": [
+        {
+          "case_id": "hold-greeting",
+          "id": "02",
+          "values": [
+            "na",
+            "yes"
+          ],
+          "reason": "Same disputed time anchor, different surface.",
+          "disputed": true,
+          "preferred": "na",
+          "actual_status": "resolved",
+          "value": "na",
+          "result": "within_disputed_set",
+          "explanation": "При первой формулировке предметного запроса в m0003 данных уже хватало: клиент перечислил кнопки и назвал желаемую. Существенных недостающих сведений для ответа, какую из них нажать, нет."
+        }
+      ],
+      "mismatches": [
+        {
+          "case_id": "hold-clarify",
+          "id": "02",
+          "values": [
+            "yes"
+          ],
+          "reason": "Жетпеген таңдау мазмұнды жауапқа дейін анықталды.",
+          "disputed": false,
+          "preferred": null,
+          "actual_status": "resolved",
+          "value": "na",
+          "result": "mismatch",
+          "explanation": "Условие неприменимости выполнено: при формулировании запроса в m0003 клиент уже назвал нужное действие, а наличие соответствующей кнопки было известно из m0001. Вопрос оператора в m0002 предшествовал формулированию этого запроса."
+        }
+      ],
+      "quotes": 93,
+      "ranges": 21,
+      "partial": 0,
+      "cost": {
+        "known_usage_estimate_usd": 0.3469044,
+        "unpriced_calls": 0,
+        "total_estimate_usd": 0.3469044,
+        "input_tokens": 130672,
+        "output_tokens": 22823,
+        "rate_source": "research/reliability/pricing.json (2026-11-07 historical estimate, not invoice)"
+      },
+      "prompt_hash": "21dfb6f39d81f130f78a4e32548eb9859bbe86c96a477d41b9980e7726a451ef",
+      "prompt_version": "cqa-facts-1.6.2-request-anchor-experiment"
+    },
+    {
+      "stage": "candidate",
+      "split": "invariance",
+      "calls": 6,
+      "statuses": {
+        "completed": 6
+      },
+      "clear_checks": 6,
+      "clear_matches": 6,
+      "disputed_checks": 0,
+      "disputed_values": [],
+      "mismatches": [],
+      "quotes": 71,
+      "ranges": 6,
+      "partial": 0,
+      "cost": {
+        "known_usage_estimate_usd": 0.22061799999999998,
+        "unpriced_calls": 0,
+        "total_estimate_usd": 0.22061799999999998,
+        "input_tokens": 98210,
+        "output_tokens": 14843,
+        "rate_source": "research/reliability/pricing.json (2026-11-07 historical estimate, not invoice)"
+      },
+      "prompt_hash": "21dfb6f39d81f130f78a4e32548eb9859bbe86c96a477d41b9980e7726a451ef",
+      "prompt_version": "cqa-facts-1.6.2-request-anchor-experiment"
+    }
+  ],
+  "total": {
+    "calls": 131,
+    "known_usage_estimate_usd": 6.180408399999999,
+    "unpriced_calls": 0,
+    "total_estimate_usd": 6.180408399999999
+  },
+  "comparisons": [
+    {
+      "split": "discovery",
+      "id": "h1-action-RU-a",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": [
+        {
+          "criterion_id": "02",
+          "before": "yes",
+          "before_status": "resolved",
+          "after": "na",
+          "after_status": "resolved",
+          "before_explanation": "Изначально было известно только намерение открыть панель. Оператор уточнил её текущее состояние, необходимое для перехода к нажатию команды, и дал инструкцию после подтверждения клиента. Уже сообщённые сведения повторно не запрашивались.",
+          "after_explanation": "Условие неприменимости выполнено: исходный запрос содержит цель и нужную панель, чего достаточно для инструкции по сохранению. Вопрос об открытии панели проверяет продвижение клиента, а не восполняет необходимую для ответа информацию."
+        }
+      ]
+    },
+    {
+      "split": "discovery",
+      "id": "h1-action-RU-b",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h1-exact-RU-a",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h1-exact-RU-b",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h1-state-RU-a",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h1-state-RU-b",
+      "status_before": "completed",
+      "status_after": "partial",
+      "changed": [
+        {
+          "criterion_id": "02",
+          "before": "na",
+          "before_status": "resolved",
+          "after": null,
+          "after_status": "unresolved",
+          "before_explanation": "Для реакции на исходное сообщение о результате перезапуска данных хватало: клиент уже сообщил, что список появился. Повторный вопрос оператора не свидетельствует о нехватке этой информации.",
+          "after_explanation": "Исходная задача клиента не сформулирована: сообщено только появление списка. Не установлено, достаточно ли этого состояния для требуемого ответа и, следовательно, выполнено ли условие N/A. Повторный вопрос об уже известном факте наблюдаем, но сам по себе не определяет применимость критерия."
+        }
+      ]
+    },
+    {
+      "split": "discovery",
+      "id": "h3-practical-RU-a",
+      "status_before": "completed",
+      "status_after": "partial",
+      "changed": [
+        {
+          "criterion_id": "02",
+          "before": "na",
+          "before_status": "resolved",
+          "after": "no",
+          "after_status": "resolved",
+          "before_explanation": "До первого ответа было понятно, что клиенту нужен ориентир для поиска кнопки сохранения. Для такого навигационного ответа необходимость дополнительных сведений из диалога не следует.",
+          "after_explanation": "Для указания конкретного расположения кнопки не хватало сведений о приложении и текущем экране. Оператор не уточнила их и сразу сослалась на открытую панель, о которой клиент не сообщал. Условие достаточности исходных данных не выполнено."
+        },
+        {
+          "criterion_id": "04",
+          "before": 20,
+          "before_status": "resolved",
+          "after": null,
+          "after_status": "unresolved",
+          "before_explanation": "Запрос сформулирован, поэтому N/A неприменимо. Оператор дал конкретный следующий шаг по единственному вопросу: искать кнопку «Сохранить» внизу открытой панели. Это позволяет продолжить действие, а не является общей отпиской. Оценка относится к предоставленному навигационному шагу, а не к подтверждённому сохранению файла; расположение кнопки независимо не проверено из-за отсутствия справочного материала.",
+          "after_explanation": "Ответ по существу есть: указано конкретное место поиска кнопки. Однако это расположение — ключевое содержание рекомендации, а не побочная деталь. Неизвестно, соответствует ли оно интерфейсу клиента. Без этого нельзя подтвердить корректный следующий шаг на 20 баллов либо установить ошибочность ключевой рекомендации. Отсутствие продолжения само по себе не доказывает неполноту или ошибку."
+        }
+      ]
+    },
+    {
+      "split": "discovery",
+      "id": "h3-practical-RU-b",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h3-later-RU-a",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": [
+        {
+          "criterion_id": "07",
+          "before": "yes",
+          "before_status": "resolved",
+          "after": "no",
+          "after_status": "resolved",
+          "before_explanation": "В m0004 оператор кратко повторил уже данную рекомендацию по исходному вопросу с вводным «По файлу:» — это итог по навигационной части обращения. Затем отдельно попрощался словами «До свидания!». Оба компонента завершения присутствуют; оставленное без реакции новое опасение оценено отдельно.",
+          "after_explanation": "Прощание присутствует: «До свидания!». Однако повтор расположения кнопки остаётся прямым консультационным ответом: он не фиксирует результат, согласованный следующий шаг или disposition обращения. Отдельного предложения дальнейшей помощи нет. Признаков обрыва до возможности завершить чат не наблюдается."
+        }
+      ]
+    },
+    {
+      "split": "discovery",
+      "id": "h3-later-RU-b",
+      "status_before": "partial",
+      "status_after": "partial",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h1-action-KZ-a",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h1-action-KZ-b",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h1-exact-KZ-a",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h1-exact-KZ-b",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h1-state-KZ-a",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h1-state-KZ-b",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h3-practical-KZ-a",
+      "status_before": "partial",
+      "status_after": "completed",
+      "changed": [
+        {
+          "criterion_id": "02",
+          "before": "no",
+          "before_status": "resolved",
+          "after": "na",
+          "after_status": "resolved",
+          "before_explanation": "Условие N/A не выполнено: изначально известна проблема с сохранением, но не названы приложение и текущий экран, необходимые для определения расположения кнопки. Оператор не уточнил этот контекст и сразу сослался на открытую панель.",
+          "after_explanation": "При формулировке запроса клиент уже обозначил действие и конкретное препятствие — не видит кнопку сохранения. Для предложенного навигационного следующего шага дополнительных данных не требовалось."
+        },
+        {
+          "criterion_id": "04",
+          "before": null,
+          "before_status": "unresolved",
+          "after": 20,
+          "after_status": "resolved",
+          "before_explanation": "Клиент сформулировал предметный запрос, поэтому N/A неприменимо. Оператор дал конкретную подсказку, но её ключевое содержание — расположение кнопки — не подтверждено: интерфейс не установлен, справочного материала и наблюдаемого результата нет. Если расположение верно, ответ может быть достаточным следующим шагом; если неверно, ошибочна ключевая рекомендация. Оснований выбрать одну из этих ступеней или промежуточный балл недостаточно.",
+          "after_explanation": "На единственный запрос дан конкретный следующий шаг: искать кнопку сохранения внизу открытой панели. Это позволяет продолжить действие, а не оставляет клиента с общей рекомендацией. Оценка относится к предоставленному навигационному шагу; успешное сохранение не подтверждено, расположение кнопки независимо не проверено из-за отсутствия справочных материалов."
+        }
+      ]
+    },
+    {
+      "split": "discovery",
+      "id": "h3-practical-KZ-b",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h3-later-KZ-a",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": [
+        {
+          "criterion_id": "06",
+          "before": 10,
+          "before_status": "resolved",
+          "after": 7,
+          "after_status": "resolved",
+          "before_explanation": "Формулировки оператора понятны и связны: указано место кнопки, при завершении явно обозначена тема файла. В m0003 клиент поднимает новую проблему, а не переспрашивает из-за непонятной инструкции. Игнорирование этой проблемы снижает полноту консультации, но само по себе не доказывает сбоя ясности речи или вынужденного уточнения.",
+          "after_explanation": "Формулировки понятны, но есть один заметный сбой ведения: после явного перехода клиента к другой теме оператор возвращается к уже данному ответу о файле. Это нарушает последовательность реакции и препятствует максимуму. Клиент не переспрашивал из-за непонятных формулировок: m0003 является новым опасением, поэтому оснований для 4 нет. Явного ожидания не было."
+        }
+      ]
+    },
+    {
+      "split": "discovery",
+      "id": "h3-later-KZ-b",
+      "status_before": "completed",
+      "status_after": "partial",
+      "changed": [
+        {
+          "criterion_id": "04",
+          "before": 20,
+          "before_status": "resolved",
+          "after": null,
+          "after_status": "unresolved",
+          "before_explanation": "По обоим обращениям даны предметные ответы или следующие шаги: для сохранения указано, где искать кнопку, а по опасению клиента разъяснено, что обсуждение данных счёта откладывается до подтверждения личности. Это соответствует максимальной ступени по предоставлению следующего шага, без утверждения, что файл уже сохранён. Расположение кнопки независимо не проверено из-за отсутствия справочного материала.",
+          "after_explanation": "Запрос сформулирован, поэтому N/A неприменимо. Оператор дал конкретный ориентир для сохранения файла и ответил на опасение об обсуждении счёта. Однако единственная рекомендация по исходной проблеме зависит от фактического расположения кнопки: оно не подтверждено ни материалами организатора, ни результатом клиента. Это решающий факт для различения корректного следующего шага и ошибочной ключевой рекомендации, а не основание автоматически снижать балл."
+        }
+      ]
+    },
+    {
+      "split": "discovery",
+      "id": "h1-action-EN-a",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h1-action-EN-b",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h1-exact-EN-a",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h1-exact-EN-b",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h1-state-EN-a",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h1-state-EN-b",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h3-practical-EN-a",
+      "status_before": "partial",
+      "status_after": "completed",
+      "changed": [
+        {
+          "criterion_id": "04",
+          "before": null,
+          "before_status": "unresolved",
+          "after": 20,
+          "after_status": "resolved",
+          "before_explanation": "Запрос сформулирован, поэтому N/A неприменимо. Оператор ответил по существу, указав расположение кнопки. Однако это единственная ключевая рекомендация, а её правильность не подтверждена ни предоставленным материалом, ни наблюдаемым результатом. От этого факта зависит выбор между корректным следующим шагом и ошибочной ключевой рекомендацией; отсутствие проверки само по себе не доказывает ошибку.",
+          "after_explanation": "На единственный существенный запрос дан конкретный следующий шаг: искать кнопку Save внизу открытой панели. Подсказка непосредственно адресует препятствие клиента и позволяет продолжить действие. Оценка относится к предоставленному навигационному шагу, а не к подтверждённому сохранению файла; расположение кнопки независимо не проверено из-за отсутствия изображения интерфейса или справочного материала."
+        }
+      ]
+    },
+    {
+      "split": "discovery",
+      "id": "h3-practical-EN-b",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h3-later-EN-a",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": [
+        {
+          "criterion_id": "02",
+          "before": "no",
+          "before_status": "resolved",
+          "after": "na",
+          "after_status": "resolved",
+          "before_explanation": "Условие N/A не выполнено: изначально не указаны приложение и открытый экран, от которых зависит расположение кнопки. Оператор не уточнил этот контекст и сразу сообщил конкретное расположение Save.",
+          "after_explanation": "Условие неприменимости выполнено: при формулировке первоначального запроса клиент уже сообщил, что не видит кнопку сохранения файла. Для данного общего указания о её расположении существенного недостающего уточнения из переписки не следует."
+        },
+        {
+          "criterion_id": "07",
+          "before": "yes",
+          "before_status": "resolved",
+          "after": "no",
+          "after_status": "resolved",
+          "before_explanation": "В m0004 оператор кратко повторил ранее данную инструкцию по исходному вопросу — где искать Save, тем самым подвёл итог помощи по файлу, — и отдельно попрощался словом Goodbye. Это не доказывает решения нового опасения клиента, но оба компонента завершения присутствуют.",
+          "after_explanation": "Возможность завершения была: оператор сам попрощался. Компонент прощания есть — «Goodbye!», но нет предложения дальнейшей помощи или содержательного итога с результатом, согласованным следующим шагом либо статусом обращения. Повтор прямого ответа о расположении кнопки сам по себе таким итогом не является."
+        }
+      ]
+    },
+    {
+      "split": "discovery",
+      "id": "h3-later-EN-b",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h2-request-timing-a",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": [
+        {
+          "criterion_id": "06",
+          "before": 7,
+          "before_status": "resolved",
+          "after": 10,
+          "after_status": "resolved",
+          "before_explanation": "Есть один заметный сбой: в m0003 оператор спрашивает, чем помочь, хотя запрос полностью изложен в m0001. Это препятствует максимальной оценке за последовательность ведения диалога. При этом следующая инструкция ясна; клиенту не пришлось повторять запрос или переспрашивать из-за формулировок.",
+          "after_explanation": "Приветствие и последующая инструкция ясны и связны. Общее приглашение изложить вопрос не привело к повторному запросу сведений или вынужденному уточнению: следующим сообщением оператор ответил по существу. Явного ожидания в диалоге не было."
+        }
+      ]
+    },
+    {
+      "split": "discovery",
+      "id": "h2-request-timing-b",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": [
+        {
+          "criterion_id": "02",
+          "before": "yes",
+          "before_status": "resolved",
+          "after": "na",
+          "after_status": "resolved",
+          "before_explanation": "Условие N/A не выполнено: до первого ответа оператора предмет обращения ещё не был известен. Оператор спросил, чем помочь, получил описание задачи в m0004 и только затем дал предметный ответ.",
+          "after_explanation": "При первой формулировке предметного запроса в m0004 уже были известны оба варианта и желаемая вкладка. Более раннее общее приглашение оператора изложить вопрос не меняет достаточность исходных данных запроса."
+        }
+      ]
+    },
+    {
+      "split": "discovery",
+      "id": "h2-essential-detail-a",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h2-essential-detail-b",
+      "status_before": "partial",
+      "status_after": "partial",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h4-completeness-a",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h4-completeness-b",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h4-wrong-topic-a",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h4-wrong-topic-b",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h4-wording-a",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h4-wording-b",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h4-refusal-a",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h4-refusal-b",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "h3-incorrect-reassurance",
+      "status_before": "partial",
+      "status_after": "completed",
+      "changed": [
+        {
+          "criterion_id": "04",
+          "before": null,
+          "before_status": "unresolved",
+          "after": 0,
+          "after_status": "resolved",
+          "before_explanation": "Клиент обозначил предмет обращения, поэтому N/A неприменимо. Ответ по теме есть, но его единственное содержательное основание — утверждение, что проверку всегда можно пропустить. Подтверждённого правила для проверки этого утверждения нет; самостоятельного следующего шага оператор не предложил. Неизвестная допустимость пропуска проверки здесь является центральным, а не побочным фактом: без неё нельзя обоснованно признать ключевую рекомендацию ошибочной либо засчитать корректное закрытие обращения.",
+          "after_explanation": "Ключевое заверение, что проверку можно пропускать всегда, противоречит прямо заданному в чек-листе требованию подтверждать личность перед раскрытием защищённых данных. Вместо корректного ответа на опасение или следующего шага дано это безусловное заверение, что соответствует 0. Факт прежнего раскрытия при этом не установлен."
+        },
+        {
+          "criterion_id": "05",
+          "before": "yes",
+          "before_status": "resolved",
+          "after": "no",
+          "after_status": "resolved",
+          "before_explanation": "Оператор вежливо поздоровался и прямо отреагировал на выраженную тревогу словами «Не беспокойтесь», связав ответ с проверкой личности. Это соответствует требованию вежливой реакции на конкретную проблему; достоверность приведённого успокоения отдельно не установлена в критерии 04.",
+          "after_explanation": "Приветствие вежливое, но на конкретную тревогу о конфиденциальности оператор отвечает обесценивающим успокоением: представляет пропуск проверки как нормальное основание не беспокоиться. Это не внимательный отклик на заявленную проблему."
+        }
+      ]
+    },
+    {
+      "split": "discovery",
+      "id": "control-no-request",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": [
+        {
+          "criterion_id": "02",
+          "before": "yes",
+          "before_status": "resolved",
+          "after": "na",
+          "after_status": "resolved",
+          "before_explanation": "Условие N/A не выполнено: до первого ответа отсутствовала тема обращения. Оператор запросил именно эту недостающую информацию, не переходя к предметному ответу.",
+          "after_explanation": "Для единственной сформулированной просьбы — подключить человека — исходных данных достаточно. Человек-оператор вступил в диалог; предметную консультацию клиент ещё не запросил."
+        }
+      ]
+    },
+    {
+      "split": "discovery",
+      "id": "control-unknown-fee",
+      "status_before": "partial",
+      "status_after": "partial",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "control-dynamic-discovery",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "discovery",
+      "id": "control-dynamic-scale",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "holdout",
+      "id": "hold-intent",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "holdout",
+      "id": "hold-precise",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "holdout",
+      "id": "hold-greeting",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": [
+        {
+          "criterion_id": "02",
+          "before": "yes",
+          "before_status": "resolved",
+          "after": "na",
+          "after_status": "resolved",
+          "before_explanation": "Изначально был известен только запрос на соединение, но не предмет консультации, поэтому условие N/A не выполнено. Оператор спросил, чем помочь, получил описание кнопок и желаемого выбора в m0003 и лишь затем дал ответ.",
+          "after_explanation": "При первой формулировке предметного запроса в m0003 данных уже хватало: клиент перечислил кнопки и назвал желаемую. Существенных недостающих сведений для ответа, какую из них нажать, нет."
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "id": "hold-clarify",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": [
+        {
+          "criterion_id": "02",
+          "before": "yes",
+          "before_status": "resolved",
+          "after": "na",
+          "after_status": "resolved",
+          "before_explanation": "Условие N/A не выполнено: изначально не было известно, какое из двух действий требуется. Оператор уточнил именно эту недостающую информацию и дал инструкцию после ответа клиента.",
+          "after_explanation": "Условие неприменимости выполнено: при формулировании запроса в m0003 клиент уже назвал нужное действие, а наличие соответствующей кнопки было известно из m0001. Вопрос оператора в m0002 предшествовал формулированию этого запроса."
+        }
+      ]
+    },
+    {
+      "split": "holdout",
+      "id": "hold-concern-ignored",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "holdout",
+      "id": "hold-practical",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "holdout",
+      "id": "hold-partial",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "holdout",
+      "id": "hold-followup",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "invariance",
+      "id": "h1-invariant-RU-a",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "invariance",
+      "id": "h1-invariant-RU-b",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "invariance",
+      "id": "h1-invariant-KZ-a",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "invariance",
+      "id": "h1-invariant-KZ-b",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "invariance",
+      "id": "h1-invariant-EN-a",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "invariance",
+      "id": "h1-invariant-EN-b",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "dev-historical",
+      "id": "p1-ru-017",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": [
+        {
+          "criterion_id": "06",
+          "before": 7,
+          "before_status": "resolved",
+          "after": 10,
+          "after_status": "resolved",
+          "before_explanation": "Один заметный сбой — лишний вопрос о наличии тикера после сообщения клиента, что он сейчас его найдёт. Это препятствует максимуму, но не делает ход диалога непонятным. Клиент лишь подтвердил наличие тикера, а не переспрашивал из-за запутанной инструкции; последующая рекомендация ясна и позволила продолжить поиск.",
+          "after_explanation": "Диалог выстроен понятно: уточнение наличия точного тикера, инструкция по поиску и проверке бумаги, подтверждение результата клиентом. Ответ клиента о наличии тикера является ответом на вопрос, а не переспросом из-за непонятной формулировки. Явного ожидания после подключения человека не было."
+        }
+      ]
+    },
+    {
+      "split": "dev-historical",
+      "id": "p1-ru-007",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "dev-historical",
+      "id": "p1-ru-009",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "dev-historical",
+      "id": "p1-ru-018",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "dev-historical",
+      "id": "p1-ru-022",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "dev-historical",
+      "id": "p1-kz-015",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "dev-historical",
+      "id": "p1-en-007",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": [
+        {
+          "criterion_id": "07",
+          "before": "yes",
+          "before_status": "resolved",
+          "after": "no",
+          "after_status": "resolved",
+          "before_explanation": "В m0012 есть краткий итог достигнутого результата навигации: подтверждено, что найденное место предназначено для заявки по профилю. Отдельно присутствует прощание «Bye». Это удовлетворяет компонентам завершения, но не означает, что вопрос о сроке повторного вывода решён. Признаков обрыва до возможности завершить чат нет.",
+          "after_explanation": "Прощание есть: «Bye.». Однако отдельного итога по обращению или предложения дальнейшей помощи нет. Фраза о местонахождении заявки лишь повторяет навигационное пояснение и не фиксирует результат или согласованный дальнейший шаг по проблеме вывода. Обрыва не было: оператор сам завершил разговор."
+        }
+      ]
+    },
+    {
+      "split": "dev-historical",
+      "id": "p1-en-014",
+      "status_before": "completed",
+      "status_after": "completed",
+      "changed": []
+    },
+    {
+      "split": "dev-historical",
+      "id": "p4-ru-001",
+      "status_before": "partial",
+      "status_after": "partial",
+      "changed": [
+        {
+          "criterion_id": "02",
+          "before": "yes",
+          "before_status": "resolved",
+          "after": "na",
+          "after_status": "resolved",
+          "before_explanation": "До первого ответа человека отсутствовал сам предмет обращения, поэтому условие N/A не выполнено. Оператор предложил изложить вопрос, получил описание прежнего обслуживания и потребности в рекомендациях, затем ответил с учётом небольшого портфеля. Для общего объяснения функций службы дополнительные данные счёта не требовались.",
+          "after_explanation": "Условие неприменимости выполнено: при формулировании запроса клиент уже сообщил о прежнем обслуживании брокером, небольшом портфеле и направлении в поддержку. Для объяснения функций этой службы и наличия помощи с рекомендациями дополнительных клиентских данных не требовалось."
+        }
+      ]
+    }
+  ]
+}

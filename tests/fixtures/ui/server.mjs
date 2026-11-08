@@ -24,7 +24,8 @@ let fixtureUnknown=[],fixtureFlag=false;
 const provider={identity:{provider:'TEST DOUBLE',model:'TEST DOUBLE — NOT AI'},evaluate:async(c,k)=>({
   metadata:{provider:'TEST DOUBLE',model:'TEST DOUBLE — NOT AI'},
   review:{criteria:k.criteria.map(x=>{
-    const m=c.transcript[x.id==='03'?3:x.id==='07'?6:x.id==='01'?2:4];
+    const first=c.transcript.find(m=>m.speaker==='operator');
+    const m=x.id==='03'?(c.transcript.find(m=>m.speaker==='system'&&m.text.includes('Проверка личности завершена'))??first):x.id==='07'?c.transcript.filter(m=>m.speaker==='operator').at(-1):first;
     if(fixtureUnknown.includes(x.id))return {criterion_id:x.id,status:'unresolved',value:null,explanation:'ТЕСТ: критерий пока не определён.',missing_information:['ТЕСТ: нужен проверенный источник с правилом, действовавшим на дату диалога.'],evidence:[],checked_ranges:[],na_reason:'',na_condition:''};
     return {criterion_id:x.id,status:'resolved',missing_information:[],na_condition:'',value:x.type==='flag'?(fixtureFlag?'yes':'no'):x.type==='scale'?Math.max(...x.scale.map(s=>s.value)):'yes',
       explanation:'СИНТЕТИЧЕСКИЙ ТЕСТОВЫЙ ОТВЕТ. Проверка экрана, не AI-оценка и не Ground Truth.',
@@ -32,8 +33,8 @@ const provider={identity:{provider:'TEST DOUBLE',model:'TEST DOUBLE — NOT AI'}
       checked_ranges:[{from_message_id:c.transcript[0].message_id,to_message_id:c.transcript.at(-1).message_id,expected_action:'ТЕСТ: проверенный участок, не автоматическое доказательство пропуска.'}],na_reason:''};
   })}
 })};
-const {server,service,store}=await createApp({directory,provider,referenceText:'TEST ONLY',datasetUrl:'',devFile:join(directory,'no-dev.json'),
-  config:{ready:false,provider:'TEST DOUBLE',model:'TEST DOUBLE — NOT AI',missing:['Только изолированный UI-тест; AI не подключён']}});
+const {server,service,store}=await createApp({directory,provider,referenceText:'TEST ONLY',datasetUrl:'',devFile:join(directory,'no-dev.json'),embedOrigins:'http://127.0.0.1:3005',
+  config:{ready:process.env.CQA_UI_TEST_READY==='true',provider:'TEST DOUBLE',model:'TEST DOUBLE — NOT AI',missing:['Только изолированный UI-тест; AI не подключён']}});
 const old=await service.evaluate(conversation,checklist);
 let appealed=await service.appeal(old.evaluation_id,{revision:old.revision,criterion_id:'01',comment:'ТЕСТ: проверить показ решения и источников.'});
 const change=structuredClone(appealed.final_review.criteria[0]);change.value='no';change.explanation='ТЕСТ: искусственное решение для проверки истории; не экспертный вывод.';

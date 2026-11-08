@@ -1,0 +1,32 @@
+{
+  "created_at": "2026-11-07T21:04:01.530Z",
+  "prompt_version": "cqa-facts-1.6.1-contextual-recap",
+  "prompt_hash": "56e19a32a84ae80add2f28418ce3a0a9b92cbf60bd3e970a7ee4aba201a31c4d",
+  "checklist_hash": "ffbcfa9ad6647dceed572854460f56c0a7b7caae87b9b46c113b481957c465e2",
+  "suite_hash": "751a0c1712ecf8d016239703ed04483a3a7e6c32b9523644832bf705f46948c3",
+  "source_hashes": {
+    "config/checklist.organizer-2026-11-07.json": "2b2c67ae13b7da4e0c48f6ff9ffe9a6d0d26abd33cdf06b44d16fefe68a23cbe",
+    "docs/ten-disagreements-review-2026-11-08.txt": "ce481765459fa58ae875ec654d8371c12b8209bb24234f54b81a43ca210b1741",
+    "research/reliability/ten-disagreements-review.json": "69974847034bc5c98d4222df0c0bf0a186c22e46a4bf928bb5ac75e4af0a0646",
+    "docs/dev-label-comparison-2026-11-08.txt": "d8f9c14e75047fd42d74c0b87ae6d4afcf80364ba702d6593e6a6bfe16ab8884",
+    "src/ai/prompt.js": "dac9346bdce76518987364f055c474e431ab3d63959e40d512386c8e217652e3",
+    "src/ai/schema.js": "701a2deff4f22de58aa4d0eee644e08f23a3ffaa828d60628ce0032aa4876f5a",
+    "src/ai/provider.js": "9e4294bee081d7184a3dafdc41d953feb019b9446f9e53775c3a328e1beb469a",
+    "data/reliability/ten-disagreements/input.json": "90937f65c1f6e72cb08a79f7b07821f1c999def98d49f04dac124b0abda575b2",
+    "data/reliability/ten-disagreements/review.json": "aedcf57793770c9ae34bf96dcaf3cf320a0d6e1b50391231f109f5d63207fac8",
+    "results/dev/results.json": "a1f12f208477d7369ac6444a10c107102ed6a81a6a77ae4725498b021091ed19",
+    "organizer-materials/CQA_Chat_Quality_Checklist 1.pdf": "2f6908c3026b6221f169a0a4efe808f37cdc6d1f227ed95bfe1c6431ec597808"
+  },
+  "pdf_reviewed_pages": [
+    1,
+    2,
+    3
+  ],
+  "splits": {
+    "discovery": 43,
+    "holdout": 8,
+    "controls": 4
+  },
+  "candidate_formulated": false,
+  "paid_calls_before_freeze": 0
+}

@@ -1,0 +1,312 @@
+{
+  "created_at": "2026-11-07T21:07:45.889Z",
+  "notice": "Supplement frozen after baseline started, before supplemental calls and before candidate design. Not part of the initial global freeze; expectations never revised using outcomes.",
+  "cases": [
+    {
+      "id": "h1-invariant-RU-a",
+      "hypothesis": 1,
+      "language": "RU",
+      "split": "invariance",
+      "expected": {
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "Условный следующий шаг не требует повторно сообщать известное состояние.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-invariant-RU-a",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Я собираюсь открыть панель «Файлы». Помогите сохранить документ."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Если панель ещё закрыта, откройте её; затем нажмите «Сохранить»."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "Документ сохранён."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "Если нужна ещё помощь, напишите. До свидания!"
+          }
+        ]
+      },
+      "pair_id": "h1-invariant-RU",
+      "changed_fact": "Only intended/already completed state; conditional next step accommodates both."
+    },
+    {
+      "id": "h1-invariant-RU-b",
+      "hypothesis": 1,
+      "language": "RU",
+      "split": "invariance",
+      "expected": {
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "Условный следующий шаг не требует повторно сообщать известное состояние.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-invariant-RU-b",
+        "channel": "agent chat",
+        "language": "RU",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "Я уже открыл панель «Файлы». Помогите сохранить документ."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Здравствуйте! Я Лина. Если панель ещё закрыта, откройте её; затем нажмите «Сохранить»."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "Документ сохранён."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "Если нужна ещё помощь, напишите. До свидания!"
+          }
+        ]
+      },
+      "pair_id": "h1-invariant-RU",
+      "changed_fact": "Only intended/already completed state; conditional next step accommodates both."
+    },
+    {
+      "id": "h1-invariant-KZ-a",
+      "hypothesis": 1,
+      "language": "KZ",
+      "split": "invariance",
+      "expected": {
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "Условный следующий шаг не требует повторно сообщать известное состояние.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-invariant-KZ-a",
+        "channel": "agent chat",
+        "language": "KZ",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "«Файлдар» панелін ашқалы жатырмын. Құжатты сақтауға көмектесіңізші."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Сәлеметсіз бе! Мен Линамын. Панель әлі жабық болса, оны ашыңыз; содан кейін «Сақтау» батырмасын басыңыз."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "Құжат сақталды."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "Тағы көмек қажет болса, жазыңыз. Сау болыңыз!"
+          }
+        ]
+      },
+      "pair_id": "h1-invariant-KZ",
+      "changed_fact": "Only intended/already completed state; conditional next step accommodates both."
+    },
+    {
+      "id": "h1-invariant-KZ-b",
+      "hypothesis": 1,
+      "language": "KZ",
+      "split": "invariance",
+      "expected": {
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "Условный следующий шаг не требует повторно сообщать известное состояние.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-invariant-KZ-b",
+        "channel": "agent chat",
+        "language": "KZ",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "«Файлдар» панелін ашып қойдым. Құжатты сақтауға көмектесіңізші."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Сәлеметсіз бе! Мен Линамын. Панель әлі жабық болса, оны ашыңыз; содан кейін «Сақтау» батырмасын басыңыз."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "Құжат сақталды."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "Тағы көмек қажет болса, жазыңыз. Сау болыңыз!"
+          }
+        ]
+      },
+      "pair_id": "h1-invariant-KZ",
+      "changed_fact": "Only intended/already completed state; conditional next step accommodates both."
+    },
+    {
+      "id": "h1-invariant-EN-a",
+      "hypothesis": 1,
+      "language": "EN",
+      "split": "invariance",
+      "expected": {
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "Условный следующий шаг не требует повторно сообщать известное состояние.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-invariant-EN-a",
+        "channel": "agent chat",
+        "language": "EN",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "I'm going to open the Files panel. Please help me save the document."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Hello! I'm Lina. If the panel is still closed, open it; then press Save."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "The document has been saved."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "If you need more help, please contact us. Goodbye!"
+          }
+        ]
+      },
+      "pair_id": "h1-invariant-EN",
+      "changed_fact": "Only intended/already completed state; conditional next step accommodates both."
+    },
+    {
+      "id": "h1-invariant-EN-b",
+      "hypothesis": 1,
+      "language": "EN",
+      "split": "invariance",
+      "expected": {
+        "06": {
+          "values": [
+            10
+          ],
+          "reason": "Условный следующий шаг не требует повторно сообщать известное состояние.",
+          "disputed": false,
+          "preferred": null
+        }
+      },
+      "conversation": {
+        "schema_version": "1.0",
+        "conversation_id": "novel-h1-invariant-EN-b",
+        "channel": "agent chat",
+        "language": "EN",
+        "audio_url": null,
+        "transcript": [
+          {
+            "message_id": "m0001",
+            "timestamp": "00:00",
+            "speaker": "client",
+            "text": "I've already opened the Files panel. Please help me save the document."
+          },
+          {
+            "message_id": "m0002",
+            "timestamp": "00:10",
+            "speaker": "operator",
+            "text": "Hello! I'm Lina. If the panel is still closed, open it; then press Save."
+          },
+          {
+            "message_id": "m0003",
+            "timestamp": "00:40",
+            "speaker": "client",
+            "text": "The document has been saved."
+          },
+          {
+            "message_id": "m0004",
+            "timestamp": "00:50",
+            "speaker": "operator",
+            "text": "If you need more help, please contact us. Goodbye!"
+          }
+        ]
+      },
+      "pair_id": "h1-invariant-EN",
+      "changed_fact": "Only intended/already completed state; conditional next step accommodates both."
+    }
+  ]
+}

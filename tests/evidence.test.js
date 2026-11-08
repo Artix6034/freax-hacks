@@ -35,7 +35,8 @@ test('evidence HTML distinguishes quotes and checked ranges, escapes source text
 });
 test('empty or unavailable sources remain presentation limitations, not automatic semantic judgments',()=>{
   const empty=renderEvidenceHTML({...review,evidence:[],checked_ranges:[]},conversation);
-  assert.match(empty,/не подтверждается и не опровергается/);
+  assert.match(empty,/Источники не указаны/);
+  assert.doesNotMatch(empty,/data-from=|class="proof"/);
   const unavailable=deriveEvidence({...review,evidence:[{message_id:'missing',quote:'TEST'}],checked_ranges:[]},conversation);
   assert.equal(unavailable[0].available,false);
   assert.equal(Object.hasOwn(unavailable[0],'value'),false);

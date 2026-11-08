@@ -31,7 +31,7 @@ export function deriveEvidence(review, conversation) {
 export function renderEvidenceHTML(review, conversation) {
   const esc=escapeHTML;
   const cards=deriveEvidence(review,conversation);
-  if (!cards.length) return '<p class="hint">Источники не указаны. По одному этому признаку вывод не подтверждается и не опровергается.</p>';
+  if (!cards.length) return '<p class="hint">Источники не указаны.</p>';
   return cards.map(card=>{
     if (!card.available) return `<p class="hint source-unavailable">Источник ${esc(card.message_id ?? `${card.from_message_id}–${card.to_message_id}`)} недоступен или не совпадает с сохранённым транскриптом.</p>`;
     const title=card.kind==='quote'?'Сообщение-доказательство':'Проверенный участок';
