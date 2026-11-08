@@ -11,7 +11,7 @@ try{await store.read('checklists');}catch(e){
   const templates=await Promise.all(['checklist.v1.json','checklist.organizer-2026-11-07.json'].map(async name=>validateChecklist(JSON.parse(await readFile(new URL(`../config/${name}`,import.meta.url),'utf8')))));
   await store.write('checklists',templates);
 }
-const {server,batches}=await createApp({directory,referenceText:''}); // Organizer/transcript evidence only.
+const {server,batches}=await createApp({directory,referenceText:'',devFile:resolve(directory,'dev/api-response.json')}); // Organizer/transcript evidence only.
 const port=Number(process.env.PORT||3000),host=process.env.HOST||'127.0.0.1';
 if(!Number.isInteger(port)||port<1||port>65535)throw new Error('Invalid PORT');
 server.listen(port,host,()=>console.log(`Freax listening on ${host}:${port}`));

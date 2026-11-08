@@ -163,8 +163,9 @@ function collectChecklist() {
 async function loadChecklists(selectLatest = true) {
   $('#checklist-select').disabled=true;$('#checklist-select').setAttribute('aria-busy','true');
   try {
-    checklists = await api('/api/checklists');
-    $('#checklist-select').innerHTML = checklists.map((c,i) => `<option value="${i}">${esc(c.name)} · v${c.version}</option>`).join('');
+    const saved=await api('/api/checklists');
+    checklists=[saved.reduce((latest,c)=>!latest||c.version>latest.version?c:latest,null)].filter(Boolean);
+    $('#checklist-select').innerHTML = checklists.map((c,i) => `<option value="${i}">${esc(c.name.replace(/ \u2014 уточнения 7 ноября$/u,''))} · v${c.version}</option>`).join('');
     if (selectLatest) $('#checklist-select').value = String(checklists.length-1);
     renderSelectedRules(selectedChecklist()); renderEditor(selectedChecklist());refreshDraftCompatibility();
   } finally {$('#checklist-select').disabled=!checklists.length;$('#checklist-select').setAttribute('aria-busy','false');$('#metrics').setAttribute('aria-busy','false');}
@@ -253,11 +254,6 @@ async function loadHistory() {
 $('#history-toggle').onclick=async()=>{ $('#history').hidden=false;publishState();if(!$('#history').hidden)try{await loadHistory();}catch(e){notice(e.message);} };
 $('#history-filters').onsubmit=async e=>{e.preventDefault();try{await loadHistory();}catch(err){notice(err.message);}};
 for(const id of ['view','gross_error','status'])$(`#history-${id}`).onchange=async()=>{try{await loadHistory();}catch(e){notice(e.message);}};
-$('#organizer-update').onclick=async()=>{try{
-  const c=await api('/api/checklists/organizer-update',{});await loadChecklists();
-  $('#checklist-select').value=String(checklists.findIndex(x=>x.checklist_id===c.checklist_id&&x.version===c.version));
-  renderSelectedRules(c);renderEditor(c);refreshDraftCompatibility();updateLaunch();notice(`Выбрана версия ${c.version} с уточнениями организатора на основе v1. Пользовательские версии и старые оценки сохранены. Для применения запустите новую оценку.`);
-}catch(e){notice(e.message);}};
 $('#history-list').onclick = async e => { const b = e.target.closest('[data-id]'); if (!b) return; try { renderResult(await api(`/api/evaluations/${b.dataset.id}`)); $('#workspace').scrollIntoView({block:'start'}); } catch(e) { notice(e.message); } };
 $('#export').onclick = () => { const url = URL.createObjectURL(new Blob([JSON.stringify(evaluation,null,2)], {type:'application/json'})); const a = document.createElement('a'); a.href=url; a.download=`cqa-${evaluation.evaluation_id}.json`; a.click(); setTimeout(() => URL.revokeObjectURL(url),1000); };
 function renderBatch(run){

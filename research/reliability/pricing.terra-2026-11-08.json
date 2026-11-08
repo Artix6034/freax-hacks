@@ -1,0 +1,11 @@
+{
+  "source":"https://developers.openai.com/api/docs/models/gpt-6.1-terra",
+  "verified_on":"2026-11-08",
+  "model":"gpt-6.1-terra",
+  "tier":"Standard short context, USD per million tokens",
+  "input":1,
+  "output":5,
+  "cached_input":0.05,
+  "cache_write_30m":1.25,
+  "notice":"Estimate from recorded usage, not an invoice. Assumes default 30-minute cache writes; no Fast/Ultrafast, regional uplifts or custom provider billing. Missing usage means unknown cost, not zero."
+}

@@ -4,8 +4,8 @@
 Прочитан текущий формат Evaluation в src/service.js, src/domain.js, src/scoring.js. Обычный список /api/evaluations содержит краткие строки и НЕ подходит: нужны полные сохранённые Evaluation, один объект, массив объектов JSON или JSONL. Каталоги автоматически не сканируются.
 
 БЫСТРЫЙ ЗАПУСК ИЗ КОРНЯ ПРОЕКТА
-На этой машине python в PATH может быть системной заглушкой. В PowerShell можно один раз задать:
-$researchPython = 'C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe'
+Укажите установленный Python 3. В PowerShell можно один раз задать:
+$researchPython = 'python'
 
 Проверка текущего пустого пилотного шаблона, без каких-либо AI-ответов:
 & $researchPython research/compare_evaluations.py compare --references research/pilot20-expert-a.blank.jsonl --output research/metrics/blank-pilot-report.json
