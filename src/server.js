@@ -61,9 +61,8 @@ export async function createApp({ directory = resolve(root, 'data'), provider, c
     res.setHeader('Content-Security-Policy', `default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; base-uri 'none'; object-src 'none'; frame-ancestors 'self' ${allowedEmbedOrigins.join(' ')}`.trim());
     try {
       const url = new URL(req.url, 'http://localhost');
-      if (req.method === 'GET' && url.pathname === '/favicon.ico') { res.writeHead(204); return res.end(); }
       // This prototype is intentionally local; prevent cross-site writes to the local AI proxy.
-      if (req.method !== 'GET') {
+      if (!['GET','HEAD'].includes(req.method)) {
         if (req.headers.origin && ![`http://${req.headers.host}`,`https://${req.headers.host}`,allowedPublicOrigin].includes(req.headers.origin)) throw new InputError('Запрос с другого сайта запрещён.', 403);
         requireThat(req.headers['content-type']?.startsWith('application/json'), 'Ожидается Content-Type: application/json.');
       }
@@ -144,12 +143,14 @@ export async function createApp({ directory = resolve(root, 'data'), provider, c
         if (req.method === 'GET' && !match[2]) return json(res, 200, await store.read(match[1]));
         if (req.method === 'POST' && match[2]) return json(res, 200, await service[match[2] === 'appeals' ? 'appeal' : 'resolve'](match[1], await body(req)));
       }
-      const assets = { '/': ['index.html', 'text/html'], '/app.js': ['app.js', 'text/javascript'], '/evidence.js':['evidence.js','text/javascript'], '/embed.js':['embed.js','text/javascript'], '/submission-compatibility.js':['submission-compatibility.js','text/javascript'], '/style.css': ['style.css', 'text/css'], '/assets/freax.svg':['assets/freax.svg','image/svg+xml'], '/assets/manrope-variable.ttf':['assets/manrope-variable.ttf','font/ttf'] };
-      if (req.method === 'GET' && assets[url.pathname]) {
+      const assets = {"/": ["index.html", "text/html"], "/app.js": ["app.js", "text/javascript"], "/evidence.js": ["evidence.js", "text/javascript"], "/embed.js": ["embed.js", "text/javascript"], "/submission-compatibility.js": ["submission-compatibility.js", "text/javascript"], "/style.css": ["style.css", "text/css"], "/workspace.js": ["workspace.js", "text/javascript"], "/components.js": ["components.js", "text/javascript"], "/halftone.js": ["halftone.js", "text/javascript"], "/ui-model.js": ["ui-model.js", "text/javascript"], "/components.css": ["components.css", "text/css"], "/glass.css": ["glass.css", "text/css"], "/polish.css": ["polish.css", "text/css"], "/polish.js": ["polish.js", "text/javascript"], "/select-menu.js": ["select-menu.js", "text/javascript"], "/hero-dots.js": ["hero-dots.js", "text/javascript"], "/service.css": ["service.css", "text/css"], "/service.js": ["service.js", "text/javascript"], "/assets/freedom-broker-logo.png": ["assets/freedom-broker-logo.png", "image/png"], "/assets/freedom-favicon.png": ["assets/freedom-favicon.png", "image/png"], "/favicon.ico": ["assets/freedom-favicon.ico", "image/x-icon"], "/assets/freax.svg": ["assets/freax.svg", "image/svg+xml"], "/assets/manrope-variable.ttf": ["assets/manrope-variable.ttf", "font/ttf"], "/assets/Manrope-OFL.txt": ["assets/Manrope-OFL.txt", "text/plain"]};
+      if (['GET','HEAD'].includes(req.method) && assets[url.pathname]) {
         const [name, type] = assets[url.pathname];
-        res.writeHead(200, { 'Content-Type': `${type}; charset=utf-8` });
-        return res.end(await readFile(resolve(root, 'src/web', name)));
+        res.writeHead(200, { 'Content-Type': type.startsWith('text/')?`${type}; charset=utf-8`:type });
+        return res.end(req.method==='HEAD'?undefined:await readFile(resolve(root, 'src/web', name)));
       }
+      const pageRequest=['GET','HEAD'].includes(req.method)&&!url.pathname.startsWith('/api/')&&(url.pathname==='/404'||url.pathname.endsWith('.html')||(!/\.[a-z0-9]+$/i.test(url.pathname)&&req.headers.accept?.includes('text/html')));
+      if(pageRequest){res.writeHead(404,{'Content-Type':'text/html; charset=utf-8'});return res.end(req.method==='HEAD'?undefined:await readFile(resolve(root,'src/web/404.html')));}
       json(res, 404, { error: 'Не найдено.' });
     } catch (e) { json(res, e instanceof InputError ? e.status : e instanceof SubmissionError?400:500, { error: e instanceof InputError||e instanceof SubmissionError ? e.message : 'Внутренняя ошибка сервиса.' }); }
   });
