@@ -153,8 +153,9 @@ function collectChecklist() {
   }); return base;
 }
 async function loadChecklists(selectLatest = true) {
-  checklists = await api('/api/checklists');
-  $('#checklist-select').innerHTML = checklists.map((c,i) => `<option value="${i}">${esc(c.name)} · v${c.version}</option>`).join('');
+  const saved = await api('/api/checklists');
+  checklists = [saved.reduce((latest,c)=>!latest||c.version>latest.version?c:latest,null)].filter(Boolean);
+  $('#checklist-select').innerHTML = checklists.map((c,i) => `<option value="${i}">${esc(c.name.replace(/ — уточнения 7 ноября$/u,''))} · v${c.version}</option>`).join('');
   if (selectLatest) $('#checklist-select').value = String(checklists.length-1);
   renderSelectedRules(selectedChecklist()); renderEditor(selectedChecklist());
   refreshDraftCompatibility();updateLaunch();
@@ -224,11 +225,6 @@ async function loadHistory() {
 $('#history-toggle').onclick=async()=>{showView('history');try{await loadHistory();}catch(e){notice(e.message);} };
 $('#history-filters').onsubmit=async e=>{e.preventDefault();try{await loadHistory();}catch(err){notice(err.message);}};
 for(const id of ['view','gross_error','status'])$(`#history-${id}`).onchange=async()=>{try{await loadHistory();}catch(e){notice(e.message);}};
-$('#organizer-update').onclick=async()=>{try{
-  const c=await api('/api/checklists/organizer-update',{});await loadChecklists();
-  $('#checklist-select').value=String(checklists.findIndex(x=>x.checklist_id===c.checklist_id&&x.version===c.version));
-  renderSelectedRules(c);renderEditor(c);notice(`Выбрана версия ${c.version}.`);
-}catch(e){notice(e.message);}};
 $('#history-list').onclick = async e => { const b = e.target.closest('[data-id]'); if (!b) return; try {const r=await api(`/api/evaluations/${b.dataset.id}`);if(!conversations.some(c=>c.conversation_id===r.conversation.conversation_id)){conversations.push(r.conversation);$('#conversation-select').innerHTML=conversations.map((c,i)=>`<option value="${i}">${esc(c.conversation_id)} · ${c.language}</option>`).join('');$('#conversation-select').disabled=false;}$('#conversation-select').value=String(conversations.findIndex(c=>c.conversation_id===r.conversation.conversation_id));showView('review');renderResult(r);await hydrateSavedAssessments();renderConversationList();mobileTab('result');} catch(e) { notice(e.message); } };
 $('#export').onclick = () => { const url = URL.createObjectURL(new Blob([JSON.stringify(evaluation,null,2)], {type:'application/json'})); const a = document.createElement('a'); a.href=url; a.download=`cqa-${evaluation.evaluation_id}.json`; a.click(); setTimeout(() => URL.revokeObjectURL(url),1000); };
 function renderBatch(run){
